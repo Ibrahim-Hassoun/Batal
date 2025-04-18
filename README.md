@@ -25,7 +25,10 @@
 
 ### Add Title Here
 
-- List the sexy features.
+- AI-powered pose detector with live feedback for each exercice.
+- Traffic detector using sensors to get live feedback on gym traffic level.
+- AI assistant that gives personalized advice based on previous interactions.
+- Recommendation system for diet/workout plans.
 
 <br><br>
 
