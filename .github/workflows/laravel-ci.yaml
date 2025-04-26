@@ -29,19 +29,23 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: install dependencies
-        run: composer install --no-interaction
+        run: composer install -no-interaction
+        working-directory: backend
 
       - name: make new laravel key
         run: php artisan key:generate
-      
+        working-directory: backend
+
       - name: Run Default Tests
         run: |
           cp .env.example .env.testing
           echo "APP_ENV=testing" >> .env.testing
           php artisan test --env=testing
+        working-directory: backend
 
       - name: boot laravel
         run: |
            php artisan serve --no-interaction &  
            sleep 10  
            curl -I http://127.0.0.1:8000  
+        working-directory: backend
