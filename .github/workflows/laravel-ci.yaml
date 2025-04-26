@@ -29,7 +29,7 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: install dependencies
-        run: composer install -no-interaction
+        run: composer install --no-interaction
         working-directory: backend
 
       - name: make new laravel key
