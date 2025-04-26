@@ -9,6 +9,9 @@ jobs:
     steps:
       - name: get code
         uses: actions/checkout@v4
+        
+      - name: move to backend
+        run: cd backend
 
       - name: setup PHP
         uses: shivammathur/setup-php@v2
@@ -16,6 +19,7 @@ jobs:
           php-version: '8.4.4'
           extension: mbstring, ctype, fileinfo, openssl, pdo, tokenizer, xml  
           coverage: none
+          
       - name: Cache Composer packages
         uses: actions/cache@v3
         with:
@@ -43,5 +47,5 @@ jobs:
         run: |
            php artisan serve --no-interaction &  
            sleep 10  
-           curl -I http://127.0.0.1:8000 
+           curl -I http://127.0.0.1:8000  
         working-directory: backend
