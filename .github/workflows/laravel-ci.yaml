@@ -7,45 +7,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: get code
+      - name: Checkout code
         uses: actions/checkout@v4
         
-      - name: move to backend
-        run: cd backend
-
-      - name: setup PHP
+      - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4.4'
-          extension: mbstring, ctype, fileinfo, openssl, pdo, tokenizer, xml  
+          php-version: '8.4'  
+          extensions: mbstring, ctype, fileinfo, openssl, pdo, tokenizer, xml  
           coverage: none
           
       - name: Cache Composer packages
         uses: actions/cache@v3
         with:
-          path: vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
+          path: backend/vendor  
+          key: ${{ runner.os }}-composer-${{ hashFiles('backend/composer.lock') }}  
 
-      - name: install dependencies
-        run: composer install -no-interaction
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
         working-directory: backend
 
-      - name: make new laravel key
-        run: php artisan key:generate
+      - name: Generate Laravel key
+        run: php artisan key:generate --show  
         working-directory: backend
 
-      - name: Run Default Tests
+      # - name: Run Default Tests
+      #   run: |
+      #     cp .env.example .env.testing
+      #     echo "APP_ENV=testing" >> .env.testing
+      #     # ▼ Add this line ▼ #
+      #     php artisan key:generate --force --env=testing
+      #     php artisan test --env=testing
+      #   working-directory: backend
+
+      - name: Verify Laravel boot
         run: |
-          cp .env.example .env.testing
-          echo "APP_ENV=testing" >> .env.testing
-          php artisan test --env=testing
-        working-directory: backend
-
-      - name: boot laravel
-        run: |
-           php artisan serve --no-interaction &  
-           sleep 10  
-           curl -I http://127.0.0.1:8000  
+          php artisan serve --no-interaction &
+          sleep 10  
+          curl -I http://127.0.0.1:8000  
         working-directory: backend
