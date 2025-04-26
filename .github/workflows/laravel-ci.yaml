@@ -1,0 +1,43 @@
+name: Laravel CI
+
+on: [push]
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: get code
+        uses: actions/checkout@v4
+
+      - name: setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4.4'
+          extension: mbstring, ctype, fileinfo, openssl, pdo, tokenizer, xml  
+          coverage: none
+      - name: Cache Composer packages
+        uses: actions/cache@v3
+        with:
+        path: vendor
+        key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-
+
+      - name: install dependencies
+        run: composer install -no-interaction
+
+      - name: make new laravel key
+        run: php artisan key:generate
+      
+      - name: Run Default Tests
+        run: |
+          cp .env.example .env.testing
+          echo "APP_ENV=testing" >> .env.testing
+          php artisan test --env=testing
+
+      - name: boot laravel
+        run: |
+           php artisan serve --no-interaction &  
+           sleep 10  
+           curl -I http://127.0.0.1:8000  
