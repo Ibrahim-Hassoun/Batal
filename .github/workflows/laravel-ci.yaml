@@ -33,7 +33,7 @@ jobs:
 
       - name: Run Default Tests
         run: |
-          php artisan test --env=testing --force
+          php artisan test --env=testing 
         working-directory: backend
 
       - name: Verify Laravel boot
