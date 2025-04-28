@@ -5,14 +5,19 @@
 <!-- project overview -->
 <img src="./readme/title2.svg"/>
 
-> Batal is an intelligent fitness application designed to enhance the workout experience
->  through advanced AI technologies. It features a real-time pose detection system with
->  live feedback to help users maintain proper form during exercises. A built-in 
-> personalized AI assistant provides ongoing support and guidance, while integrated gym 
-> door sensors allow users to check gym traffic levels before heading out. Additionally,
->  Batal includes a recommendation system offering customized workout and diet plans 
-> curated by certified professionals, ensuring a well-rounded and data-driven fitness 
-> journey.
+>Batal is an intelligent fitness application designed to
+>enhance the workout experience through advanced AI
+>technologies. It features a real-time pose detection system
+>with live feedback to help users maintain proper form during
+>exercises. A built-in personalized AI assistant provides
+>ongoing support and guidance, while integrated gym door 
+>sensors allow users to check gym traffic levels before heading
+>out. Additionally, Batal includes a recommendation system 
+>offering customized workout and diet plans curated by 
+>certified professionals, ensuring a well-rounded and 
+>data-driven fitness journey.
+
+
 
 <br><br>
 
