@@ -8,8 +8,10 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class Register4 extends StatelessWidget {
   final Function incrementStep;
   final Function decrementStep;
-  
-  const Register4({super.key,required this.incrementStep,required this.decrementStep});
+  final Function handleChange;
+  final Map data;
+
+  const Register4({super.key,required this.incrementStep,required this.decrementStep,required this.data,required this.handleChange});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class Register4 extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 110),
-          PlatformText("Date of Birth"),
+          PlatformText("Insert Your Date of Birth"),
           const SizedBox(height: 160,),
           Expanded(
             child: Center(
@@ -25,7 +27,7 @@ class Register4 extends StatelessWidget {
               child:Padding(padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                 children: [
-                  LabeledInput(label: "Birthdate", placeholder: "1/1/1999"),
+                  LabeledInput(label: "Birthdate", placeholder: "1/1/1999",dataKey:'birthday',value:data['birthday'],handleChange:handleChange,keyboardType: TextInputType.datetime,),
                   
                   SizedBox(height: 16),
                   ScreenWideElevatedButton(label: 'Back',onPressed:(){decrementStep();},backgroundColor: bg_gray,foregroundColor: secondaryColor),

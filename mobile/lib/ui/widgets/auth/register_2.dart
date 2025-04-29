@@ -8,8 +8,10 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class Register2 extends StatelessWidget {
   final Function incrementStep;
   final Function decrementStep;
-  
-  const Register2({super.key,required this.incrementStep,required this.decrementStep});
+   final Function handleChange;
+  final Map data;
+
+  const Register2({super.key,required this.incrementStep,required this.decrementStep,required this.data,required this.handleChange});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +27,9 @@ class Register2 extends StatelessWidget {
               child:Padding(padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                 children: [
-                  LabeledInput(label: "Password", placeholder: "********"),
+                  LabeledInput(label: "Password", placeholder: "********",dataKey:'password',value:data['password'],handleChange:handleChange,type: 'password'),
                   SizedBox(height: 16),
-                  LabeledInput(label: "Password Confirmation", placeholder: "********"),
+                  LabeledInput(label: "Password Confirmation", placeholder: "********",dataKey:'confirmPassword',value:data['confirmPassword'],handleChange:handleChange,type: 'password',),
                   SizedBox(height: 16),
                   ScreenWideElevatedButton(label: 'Back',onPressed:(){decrementStep();},backgroundColor: bg_gray,foregroundColor: secondaryColor),
                   SizedBox(height: 16),
