@@ -18,7 +18,7 @@ class Register4 extends StatelessWidget {
         children: [
           const SizedBox(height: 110),
           PlatformText("Date of Birth"),
-          const SizedBox(height: 160),
+          const SizedBox(height: 160,),
           Expanded(
             child: Center(
               
