@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:mobile/ui/widgets/auth/register_1.dart';
 import 'package:mobile/ui/widgets/auth/register_2.dart';
+import 'package:mobile/ui/widgets/auth/register_3.dart';
 
 
 class AuthWidget extends StatefulWidget {
@@ -41,7 +42,7 @@ class _AuthWidgetState extends State<AuthWidget> {
       body: isRegistering?
              currentStep==1?Register1(incrementStep: incrementStep, decrementStep: decrementStep):
              currentStep==2?Register2(incrementStep: incrementStep, decrementStep: decrementStep):
-             currentStep==3?Text(" 3"):null
+             currentStep==3?Register3(incrementStep: incrementStep, decrementStep: decrementStep):null
                 :
             !isRegistering? TextButton(onPressed: decrementStep, child: const Text('Back')):null
     );
