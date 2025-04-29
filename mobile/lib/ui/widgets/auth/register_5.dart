@@ -5,11 +5,11 @@ import '../../layouts/labeled_input.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 
-class Register4 extends StatelessWidget {
+class Register5 extends StatelessWidget {
   final Function incrementStep;
   final Function decrementStep;
   
-  const Register4({super.key,required this.incrementStep,required this.decrementStep});
+  const Register5({super.key,required this.incrementStep,required this.decrementStep});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class Register4 extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 110),
-          PlatformText("Insert Your Date of Birth"),
+          PlatformText("Choose a Username"),
           const SizedBox(height: 160,),
           Expanded(
             child: Center(
@@ -25,7 +25,7 @@ class Register4 extends StatelessWidget {
               child:Padding(padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                 children: [
-                  LabeledInput(label: "Birthdate", placeholder: "1/1/1999"),
+                  LabeledInput(label: "Username", placeholder: "not_john_doe"),
                   
                   SizedBox(height: 16),
                   ScreenWideElevatedButton(label: 'Back',onPressed:(){decrementStep();},backgroundColor: bg_gray,foregroundColor: secondaryColor),

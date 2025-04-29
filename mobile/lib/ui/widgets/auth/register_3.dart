@@ -17,7 +17,7 @@ class Register3 extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 110),
-          PlatformText("Profile Information"),
+          PlatformText("Insert Profile Information"),
           const SizedBox(height: 160),
           Expanded(
             child: Center(
