@@ -4,7 +4,10 @@ import '../../layouts/labeled_input.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class Register1 extends StatelessWidget {
-  const Register1({super.key});
+  final Function incrementStep;
+  final Function decrementStep;
+  
+  const Register1({super.key,required this.incrementStep,required this.decrementStep});
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +42,33 @@ class Register1 extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               LabeledInput(label: 'Email', placeholder: 'email@domain.com'),
+              SizedBox(height: 16,),
+              Row(
+                children: [
+                  Expanded(
+                    child: PlatformElevatedButton(
+                      onPressed: () {incrementStep();},
+                      color: bg_gray,
+                      material: (_, __) => MaterialElevatedButtonData(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: secondaryColor,
+                          foregroundColor: tertiaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
+                      cupertino: (_, __) => CupertinoElevatedButtonData(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: 
+                          PlatformText('Next',style: TextStyle(fontSize: 20),),
+                        
+                      
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(height: 32),
               Row(
                   children: [
@@ -84,7 +114,10 @@ class Register1 extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(context.platformIcons.gameController),
+                          CircleAvatar(
+                          backgroundImage: AssetImage('assets/google.png'),
+                          radius: 12,  // adjust size
+                          ),
                           const SizedBox(width: 8),
                           PlatformText('Continue with Google'),
                         ],
@@ -114,7 +147,10 @@ class Register1 extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(context.platformIcons.gameController),
+                          CircleAvatar(
+                          backgroundImage: AssetImage('assets/apple.jpg'),
+                          radius: 12,  // adjust size
+                          ),
                           const SizedBox(width: 8),
                           PlatformText('Continue with Apple'),
                         ],
