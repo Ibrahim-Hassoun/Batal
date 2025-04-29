@@ -27,9 +27,9 @@ class Register2 extends StatelessWidget {
               child:Padding(padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                 children: [
-                  LabeledInput(label: "Password", placeholder: "********",dataKey:'password',value:data['password'],handleChange:handleChange),
+                  LabeledInput(label: "Password", placeholder: "********",dataKey:'password',value:data['password'],handleChange:handleChange,type: 'password'),
                   SizedBox(height: 16),
-                  LabeledInput(label: "Password Confirmation", placeholder: "********",dataKey:'confirmPassword',value:data['confirmPassword'],handleChange:handleChange),
+                  LabeledInput(label: "Password Confirmation", placeholder: "********",dataKey:'confirmPassword',value:data['confirmPassword'],handleChange:handleChange,type: 'password',),
                   SizedBox(height: 16),
                   ScreenWideElevatedButton(label: 'Back',onPressed:(){decrementStep();},backgroundColor: bg_gray,foregroundColor: secondaryColor),
                   SizedBox(height: 16),

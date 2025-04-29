@@ -7,7 +7,10 @@ class LabeledInput extends StatelessWidget {
   final String dataKey;
   final String value;
   final Function handleChange;
-  const LabeledInput({super.key,required this.label,required this.placeholder,required this.value,required this.handleChange,required this.dataKey});
+  final TextInputType? keyboardType;
+  final String? type;
+
+  const LabeledInput({super.key,required this.label,required this.placeholder,required this.value,required this.handleChange,required this.dataKey, this.keyboardType,this.type });
   
 
 
@@ -17,22 +20,17 @@ class LabeledInput extends StatelessWidget {
       
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Label
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Colors.black, 
-          ),
-        ),
+        
         // Input field
         SizedBox(height: 8), 
         PlatformTextFormField(
             onChanged: (text) => handleChange(dataKey, text),
             initialValue: value,
+            obscureText: type == 'password'? true : false,
+            keyboardType: keyboardType,
           material: (_, __) => MaterialTextFormFieldData(
             decoration: InputDecoration(
+              label: Text(label),
               border: OutlineInputBorder(
                 borderSide: BorderSide()
               ),

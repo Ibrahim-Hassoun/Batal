@@ -43,7 +43,7 @@ class Register1 extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              LabeledInput(label: 'Email', placeholder: 'email@domain.com',dataKey:'email',value:data['email'],handleChange:handleChange),
+              LabeledInput(label: 'Email', placeholder: 'email@domain.com',dataKey:'email',value:data['email'],handleChange:handleChange,keyboardType: TextInputType.emailAddress,),
               SizedBox(height: 16,),
               Row(
                 children: [
