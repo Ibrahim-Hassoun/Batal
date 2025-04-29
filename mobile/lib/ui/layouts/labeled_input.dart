@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class LabeledInput extends StatelessWidget {
   final String label;
@@ -21,16 +22,24 @@ class LabeledInput extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: Colors.black, // Customize label color
+              color: Colors.black, 
             ),
           ),
           // Input field
-          SizedBox(height: 8), // Spacing between label and input
-          TextFormField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              contentPadding: EdgeInsets.all(12),
-              hintText: placeholder, // You can replace with a placeholder or hint
+          SizedBox(height: 8), 
+          PlatformTextFormField(
+            material: (_, __) => MaterialTextFormFieldData(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderSide: BorderSide()
+                ),
+                contentPadding: EdgeInsets.all(12),
+                hintText: placeholder, 
+              ),
+            ),
+            cupertino: (_, __) => CupertinoTextFormFieldData(
+              placeholder: placeholder,
+              padding: EdgeInsets.all(12),
             ),
           ),
         ],
