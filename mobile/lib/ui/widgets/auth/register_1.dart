@@ -6,8 +6,10 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class Register1 extends StatelessWidget {
   final Function incrementStep;
   final Function decrementStep;
-  
-  const Register1({super.key,required this.incrementStep,required this.decrementStep});
+  final Function handleChange;
+  final Map data;
+
+  const Register1({super.key,required this.incrementStep,required this.decrementStep,required this.data,required this.handleChange});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class Register1 extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              LabeledInput(label: 'Email', placeholder: 'email@domain.com'),
+              LabeledInput(label: 'Email', placeholder: 'email@domain.com',dataKey:'email',value:data['email'],handleChange:handleChange),
               SizedBox(height: 16,),
               Row(
                 children: [

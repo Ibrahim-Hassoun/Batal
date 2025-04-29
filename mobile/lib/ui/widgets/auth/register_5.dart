@@ -5,13 +5,13 @@ import '../../layouts/labeled_input.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 
-class Register3 extends StatelessWidget {
+class Register5 extends StatelessWidget {
   final Function incrementStep;
   final Function decrementStep;
   final Function handleChange;
   final Map data;
 
-  const Register3({super.key,required this.incrementStep,required this.decrementStep,required this.data,required this.handleChange});
+  const Register5({super.key,required this.incrementStep,required this.decrementStep,required this.data,required this.handleChange});
 
   @override
   Widget build(BuildContext context) {
@@ -19,17 +19,16 @@ class Register3 extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 110),
-          PlatformText("Insert Profile Information"),
-          const SizedBox(height: 160),
+          PlatformText("Choose a Username"),
+          const SizedBox(height: 160,),
           Expanded(
             child: Center(
               
               child:Padding(padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                 children: [
-                  LabeledInput(label: "First Name", placeholder: "John",dataKey:'firstName',value:data['firstName'],handleChange:handleChange),
-                  SizedBox(height: 16),
-                  LabeledInput(label: "Last Name", placeholder: "Doe",dataKey:'lastName',value:data['lastName'],handleChange:handleChange),
+                  LabeledInput(label: "Username", placeholder: "not_john_doe",dataKey:'username',value:data['username'],handleChange:handleChange),
+                  
                   SizedBox(height: 16),
                   ScreenWideElevatedButton(label: 'Back',onPressed:(){decrementStep();},backgroundColor: bg_gray,foregroundColor: secondaryColor),
                   SizedBox(height: 16),

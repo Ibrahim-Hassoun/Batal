@@ -4,6 +4,8 @@ import 'package:mobile/ui/widgets/auth/register_1.dart';
 import 'package:mobile/ui/widgets/auth/register_2.dart';
 import 'package:mobile/ui/widgets/auth/register_3.dart';
 import 'package:mobile/ui/widgets/auth/register_4.dart';
+import 'package:mobile/ui/widgets/auth/register_5.dart';
+import 'package:mobile/ui/widgets/auth/register_6.dart';
 
 
 class AuthWidget extends StatefulWidget {
@@ -16,14 +18,16 @@ class AuthWidget extends StatefulWidget {
 class _AuthWidgetState extends State<AuthWidget> {
   bool isRegistering = true;
   int currentStep = 1;
-  String email = '';
-  String password = '';
-  String confirmPassword = '';
-  String firstName = '';
-  String lastName = '';
-  String birthday = '';
-  String username = '';
-  String code='';
+  final data = {
+    'email': '',
+    'password': '',
+    'confirmPassword': '',
+    'firstName': '',
+    'lastName': '',
+    'birthday': '',
+    'username': '',
+    'code': ''
+  };
 
   void incrementStep() {
     setState(() {
@@ -37,16 +41,26 @@ class _AuthWidgetState extends State<AuthWidget> {
       currentStep--;
     });
   }
-
-
+  void setStep(step) {
+    setState(() {
+      currentStep=step;
+    });
+  }
+  void handleChange(key,value){
+    setState(() {
+      data[key] = value;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
       body: isRegistering?
-             currentStep==1?Register1(incrementStep: incrementStep, decrementStep: decrementStep):
-             currentStep==2?Register2(incrementStep: incrementStep, decrementStep: decrementStep):
-             currentStep==3?Register3(incrementStep: incrementStep, decrementStep: decrementStep):
-             currentStep==4?Register4(incrementStep: incrementStep, decrementStep: decrementStep):null
+            currentStep==1?Register1(incrementStep: incrementStep, decrementStep: decrementStep,data:data,handleChange:handleChange):
+            currentStep==2?Register2(incrementStep: incrementStep, decrementStep: decrementStep,data:data,handleChange:handleChange):
+            currentStep==3?Register3(incrementStep: incrementStep, decrementStep: decrementStep,data:data,handleChange:handleChange):
+            currentStep==4?Register4(incrementStep: incrementStep, decrementStep: decrementStep,data:data,handleChange:handleChange):
+            currentStep==5?Register5(incrementStep: incrementStep, decrementStep: decrementStep,data:data,handleChange:handleChange):
+            currentStep==6?Register6(incrementStep: incrementStep, decrementStep: decrementStep,setStep:setStep,data:data,handleChange:handleChange):null
                 :
             !isRegistering? TextButton(onPressed: decrementStep, child: const Text('Back')):null
     );
