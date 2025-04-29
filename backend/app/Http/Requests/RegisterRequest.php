@@ -13,7 +13,7 @@ class RegisterRequest extends RootRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class RegisterRequest extends RootRequest
             'username' => 'required|string|max:15|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'password_confirmation' => 'required|string|min:8|confirmed',
+           
         ];
     }
 

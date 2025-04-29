@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\RegisterRequest;
+use App\Traits\HttpResponse;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    use HttpResponse;
+    public function register(RegisterRequest $request)
     {
        
     }

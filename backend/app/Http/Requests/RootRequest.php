@@ -6,9 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use \App\Traits\HttpResponse;
+
 class RootRequest extends FormRequest
 {
-    use \App\Http\Traits\HttpResponse;
+    use HttpResponse;
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -20,7 +22,12 @@ class RootRequest extends FormRequest
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(
-            respond(false,$validator->errors,null,422) 
+            $this->respond(
+                false,
+                "Validation error",
+                $validator->errors(),
+                422
+            )
         );
     }
     /**
