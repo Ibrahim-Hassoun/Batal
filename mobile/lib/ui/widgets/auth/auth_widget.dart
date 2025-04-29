@@ -40,7 +40,8 @@ class _AuthWidgetState extends State<AuthWidget> {
     return PlatformScaffold(
       body: isRegistering?
              currentStep==1?Register1(incrementStep: incrementStep, decrementStep: decrementStep):
-             currentStep==2?Register2(incrementStep: incrementStep, decrementStep: decrementStep):null
+             currentStep==2?Register2(incrementStep: incrementStep, decrementStep: decrementStep):
+             currentStep==3?Text(" 3"):null
                 :
             !isRegistering? TextButton(onPressed: decrementStep, child: const Text('Back')):null
     );

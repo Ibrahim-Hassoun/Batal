@@ -17,7 +17,7 @@ class Register2 extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 110),
-          const Text("Choose your password"),
+          PlatformText("Choose your password"),
           const SizedBox(height: 160),
           Expanded(
             child: Center(
