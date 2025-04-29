@@ -17,7 +17,7 @@ class LogFactory extends Factory
     public function definition(): array
     {
         return [
-            'id'=>fake()>unique()->uuid(),
+            
             'user_id' => \App\Models\User::factory(),
             'ip_address' => fake()->ipv4(),
             'action' =>fake()->randomElement(['login','logout','register']),
@@ -28,7 +28,7 @@ class LogFactory extends Factory
             'street' => fake()->streetAddress(),
             'created_at' => now(),
             'updated_at' => now(),
-            
+
 
         ];
     }
