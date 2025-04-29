@@ -27,7 +27,7 @@ class Register4 extends StatelessWidget {
               child:Padding(padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                 children: [
-                  LabeledInput(label: "Birthdate", placeholder: "1/1/1999",dataKey:'birthday',value:data['birthday'],handleChange:handleChange),
+                  LabeledInput(label: "Birthdate", placeholder: "1/1/1999",dataKey:'birthday',value:data['birthday'],handleChange:handleChange,keyboardType: TextInputType.datetime,),
                   
                   SizedBox(height: 16),
                   ScreenWideElevatedButton(label: 'Back',onPressed:(){decrementStep();},backgroundColor: bg_gray,foregroundColor: secondaryColor),
