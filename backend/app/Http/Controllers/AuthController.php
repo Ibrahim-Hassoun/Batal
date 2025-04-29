@@ -11,12 +11,7 @@ class AuthController extends Controller
     use HttpResponse;
     public function register(RegisterRequest $request)
     {
-        return $this->respond(
-            true,
-            "   User registered successfully",
-            null,
-            200
-        );
+       
     }
 
     public function login(Request $request)
