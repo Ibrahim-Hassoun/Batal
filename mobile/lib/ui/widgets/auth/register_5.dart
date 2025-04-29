@@ -8,8 +8,10 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class Register5 extends StatelessWidget {
   final Function incrementStep;
   final Function decrementStep;
-  
-  const Register5({super.key,required this.incrementStep,required this.decrementStep});
+  final Function handleChange;
+  final Map data;
+
+  const Register5({super.key,required this.incrementStep,required this.decrementStep,required this.data,required this.handleChange});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class Register5 extends StatelessWidget {
               child:Padding(padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                 children: [
-                  LabeledInput(label: "Username", placeholder: "not_john_doe"),
+                  LabeledInput(label: "Username", placeholder: "not_john_doe",dataKey:'username',value:data['username'],handleChange:handleChange),
                   
                   SizedBox(height: 16),
                   ScreenWideElevatedButton(label: 'Back',onPressed:(){decrementStep();},backgroundColor: bg_gray,foregroundColor: secondaryColor),

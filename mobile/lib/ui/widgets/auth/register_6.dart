@@ -10,8 +10,10 @@ class Register6 extends StatelessWidget {
   final Function incrementStep;
   final Function decrementStep;
   final Function setStep;
+  final Function handleChange;
+  final Map data;
 
-  const Register6({super.key,required this.incrementStep,required this.decrementStep,required this.setStep});
+  const Register6({super.key,required this.incrementStep,required this.decrementStep,required this.setStep,required this.data,required this.handleChange});
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +79,7 @@ class Register6 extends StatelessWidget {
               child:Padding(padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                 children: [
-                  LabeledInput(label: "Code", placeholder: "123456"),
+                  LabeledInput(label: "Code", placeholder: "123456",dataKey:'code',value:data['code'],handleChange:handleChange),
                   
                   SizedBox(height: 16),
                   ScreenWideElevatedButton(label: 'Back',onPressed:(){decrementStep();},backgroundColor: bg_gray,foregroundColor: secondaryColor),
