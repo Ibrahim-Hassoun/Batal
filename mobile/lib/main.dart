@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import './ui/screens/authScreen/auth_screen.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
 
 const Color primaryColor =Color(0xFFF7713D);
 const Color secondaryColor =Color.fromARGB(255, 31, 31, 31);
@@ -15,23 +18,43 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+
+    final isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    
+    return PlatformApp(
       title: 'Flutter Demo',
-      theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: Colors.white,
-        textTheme: ThemeData.light().textTheme.apply(
-          bodyColor: secondaryColor,  
-          displayColor: secondaryColor, 
+      material: (_, __) => MaterialAppData(
+        theme: ThemeData.light().copyWith(
+          scaffoldBackgroundColor: Colors.white,
+          textTheme: ThemeData.light().textTheme.apply(
+            bodyColor: secondaryColor,  
+            displayColor: secondaryColor,
+          ),
         ),
-      ),
-      darkTheme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: Colors.grey[900],
-        textTheme: ThemeData.light().textTheme.apply(
-          bodyColor: Colors.white,  
-          displayColor: Colors.white, 
+        darkTheme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: Colors.grey[900],
+          textTheme: ThemeData.dark().textTheme.apply(
+            bodyColor: Colors.white,  
+            displayColor: Colors.white,
+          ),
         ),
+        themeMode: ThemeMode.system,  // Automatically switches between light/dark themes
       ),
-      
+      cupertino: (_, __) => CupertinoAppData(
+        theme: isDarkMode
+            ? CupertinoThemeData(
+                primaryColor: CupertinoColors.inactiveGray,
+                textTheme: CupertinoTextThemeData(
+                  textStyle: TextStyle(color: Colors.white),
+                ),
+              )
+            : CupertinoThemeData(
+                primaryColor: CupertinoColors.activeBlue,
+                textTheme: CupertinoTextThemeData(
+                  textStyle: TextStyle(color: secondaryColor),
+                ),
+              ),
+      ),
       home: AuthScreen()
     );
   }
