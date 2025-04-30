@@ -45,7 +45,23 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // Login logic here
+        try{
+            $credentials = $request->only('email', 'password');
+            $user = $this->authServices->login($credentials);
+            return $this->respond(
+                true,
+                "User logged in successfully",
+                $user,
+                200
+            );
+        }catch(\Exception $e){
+            return $this->respond(
+                false,
+                $e->getMessage(),
+                null,
+                 500
+            );
+        }
        
     }
 
