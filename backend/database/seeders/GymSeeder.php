@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Gym;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class GymSeeder extends Seeder
 {
@@ -12,6 +13,8 @@ class GymSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Gym::factory()->count(10)->create([
+            'owner_id' => \App\Models\User::factory()->create()->id,
+        ]);
     }
 }

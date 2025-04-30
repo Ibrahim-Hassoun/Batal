@@ -6,7 +6,6 @@ use App\Models\Log;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-
 class LogSeeder extends Seeder
 {
     /**
