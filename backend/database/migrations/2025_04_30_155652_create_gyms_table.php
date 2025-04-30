@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('estimated_capacity');
             $table->integer('subscription_price');
             $table->integer('current_traffic')->nullable();
+            $table->enum('usual_traffic', ['low', 'medium', 'high'])->nullable();
             $table->json('opening_hours')->nullable();
             $table->enum('gender', ['male', 'female','mixed']);
             $table->point('location')->nullable();
@@ -29,6 +30,10 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes(); 
+
+
+            $table->index('name');  
+            $table->spatialIndex('location');
         });
     }
 
