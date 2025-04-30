@@ -6,4 +6,5 @@ use App\Http\Controllers\AuthController;
 
 Route::group(['prefix'=>"v0.1"],function(){
     Route::post('/register',[AuthController::class,'register'] );
+    
 });
