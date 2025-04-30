@@ -6,11 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use \App\Traits\HttpResponse;
+use \App\Traits\HttpResponseTrait;
 
 class RootRequest extends FormRequest
 {
-    use HttpResponse;
+    use HttpResponseTrait;
     /**
      * Determine if the user is authorized to make this request.
      */
