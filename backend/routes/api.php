@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthController;
 
 Route::group(['prefix'=>"v0.1"],function(){
     Route::post('/register',[AuthController::class,'register'] );
-    Route::get('test',function(){
+    Route::get('testing',function(){
         return response()->json(['message'=>'test']);
     });
 });
