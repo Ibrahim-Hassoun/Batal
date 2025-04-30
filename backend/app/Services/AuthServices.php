@@ -25,4 +25,18 @@ class AuthServices {
         };
         return $user;
     }
+
+    public function login($credentials) {
+        $token = JWTAuth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']]);
+        if (!$token) {
+            throw new \Exception('Invalid credentials', 401);
+        }
+        $user = JWTAuth::user();
+        $data = [
+            'user' => $user,
+            'token' => $token
+        ];
+        return $data;
+       
+    }
 }
