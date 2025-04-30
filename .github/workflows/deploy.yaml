@@ -21,7 +21,7 @@ jobs:
 
       - name: Copy files to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ec2-user@35.180.187.60 'bash -s' < ./deploy_script.sh
+          ssh -o StrictHostKeyChecking=no ubuntu@35.180.187.60 'bash -s' < ./deploy_script.sh
 
     env:
       PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
