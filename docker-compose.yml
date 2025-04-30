@@ -28,11 +28,10 @@ services:
     volumes:
       - database:/database 
     environment:
-       - DB_HOST=database
-       - DB_DATABASE=batal
-       - DB_PORT=3306
-       - DB_USERNAME=batal
-       - DB_PASSWORD=DerB@t@l150
+      - MYSQL_ROOT_PASSWORD=your_root_password
+      - MYSQL_DATABASE=batal
+      - MYSQL_USER=batal
+      - MYSQL_PASSWORD=DerB@t@l150
        
 volumes:
   database:
