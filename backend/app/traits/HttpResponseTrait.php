@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-trait HttpResponse
+trait HttpResponseTrait
 {
     public function respond($success,$message,$data,$statusCode){
         return response()->json([
