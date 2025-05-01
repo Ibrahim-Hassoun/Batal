@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('gyms', function (Blueprint $table) {
             $table->id();
             $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
+            $table->unsignedInteger('rating')->default(1);
             $table->string('name');
             $table->string('description');
             $table->string('logo_path')->nullable();

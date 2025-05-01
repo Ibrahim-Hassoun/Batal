@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes; 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Gym extends Model
 {
+    use SoftDeletes;
     protected $fillable = [
         'owner_id',
         'name',
@@ -23,7 +26,8 @@ class Gym extends Model
         'phone_number',
         'email',
         'website',
-        'is_active'
+        'is_active',
+        'deleted_at',
     ];
     /** @use HasFactory<\Database\Factories\GymFactory> */
     use HasFactory;
