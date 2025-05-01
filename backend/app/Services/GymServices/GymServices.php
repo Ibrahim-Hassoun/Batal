@@ -36,30 +36,28 @@ class GymServices {
         return Gym::find($id);
     }
 
-    public function getAllGyms(){
-        return Gym::all();
-    }
-
-    public function searchGyms($query){
+    public function getGyms($request){
         $query=Gym::query();
 
-        if($request->has('name')){
-            $query->where('name','like','%'.$request->input('name').'%');
+        if($request->query('name')){
+            $query->where('name', 'like', '%' . $request->query('name') . '%');
         }
-        if($request->has('location')){
-           //we need to see how to search by location
+        if($request->query('location')){
+           // we need to see how to search by location
         }
-        if($request->has('gender')){
-            $query->where('gender','like','%'.$request->input('type').'%');
+        if($request->query('gender')){
+            $query->where('gender', $request->query('gender'));
         }
-        if($request->has('min_subscription_price')){
-            $query->where('subscription_price','>=',$request->input('min_subscription_price'));
+        if($request->query('min_subscription_price')){
+            $query->where('subscription_price', '>=', $request->query('min_subscription_price'));
         }
-        if($request->has('max_subscription_price')){
-            $query->where('subscription_price','<=',$request->input('max_subscription_price'));
+        if($request->query('max_subscription_price')){
+            $query->where('subscription_price', '<=', $request->query('max_subscription_price'));
         }
         return $query->get();
     }
+
+   
     
 
 }
