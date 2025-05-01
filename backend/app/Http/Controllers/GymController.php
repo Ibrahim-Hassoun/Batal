@@ -77,4 +77,24 @@ class GymController extends Controller
             );
         }
     }
+
+    public function updateGym(GymManipulationAuthorizationRequest $authRequest,AddGymRequest $request)
+    {
+       try{
+        $gym=$this->gymServices->updateGym($request->all());
+        return $this->respond(
+            'true',
+            'Gym updated successfully',
+            $gym,
+            200
+        );
+       }catch(\Exception $e){
+            return $this->respond(
+                'false',
+                $e->getMessage(),
+                null,
+                500
+            );
+        } 
+    }
 }

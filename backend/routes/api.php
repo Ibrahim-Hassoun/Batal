@@ -18,6 +18,7 @@ Route::group(['prefix'=>"v0.1"],function(){
             Route::get('/search',[GymController::class,'getGyms']);
             Route::post('/add',[GymController::class,'addGym']);
             Route::delete('/delete',[GymController::class,'deleteGym']);
+            Route::post('/update',[GymController::class,'updateGym']);
         });
     });
 });
