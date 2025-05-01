@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Mockery;
 use App\Models\Log;
-use App\Services\LogService\LogService;
+use App\Services\LogServices\LogServices;
 use PHPUnit\Framework\TestCase;
 
 class AddLogTest extends TestCase
@@ -15,7 +15,7 @@ class AddLogTest extends TestCase
      */
     // public function testAddLog(): void
     // {
-    //     $logService = new LogService();
+    //     $logServices = new LogServices();
     //     $ip = '8.8.8.8';
     //     $action = 'login';
     //     $success = true;
