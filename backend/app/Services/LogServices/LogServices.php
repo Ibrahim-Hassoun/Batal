@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\LogService;
+namespace App\Services\LogServices;
 
 use App\Models\Log;
 use Stevebauman\Location\Facades\Location;
 
-class LogService {
+class LogServices {
     public  function addLog($ip,$action,$success,$id)
     {
         $location = Location::get($ip);
