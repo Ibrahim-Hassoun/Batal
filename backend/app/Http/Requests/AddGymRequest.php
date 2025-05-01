@@ -35,7 +35,7 @@ class AddGymRequest extends RootRequest
             'phone_number' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:255',
             'website' => 'nullable|url|max:255',
-            'is_active' => 'required|boolean|in:true,false',
+            'is_active' => 'required|boolean',
         ];
     }
 }
