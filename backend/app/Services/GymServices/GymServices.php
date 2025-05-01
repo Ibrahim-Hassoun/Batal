@@ -6,35 +6,8 @@ use App\Models\Gym;
 
 class GymServices {
 
-    public function addGym($data){
-        $gym = Gym::create($data);
-        if ($gym) {
-            return $gym;
-        }
-        throw new \Exception('Failed to create gym');
-    }
-
-    public function updateGym($id, $data){
-        $gym = Gym::find($id);
-        if ($gym) {
-            $gym->update($data);
-            return $gym;
-        }
-        throw new \Exception('Gym not found');
-    }
-
-    public function deleteGym($id){
-        $gym = Gym::find($id)->first();
-        if ($gym) {
-            if($gym->delete()){
-                return true;
-            }
-            throw new \Exception('Failed to delete gym');
-        }
-        throw new \Exception('Gym not found');
-    }
-
-    public function getGyms($request){
+    public function getGyms($request)
+    {
         $query=Gym::query();
 
         if($request->query('id')){
@@ -76,7 +49,37 @@ class GymServices {
         return $query->get();
     }
 
-   
+    public function addGym($data)
+    {
+        $gym = Gym::create($data);
+        if ($gym) {
+            return $gym;
+        }
+        throw new \Exception('Failed to create gym');
+    }
+
+
+    public function deleteGym($id)
+    {
+        $gym = Gym::find($id)->first();
+        if ($gym) {
+            if($gym->delete()){
+                return true;
+            }
+            throw new \Exception('Failed to delete gym');
+        }
+        throw new \Exception('Gym not found');
+    }
     
+    public function updateGym( $data)
+    {
+        $gym = Gym::find($data['id']);
+        if (!$gym) {
+            throw new \Exception('Gym not found');
+            
+        }
+        if(!$gym->update($data)) throw new \Exception('Failed to update gym');
+        return $gym;
+    }
 
 }
