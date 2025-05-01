@@ -32,10 +32,6 @@ class GymServices {
         throw new \Exception('Gym not found');
     }
 
-    public function getGym($id){
-        return Gym::find($id);
-    }
-
     public function getGyms($request){
         $query=Gym::query();
 

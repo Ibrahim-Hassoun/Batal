@@ -36,4 +36,23 @@ class GymController extends Controller
         }
     }
     
+    public function addGym(Request $request)
+    {
+        try{
+            $data = $this->gymServices->addGym($request->all());
+            return $this->respond(
+                'true',
+                'Gym added successfully',
+                $data,
+                201
+            );
+        }catch(\Exception $e){
+            return $this->respond(
+                'false',
+                $e->getMessage(),
+                null,
+                500
+            );
+        }
+    }
 }
