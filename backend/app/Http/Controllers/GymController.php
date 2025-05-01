@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Traits\HttpResponseTrait;
+use App\Http\Requests\AddGymRequest;
 use App\Services\GymServices\GymServices;
+
 
 class GymController extends Controller
 {
@@ -36,7 +38,7 @@ class GymController extends Controller
         }
     }
     
-    public function addGym(Request $request)
+    public function addGym(AddGymRequest $request)
     {
         try{
             $data = $this->gymServices->addGym($request->all());
