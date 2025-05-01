@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Traits\HttpResponseTrait;
 use App\Http\Requests\AddGymRequest;
 use App\Services\GymServices\GymServices;
-
+use App\Http\Requests\GymManipulationAuthorizationRequest;
 
 class GymController extends Controller
 {
@@ -58,7 +58,7 @@ class GymController extends Controller
         }
     }
 
-    public function deleteGym(Request $request)
+    public function deleteGym(GymManipulationAuthorizationRequest $request)
     {
         try{
             $data = $this->gymServices->deleteGym($request->only('id'));
