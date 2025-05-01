@@ -35,6 +35,12 @@ class GymServices {
     public function getGyms($request){
         $query=Gym::query();
 
+        if($request->query('id')){
+            $query->where('id', $request->query('id'));
+        }
+        if($request->query('owner_id')){
+            $query->where('owner_id', $request->query('owner_id'));
+        }
         if($request->query('name')){
             $query->where('name', 'like', '%' . $request->query('name') . '%');
         }
@@ -49,6 +55,21 @@ class GymServices {
         }
         if($request->query('max_subscription_price')){
             $query->where('subscription_price', '<=', $request->query('max_subscription_price'));
+        }
+        if($request->query('min_rating')){
+            $query->where('min_rating', '>=', $request->query('min_rating'));
+        }
+        if($request->query('max_rating')){
+            $query->where('max_rating', '<=', $request->query('max_rating'));
+        }
+        if($request->query('current_traffic')){
+            $query->where('current_traffic',  $request->query('current_traffic'));
+        }
+        if($request->query('usual_traffic') ){
+            $query->where('usual_traffic',  $request->query('usual_traffic'));
+        }
+        if($request->query('is_active')){
+            $query->where('is_active', $request->query('is_active'));
         }
         return $query->get();
     }
