@@ -24,10 +24,12 @@ class GymServices {
     }
 
     public function deleteGym($id){
-        $gym = Gym::find($id);
+        $gym = Gym::find($id)->first();
         if ($gym) {
-            $gym->update(['deleted_at' => now()]);
-            return true;
+            if($gym->delete()){
+                return true;
+            }
+            throw new \Exception('Failed to delete gym');
         }
         throw new \Exception('Gym not found');
     }

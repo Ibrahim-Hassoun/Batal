@@ -57,4 +57,24 @@ class GymController extends Controller
             );
         }
     }
+
+    public function deleteGym(Request $request)
+    {
+        try{
+            $data = $this->gymServices->deleteGym($request->only('id'));
+            return $this->respond(
+                'true',
+                'Gym deleted successfully',
+                $data,
+                200
+            );
+        }catch(\Exception $e){
+            return $this->respond(
+                'false',
+                $e->getMessage(),
+                null,
+                500
+            );
+        }
+    }
 }
