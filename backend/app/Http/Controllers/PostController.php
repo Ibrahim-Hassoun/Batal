@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponseTrait;
 use App\Services\PostServices\PostServices;
-use App\Http\Requests\PostManipulationAuthorizationRequest;
+use App\Http\Requests\PostRequests\PostManipulationAuthorizationRequest;
 
 class PostController extends Controller
 {

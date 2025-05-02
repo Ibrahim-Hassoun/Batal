@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\PostRequests;
 
 use App\Models\Post;
 use App\Http\Requests\RootRequest;

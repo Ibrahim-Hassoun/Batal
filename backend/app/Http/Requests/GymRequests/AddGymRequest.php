@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\GymRequests;
 
 use App\Http\Requests\RootRequest;
 use Illuminate\Foundation\Http\FormRequest;

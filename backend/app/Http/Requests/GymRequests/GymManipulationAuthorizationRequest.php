@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\GymRequests;
 
 use App\Models\Gym;
 use Illuminate\Foundation\Http\FormRequest;
