@@ -27,10 +27,17 @@ class PostController extends Controller
             return $this->respond(false,$e->getMessage(),null,$e->getCode());
         }
     }
-    public function getPost(Request $request)
+
+    public function searchPost(Request $request)
     {
-        
+        try{
+            $posts = $this->postServices->searchPost($request);
+            return $this->respond(true,'Post retrieved successfully',$posts,200);
+        }catch(\Exception $e){
+            return $this->respond(false, $e->getMessage(), null, $e->getCode() ?: 500);
+        }
     }
+
     public function deletePost(Request $request)
     {
         

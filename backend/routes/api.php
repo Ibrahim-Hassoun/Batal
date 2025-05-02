@@ -24,7 +24,7 @@ Route::group(['prefix'=>"v0.1"],function(){
 
         Route::group(['prefix'=>'posts'],function(){
             Route::post('/add',[PostController::class,'addPost']);
-            Route::get('/search',[PostController::class,'getPost']);
+            Route::get('/search',[PostController::class,'searchPost']);
             Route::delete('/delete',[PostController::class,'deletePost']);
             Route::post('/update',[PostController::class,'updatePost']);
         });

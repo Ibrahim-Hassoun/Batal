@@ -26,9 +26,26 @@ class PostServices {
         }
         return $post;
     }
-    public function getPost($data)
+    public function searchPost($request)
     {
+        $query=Post::query();
 
+        if($request->query('id')){
+            $query->where('id', $request->query('id'));
+        }
+        if($request->query('user_id')){
+            $query->where('user_id', $request->query('user_id'));
+        }
+        if($request->query('description')){
+            $query->where('name', 'like', '%' . $request->query('name') . '%');
+        }
+
+        $results=$query->get();
+
+        if(!$results){
+            throw new \Exception('Post not found', 404);
+        }
+        return $results;
     }
     public function deletePost($data)
     {
