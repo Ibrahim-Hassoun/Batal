@@ -49,7 +49,12 @@ class PostServices {
     }
     public function deletePost($data)
     {
-
+        $post = Post::find($data);
+        if(!$post){
+            throw new \Exception('Post not found', 404);
+        }
+        $post->delete();
+        return $post;
     }
     public function updatePost($data)
     {

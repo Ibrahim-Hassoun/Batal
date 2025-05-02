@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponseTrait;
 use App\Services\PostServices\PostServices;
+use App\Http\Requests\PostManipulationAuthorizationRequest;
 
 class PostController extends Controller
 {
@@ -38,10 +39,16 @@ class PostController extends Controller
         }
     }
 
-    public function deletePost(Request $request)
+    public function deletePost(PostManipulationAuthorizationRequest $request)
     {
-        
+        try{
+            $post = $this->postServices->deletePost($request->input('id'));
+            return $this->respond(true,'Post deleted successfully',$post,200);
+        }catch(\Exception $e){
+            return $this->respond(false, $e->getMessage(), null, $e->getCode() ?: 500);
+        }
     }
+
     public function updatePost(Request $request)
     {
         
