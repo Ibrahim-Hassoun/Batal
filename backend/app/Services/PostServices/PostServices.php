@@ -56,9 +56,26 @@ class PostServices {
         $post->delete();
         return $post;
     }
+
     public function updatePost($data)
     {
-
+        $post = Post::find($data['id']);
+        if(!$post){
+            throw new \Exception('Post not found', 404);
+        }
+        $post->update([
+            'description' => $data['description'],
+            'image_path' => $data['image_path'],
+            'reactions' => $data['reactions'],
+            'comments' => $data['comments'],
+            'shares' => $data['shares'],
+            'impressions_count' => $data['impressions_count'],
+            'followers_brought' => $data['followers_brought'],
+            'profile_visits' => $data['profile_visits'],
+            'reach' => $data['reach'],
+            'scheduled_at' => $data['scheduled_at'],
+        ]);
+        return $post;
     }
     
 

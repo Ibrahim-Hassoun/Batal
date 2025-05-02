@@ -49,9 +49,14 @@ class PostController extends Controller
         }
     }
 
-    public function updatePost(Request $request)
+    public function updatePost(PostManipulationAuthorizationRequest $request)
     {
-        
+        try{
+            $post = $this->postServices->updatePost($request->all());
+            return $this->respond(true,'Post updated successfully',$post,200);
+        }catch(\Exception $e){
+            return $this->respond(false, $e->getMessage(), null, $e->getCode() ?: 500);
+        }
     }
     
 }
