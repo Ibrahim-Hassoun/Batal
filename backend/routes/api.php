@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GymController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
 
 
@@ -19,6 +20,13 @@ Route::group(['prefix'=>"v0.1"],function(){
             Route::post('/add',[GymController::class,'addGym']);
             Route::delete('/delete',[GymController::class,'deleteGym']);
             Route::post('/update',[GymController::class,'updateGym']);
+        });
+
+        Route::group(['prefix'=>'posts'],function(){
+            Route::post('/add',[PostController::class,'addPost']);
+            Route::get('/search',[PostController::class,'getPost']);
+            Route::delete('/delete',[PostController::class,'deletePost']);
+            Route::post('/update',[PostController::class,'updatePost']);
         });
     });
 });

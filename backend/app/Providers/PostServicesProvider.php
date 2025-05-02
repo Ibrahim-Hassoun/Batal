@@ -6,6 +6,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Services\PostServices\PostServices;
 
+
 class PostServicesProvider extends ServiceProvider
 {
     /**
