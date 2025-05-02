@@ -9,7 +9,7 @@ class PostServices {
     public function addPost($data)
     {
         $post = Post::create([
-            'user_id' => $data['user_id'],
+            'user_id' => auth()->user()->id,
             'description' => $data['description'],
             'image_path' => $data['image_path'],
             'reactions' => $data['reactions'],

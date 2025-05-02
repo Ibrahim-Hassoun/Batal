@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Traits\HttpResponseTrait;
 use App\Services\PostServices\PostServices;
 use App\Http\Requests\PostRequests\PostManipulationAuthorizationRequest;
+use App\Http\Requests\PostRequests\UpdatePostRequest;
+use App\Http\Requests\PostRequests\AddPostRequest;
 
 class PostController extends Controller
 {
@@ -18,7 +20,7 @@ class PostController extends Controller
     }
 
 
-    public function addPost(Request $request)
+    public function addPost(AddPostRequest $request)
     {
         try{
             $post = $this->postServices->addPost($request->all());
@@ -49,7 +51,7 @@ class PostController extends Controller
         }
     }
 
-    public function updatePost(PostManipulationAuthorizationRequest $request)
+    public function updatePost(UpdatePostRequest $request)
     {
         try{
             $post = $this->postServices->updatePost($request->all());

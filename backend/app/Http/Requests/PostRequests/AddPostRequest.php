@@ -2,27 +2,18 @@
 
 namespace App\Http\Requests\PostRequests;
 
-use App\Models\Post;
 use App\Http\Requests\RootRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-
-class PostManipulationAuthorizationRequest extends RootRequest
+class AddPostRequest extends RootRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
-    {
-        $userId = $this->user()->id;
-        $postId = $this->input('id');
-        $post = Post::find($postId);
-        if ($post && $post->user_id == $userId) {
-            return true;
-        }
-        return false;
-        
-    }
+    // public function authorize(): bool
+    // {
+    //     return false;
+    // }
 
     /**
      * Get the validation rules that apply to the request.
@@ -32,7 +23,9 @@ class PostManipulationAuthorizationRequest extends RootRequest
     public function rules(): array
     {
         return [
-            //
+           'description' => 'present|nullable|string|max:255',
+            'image_path' => 'present|nullable|string|max:255',
+            'scheduled_at' => 'present|nullable|date|after:now',
         ];
     }
 }
