@@ -8,19 +8,20 @@ class PostServices {
 
     public function addPost($data)
     {
-        $post = Post::create([
-            'user_id' => $data['user_id'],
-            'description' => $data['description'],
-            'image_path' => $data['image_path'],
-            'reactions' => $data['reactions'],
-            'comments' => $data['comments'],
-            'shares' => $data['shares'],
-            'impressions_count' => $data['impressions_count'],
-            'followers_brought' => $data['followers_brought'],
-            'profile_visits' => $data['profile_visits'],
-            'reach' => $data['reach'],
-            'scheduled_at' => $data['scheduled_at'],
-        ]);
+        $post = Post::create(array_filter([
+            'user_id' => auth()->user()->id,
+            'description' => $data['description'] ?? null,
+            'image_path' => $data['image_path'] ?? null,
+            'reactions' => $data['reactions'] ?? null,
+            'comments' => $data['comments'] ?? null,
+            'shares' => $data['shares'] ?? null,
+            'impressions_count' => $data['impressions_count'] ?? null,
+            'followers_brought' => $data['followers_brought'] ?? null,
+            'profile_visits' => $data['profile_visits'] ?? null,
+            'reach' => $data['reach'] ?? null,
+            'scheduled_at' => $data['scheduled_at'] ?? null,
+        ]));
+       
         if(!$post){
             throw new \Exception('Post not created', 500);
         }

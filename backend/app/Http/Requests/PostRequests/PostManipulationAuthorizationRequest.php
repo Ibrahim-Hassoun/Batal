@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\PostRequests;
 
 use App\Models\Post;
 use App\Http\Requests\RootRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostManipulationAuthorizationRequest extends FormRequest
+
+class PostManipulationAuthorizationRequest extends RootRequest
 {
     /**
      * Determine if the user is authorized to make this request.
