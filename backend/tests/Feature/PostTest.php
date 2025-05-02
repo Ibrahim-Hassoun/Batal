@@ -63,4 +63,18 @@ class PostTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function testDeletePost():void
+    {
+        $token = $this->addUserAndGetToken();
+        $post = $this->addPost($token);
+
+        $data = ["id"=>$post->json('data.id')];
+        $response = $this->withHeader('Authorization', 'Bearer ' . $token)
+                        ->delete('/api/v0.1/posts/delete',$data);
+
+        $response->assertStatus(200);
+    }
+
+
 }
