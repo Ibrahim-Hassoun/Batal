@@ -76,5 +76,32 @@ class PostTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function testUpdatePost():void
+    {
+        $token = $this->addUserAndGetToken();
+        $post = $this->addPost($token);
+
+        $data = [
+            "id"=>$post->json('data.id'),
+            'description' => 'updated description',
+            'image_path' => 'https://example.com/images/updated_post123.jpg',
+            'reactions' => 10,
+            'comments' => 5,
+            'shares' => 3,
+            'impressions_count' => 100,
+            'followers_brought' => 20,
+            'profile_visits' => 15,
+            'reach' => 50,
+            'scheduled_at' => '2025-05-04T15:30:00',
+        ];
+
+        $response = $this->withHeader('Authorization', 'Bearer ' . $token)
+                        ->post('/api/v0.1/posts/update',$data);
+
+        $response->assertStatus(200);
+    }
+
+  
+
 
 }
