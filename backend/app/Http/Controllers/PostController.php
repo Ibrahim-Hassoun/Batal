@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponseTrait;
 use App\Services\PostServices\PostServices;
+use App\Services\PostServices\ReactionServices;
 use App\Http\Requests\PostRequests\PostManipulationAuthorizationRequest;
 use App\Http\Requests\PostRequests\UpdatePostRequest;
 use App\Http\Requests\PostRequests\AddPostRequest;
@@ -13,10 +14,12 @@ class PostController extends Controller
 {
     use HttpResponseTrait;
     protected $postServices;
+    protected $reactionServices;
 
-    public function __construct(PostServices $postServices)
+    public function __construct(PostServices $postServices,ReactionServices $reactionServices)
     {
         $this->postServices = $postServices;
+        $this->reactionServices = $reactionServices;
     }
 
 
@@ -61,4 +64,13 @@ class PostController extends Controller
         }
     }
     
+    public function addReaction(Request $request)
+    {
+        try{
+            $reaction=$this->reactionServices->addReaction($request->all());
+            return $this->respond(true,"reaction added successfully",$reaction,200);
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,$e->getCode());
+        }
+    }
 }
