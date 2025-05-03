@@ -79,6 +79,14 @@ class PostServices {
         return $post;
     }
     
+    //This will be used later on 
+    public function getFeed($user)
+    {
+        
+        return Post::with('myReaction')
+                   ->latest()
+                   ->get();
+    }
 
 
 }

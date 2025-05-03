@@ -62,7 +62,7 @@ class ReactionServices
     {
         $userId = auth()->user()->id;
         $reaction = Reaction::where("user_id", $userId)->where("post_id", $request['post_id'])->first();
-
+        
         $reaction->type = $request['type'];
 
         if(!$reaction->save()){
