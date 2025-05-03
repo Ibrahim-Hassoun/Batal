@@ -68,10 +68,11 @@ class PostController extends Controller
     public function addReaction(AddReactionRequest $request)
     {
         try{
-            $reaction=$this->reactionServices->addReaction($request->all());
+            $reaction=$this->reactionServices->addReaction($request);
             return $this->respond(true,"reaction added successfully",$reaction,200);
         }catch(\Exception $e){
             return $this->respond(false,$e->getMessage(),null,400);
         }
     }
+    
 }

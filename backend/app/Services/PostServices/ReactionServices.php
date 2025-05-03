@@ -2,25 +2,22 @@
 
 namespace App\Services\PostServices;
 
+use App\Traits\IpApi;
 use App\Models\Reaction;
-use Illuminate\Support\Facades\Http;
 
 
 class ReactionServices
 {
-    
+    use IpApi;
 
-    public function addReaction($payload)
+    public function addReaction($request)
     {
-        $ip = request()->ip(); // or use a specific IP
-
-        $response = Http::get("https://ipapi.co/178.135.15.202/json/");
-        $location = $response->json();
+        $location = $this->getLocation($request->ip());
 
         $reaction=Reaction::create([
             'user_id' => auth()->user()->id,
-            'post_id' => $payload['post_id']??null,
-            'type'=> $payload['type']??null,
+            'post_id' => $request['post_id']??null,
+            'type'=> $request['type']??null,
             'country'=> $location['country']??null,
             'province'=> $location['region']??null,
             'city'=> $location['city']??null,
