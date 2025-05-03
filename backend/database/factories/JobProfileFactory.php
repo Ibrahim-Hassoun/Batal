@@ -18,7 +18,7 @@ class JobProfileFactory extends Factory
     {
         return [
             'user_id' => \App\Models\User::factory(),
-            'job_type' => $this->faker->randomElement(['trainer', 'dietitian']),
+            'role' => $this->faker->randomElement(['trainer', 'dietitian']),
             'job_description' => $this->faker->sentence(),
             'hourly_rate' => $this->faker->randomFloat(2, 10, 100), 
             'negotiable' => $this->faker->boolean(),

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('job_profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->enum('job_type', ['trainer', 'dietitian']);
+            $table->enum('role', ['trainer', 'dietitian']);
             $table->string('job_description')->nullable();
             $table->decimal('hourly_rate', 5, 2)->unsigned();
             $table->boolean('negotiable')->default(false);
