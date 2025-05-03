@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('job_profiles', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->enum('job_type', ['trainer', 'dietitian']);
+            $table->string('job_description')->nullable();
+            $table->unsignedDecimal('hourly_rate', 5, 2);
+            $table->boolean('negotiable')->default(false);
+            $table->unsignedDecimal('years_of_experience', 3, 1);
+            $table->decimal('rating', 3, 2)->default(0.0);
+            $table->boolean('is_approved')->default(false);
             $table->timestamps();
         });
     }
