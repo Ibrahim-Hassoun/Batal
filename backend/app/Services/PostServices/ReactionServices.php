@@ -27,4 +27,21 @@ class ReactionServices
         }
         return $reaction;
     }
+
+    public function deleteReaction($request)
+    {
+        $userId = auth()->user()->id;
+
+        $reaction = Reaction::where('user_id', $userId)
+                    ->where('post_id', $request['post_id'])
+                    ->first();
+
+        if (!$reaction) {
+            throw new Exception("Reaction not found", 404);
+        }
+
+        $reaction->delete();
+
+        return $reaction;
+    }
 }
