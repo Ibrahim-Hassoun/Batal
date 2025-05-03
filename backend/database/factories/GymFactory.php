@@ -21,7 +21,7 @@ class GymFactory extends Factory
             
             'owner_id' => \App\Models\User::factory()->create()->id,
             'name' => $this->faker->company,
-            'description' => $this->faker->paragraph,
+            'description' => $this->faker->text(200),
             'logo_path' => $this->faker->imageUrl(),
             'estimated_capacity' => $this->faker->numberBetween(50, 500),
             'subscription_price' => $this->faker->numberBetween(100, 1000),

@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Log;
+use App\Models\Post;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -43,11 +44,17 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Log::class);
     }
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey(); // Typically the user's primary key (e.g., `id`)
     }
-
+    
+    
     /**
      * Get the custom claims for the JWT.
      *

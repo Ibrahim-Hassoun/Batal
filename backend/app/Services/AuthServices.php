@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use App\Http\Requests\RegisterRequest;
+
 
 
 class AuthServices {

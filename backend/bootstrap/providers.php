@@ -4,4 +4,5 @@ return [
     App\Providers\AppServiceProvider::class,
     App\Providers\AuthServicesProvider::class,
     App\Providers\GymServicesProvider::class,
+    App\Providers\PostServicesProvider::class,
 ];

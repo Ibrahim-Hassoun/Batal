@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\AuthRequests\RegisterRequest;
 use App\Traits\HttpResponseTrait;
 use App\Services\AuthServices;
 

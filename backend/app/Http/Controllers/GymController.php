@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Traits\HttpResponseTrait;
-use App\Http\Requests\AddGymRequest;
+use App\Http\Requests\GymRequests\AddGymRequest;
 use App\Services\GymServices\GymServices;
-use App\Http\Requests\GymManipulationAuthorizationRequest;
+use App\Http\Requests\GymRequests\GymManipulationAuthorizationRequest;
 
 class GymController extends Controller
 {
