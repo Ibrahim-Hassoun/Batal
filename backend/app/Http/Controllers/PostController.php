@@ -74,5 +74,24 @@ class PostController extends Controller
             return $this->respond(false,$e->getMessage(),null,400);
         }
     }
+
+    public function deleteReaction(Request $request)
+    {
+        try{
+            $reaction = $this->reactionServices->deleteReaction($request);
+            return $this->respond(true,"Reaction deleted successfully",$reaction,200);
+        }catch(\Exception $e){
+            return $this->respond(false, $e->getMessage(), null, $e->getCode() ?: 500);
+        }
+    }
     
+    public function updateReaction(Request $request)
+    {
+        try{
+            $reaction = $this->reactionServices->updateReaction($request);
+            return $this->respond(true,"Reaction updated successfully",$reaction,200);
+        }catch(\Exception $e){
+            return $this->respond(false, $e->getMessage(), null, $e->getCode() ?: 500);
+        }
+    }
 }

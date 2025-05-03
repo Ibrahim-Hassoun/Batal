@@ -33,4 +33,10 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function myReaction()
+    {
+    return $this->hasOne(Reaction::class)
+                ->where('user_id', auth()->id());
+    }
+
 }

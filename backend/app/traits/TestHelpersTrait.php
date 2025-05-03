@@ -26,7 +26,7 @@ trait TestHelpersTrait
             
             "description"=>"test",
             "image_path"=> "https://example.com/images/post123.jpg",
-            "scheduled_at"=> "2025-05-03T15:30:00",
+            "scheduled_at" => now()->addDay()->toDateTimeString(),
         ];
         $response = $this->withHeader('Authorization', 'Bearer ' . $token)
                  ->post('/api/v0.1/posts/add', $data);

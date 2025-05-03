@@ -38,7 +38,7 @@ class PostServices {
             $query->where('user_id', $request->query('user_id'));
         }
         if($request->query('description')){
-            $query->where('name', 'like', '%' . $request->query('name') . '%');
+            $query->where('description', 'like', '%' . $request->query('description') . '%');
         }
 
         $results=$query->get();
@@ -79,6 +79,14 @@ class PostServices {
         return $post;
     }
     
+    //This will be used later on 
+    public function getFeed($user)
+    {
+        
+        return Post::with('myReaction')
+                   ->latest()
+                   ->get();
+    }
 
 
 }
