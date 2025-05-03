@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use App\Traits\HttpResponseTrait;
 use App\Services\PostServices\PostServices;
 use App\Services\PostServices\ReactionServices;
-use App\Http\Requests\PostRequests\PostManipulationAuthorizationRequest;
-use App\Http\Requests\PostRequests\UpdatePostRequest;
 use App\Http\Requests\PostRequests\AddPostRequest;
+use App\Http\Requests\PostRequests\UpdatePostRequest;
+use App\Http\Requests\PostRequests\AddReactionRequest;
+use App\Http\Requests\PostRequests\PostManipulationAuthorizationRequest;
 
 class PostController extends Controller
 {
@@ -64,13 +65,13 @@ class PostController extends Controller
         }
     }
     
-    public function addReaction(Request $request)
+    public function addReaction(AddReactionRequest $request)
     {
         try{
             $reaction=$this->reactionServices->addReaction($request->all());
             return $this->respond(true,"reaction added successfully",$reaction,200);
         }catch(\Exception $e){
-            return $this->respond(false,$e->getMessage(),null,$e->getCode());
+            return $this->respond(false,$e->getMessage(),null,400);
         }
     }
 }

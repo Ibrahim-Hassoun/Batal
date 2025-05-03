@@ -10,11 +10,11 @@ class ReactionServices
     {
         $reaction=Reaction::create([
             'user_id' => auth()->user()->id,
-            'post_id' => $payload['post_id'],
-            'type'=> $payload['type'],
-            'country'=> $payload['country'],
-            'province'=> $payload['province'],
-            'city'=> $payload['city'],
+            'post_id' => $payload['post_id']??null,
+            'type'=> $payload['type']??null,
+            'country'=> $payload['country']??null,
+            'province'=> $payload['province']??null,
+            'city'=> $payload['city']??null,
         ]);
         if(!$reaction){
             throw new Exception("couldn't add reaction",400);
