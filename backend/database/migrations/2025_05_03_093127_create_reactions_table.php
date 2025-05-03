@@ -23,6 +23,7 @@ return new class extends Migration
             $table->timestamps();
             $table->index(['post_id', 'type']);
             $table->unique(['user_id', 'post_id']);
+            
 
         });
     }
