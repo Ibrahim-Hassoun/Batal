@@ -85,4 +85,12 @@ class PostController extends Controller
         }
     }
     
+    public function updateReaction(Request $request){
+        try{
+            $reaction = $this->reactionServices->updateReaction($request);
+            return $this->respond(true,"Reaction updated successfully",$reaction,200);
+        }catch(\Exception $e){
+            return $this->respond(false, $e->getMessage(), null, $e->getCode() ?: 500);
+        }
+    }
 }

@@ -30,6 +30,7 @@ Route::group(['prefix'=>"v0.1"],function(){
 
             Route::post('/addReaction',[PostController::class,'addReaction']);
             Route::post('/deleteReaction',[PostController::class,'deleteReaction']);
+            Route::post('/updateReaction',[PostController::class,'updateReaction']);
             
         });
     });
