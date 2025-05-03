@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->string('province')->nullable();
             $table->string('city')->nullable();
-            $table->softDelete();
+            $table->softDeletes();
             $table->timestamps();
             $table->index(['post_id', 'type']);
             $table->unique(['user_id', 'post_id']);
