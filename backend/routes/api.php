@@ -27,6 +27,9 @@ Route::group(['prefix'=>"v0.1"],function(){
             Route::get('/search',[PostController::class,'searchPost']);
             Route::delete('/delete',[PostController::class,'deletePost']);
             Route::post('/update',[PostController::class,'updatePost']);
+
+            Route::post('/addReaction',[PostController::class,'addReaction']);
+            
         });
     });
 });
