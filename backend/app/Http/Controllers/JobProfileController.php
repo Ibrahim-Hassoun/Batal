@@ -27,5 +27,15 @@ class JobProfileController extends Controller
         }
     }
 
+    public  function updateJobProfile(Request $request)
+    {
+        try{
+            $jobProfile = $this->jobProfileServices->updateJobProfile($request);
+            return $this->respond(true,"Job Profile updated successfully.",$jobProfile,200);
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,$e->getCode()??500);
+        }
+    }
+
 
 }
