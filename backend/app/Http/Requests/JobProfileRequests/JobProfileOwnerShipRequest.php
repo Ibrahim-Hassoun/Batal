@@ -7,7 +7,7 @@ use App\Http\Requests\RootRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class JobProfileManipulationAuthorizationRequest extends RootRequest
+class JobProfileOwnerShipRequest extends RootRequest
 {
     /**
      * Determine if the user is authorized to make this request.
