@@ -24,4 +24,37 @@ class JobProfileServices
         return $jobProfile;
     }
 
+    public function updateJobProfile($request)
+    {
+        $userId = auth()->user()->id;
+
+        $jobProfile = JobProfile::find($request->input('job_profile_id'));
+        
+        if(!$jobProfile){
+            throw new Exception('Couldn\'t find job profile', 404);
+        }
+
+        if ($request->input('role')) {
+            $jobProfile->role = $request->input('role');
+        }
+        if ($request->input('job_description')) {
+            $jobProfile->job_description = $request->input('job_description');
+        }
+        if ($request->input('hourly_rate')) {
+            $jobProfile->hourly_rate = $request->input('hourly_rate');
+        }
+        if ($request->has('negotiable')) {
+            $jobProfile->negotiable = $request->boolean('negotiable');
+        }
+        if ($request->input('years_of_experience')) {
+            $jobProfile->years_of_experience = $request->input('years_of_experience');
+        }
+
+        if(!$jobProfile->save()){
+            throw new Exception("Couldn't update job profile", 500);
+        }
+
+        return $jobProfile;
+        
+    }
 }
