@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Traits\HttpResponseTrait;
 use App\Services\JobProfileServices\JobProfileServices;
 use App\Http\Requests\JobProfileRequests\AddJobProfileRequest;
-use App\Http\Requests\JobProfileRequests\JobProfileOwnerShipRequest;
+use App\Http\Requests\JobProfileRequests\UpdateJobProfileRequest;
 
 
 class JobProfileController extends Controller
@@ -29,7 +29,7 @@ class JobProfileController extends Controller
         }
     }
 
-    public  function updateJobProfile(JobProfileOwnerShipRequest $request)
+    public  function updateJobProfile(UpdateJobProfileRequest $request)
     {
         try{
             $jobProfile = $this->jobProfileServices->updateJobProfile($request);
