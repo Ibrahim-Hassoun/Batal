@@ -39,5 +39,14 @@ class JobProfileController extends Controller
         }
     }
 
+    public function approveJobProfile(Request $request)
+    {
+        try{
+            $jobProfile = $this->jobProfileServices->approveJobProfile($request);
+            return $this->respond(true,"Job Profile approved successfully.",$jobProfile,200);
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,$e->getCode()??500);
+        } 
+    }
 
 }
