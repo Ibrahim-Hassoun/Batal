@@ -39,6 +39,7 @@ Route::group(['prefix'=>"v0.1"],function(){
         Route::group(['prefix'=>'jobProfiles'],function(){
             Route::post('/add',[JobProfileController::class,'addJobProfile']);
             Route::post('/update',[JobProfileController::class,'updateJobProfile']);
+            Route::post('/approve',[JobProfileController::class,'approveJobProfile']);
 
         });
     });
