@@ -57,4 +57,21 @@ class JobProfileServices
         return $jobProfile;
         
     }
+
+    public function approveJobProfile($request){
+        
+        $jobProfile = JobProfile::find($request->input('job_profile_id'));
+        
+        if(!$jobProfile){
+            throw new Exception('Couldn\'t find job profile', 404);
+        }
+        
+        $jobProfile->is_approved = true;
+
+        if(!$jobProfile->save()){
+            throw new Exception("Couldn't update job profile", 500);
+        }
+
+        return $jobProfile;
+    }
 }
