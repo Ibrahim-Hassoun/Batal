@@ -65,7 +65,7 @@ class PostTest extends TestCase
             'followers_brought' => 20,
             'profile_visits' => 15,
             'reach' => 50,
-            'scheduled_at' => '2025-05-04T15:30:00',
+            'scheduled_at' => '2030-06-30T15:30:00',
         ];
 
         $response = $this->withHeader('Authorization', 'Bearer ' . $token)
