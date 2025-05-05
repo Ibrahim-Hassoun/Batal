@@ -52,7 +52,11 @@ jobs:
       - name: Generate Laravel key
         run: php artisan key:generate --show  
         working-directory: backend
-
+        
+      - name:  Generate JWT key
+        run: php artisan jwt:key
+        working-directory: backend
+        
       - name: Run Migrations
         run: php artisan migrate --force
         working-directory: backend
