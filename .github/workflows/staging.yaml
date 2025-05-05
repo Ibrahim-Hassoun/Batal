@@ -79,7 +79,7 @@ jobs:
           curl -I http://127.0.0.1:8000  
         working-directory: backend
 
-  Deployment:
+  Staging-deployment:
 
     runs-on: ubuntu-latest
 
