@@ -69,9 +69,7 @@ jobs:
           DB_PASSWORD: laravel
 
       - name: Run Tests
-        run: |
-          php artisan key:generate --show
-          php artisan test 
+        run: php artisan test 
         working-directory: backend
 
       - name: Verify Laravel boot
