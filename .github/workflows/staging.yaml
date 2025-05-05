@@ -53,8 +53,8 @@ jobs:
         run: php artisan key:generate --show  
         working-directory: backend
         
-      - name:  Generate JWT key
-        run: php artisan jwt:key
+      - name:  Generate JWT secret
+        run: php artisan jwt:secret
         working-directory: backend
         
       - name: Run Migrations
