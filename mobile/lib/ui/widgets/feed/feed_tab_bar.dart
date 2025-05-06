@@ -7,21 +7,51 @@ class FeedTabBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.white,
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         
         children: [
-          Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: secondaryColor, width: 2),
+          GestureDetector(
+            onTap: () {
+              print('Text clicked');
+            },
+            child: Text(
+              'Following',
+              style: TextStyle(
+                color: text_gray,
+                fontSize: 16,
+                
+              ),
             ),
-            child: Icon(Icons.add, color: secondaryColor, size:24),
+          ),
+          SizedBox(width: 16,),
+          GestureDetector(
+            onTap: () {
+              print('Text clicked');
+            },
+            child: Text(
+              'Trending',
+              style: TextStyle(
+                color: text_gray,
+                fontSize: 16,
+                
+              ),
             ),
-            SizedBox(width: 16),
-          Icon(Icons.search, color: secondaryColor, size:32),
-          SizedBox(width: 16),
-          Icon(Icons.chat, color: secondaryColor, size: 32),
+          ),
+          SizedBox(width: 16,),
+          GestureDetector(
+            onTap: () {
+              print('Text clicked');
+            },
+            child: Text(
+              'Tournaments',
+              style: TextStyle(
+                color: text_gray,
+                fontSize: 16,
+                
+              ),
+            ),
+          ),
         ],
       ),
     );
