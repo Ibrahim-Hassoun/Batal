@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../remote/server.dart';
 
 class AuthProvider with ChangeNotifier {
-  bool _isLoggedIn = false;
+  bool _isLoggedIn = true;
   bool _hasAccount = false;
   bool get hasAccount => _hasAccount;
   bool get isLoggedIn => _isLoggedIn;
