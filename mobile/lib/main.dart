@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import './ui/screens/authScreen/auth_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import './ui/screens/feedScreen/feed_screen.dart';
+import './ui/screens/authScreen/auth_screen.dart';
+import './core/provider/AuthProvider.dart';
 
 const Color primaryColor =Color(0xFFF7713D);
 const Color secondaryColor =Color.fromARGB(255, 31, 31, 31);
@@ -11,7 +13,12 @@ const Color bg_gray = Color(0xEEEEEEEE);
 
 const Color text_gray = Color.fromARGB(255, 179, 179, 179);
 void main() {
-  runApp(const MyApp());
+ runApp(
+    ChangeNotifierProvider(
+      create: (_) => AuthProvider(), // Instantiate your provider
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -24,6 +31,7 @@ class MyApp extends StatelessWidget {
     
     return PlatformApp(
       title: 'Flutter Demo',
+      
       material: (_, __) => MaterialAppData(
         theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: Colors.white,
@@ -41,11 +49,13 @@ class MyApp extends StatelessWidget {
         ),
         themeMode: ThemeMode.system,  // Automatically switches between light/dark themes
       ),
+      
       routes: {
         '/auth':(context) =>AuthScreen(),
         '/feed':(context) => FeedScreen(),
         
       },
+      
       cupertino: (_, __) => CupertinoAppData(
         theme: isDarkMode
             ? CupertinoThemeData(
@@ -61,33 +71,16 @@ class MyApp extends StatelessWidget {
                 ),
               ),
       ),
-      home:Builder(builder: 
-      (context)=>Scaffold(
-        appBar: AppBar(
-          title: const Text('Navigation Example'),
-          backgroundColor: primaryColor,
-        ),
-        body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-            onPressed: () {
-          Navigator.pushNamed(context, '/auth');
-            },
-            child: const Text('Go to Auth Screen'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-          Navigator.pushNamed(context, '/feed');
-            },
-            child: const Text('Go to Feed Screen'),
-          ),
-        ],
-          ),
-        ),
-      )
-      ) 
+
+      home: Builder(
+        builder: (context) {
+          // Replace this with your actual AuthProvider logic
+          final isLoggedIn = true; // Example: AuthProvider.of(context).isLoggedIn;
+
+          return isLoggedIn ? FeedScreen() : AuthScreen();
+        },
+      ),
+
     );
   }
 }
