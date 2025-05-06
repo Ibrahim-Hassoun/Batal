@@ -52,7 +52,7 @@ class Login extends StatelessWidget {
                 children: [
                   Expanded(
                     child: PlatformElevatedButton(
-                      onPressed: () {incrementStep();},
+                      onPressed: () => Provider.of<AuthProvider>(context, listen: false).login(data),
                       color: bg_gray,
                       material: (_, __) => MaterialElevatedButtonData(
                         style: ElevatedButton.styleFrom(
