@@ -6,7 +6,8 @@ import 'package:mobile/ui/widgets/auth/register_3.dart';
 import 'package:mobile/ui/widgets/auth/register_4.dart';
 import 'package:mobile/ui/widgets/auth/register_5.dart';
 import 'package:mobile/ui/widgets/auth/register_6.dart';
-
+import 'package:provider/provider.dart';
+import '../../../core/provider/AuthProvider.dart'; 
 
 class AuthWidget extends StatefulWidget {
   const AuthWidget({super.key});
@@ -28,7 +29,7 @@ class _AuthWidgetState extends State<AuthWidget> {
     'username': '',
     'code': ''
   };
-
+  late bool hasAccount;
   void incrementStep() {
     setState(() {
       if(currentStep<6){
@@ -52,9 +53,17 @@ class _AuthWidgetState extends State<AuthWidget> {
     });
   }
   @override
+  void initState() {
+    super.initState();
+   
+  }
+
+  @override
   Widget build(BuildContext context) {
+    hasAccount = Provider.of<AuthProvider>(context, listen: true).hasAccount;
+     
     return PlatformScaffold(
-      body: isRegistering?
+      body: !hasAccount?
             currentStep==1?Register1(incrementStep: incrementStep, decrementStep: decrementStep,data:data,handleChange:handleChange):
             currentStep==2?Register2(incrementStep: incrementStep, decrementStep: decrementStep,data:data,handleChange:handleChange):
             currentStep==3?Register3(incrementStep: incrementStep, decrementStep: decrementStep,data:data,handleChange:handleChange):
@@ -62,7 +71,7 @@ class _AuthWidgetState extends State<AuthWidget> {
             currentStep==5?Register5(incrementStep: incrementStep, decrementStep: decrementStep,data:data,handleChange:handleChange):
             currentStep==6?Register6(incrementStep: incrementStep, decrementStep: decrementStep,setStep:setStep,data:data,handleChange:handleChange):null
                 :
-            !isRegistering? TextButton(onPressed: decrementStep, child: const Text('Back')):null
+            hasAccount? TextButton(onPressed: decrementStep, child: const Text('Back')):null
     );
   }
 }
