@@ -8,6 +8,7 @@ import 'package:mobile/ui/widgets/auth/register_5.dart';
 import 'package:mobile/ui/widgets/auth/register_6.dart';
 import 'package:provider/provider.dart';
 import '../../../core/provider/AuthProvider.dart'; 
+import './login.dart';
 
 class AuthWidget extends StatefulWidget {
   const AuthWidget({super.key});
@@ -71,7 +72,7 @@ class _AuthWidgetState extends State<AuthWidget> {
             currentStep==5?Register5(incrementStep: incrementStep, decrementStep: decrementStep,data:data,handleChange:handleChange):
             currentStep==6?Register6(incrementStep: incrementStep, decrementStep: decrementStep,setStep:setStep,data:data,handleChange:handleChange):null
                 :
-            hasAccount? TextButton(onPressed: decrementStep, child: const Text('Back')):null
+            hasAccount?Login(incrementStep: incrementStep, decrementStep: decrementStep, data: data, handleChange: handleChange):null
     );
   }
 }
