@@ -7,28 +7,32 @@ class AuthProvider with ChangeNotifier {
   bool get hasAccount => _hasAccount;
   bool get isLoggedIn => _isLoggedIn;
 
+ String? _access_token; 
+String? get access_token => _access_token;
+
   void toggleHasAccount() {
     _hasAccount = !_hasAccount;
     notifyListeners();
   }
 
   void login(data) async {
-    print("Data sent: $data");
-    final response = await request(
+  final response = await request(
     endpoint: '/api/v0.1/login',
     method: 'POST',
-    body: data
+    body: data,
   );
-  
+
   if (response['success']) {
     _isLoggedIn = true;
+   _access_token = response['data']['data']['token'];
     print('User Data: ${response['data']}');
+    print('token is: $_access_token');
   } else {
     print('Error: ${response['message']}');
   }
-    
-    notifyListeners();
-  }
+
+  notifyListeners();
+}
 
   void logout() {
     _isLoggedIn = false;
