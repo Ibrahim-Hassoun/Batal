@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import './ui/screens/authScreen/auth_screen.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-
+import './ui/screens/feedScreen/feed_screen.dart';
 
 const Color primaryColor =Color(0xFFF7713D);
 const Color secondaryColor =Color.fromARGB(255, 31, 31, 31);
@@ -41,6 +41,11 @@ class MyApp extends StatelessWidget {
         ),
         themeMode: ThemeMode.system,  // Automatically switches between light/dark themes
       ),
+      routes: {
+        '/auth':(context) =>AuthScreen(),
+        '/feed':(context) => FeedScreen(),
+        
+      },
       cupertino: (_, __) => CupertinoAppData(
         theme: isDarkMode
             ? CupertinoThemeData(
