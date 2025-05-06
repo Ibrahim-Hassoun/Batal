@@ -10,8 +10,8 @@ const Color primaryColor =Color(0xFFF7713D);
 const Color secondaryColor =Color.fromARGB(255, 31, 31, 31);
 const Color tertiaryColor =Color.fromARGB(255, 255, 255, 255);
 const Color bg_gray = Color(0xEEEEEEEE);
-
 const Color text_gray = Color.fromARGB(255, 179, 179, 179);
+
 void main() {
  runApp(
     ChangeNotifierProvider(
@@ -23,10 +23,10 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
-
+    final isLoggedIn = Provider.of<AuthProvider>(context, listen: true).isLoggedIn;
     final isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
     
     return PlatformApp(
@@ -72,14 +72,8 @@ class MyApp extends StatelessWidget {
               ),
       ),
 
-      home: Builder(
-        builder: (context) {
-          // Replace this with your actual AuthProvider logic
-          final isLoggedIn = true; // Example: AuthProvider.of(context).isLoggedIn;
-
-          return isLoggedIn ? FeedScreen() : AuthScreen();
-        },
-      ),
+      home: isLoggedIn ? FeedScreen() : AuthScreen()
+        
 
     );
   }
