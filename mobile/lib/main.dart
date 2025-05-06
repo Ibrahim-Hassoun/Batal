@@ -61,7 +61,33 @@ class MyApp extends StatelessWidget {
                 ),
               ),
       ),
-      home: AuthScreen()
+      home:Builder(builder: 
+      (context)=>Scaffold(
+        appBar: AppBar(
+          title: const Text('Navigation Example'),
+          backgroundColor: primaryColor,
+        ),
+        body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+          Navigator.pushNamed(context, '/auth');
+            },
+            child: const Text('Go to Auth Screen'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+          Navigator.pushNamed(context, '/feed');
+            },
+            child: const Text('Go to Feed Screen'),
+          ),
+        ],
+          ),
+        ),
+      )
+      ) 
     );
   }
 }
