@@ -46,7 +46,7 @@ class Login extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               LabeledInput(label: 'Email', placeholder: 'email@domain.com',dataKey:'email',value:data['email'],handleChange:handleChange,keyboardType: TextInputType.emailAddress,),
-              LabeledInput(label: 'Password', placeholder: '********',dataKey:'password',value:data['password'],handleChange:handleChange,keyboardType: TextInputType.emailAddress,),
+              LabeledInput(label: "Password", placeholder: "********",dataKey:'password',value:data['password'],handleChange:handleChange,type: 'password'),
               SizedBox(height: 16,),
               Row(
                 children: [
