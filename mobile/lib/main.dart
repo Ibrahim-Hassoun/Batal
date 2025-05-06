@@ -5,6 +5,9 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import './ui/screens/feedScreen/feed_screen.dart';
 import './ui/screens/authScreen/auth_screen.dart';
 import './core/provider/AuthProvider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+
 
 const Color primaryColor =Color(0xFFF7713D);
 const Color secondaryColor =Color.fromARGB(255, 31, 31, 31);
@@ -12,10 +15,11 @@ const Color tertiaryColor =Color.fromARGB(255, 255, 255, 255);
 const Color bg_gray = Color(0xEEEEEEEE);
 const Color text_gray = Color.fromARGB(255, 179, 179, 179);
 
-void main() {
- runApp(
+void main() async {
+  await dotenv.load(fileName: ".env");
+  runApp(
     ChangeNotifierProvider(
-      create: (_) => AuthProvider(), // Instantiate your provider
+      create: (_) => AuthProvider(), 
       child: const MyApp(),
     ),
   );
