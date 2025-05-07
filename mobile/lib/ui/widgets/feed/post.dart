@@ -36,7 +36,75 @@ class _PostState extends State<Post> {
     return Column(
       children: [
         SizedBox(height: 16),
-        // ... your post header code remains unchanged ...
+       Row(//whole row on top before description
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          
+          Expanded(
+            child: Padding(
+            
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(//left part of the post header
+                    children: [
+                      Container(//pp
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.orange, width: 2),
+                          image: widget.profileImageUrl != null
+                            ? DecorationImage(
+                              image: NetworkImage(widget.profileImageUrl!),
+                              fit: BoxFit.cover,
+                            )
+                            : null,
+                        ),
+                        child: widget.profileImageUrl == null
+                          ? Icon(Icons.person, size: 30, color: Colors.grey)
+                          : null,
+                        ),
+                      SizedBox(width: 8,),
+                      Column(//name and time
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('John Doe',style: TextStyle(color: secondaryColor,fontSize: 16,fontWeight:FontWeight.w500),),
+                          Text('Just now',style: TextStyle(color: text_gray,fontSize: 16,fontWeight:FontWeight.w400,),)
+                        ],
+                      ),
+                    ],
+                  ),
+                  Row(//right part of the post header
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                     
+                      SvgPicture.asset(
+                      'assets/ellipsis.svg',
+                      width: 24,
+                      height: 24,
+                      color: text_gray,
+                    ),
+                    SizedBox(width: 12,),
+                      SvgPicture.asset(
+                      'assets/x.svg',
+                      width: 24,
+                      height: 24,
+                      color: text_gray,
+                    ),
+                    ] 
+                  )
+                
+                ],
+              ),
+            ),
+          ),
+        ],
+        
+        
+      ),
 
         if (widget.description != null) SizedBox(height: 8),
         if (widget.description != null)
@@ -87,6 +155,15 @@ class _PostState extends State<Post> {
               },
             ),
           ),
+      if (widget.PostImageUrl!=null)
+      SizedBox(height: 8,),
+      if (widget.PostImageUrl!=null)
+      Image.network(
+        widget.PostImageUrl!,
+        height: 375,
+        width: double.infinity,
+        fit: BoxFit.cover,
+      )
       ],
     );
   }
