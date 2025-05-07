@@ -107,7 +107,7 @@ class _PostState extends State<Post> {
       SizedBox(height: 8),
       if(widget.description!=null)
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: LayoutBuilder(
           builder: (context, constraints) {
         final maxLines = 2;
