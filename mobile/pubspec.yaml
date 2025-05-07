@@ -60,6 +60,12 @@ flutter:
     - assets/apple.jpg
     - .env
     - assets/house.svg
+    - assets/compass.svg
+    - assets/shopping-cart.svg
+    - assets/dumbbell.svg
+    - assets/bell.svg
+    - assets/user.svg
+    
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

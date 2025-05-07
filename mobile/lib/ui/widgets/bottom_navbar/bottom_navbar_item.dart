@@ -7,11 +7,14 @@ class BottomNavbarItem extends StatefulWidget implements PreferredSizeWidget {
   final String icon;
   final String label;
   final String route;
+  final String state;
+ 
 
   BottomNavbarItem({
     required this.icon,
     required this.label,
     required this.route,
+    required this.state,
   });
 
   @override
@@ -39,16 +42,16 @@ class _BottomNavbarItemState extends State<BottomNavbarItem> {
               color: primaryColor,
             ),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 6),
           SizedBox(
             height: 6,
-            child: FittedBox( // NEW: scales the text to fit
+            child: FittedBox( 
               fit: BoxFit.scaleDown,
               child: Text(
                 widget.label,
                 style: const TextStyle(
                   fontSize: 12,
-                  height: 0.1, // Tight line height
+                  height: 0.1, 
                   color: primaryColor,
                 ),
               ),
