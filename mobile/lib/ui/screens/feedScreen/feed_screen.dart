@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/main.dart';
+import 'package:mobile/core/provider/feed_provider.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/feed/feed_app_bar.dart';
 import '../../widgets/feed/feed_tab_bar.dart';
+import '../../widgets/bottom_navbar/bottom_navbar.dart';
+import '../../../core/provider/bottom_navbar_provider.dart';
 
 class FeedScreen extends StatelessWidget {
   @override
@@ -17,7 +20,10 @@ class FeedScreen extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             color: const Color.fromARGB(255, 244, 240, 240),
             ),
-            FeedTabBar(),
+            ChangeNotifierProvider(
+              create: (_)=>FeedProvider(),
+              child: FeedTabBar(),
+            ),
             Expanded(
             child: Container(
               margin: EdgeInsets.only(left: 16),
@@ -26,7 +32,11 @@ class FeedScreen extends StatelessWidget {
             ),
           
         ],
-      )
+      ),
+      bottomNavigationBar: ChangeNotifierProvider(
+        create: (_) => BottomNavbarProvider(),
+        child: BottomNavbar(),
+      ),
     );
   }
 }

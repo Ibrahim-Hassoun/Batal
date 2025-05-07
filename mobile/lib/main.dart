@@ -14,7 +14,7 @@ const Color secondaryColor =Color.fromARGB(255, 31, 31, 31);
 const Color tertiaryColor =Color.fromARGB(255, 255, 255, 255);
 const Color bg_gray = Color(0xEEEEEEEE);
 const Color text_gray = Color.fromARGB(255, 179, 179, 179);
-
+// const Color darkmodeBackgroundColor = Color(0xFF121212);
 void main() async {
   await dotenv.load(fileName: ".env");
   runApp(
@@ -43,6 +43,11 @@ class MyApp extends StatelessWidget {
             bodyColor: secondaryColor,  
             displayColor: secondaryColor,
           ),
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor: Colors.white, 
+            selectedItemColor: primaryColor,
+            unselectedItemColor: text_gray,
+            ),
         ),
         darkTheme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: Colors.grey[900],
@@ -50,6 +55,11 @@ class MyApp extends StatelessWidget {
             bodyColor: Colors.white,  
             displayColor: Colors.white,
           ),
+          // bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          //   backgroundColor: darkmodeBackgroundColor, 
+          //   selectedItemColor: primaryColor,
+          //   unselectedItemColor: text_gray,
+          //   ),
         ),
         themeMode: ThemeMode.system,  // Automatically switches between light/dark themes
       ),
