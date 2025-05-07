@@ -12,8 +12,8 @@ class BottomNavbarIcon extends StatefulWidget implements PreferredSizeWidget {
 class _BottomNavbarIconState extends State<BottomNavbarIcon>{
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-
+    return Column(
+      
     );
   }
 }
