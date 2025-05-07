@@ -60,7 +60,7 @@ class _FeedScreenState extends State<FeedScreen> {
                     width: MediaQuery.of(context).size.width,
                     color: const Color.fromARGB(255, 244, 240, 240),
           ),
-          Post(Name: 'John Doe',PostImageUrl:'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',description: 'This is a post description for fffffffffffffffffffffffffffffffffffffffffffertgdfvljkhsdfgiophasdfoiuhweoufihwasdoiufhsdljkvnsdfoivjweiofgmy post',)
+          Post(Name: 'John Doe',PostImageUrl:'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',description: 'This is a post description for fffffffffffffffffffffffffffffffffffffffffffertgdfvljkhsdfgiophasdfoiuhweoufihwasdoiufhsdljkvnsdfoivjweiofgmy postt',)
 
         ],
       ),
