@@ -19,50 +19,58 @@ class _FeedScreenState extends State<FeedScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: FeedAppBar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            height: 4,
-            width: MediaQuery.of(context).size.width,
-            color: const Color.fromARGB(255, 244, 240, 240),
-          ),
-          ChangeNotifierProvider(
-            create: (_) => FeedProvider(),
-            child: FeedTabBar(),
-          ),
-          Container(
-              margin: EdgeInsets.only(left: 16),
-              child: Column(
-                children: [
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.zero, 
-                    physics: BouncingScrollPhysics(),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Story(userName: 'Your Story',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
-                        Story(userName: 'Your Story',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
-                        Story(userName: 'Your Story',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
-                        Story(userName: 'Your Story',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
-                       
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  
-                ],
-              ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        padding: EdgeInsets.zero, 
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height: 4,
+              width: MediaQuery.of(context).size.width,
+              color: const Color.fromARGB(255, 244, 240, 240),
             ),
-          Container(
-                    height: 4,
-                    width: MediaQuery.of(context).size.width,
-                    color: const Color.fromARGB(255, 244, 240, 240),
-          ),
-          Post(Name: 'John Doe',PostImageUrl:'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',description: 'This is a post description for fffffffffffffffffffffffffffffffffffffffffffertgdfvljkhsdfgiophasdfoiuhweoufihwasdoiufhsdljkvnsdfoivjweiofgmy postt',)
-
-        ],
+            ChangeNotifierProvider(
+              create: (_) => FeedProvider(),
+              child: FeedTabBar(),
+            ),
+            Container(
+                margin: EdgeInsets.only(left: 16),
+                child: Column(
+                  children: [
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.zero, 
+                      physics: BouncingScrollPhysics(),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Story(userName: 'Your Story',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
+                          Story(userName: 'Your Story',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
+                          Story(userName: 'Your Story',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
+                          Story(userName: 'Your Story',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
+                         
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 12),
+                    
+                  ],
+                ),
+              ),
+            Container(
+                      height: 4,
+                      width: MediaQuery.of(context).size.width,
+                      color: const Color.fromARGB(255, 244, 240, 240),
+            ),
+           
+             
+             
+            Post(Name: 'John Doe',PostImageUrl:'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',description: 'This is a post description for fffffffffffffffffffffffffffffffffffffffffffertgdfvljkhsdfgiophasdfoiuhweoufihwasdoiufhsdljkvnsdfoivjweiofgmy postt',)
+        
+          ],
+        ),
       ),
       bottomNavigationBar: ChangeNotifierProvider(
         create: (_) => BottomNavbarProvider(),
