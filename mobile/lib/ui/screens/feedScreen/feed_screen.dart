@@ -6,6 +6,7 @@ import '../../widgets/feed/feed_tab_bar.dart';
 import '../../widgets/bottom_navbar/bottom_navbar.dart';
 import '../../../core/provider/bottom_navbar_provider.dart';
 import '../../widgets/feed/story.dart';
+import '../../widgets/feed/post.dart';
 
 class FeedScreen extends StatefulWidget {
   @override
@@ -59,6 +60,7 @@ class _FeedScreenState extends State<FeedScreen> {
                     width: MediaQuery.of(context).size.width,
                     color: const Color.fromARGB(255, 244, 240, 240),
           ),
+          Post(Name: 'John Doe',PostImageUrl:'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',description: 'This is a post description for my post',)
 
         ],
       ),
