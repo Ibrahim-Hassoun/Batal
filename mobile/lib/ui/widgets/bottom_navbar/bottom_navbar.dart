@@ -30,27 +30,27 @@ class _BottomNavbarState extends State<BottomNavbar>{
           children: [
             SizedBox(
               height: 50,
-              child:   BottomNavbarItem(icon: 'assets/house.svg',label: 'Home',route: '/feed',active: 'feed',),
+              child:   BottomNavbarItem(icon: 'assets/house.svg',label: 'Home',route: '/feed',state: 'feed',),
             ),
             SizedBox(
               height: 50,
-              child:   BottomNavbarItem(icon: 'assets/compass.svg',label: 'Explore',route: '/feed',active: 'feed'),
+              child:   BottomNavbarItem(icon: 'assets/compass.svg',label: 'Explore',route: '/feed',state: 'explore'),
             ),
             SizedBox(
               height: 50,
-              child:   BottomNavbarItem(icon: 'assets/shopping-cart.svg',label: 'Shop',route: '/feed',active: 'feed'),
+              child:   BottomNavbarItem(icon: 'assets/shopping-cart.svg',label: 'Shop',route: '/feed',state: 'shop'),
             ),
             SizedBox(
               height: 50,
-              child:   BottomNavbarItem(icon: 'assets/dumbbell.svg',label: 'Workout',route: '/feed',active: 'feed'),
+              child:   BottomNavbarItem(icon: 'assets/dumbbell.svg',label: 'Workout',route: '/feed',state: 'workout'),
             ),
             SizedBox(
               height: 50,
-              child:   BottomNavbarItem(icon: 'assets/bell.svg',label: 'Notifications',route: '/feed',active: 'feed'),
+              child:   BottomNavbarItem(icon: 'assets/bell.svg',label: 'Notifications',route: '/feed',state: 'notifications'),
             ),
             SizedBox(
               height: 50,
-              child:   BottomNavbarItem(icon: 'assets/user.svg',label: 'Profile',route: '/feed',active: 'feed'),
+              child:   BottomNavbarItem(icon: 'assets/user.svg',label: 'Profile',route: '/feed',state: 'profile'),
             ),
           
             
