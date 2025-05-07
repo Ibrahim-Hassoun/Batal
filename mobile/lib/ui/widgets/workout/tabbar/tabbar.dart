@@ -22,48 +22,53 @@ class _WorkoutTabbarState extends State<WorkoutTabbar> {
   @override
   Widget build(BuildContext context) {
       tab = Provider.of<WorkoutProvider>(context, listen: true).tab;
-    return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: () {
-             
-            },
-            child: Text(
-              'Following',
-              style: TextStyle(
-                color: tab == "my_workout" ?primaryColor:text_gray,
-                fontSize: 16,
+    return  Padding(
+      padding: const EdgeInsets.only(left:16,right: 16),
+      child: SizedBox(
+        width: double.infinity,
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            
+            children: [
+              GestureDetector(
+                onTap: () {
+                 
+                },
+                child: Text(
+                  'My Workout',
+                  style: TextStyle(
+                    color: tab == "my_workout" ?primaryColor:text_gray,
+                    fontSize: 16,
+                  ),
+                ),
               ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-             
-            },
-            child: Text(
-              'Following',
-              style: TextStyle(
-                color: tab == "my_workout" ?primaryColor:text_gray,
-                fontSize: 16,
+              GestureDetector(
+                onTap: () {
+                 
+                },
+                child: Text(
+                  'Pose Detector',
+                  style: TextStyle(
+                    color: tab == "pose_detector" ?primaryColor:text_gray,
+                    fontSize: 16,
+                  ),
+                ),
               ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-             
-            },
-            child: Text(
-              'Following',
-              style: TextStyle(
-                color: tab == "my_workout" ?primaryColor:text_gray,
-                fontSize: 16,
+              GestureDetector(
+                onTap: () {
+                 
+                },
+                child: Text(
+                  'Leaderboard',
+                  style: TextStyle(
+                    color: tab == "Leaderboard" ?primaryColor:text_gray,
+                    fontSize: 16,
+                  ),
+                ),
               ),
-            ),
+              SizedBox(width: 16)],
           ),
-          SizedBox(width: 16)]),
-      ); 
+      ),
+    ); 
   }
 }
