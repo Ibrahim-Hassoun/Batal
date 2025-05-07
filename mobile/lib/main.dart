@@ -8,6 +8,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import './core/provider/bottom_navbar_provider.dart';
 import './ui/widgets/bottom_navbar/bottom_navbar.dart';
 import './core/provider/feed_provider.dart';
+import './core/provider/workout_provider.dart';
 
 const Color primaryColor =Color(0xFFF7713D);
 const Color secondaryColor =Color.fromARGB(255, 31, 31, 31);
@@ -25,7 +26,8 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => BottomNavbarProvider()),
-        ChangeNotifierProvider(create: (_) => FeedProvider())
+        ChangeNotifierProvider(create: (_) => FeedProvider()),
+        ChangeNotifierProvider(create: (_) => WorkoutProvider())
       ],
       child: const MyApp(),
     ) 
