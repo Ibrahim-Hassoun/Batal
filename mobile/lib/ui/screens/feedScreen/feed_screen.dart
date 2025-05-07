@@ -35,11 +35,20 @@ class _FeedScreenState extends State<FeedScreen> {
               margin: EdgeInsets.only(left: 16),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Story(userName: 'John Doe',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,)
-                    ],
+                  SingleChildScrollView(
+                     scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.zero, 
+                    physics: BouncingScrollPhysics(),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Story(userName: 'Your Story',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
+                        Story(userName: 'Your Story',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
+                        Story(userName: 'Your Story',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
+                        Story(userName: 'Your Story',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
+                       
+                      ],
+                    ),
                   )
                   
                 ],

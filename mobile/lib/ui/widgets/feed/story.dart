@@ -4,14 +4,14 @@ import 'package:mobile/main.dart';
 class Story extends StatefulWidget {
   final String userName;
   final String storyImageUrl;
-  final String profileImageUrl;
+  final String? profileImageUrl;
   final bool isViewed;
 
   const Story({
     super.key,
     required this.userName,
     required this.storyImageUrl,
-    required this.profileImageUrl,
+     this.profileImageUrl,
     this.isViewed = false,
   });
 
@@ -29,7 +29,7 @@ class _StoryState extends State<Story> {
         setState(() {
           _isViewed = true;
         });
-        // Handle story viewing
+        
       },
       child: Container(
         width: 110,
@@ -44,7 +44,7 @@ class _StoryState extends State<Story> {
         ),
         child: Stack(
           children: [
-            // Gradient overlay at bottom
+            
             Positioned(
               bottom: 0,
               left: 0,
@@ -68,7 +68,7 @@ class _StoryState extends State<Story> {
               ),
             ),
             
-            // Profile picture with border
+          if (widget.profileImageUrl != null)
             Positioned(
               top: 8,
               left: 8,
@@ -84,14 +84,13 @@ class _StoryState extends State<Story> {
                 ),
                 child: ClipOval(
                   child: Image.network(
-                    widget.profileImageUrl,
+                    widget.profileImageUrl!,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
             ),
             
-            // User name at bottom
             Positioned(
               bottom: 10,
               left: 0,
@@ -108,24 +107,8 @@ class _StoryState extends State<Story> {
               ),
             ),
             
-            // Viewed indicator (optional)
-            if (_isViewed || widget.isViewed)
-              Positioned(
-                top: 0,
-                right: 0,
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: const BoxDecoration(
-                    color: Colors.black54,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.check,
-                    color: Colors.white,
-                    size: 12,
-                  ),
-                ),
-              ),
+           
+          
           ],
         ),
       ),
