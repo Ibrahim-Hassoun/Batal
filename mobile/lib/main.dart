@@ -89,13 +89,11 @@ class MyApp extends StatelessWidget {
               ),
       ),
 
-      home:ChangeNotifierProvider(
-        create: (_)=> BottomNavbarProvider(),
-        child:Scaffold(
+      home:Scaffold(
         body: isLoggedIn ? currentScreen: AuthScreen(),
         bottomNavigationBar:BottomNavbar(),
         )
-      ) 
+      
 
       
       

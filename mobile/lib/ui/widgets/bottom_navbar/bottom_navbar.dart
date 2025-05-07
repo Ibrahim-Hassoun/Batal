@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import './bottom_navbar_item.dart';
+import '../../screens/feedScreen/feed_screen.dart';
+import '../../screens/workout_screen/workout_screen.dart';
 
 class BottomNavbar extends StatefulWidget implements PreferredSizeWidget {
   
@@ -28,28 +30,28 @@ class _BottomNavbarState extends State<BottomNavbar>{
           children: [
             SizedBox(
               height: 50,
-              child:   BottomNavbarItem(icon: 'assets/house.svg',label: 'Home',route: '/feed',state: 'feed',),
+              child:   BottomNavbarItem(icon: 'assets/house.svg',label: 'Home',widget: FeedScreen(),state: 'feed',),
             ),
+            // SizedBox(
+            //   height: 50,
+            //   child:   BottomNavbarItem(icon: 'assets/compass.svg',label: 'Explore',widget: ,state: 'explore'),
+            // ),
+            // SizedBox(
+            //   height: 50,
+            //   child:   BottomNavbarItem(icon: 'assets/shopping-cart.svg',label: 'Shop',widget: ,state: 'shop'),
+            // ),
             SizedBox(
               height: 50,
-              child:   BottomNavbarItem(icon: 'assets/compass.svg',label: 'Explore',route: '/feed',state: 'explore'),
+              child:   BottomNavbarItem(icon: 'assets/dumbbell.svg',label: 'Workout',widget: WorkoutScreen(),state: 'workout'),
             ),
-            SizedBox(
-              height: 50,
-              child:   BottomNavbarItem(icon: 'assets/shopping-cart.svg',label: 'Shop',route: '/feed',state: 'shop'),
-            ),
-            SizedBox(
-              height: 50,
-              child:   BottomNavbarItem(icon: 'assets/dumbbell.svg',label: 'Workout',route: '/workout',state: 'workout'),
-            ),
-            SizedBox(
-              height: 50,
-              child:   BottomNavbarItem(icon: 'assets/bell.svg',label: 'Notifications',route: '/feed',state: 'notifications'),
-            ),
-            SizedBox(
-              height: 50,
-              child:   BottomNavbarItem(icon: 'assets/user.svg',label: 'Profile',route: '/feed',state: 'profile'),
-            ),
+            // SizedBox(
+            //   height: 50,
+            //   child:   BottomNavbarItem(icon: 'assets/bell.svg',label: 'Notifications',widget: ,state: 'notifications'),
+            // ),
+            // SizedBox(
+            //   height: 50,
+            //   child:   BottomNavbarItem(icon: 'assets/user.svg',label: 'Profile',widget: ,state: 'profile'),
+            // ),
           
             
         ],),

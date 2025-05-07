@@ -15,5 +15,6 @@ class BottomNavbarProvider with ChangeNotifier{
 
   void change_screen(widget){
     _current_screen = widget;
+    notifyListeners();
   }
 }
