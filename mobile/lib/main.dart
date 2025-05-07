@@ -2,13 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import './ui/screens/feedScreen/feed_screen.dart';
 import './ui/screens/authScreen/auth_screen.dart';
 import './core/provider/AuthProvider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import './ui/screens/workout_screen/workout_screen.dart';
 import './core/provider/bottom_navbar_provider.dart';
 import './ui/widgets/bottom_navbar/bottom_navbar.dart';
+import './core/provider/feed_provider.dart';
 
 const Color primaryColor =Color(0xFFF7713D);
 const Color secondaryColor =Color.fromARGB(255, 31, 31, 31);
@@ -16,17 +15,22 @@ const Color tertiaryColor =Color.fromARGB(255, 255, 255, 255);
 const Color bg_gray = Color(0xEEEEEEEE);
 const Color text_gray = Color.fromARGB(255, 179, 179, 179);
 // const Color darkmodeBackgroundColor = Color(0xFF121212);
+
 void main() async {
   await dotenv.load(fileName: ".env");
+
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => AuthProvider(), 
-      child: ChangeNotifierProvider(
-        create: (_) => BottomNavbarProvider(), 
-        child: const MyApp(),
-    ),
-    ),
+
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => BottomNavbarProvider()),
+        ChangeNotifierProvider(create: (_) => FeedProvider())
+      ],
+      child: const MyApp(),
+    ) 
   );
+    
 }
 
 class MyApp extends StatelessWidget {

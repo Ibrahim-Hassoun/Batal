@@ -31,10 +31,8 @@ class _FeedScreenState extends State<FeedScreen> {
               width: MediaQuery.of(context).size.width,
               color: const Color.fromARGB(255, 244, 240, 240),
             ),
-            ChangeNotifierProvider(
-              create: (_) => FeedProvider(),
-              child: FeedTabBar(),
-            ),
+            FeedTabBar(),
+            
             Container(
                 margin: EdgeInsets.only(left: 16),
                 child: Column(
