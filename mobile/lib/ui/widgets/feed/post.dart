@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mobile/main.dart';
-
+import './post_button.dart';
 
 class Post extends StatefulWidget {
   final String Name;
@@ -29,12 +29,14 @@ class Post extends StatefulWidget {
 }
 
 class _PostState extends State<Post> {
+  bool _isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      SizedBox(height: 16),
-      Row(//whole row on top before description
+    return Column(
+      children: [
+        SizedBox(height: 16),
+       Row(//whole row on top before description
         mainAxisSize: MainAxisSize.max,
         children: [
           
@@ -103,53 +105,89 @@ class _PostState extends State<Post> {
         
         
       ),
-      if(widget.description!=null)
-      SizedBox(height: 8),
-      if(widget.description!=null)
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-        final maxLines = 2;
-        final text = widget.description!;
-        final textStyle = TextStyle(color: text_gray, fontSize: 14);
-        final textSpan = TextSpan(text: text, style: textStyle);
-        final textPainter = TextPainter(
-          text: textSpan,
-          maxLines: maxLines,
-          textDirection: TextDirection.ltr,
-        )..layout(maxWidth: constraints.maxWidth);
 
-        final isOverflowing = textPainter.didExceedMaxLines;
+        if (widget.description != null) SizedBox(height: 8),
+        if (widget.description != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final maxLines = 2;
+                final text = widget.description!;
+                final textStyle = TextStyle(color: text_gray, fontSize: 14);
+                final textSpan = TextSpan(text: text, style: textStyle);
+                final textPainter = TextPainter(
+                  text: textSpan,
+                  maxLines: maxLines,
+                  textDirection: TextDirection.ltr,
+                )..layout(maxWidth: constraints.maxWidth);
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-          text,
-          style: textStyle,
-          maxLines: isOverflowing ? maxLines : null,
-          overflow: isOverflowing ? TextOverflow.ellipsis : null,
-            ),
-            if (isOverflowing)
-          GestureDetector(
-            onTap: () {
-              // Handle "See more" action
-            },
-            child: Text(
-              'See more',
-              style: TextStyle(
-            color: Colors.blue,
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-              ),
+                final isOverflowing = textPainter.didExceedMaxLines;
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      text,
+                      style: textStyle,
+                      maxLines: _isExpanded ? null : maxLines,
+                      overflow:
+                          _isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
+                    ),
+                    if (isOverflowing || _isExpanded)
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _isExpanded = !_isExpanded;
+                          });
+                        },
+                        child: Text(
+                          _isExpanded ? 'See less' : 'See more',
+                          style: TextStyle(
+                            color: const Color.fromARGB(255, 130, 130, 130),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                  ],
+                );
+              },
             ),
           ),
-          ],
-        );
-          },
-        ),
-      )
+      if (widget.PostImageUrl!=null)
+      SizedBox(height: 8,),
+      if (widget.PostImageUrl!=null)
+      Image.network(
+        widget.PostImageUrl!,
+        height: 375,
+        width: double.infinity,
+        fit: BoxFit.cover,
+      ),
 
-    ],);
-  }}
+      Padding(//reactions and shares
+        padding: EdgeInsets.only(left: 16,right: 16,top: 12),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+          Text('12 Comments',style: TextStyle(color: text_gray),),
+          Text('5 shares',style: TextStyle(color: text_gray),)
+        ]),
+      ),
+
+      Padding(//actions on the post
+        padding: EdgeInsets.only(top: 12),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+          PostButton(onClicked: (){}, label: 'Like',icon: Icons.thumb_up,),
+          PostButton(onClicked: (){}, label: 'Comment',icon: Icons.comment,),
+          
+          PostButton(onClicked: (){}, label: 'Share',icon: Icons.share),
+          
+        ]),
+      ),
+      ],
+    );
+  }
+}
