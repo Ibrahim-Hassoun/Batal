@@ -36,7 +36,10 @@ Widget build(BuildContext context) {
   return SizedBox(
     height: 50,
     child: GestureDetector(
-      onTap: () => Provider.of<BottomNavbarProvider>(context, listen: false).changeState(widget.state),
+      onTap: () => {
+        Provider.of<BottomNavbarProvider>(context, listen: false).changeState(widget.state),
+        Navigator.of(context).pushNamed(widget.route)
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

@@ -15,6 +15,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>{
       body: Center(
         child: Text('Welcome to the Workout Screen!'),
       ),
+      
     );
   }
 }
