@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
 import 'package:provider/provider.dart';
 
-class Tabbar extends StatefulWidget {
+class WorkoutTabbar extends StatefulWidget {
   final String currentTab;
-  const Tabbar({this.currentTab = 'my_workout'});
+  const WorkoutTabbar({this.currentTab = 'my_workout'});
 
   @override
-  _TabbarState createState() => _TabbarState();
+  _WorkoutTabbarState createState() => _WorkoutTabbarState();
 }
 
-class _TabbarState extends State<Tabbar> {
+class _WorkoutTabbarState extends State<WorkoutTabbar> {
   late String tab;
 
   @override
   void initState() {
     super.initState();
-    tab = Provider.of<WorkoutProvider>(context, listen: false).tab;
+    tab = Provider.of<WorkoutProvider>(context, listen: true).tab;
   }
   @override
   Widget build(BuildContext context) {

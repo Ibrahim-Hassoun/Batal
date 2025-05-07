@@ -41,6 +41,7 @@ class _WorkoutAppbarState extends State<WorkoutAppbar>{
                 StatItem(icon: 'assets/flame-kindling.svg', value: '${2}',color: primaryColor,),
                 StatItem(icon: 'assets/coins.svg', value: '${2}',color: Colors.blue,),
                 StatItem(icon: 'assets/dumbbell.svg', value: '${2}',color: secondaryColor,)
+                
                ],
             ),
           ),
