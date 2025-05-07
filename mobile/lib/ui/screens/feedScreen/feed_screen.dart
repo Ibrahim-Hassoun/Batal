@@ -72,10 +72,7 @@ class _FeedScreenState extends State<FeedScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: ChangeNotifierProvider(
-        create: (_) => BottomNavbarProvider(),
-        child: BottomNavbar(),
-      ),
+     
     );
   }
 }

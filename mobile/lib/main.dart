@@ -7,7 +7,8 @@ import './ui/screens/authScreen/auth_screen.dart';
 import './core/provider/AuthProvider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import './ui/screens/workout_screen/workout_screen.dart';
-
+import './core/provider/bottom_navbar_provider.dart';
+import './ui/widgets/bottom_navbar/bottom_navbar.dart';
 
 const Color primaryColor =Color(0xFFF7713D);
 const Color secondaryColor =Color.fromARGB(255, 31, 31, 31);
@@ -86,8 +87,12 @@ class MyApp extends StatelessWidget {
               ),
       ),
 
-      home:Scaffold(
+      home:ChangeNotifierProvider(
+        create: (_)=> BottomNavbarProvider(),
+         child:Scaffold(
         body: isLoggedIn ? FeedScreen() : AuthScreen(),
+        bottomNavigationBar:BottomNavbar(),
+        )
       ) 
 
       
