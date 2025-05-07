@@ -21,7 +21,10 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (_) => AuthProvider(), 
-      child: const MyApp(),
+      child: ChangeNotifierProvider(
+        create: (_) => BottomNavbarProvider(), 
+        child: const MyApp(),
+    ),
     ),
   );
 }
@@ -31,6 +34,7 @@ class MyApp extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    Widget currentScreen = Provider.of<BottomNavbarProvider>(context, listen: true).current_screen;
     final isLoggedIn = Provider.of<AuthProvider>(context, listen: true).isLoggedIn;
     final isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
     
@@ -66,9 +70,7 @@ class MyApp extends StatelessWidget {
       ),
       
       routes: {
-        '/auth':(context) =>AuthScreen(),
-        '/feed':(context) => FeedScreen(),
-        '/workout':(context) =>WorkoutScreen()
+        
       },
       
       cupertino: (_, __) => CupertinoAppData(
@@ -89,8 +91,8 @@ class MyApp extends StatelessWidget {
 
       home:ChangeNotifierProvider(
         create: (_)=> BottomNavbarProvider(),
-         child:Scaffold(
-        body: isLoggedIn ? FeedScreen() : AuthScreen(),
+        child:Scaffold(
+        body: isLoggedIn ? currentScreen: AuthScreen(),
         bottomNavigationBar:BottomNavbar(),
         )
       ) 
