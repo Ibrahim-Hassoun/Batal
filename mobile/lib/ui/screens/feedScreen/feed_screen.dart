@@ -30,13 +30,12 @@ class _FeedScreenState extends State<FeedScreen> {
             create: (_) => FeedProvider(),
             child: FeedTabBar(),
           ),
-          Expanded(
-            child: Container(
+          Container(
               margin: EdgeInsets.only(left: 16),
               child: Column(
                 children: [
                   SingleChildScrollView(
-                     scrollDirection: Axis.horizontal,
+                    scrollDirection: Axis.horizontal,
                     padding: EdgeInsets.zero, 
                     physics: BouncingScrollPhysics(),
                     child: Row(
@@ -49,12 +48,18 @@ class _FeedScreenState extends State<FeedScreen> {
                        
                       ],
                     ),
-                  )
+                  ),
+                  SizedBox(height: 12),
                   
                 ],
               ),
             ),
+          Container(
+                    height: 4,
+                    width: MediaQuery.of(context).size.width,
+                    color: const Color.fromARGB(255, 244, 240, 240),
           ),
+
         ],
       ),
       bottomNavigationBar: ChangeNotifierProvider(
