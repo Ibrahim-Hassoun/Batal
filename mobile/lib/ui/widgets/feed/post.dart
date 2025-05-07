@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mobile/main.dart';
-
+import './post_button.dart';
 
 class Post extends StatefulWidget {
   final String Name;
@@ -176,12 +176,15 @@ class _PostState extends State<Post> {
       ),
 
       Padding(//actions on the post
-        padding: EdgeInsets.only(left: 16,right: 16,top: 12),
+        padding: EdgeInsets.only(top: 12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-          Text('12 Comments',style: TextStyle(color: text_gray),),
-          Text('5 shares',style: TextStyle(color: text_gray),)
+          PostButton(onClicked: (){}, label: 'Like',icon: Icons.thumb_up,),
+          PostButton(onClicked: (){}, label: 'Comment',icon: Icons.comment,),
+          
+          PostButton(onClicked: (){}, label: 'Share',icon: Icons.share),
+          
         ]),
       ),
       ],

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:mobile/main.dart';
 
 class PostButton extends StatefulWidget {
   final VoidCallback onClicked;
   final String label;
-  final IconData? icon;
+  final IconData icon;
 
   const PostButton({
     Key? key,
     required this.onClicked,
     required this.label,
-    this.icon,
+    required this.icon,
   }) : super(key: key);
 
   @override
@@ -27,33 +29,28 @@ class _PostButtonState extends State<PostButton> {
       onTapUp: (_) => setState(() => _isHovered = false),
       onTapCancel: () => setState(() => _isHovered = false),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        decoration: BoxDecoration(
-          color: _isHovered ? Colors.blue[700] : Colors.blue,
-          borderRadius: BorderRadius.circular(8),
+      duration: const Duration(milliseconds: 200),
+      width: MediaQuery.of(context).size.width / 3,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+        Icon(
+          widget.icon,
+          color: text_gray,
+          size: 20,
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (widget.icon != null) ...[
-              Icon(
-                widget.icon,
-                color: Colors.white,
-                size: 20,
-              ),
-              const SizedBox(width: 8),
-            ],
-            Text(
-              widget.label,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+        const SizedBox(width: 8),
+        Text(
+          widget.label,
+          style: const TextStyle(
+          color: text_gray,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          ),
         ),
+        ],
+      ),
       ),
     );
   }
