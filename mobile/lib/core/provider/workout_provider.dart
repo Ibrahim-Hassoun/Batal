@@ -4,10 +4,11 @@ class WorkoutProvider with ChangeNotifier {
   List<String> _workouts = [];
   List<String> get workouts => _workouts;
 
-  String tab='my_workout';
+  String _tab='my_workout';
+  String get tab =>_tab;
 
   void changeTab(newTab){
-    tab=newTab;
+    _tab=newTab;
     notifyListeners();
   }
   void addWorkout(String workout) {

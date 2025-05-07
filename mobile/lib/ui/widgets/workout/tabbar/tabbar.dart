@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/provider/workout_provider.dart';
+import 'package:mobile/core/provider/workout_provider.dart';
+import 'package:provider/provider.dart';
 
 class Tabbar extends StatefulWidget {
   final String currentTab;
@@ -10,6 +11,13 @@ class Tabbar extends StatefulWidget {
 }
 
 class _TabbarState extends State<Tabbar> {
+  late String tab;
+
+  @override
+  void initState() {
+    super.initState();
+    tab = Provider.of<WorkoutProvider>(context, listen: false).tab;
+  }
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -19,7 +27,7 @@ class _TabbarState extends State<Tabbar> {
         children: [
           GestureDetector(
             onTap: () {
-              // Provider.of<FeedProvider>(context,listen: false).setActive("following");
+             
             },
             child: Text(
               'Following',
