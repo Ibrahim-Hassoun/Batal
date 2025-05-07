@@ -40,7 +40,7 @@ class _BottomNavbarState extends State<BottomNavbar>{
             ),
             SizedBox(
               height: 50,
-              child:   BottomNavbarItem(icon: 'assets/dumbbell.svg',label: 'Workout',route: '/feed',state: 'workout'),
+              child:   BottomNavbarItem(icon: 'assets/dumbbell.svg',label: 'Workout',route: '/workout',state: 'workout'),
             ),
             SizedBox(
               height: 50,

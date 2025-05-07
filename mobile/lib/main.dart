@@ -6,7 +6,7 @@ import './ui/screens/feedScreen/feed_screen.dart';
 import './ui/screens/authScreen/auth_screen.dart';
 import './core/provider/AuthProvider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
+import './ui/screens/workout_screen/workout_screen.dart';
 
 
 const Color primaryColor =Color(0xFFF7713D);
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/auth':(context) =>AuthScreen(),
         '/feed':(context) => FeedScreen(),
-        
+        '/workout':(context) =>WorkoutScreen()
       },
       
       cupertino: (_, __) => CupertinoAppData(
