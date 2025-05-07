@@ -11,7 +11,7 @@ class StatItem extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
        children: [
         SvgPicture.asset(
           icon,
@@ -19,6 +19,7 @@ class StatItem extends StatelessWidget{
           width: 24,
           color: color,
         ),
+        SizedBox(width: 8,),
         Text(value)
        ],
        );
