@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
+import 'package:mobile/main.dart';
 import 'package:provider/provider.dart';
 
 class WorkoutTabbar extends StatefulWidget {
@@ -16,13 +17,14 @@ class _WorkoutTabbarState extends State<WorkoutTabbar> {
   @override
   void initState() {
     super.initState();
-    tab = Provider.of<WorkoutProvider>(context, listen: true).tab;
+  
   }
   @override
   Widget build(BuildContext context) {
+      tab = Provider.of<WorkoutProvider>(context, listen: true).tab;
     return Expanded(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           GestureDetector(
@@ -32,7 +34,31 @@ class _WorkoutTabbarState extends State<WorkoutTabbar> {
             child: Text(
               'Following',
               style: TextStyle(
-                // color: active == "following" ? primaryColor : text_gray,
+                color: tab == "my_workout" ?primaryColor:text_gray,
+                fontSize: 16,
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+             
+            },
+            child: Text(
+              'Following',
+              style: TextStyle(
+                color: tab == "my_workout" ?primaryColor:text_gray,
+                fontSize: 16,
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+             
+            },
+            child: Text(
+              'Following',
+              style: TextStyle(
+                color: tab == "my_workout" ?primaryColor:text_gray,
                 fontSize: 16,
               ),
             ),

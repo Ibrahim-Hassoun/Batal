@@ -12,10 +12,15 @@ class _WorkoutScreenState extends State<WorkoutScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: WorkoutAppbar(trophies: 0, streak: 0, coins: 0, sets: 0),
-      body: Column(
-        children: [
-          WorkoutTabbar()
-        ],
+      body: Expanded(
+        
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            WorkoutTabbar(),
+            Text('data')
+          ],
+        ),
       ),
      
       
