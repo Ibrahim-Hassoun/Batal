@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class BottomNavbarIcon extends StatefulWidget implements PreferredSizeWidget {
+class BottomNavbarItem extends StatefulWidget implements PreferredSizeWidget {
   
   @override
-  _BottomNavbarIconState createState() => _BottomNavbarIconState();
+  _BottomNavbarItemState createState() => _BottomNavbarItemState();
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
-class _BottomNavbarIconState extends State<BottomNavbarIcon>{
+class _BottomNavbarItemState extends State<BottomNavbarItem>{
   @override
   Widget build(BuildContext context) {
     return Column(
