@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../widgets/workout/workout_appbar.dart';
 
 class WorkoutScreen extends StatefulWidget{
   @override
@@ -10,9 +10,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Workout Screen'),
-      ),
+      appBar: WorkoutAppbar(trophies: 0, streak: 0, coins: 0, sets: 0),
       body: Center(
         child: Text('Welcome to the Workout Screen!'),
       ),
