@@ -43,6 +43,11 @@ class MyApp extends StatelessWidget {
             bodyColor: secondaryColor,  
             displayColor: secondaryColor,
           ),
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor: Colors.white, 
+            selectedItemColor: primaryColor,
+            unselectedItemColor: text_gray,
+            ),
         ),
         darkTheme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: Colors.grey[900],

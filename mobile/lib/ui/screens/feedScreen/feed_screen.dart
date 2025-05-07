@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../core/provider/feed_provider.dart'; 
 import '../../widgets/feed/feed_app_bar.dart';
 import '../../widgets/feed/feed_tab_bar.dart';
+import '../../widgets/bottom_navbar/bottom_navbar.dart';
 
 class FeedScreen extends StatelessWidget {
   @override
@@ -32,7 +33,8 @@ class FeedScreen extends StatelessWidget {
             ),
           
         ],
-      )
+      ),
+      bottomNavigationBar: BottomNavbar(),
     );
   }
 }
