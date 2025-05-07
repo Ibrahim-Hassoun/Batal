@@ -163,7 +163,27 @@ class _PostState extends State<Post> {
         height: 375,
         width: double.infinity,
         fit: BoxFit.cover,
-      )
+      ),
+
+      Padding(//reactions and shares
+        padding: EdgeInsets.only(left: 16,right: 16,top: 12),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+          Text('12 Comments',style: TextStyle(color: text_gray),),
+          Text('5 shares',style: TextStyle(color: text_gray),)
+        ]),
+      ),
+
+      Padding(//actions on the post
+        padding: EdgeInsets.only(left: 16,right: 16,top: 12),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+          Text('12 Comments',style: TextStyle(color: text_gray),),
+          Text('5 shares',style: TextStyle(color: text_gray),)
+        ]),
+      ),
       ],
     );
   }
