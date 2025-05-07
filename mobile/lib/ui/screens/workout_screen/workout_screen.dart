@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../widgets/workout/workout_appbar.dart';
+import '../../widgets/workout/appbar/workout_appbar.dart';
 
 class WorkoutScreen extends StatefulWidget{
   @override

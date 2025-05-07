@@ -5,8 +5,9 @@ import 'package:flutter_svg/svg.dart';
 class StatItem extends StatelessWidget{
   final String icon;
   final String value;
+  final Color color;
 
-  StatItem({required this.icon, required this.value});
+  StatItem({required this.icon, required this.value,required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,7 @@ class StatItem extends StatelessWidget{
           icon,
           height: 24,
           width: 24,
+          color: color,
         ),
         Text(value)
        ],

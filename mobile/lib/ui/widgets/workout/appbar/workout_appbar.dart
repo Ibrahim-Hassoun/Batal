@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/main.dart';
+import './stat_item.dart';
 
 class WorkoutAppbar extends StatefulWidget implements PreferredSizeWidget {
 
@@ -26,44 +28,21 @@ class _WorkoutAppbarState extends State<WorkoutAppbar>{
   @override
   Widget build(BuildContext context) {
     return AppBar(
-     
+     backgroundColor: tertiaryColor,
       actions: [
         Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.emoji_events, color: Colors.yellow),
-                  Text('${widget.trophies}'),
-                ],
-              ),
-              SizedBox(width: 16),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.local_fire_department, color: Colors.red),
-                  Text('${widget.streak}'),
-                ],
-              ),
-              SizedBox(width: 16),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.monetization_on, color: Colors.green),
-                  Text('${widget.coins}'),
-                ],
-              ),
-              SizedBox(width: 16),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.fitness_center, color: Colors.blue),
-                  Text('${widget.sets}'),
-                ],
-              ),
-            ],
+          
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16,right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                StatItem(icon: 'assets/house.svg', value: '${2}',color: Colors.red,),
+                StatItem(icon: 'assets/house.svg', value: '${2}',color: Colors.green,),
+                StatItem(icon: 'assets/house.svg', value: '${2}',color: Colors.black,),
+                StatItem(icon: 'assets/house.svg', value: '${2}',color: Colors.grey,)
+               ],
+            ),
           ),
         ),
       ],
