@@ -5,32 +5,47 @@ import '../../widgets/feed/feed_app_bar.dart';
 import '../../widgets/feed/feed_tab_bar.dart';
 import '../../widgets/bottom_navbar/bottom_navbar.dart';
 import '../../../core/provider/bottom_navbar_provider.dart';
+import '../../widgets/feed/story.dart';
 
-class FeedScreen extends StatelessWidget {
+class FeedScreen extends StatefulWidget {
+  @override
+  _FeedScreenState createState() => _FeedScreenState();
+}
+
+class _FeedScreenState extends State<FeedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: FeedAppBar(),
-      body:Column(
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             height: 4,
             width: MediaQuery.of(context).size.width,
             color: const Color.fromARGB(255, 244, 240, 240),
-            ),
-            ChangeNotifierProvider(
-              create: (_)=>FeedProvider(),
-              child: FeedTabBar(),
-            ),
-            Expanded(
+          ),
+          ChangeNotifierProvider(
+            create: (_) => FeedProvider(),
+            child: FeedTabBar(),
+          ),
+          Expanded(
             child: Container(
               margin: EdgeInsets.only(left: 16),
-              
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Story(userName: 'John Doe',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,)
+                    ],
+                  )
+                  
+                ],
+              ),
             ),
-            ),
-          
+          ),
         ],
       ),
       bottomNavigationBar: ChangeNotifierProvider(
