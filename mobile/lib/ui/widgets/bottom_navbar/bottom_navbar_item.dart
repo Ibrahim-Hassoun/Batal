@@ -8,14 +8,14 @@ class BottomNavbarItem extends StatefulWidget implements PreferredSizeWidget {
   
   final String icon;
   final String label;
-  final String route;
+  final Widget widget;
   final String state;
  
 
   BottomNavbarItem({
     required this.icon,
     required this.label,
-    required this.route,
+    required this.widget,
     required this.state,
   });
 
@@ -36,7 +36,11 @@ Widget build(BuildContext context) {
   return SizedBox(
     height: 50,
     child: GestureDetector(
-      onTap: () => Provider.of<BottomNavbarProvider>(context, listen: false).changeState(widget.state),
+      onTap: () => {
+        Provider.of<BottomNavbarProvider>(context, listen: false).changeState(widget.state),
+        Provider.of<BottomNavbarProvider>(context, listen: false).change_screen(widget.widget),
+        
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
