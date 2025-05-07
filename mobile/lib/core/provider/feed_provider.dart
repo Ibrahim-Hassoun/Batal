@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../remote/server.dart';
 
 class FeedProvider with ChangeNotifier {
   String active = 'following';
@@ -9,9 +8,4 @@ class FeedProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  
-
-  
-
- 
 }

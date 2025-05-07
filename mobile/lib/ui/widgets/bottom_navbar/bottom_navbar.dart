@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:mobile/main.dart';
 import './bottom_navbar_item.dart';
 
 class BottomNavbar extends StatefulWidget implements PreferredSizeWidget {

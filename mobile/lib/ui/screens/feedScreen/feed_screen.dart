@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/core/provider/feed_provider.dart';
-import 'package:mobile/main.dart';
 import 'package:provider/provider.dart';
-import '../../../core/provider/feed_provider.dart'; 
 import '../../widgets/feed/feed_app_bar.dart';
 import '../../widgets/feed/feed_tab_bar.dart';
 import '../../widgets/bottom_navbar/bottom_navbar.dart';
