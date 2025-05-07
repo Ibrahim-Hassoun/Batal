@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/bottom_navbar/bottom_navbar.dart';
+import '../../../core/provider/bottom_navbar_provider.dart';
 
 class WorkoutScreen extends StatefulWidget{
   @override
@@ -16,7 +18,11 @@ class _WorkoutScreenState extends State<WorkoutScreen>{
       body: Center(
         child: Text('Welcome to the Workout Screen!'),
       ),
-      bottomNavigationBar: BottomNavbar(),
+      bottomNavigationBar:ChangeNotifierProvider(
+        create: (_)=> BottomNavbarProvider(),
+        child: BottomNavbar(),
+        )
+      ,
     );
   }
 }

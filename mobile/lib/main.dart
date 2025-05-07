@@ -86,8 +86,13 @@ class MyApp extends StatelessWidget {
               ),
       ),
 
-      home: isLoggedIn ? FeedScreen() : AuthScreen()
-        
+      home:Scaffold(
+        body: isLoggedIn ? FeedScreen() : AuthScreen(),
+      ) 
+
+      
+      
+      
 
     );
   }
