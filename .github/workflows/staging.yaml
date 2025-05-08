@@ -95,7 +95,7 @@ jobs:
 
       - name: Copy files to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@15.237.142.115 'bash -s' < ./batal-staging/Batal/deploy_script.sh
+          ssh -o StrictHostKeyChecking=no ubuntu@15.237.142.115 'bash -s' < /batal-staging/Batal/deploy_script.sh
 
     env:
       PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
