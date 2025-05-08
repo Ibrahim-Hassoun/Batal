@@ -20,12 +20,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>{
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             WorkoutTabbar(),
-            Text('data'),
-            Text('data'),
-            Container(
-              color: primaryColor,
-              height: 90,
-            )
+           
           ],
         ),
       ),
