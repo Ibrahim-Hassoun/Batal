@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/core/provider/workout_provider.dart';
+import 'package:provider/provider.dart';
 import '../../../layouts/drop_down_button.dart';
 
 class PoseDetector extends StatefulWidget {
@@ -9,18 +11,21 @@ class PoseDetector extends StatefulWidget {
 }
 
 class _PoseDetectorState extends State<PoseDetector> {
+  
   @override
   Widget build(BuildContext context) {
+    WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen:true);
     return Column(
       children: [
         Padding(//selections wrapper
-          padding: EdgeInsets.only(left: 16, right: 16,top: 8),
+          padding: EdgeInsets.only(left: 16, right: 16,top: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [//selections
-              CustomDropdownButton(items: ['option 1','option 2'],onChanged: () => {},label: 'Area',),
-              CustomDropdownButton(items: ['option 1','option 2'],onChanged: () => {},label: 'Muscle',),
-              CustomDropdownButton(items: ['option 1','option 2'],onChanged: () => {},label: 'Exercice',),
+              CustomDropdownButton(items: ['option 1','option 2'],onChanged: (value){provider.setDetectedArea(value);}, label: 'Area',selectedValue: provider.detected_area,),
+              CustomDropdownButton(items: ['option 1','option 2'],onChanged: (value){provider.setDetectedMuscle(value);}, label: 'Muscle',selectedValue: provider.detected_muscle,),
+              CustomDropdownButton(items: ['option 1','option 2'],onChanged: (value){provider.setDetectedArea(value);}, label: 'Exercice',selectedValue: provider.detected_exercise,),
+            
              
             ],
           ),

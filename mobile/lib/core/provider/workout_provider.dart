@@ -19,6 +19,7 @@ class WorkoutProvider with ChangeNotifier {
 
   void setDetectedArea(String area) {
     _detected_area = area;
+    print("this is from provider" + (_detected_area ?? "unknown"));
     notifyListeners();
   }
 

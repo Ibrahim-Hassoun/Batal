@@ -3,17 +3,16 @@ import 'package:mobile/main.dart';
 
 class CustomDropdownButton extends StatefulWidget {
   final String label;
-  final String selectedValue;
-  final Function() onChanged;
+  final String? selectedValue;
+  final Function(String) onChanged;
   final List<String> items;
 
-  
   const CustomDropdownButton({
     Key? key,
     required this.label,
     required this.onChanged,
     required this.items,
-    this.selectedValue = '',
+    this.selectedValue,
   }) : super(key: key);
 
   @override
@@ -21,47 +20,52 @@ class CustomDropdownButton extends StatefulWidget {
 }
 
 class _CustomDropdownButtonState extends State<CustomDropdownButton> {
-  late String selectedValue;
-  late List<String> items;
+  String? _internalValue;
+
+  @override
+  void didUpdateWidget(covariant CustomDropdownButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.selectedValue != oldWidget.selectedValue) {
+      setState(() {
+        _internalValue = widget.selectedValue;
+      });
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    items = widget.items;
-    selectedValue = '';
-
+    _internalValue = widget.selectedValue;
   }
 
   @override
   Widget build(BuildContext context) {
-
     return PopupMenuButton<String>(
       onSelected: (value) {
-        print('Selected: $value');
         setState(() {
-          selectedValue = value;
+          _internalValue = value;
         });
-        
+        widget.onChanged(value);
       },
-      itemBuilder: (BuildContext context) => items
+      itemBuilder: (BuildContext context) => widget.items
           .map((item) => PopupMenuItem<String>(
-            value: item,
-            child: Text(item),
-          ))
+                value: item,
+                child: Text(item),
+              ))
           .toList(),
-      
-     
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
         decoration: BoxDecoration(
-          color: bg_gray, 
+          color: bg_gray,
           borderRadius: BorderRadius.circular(80),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-                selectedValue.isNotEmpty ? selectedValue : widget.label,
+              _internalValue?.isNotEmpty == true
+                  ? _internalValue!
+                  : widget.label,
               style: TextStyle(color: secondaryColor),
             ),
             Icon(Icons.arrow_drop_down, color: secondaryColor),
@@ -69,6 +73,5 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
         ),
       ),
     );
-
   }
 }
