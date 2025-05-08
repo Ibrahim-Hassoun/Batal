@@ -14,7 +14,7 @@ Route::group(['prefix'=>"v0.1"],function(){
     Route::get('/test',function(){
         return response()->json([
             'message'=>'Hello World',
-            'message2'=>'Hello World 2'
+            'message2sads'=>'Hello World 2asdasdas'
         ]);
     });
     // Route::post('/logout',[AuthController::class,'logout'] ); to be implemented
