@@ -46,7 +46,9 @@ class MyApp extends StatelessWidget {
     
     return PlatformApp(
       title: 'Flutter Demo',
-      
+      routes: {
+        '/chats': (context) => const AuthScreen(),
+      },
       material: (_, __) => MaterialAppData(
         theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: Colors.white,
@@ -75,9 +77,7 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.system,  // Automatically switches between light/dark themes
       ),
       
-      routes: {
-        
-      },
+      
       
       cupertino: (_, __) => CupertinoAppData(
         theme: isDarkMode
