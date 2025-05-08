@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/main.dart';
 
 class CustomDropdownButton extends StatefulWidget {
+  final String label;
   final String selectedValue;
+  final Function() onChanged;
   final List<String> items;
 
   
   const CustomDropdownButton({
     Key? key,
-     
+    required this.label,
+    required this.onChanged,
     required this.items,
     this.selectedValue = '',
   }) : super(key: key);
@@ -24,7 +28,8 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
   void initState() {
     super.initState();
     items = widget.items;
-    selectedValue = widget.selectedValue.isNotEmpty ? widget.selectedValue : (items.isNotEmpty ? items[0] : '');
+    selectedValue = '';
+
   }
 
   @override
@@ -45,21 +50,21 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
           ))
           .toList(),
       
-      // 🎯 Custom button appearance
+     
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
         decoration: BoxDecoration(
-          color: Colors.blue, 
-          borderRadius: BorderRadius.circular(8),
+          color: bg_gray, 
+          borderRadius: BorderRadius.circular(80),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              selectedValue,
-              style: TextStyle(color: Colors.white), // Text color
+                selectedValue.isNotEmpty ? selectedValue : widget.label,
+              style: TextStyle(color: secondaryColor),
             ),
-            Icon(Icons.arrow_drop_down, color: Colors.white),
+            Icon(Icons.arrow_drop_down, color: secondaryColor),
           ],
         ),
       ),

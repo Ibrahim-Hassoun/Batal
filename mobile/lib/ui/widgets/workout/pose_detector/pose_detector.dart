@@ -14,11 +14,13 @@ class _PoseDetectorState extends State<PoseDetector> {
     return Column(
       children: [
         Padding(//selections wrapper
-          padding: EdgeInsets.only(left: 16, right: 16),
+          padding: EdgeInsets.only(left: 16, right: 16,top: 8),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [//selections
-              CustomDropdownButton(items: ['option 1','option 2'],)
+              CustomDropdownButton(items: ['option 1','option 2'],onChanged: () => {},label: 'Area',),
+              // CustomDropdownButton(items: ['option 1','option 2'],),
+              // CustomDropdownButton(items: ['option 1','option 2'],)
             ],
           ),
         ),
