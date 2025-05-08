@@ -95,7 +95,7 @@ jobs:
 
       - name: Copy deploy script to EC2
         run: |
-          scp -o StrictHostKeyChecking=no ./batal-staging/Batal/deploy_script.sh ubuntu@15.237.142.115:/tmp/
+          scp -o StrictHostKeyChecking=no ./deploy_script.sh ubuntu@15.237.142.115:/tmp/
 
       - name: Execute deploy script on EC2
         run: |
