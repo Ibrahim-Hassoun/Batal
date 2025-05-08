@@ -19,8 +19,9 @@ class _PoseDetectorState extends State<PoseDetector> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [//selections
               CustomDropdownButton(items: ['option 1','option 2'],onChanged: () => {},label: 'Area',),
-              // CustomDropdownButton(items: ['option 1','option 2'],),
-              // CustomDropdownButton(items: ['option 1','option 2'],)
+              CustomDropdownButton(items: ['option 1','option 2'],onChanged: () => {},label: 'Muscle',),
+              CustomDropdownButton(items: ['option 1','option 2'],onChanged: () => {},label: 'Exercice',),
+             
             ],
           ),
         ),
