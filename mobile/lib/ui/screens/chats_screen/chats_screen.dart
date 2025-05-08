@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/main.dart';
+import 'package:mobile/ui/widgets/chats/chat_row.dart';
+import './chats_screen.dart';
 
 class ChatsScreen extends StatefulWidget {
   const ChatsScreen({Key? key}) : super(key: key);
@@ -32,7 +34,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
       
       ),
       body: Center(
-        child: Text('This is the Chats Screen'),
+        child: ChatRow(chatId: 1, chatName: "John Doe", lastMessage: "Hello world", lastMessageTime: "9:00", chatImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg'),
       ),
     );
   }
