@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/main.dart';
 import '../../widgets/workout/appbar/workout_appbar.dart';
 import '../../widgets/workout/tabbar/tabbar.dart';
 
