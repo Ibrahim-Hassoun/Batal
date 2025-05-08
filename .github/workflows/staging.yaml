@@ -95,7 +95,7 @@ jobs:
 
       - name: Execute deploy script on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@15.237.142.115 'chmod +x /home/ubuntu/batal-staging/Batal/deploy_script.sh && /home/ubuntu/batal-staging/Batal/deploy_script.sh'
+          ssh -o StrictHostKeyChecking=no ubuntu@15.237.142.115 'cd /home/ubuntu/batal-staging/Batal && chmod +x deploy_script.sh && ./deploy_script.sh'
 
 
       - name: Clean up SSH key
