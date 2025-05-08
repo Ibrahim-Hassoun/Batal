@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './workout_item.dart';
+import 'exercice_row.dart';
 
 
 class MyWorkout extends StatefulWidget {
@@ -18,7 +18,7 @@ class _MyWorkoutState extends State<MyWorkout> {
           physics: BouncingScrollPhysics(),
           child: Column(
             children: const [
-              WorkoutItem()
+              ExerciseRow(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg')
             
          
             ],
