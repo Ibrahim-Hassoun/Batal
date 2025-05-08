@@ -15,7 +15,7 @@ class WorkoutProvider with ChangeNotifier {
 
   Widget provideSection(){
     if(_tab=="my_workout"){
-      return const Text("Pose Detector Section");
+      return const Text("my workout");
     }else if(_tab=="pose_detector"){
       return const PoseDetector();
     }else{

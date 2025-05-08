@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/core/provider/workout_provider.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/workout/appbar/workout_appbar.dart';
 import '../../widgets/workout/tabbar/tabbar.dart';
 
@@ -8,8 +10,10 @@ class WorkoutScreen extends StatefulWidget{
 }
 
 class _WorkoutScreenState extends State<WorkoutScreen>{
+  
   @override
   Widget build(BuildContext context) {
+    final Widget CurrentSection = Provider.of<WorkoutProvider>(context, listen: true).provideSection();
     return Scaffold(
       appBar: WorkoutAppbar(trophies: 0, streak: 0, coins: 0, sets: 0),
       
@@ -19,7 +23,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>{
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             WorkoutTabbar(),
-            
+            CurrentSection,
           ],
         ),
       ),
