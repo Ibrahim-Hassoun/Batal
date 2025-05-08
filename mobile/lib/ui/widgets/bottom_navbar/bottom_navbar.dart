@@ -32,26 +32,26 @@ class _BottomNavbarState extends State<BottomNavbar>{
               height: 50,
               child:   BottomNavbarItem(icon: 'assets/house.svg',label: 'Home',widget: FeedScreen(),state: 'feed',),
             ),
-            // SizedBox(
-            //   height: 50,
-            //   child:   BottomNavbarItem(icon: 'assets/compass.svg',label: 'Explore',widget: ,state: 'explore'),
-            // ),
-            // SizedBox(
-            //   height: 50,
-            //   child:   BottomNavbarItem(icon: 'assets/shopping-cart.svg',label: 'Shop',widget: ,state: 'shop'),
-            // ),
+            SizedBox(
+              height: 50,
+              child:   BottomNavbarItem(icon: 'assets/compass.svg',label: 'Explore',widget: FeedScreen(),state: 'explore'),
+            ),
+            SizedBox(
+              height: 50,
+              child:   BottomNavbarItem(icon: 'assets/shopping-cart.svg',label: 'Shop',widget: FeedScreen(),state: 'shop'),
+            ),
             SizedBox(
               height: 50,
               child:   BottomNavbarItem(icon: 'assets/dumbbell.svg',label: 'Workout',widget: WorkoutScreen(),state: 'workout'),
             ),
-            // SizedBox(
-            //   height: 50,
-            //   child:   BottomNavbarItem(icon: 'assets/bell.svg',label: 'Notifications',widget: ,state: 'notifications'),
-            // ),
-            // SizedBox(
-            //   height: 50,
-            //   child:   BottomNavbarItem(icon: 'assets/user.svg',label: 'Profile',widget: ,state: 'profile'),
-            // ),
+            SizedBox(
+              height: 50,
+              child:   BottomNavbarItem(icon: 'assets/bell.svg',label: 'Notifications',widget: WorkoutScreen(),state: 'notifications'),
+            ),
+            SizedBox(
+              height: 50,
+              child:   BottomNavbarItem(icon: 'assets/user.svg',label: 'Profile',widget: WorkoutScreen(),state: 'profile'),
+            ),
           
             
         ],),
