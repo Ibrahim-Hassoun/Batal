@@ -3,6 +3,7 @@ import 'package:mobile/core/provider/workout_provider.dart';
 import 'package:mobile/main.dart';
 import 'package:provider/provider.dart';
 import '../../../layouts/drop_down_button.dart';
+import '../../../atoms/screen_wide_elevated_button.dart';
 
 class PoseDetector extends StatefulWidget {
   const PoseDetector({Key? key}) : super(key: key);
@@ -40,20 +41,18 @@ class _PoseDetectorState extends State<PoseDetector> {
 
         ),
         SizedBox(height: 24,),
-        ElevatedButton(
-          
-          onPressed: () {
-            // Handle button press
-          },
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Text('Start '),
-            decoration: BoxDecoration(
-              color: primaryColor,
-              borderRadius: BorderRadius.circular(8),
-            ),
+        
+        Padding(
+          padding: const EdgeInsets.only(left: 108,right: 108),
+          child: ScreenWideElevatedButton(
+            onPressed: () {
+              // Handle button press
+            },
+            label: 'Start',
+            backgroundColor: primaryColor,
+            foregroundColor: tertiaryColor,
+            
           ),
-          
         ),
       ],
     );
