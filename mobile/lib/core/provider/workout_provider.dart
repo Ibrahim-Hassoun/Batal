@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../ui/widgets/workout/pose_detector/pose_detector.dart';
 
 class WorkoutProvider with ChangeNotifier {
   List<String> _workouts = [];
@@ -11,6 +12,17 @@ class WorkoutProvider with ChangeNotifier {
     _tab=newTab;
     notifyListeners();
   }
+
+  Widget provideSection(){
+    if(_tab=="my_workout"){
+      return const Text("Pose Detector Section");
+    }else if(_tab=="pose_detector"){
+      return const PoseDetector();
+    }else{
+      return const Text("Unknown Section");
+    }
+  }
+
   void addWorkout(String workout) {
     _workouts.add(workout);
     notifyListeners();
