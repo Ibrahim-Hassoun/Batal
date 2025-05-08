@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
+import 'package:mobile/main.dart';
 import 'package:provider/provider.dart';
 import '../../../layouts/drop_down_button.dart';
 
@@ -29,6 +30,30 @@ class _PoseDetectorState extends State<PoseDetector> {
              
             ],
           ),
+          
+        ),
+        SizedBox(height: 24,),
+        Container(
+          color: Colors.red,
+          height: 550,
+          width: 290,
+
+        ),
+        SizedBox(height: 24,),
+        ElevatedButton(
+          
+          onPressed: () {
+            // Handle button press
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Text('Start '),
+            decoration: BoxDecoration(
+              color: primaryColor,
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+          
         ),
       ],
     );
