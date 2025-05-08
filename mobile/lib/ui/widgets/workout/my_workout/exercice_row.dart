@@ -31,19 +31,19 @@ class _ExerciseRowState extends State<ExerciseRow> {
     return Slidable(
       key: Key(widget.title),
       endActionPane: ActionPane(
-        motion: const DrawerMotion(), // You can use StretchMotion or others too
-        extentRatio: 0.4, // 40% of the width
+        motion: const StretchMotion(), // You can use StretchMotion or others too
+        extentRatio: 0.6, 
         children: [
           SlidableAction(
             onPressed: (context) {
               // Confirm action
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('${widget.title} confirmed')),
+                SnackBar(content: Text('${widget.title} done!')),
               );
             },
             backgroundColor: Colors.green,
             icon: Icons.check,
-            label: 'Confirm',
+            label: 'Done',
           ),
           SlidableAction(
             onPressed: (context) {
@@ -70,7 +70,7 @@ class _ExerciseRowState extends State<ExerciseRow> {
               icon: Icon(Icons.remove_circle),
               onPressed: () {
                 setState(() {
-                  if (count > 0) count--;
+                  if (count > 1) count--;
                 });
               },
             ),
@@ -79,6 +79,7 @@ class _ExerciseRowState extends State<ExerciseRow> {
               icon: Icon(Icons.add_circle),
               onPressed: () {
                 setState(() {
+                  if(count<5)
                   count++;
                 });
               },

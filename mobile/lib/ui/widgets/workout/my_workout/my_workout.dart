@@ -18,6 +18,7 @@ class _MyWorkoutState extends State<MyWorkout> {
           physics: BouncingScrollPhysics(),
           child: Column(
             children: const [
+              SizedBox(height: 20),
               ExerciseRow(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg')
             
          
