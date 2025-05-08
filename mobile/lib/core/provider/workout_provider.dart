@@ -4,7 +4,7 @@ class WorkoutProvider with ChangeNotifier {
   List<String> _workouts = [];
   List<String> get workouts => _workouts;
 
-  String _tab='my_workout';
+  String _tab='pose_detector';
   String get tab =>_tab;
 
   void changeTab(newTab){
