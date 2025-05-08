@@ -1,33 +1,69 @@
 import 'package:flutter/material.dart';
 
-class DropdownButtonExample extends StatefulWidget {
+class CustomDropdownButton extends StatefulWidget {
+  final String selectedValue;
+  final List<String> items;
+
+  
+  const CustomDropdownButton({
+    Key? key,
+     
+    required this.items,
+    this.selectedValue = '',
+  }) : super(key: key);
+
   @override
-  _DropdownButtonExampleState createState() => _DropdownButtonExampleState();
+  _CustomDropdownButtonState createState() => _CustomDropdownButtonState();
 }
 
-class _DropdownButtonExampleState extends State<DropdownButtonExample> {
-  String selectedValue = 'Option 1';
-  List<String> items = ['Option 1', 'Option 2', 'Option 3'];
+class _CustomDropdownButtonState extends State<CustomDropdownButton> {
+  late String selectedValue;
+  late List<String> items;
+
+  @override
+  void initState() {
+    super.initState();
+    items = widget.items;
+    selectedValue = widget.selectedValue.isNotEmpty ? widget.selectedValue : (items.isNotEmpty ? items[0] : '');
+  }
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      value: selectedValue,
-      icon: Icon(Icons.arrow_drop_down), // arrow icon
-      elevation: 16,
-      style: TextStyle(color: Colors.black, fontSize: 16),
-      underline: Container(height: 2, color: Colors.blue),
-      onChanged: (String? newValue) {
+
+    return PopupMenuButton<String>(
+      onSelected: (value) {
+        print('Selected: $value');
         setState(() {
-          selectedValue = newValue!;
+          selectedValue = value;
         });
+        
       },
-      items: items.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
+      itemBuilder: (BuildContext context) => items
+          .map((item) => PopupMenuItem<String>(
+            value: item,
+            child: Text(item),
+          ))
+          .toList(),
+      
+      // 🎯 Custom button appearance
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(
+          color: Colors.blue, 
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              selectedValue,
+              style: TextStyle(color: Colors.white), // Text color
+            ),
+            Icon(Icons.arrow_drop_down, color: Colors.white),
+          ],
+        ),
+      ),
     );
+
   }
 }
