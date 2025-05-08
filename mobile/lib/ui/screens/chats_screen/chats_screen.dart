@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/main.dart';
 import 'package:mobile/ui/widgets/chats/chat_row.dart';
-import './chats_screen.dart';
 
 class ChatsScreen extends StatefulWidget {
   const ChatsScreen({Key? key}) : super(key: key);
