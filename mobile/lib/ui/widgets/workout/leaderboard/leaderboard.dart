@@ -8,7 +8,7 @@ class Leaderboard extends StatelessWidget {
     return Column(
       children: [
         SizedBox(height: 16,),
-        PlayerRow(playerName: 'playerName', playerScore: 100, rank: 2)
+        PlayerRow(playerName: 'John Doe', playerScore: 100, rank: 2,imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',streak: 40,)
       ],
     );
   }
