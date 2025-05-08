@@ -27,7 +27,7 @@ class _WorkoutTabbarState extends State<WorkoutTabbar> {
       child: SizedBox(
         width: double.infinity,
         child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             
             children: [
               GestureDetector(
@@ -66,7 +66,7 @@ class _WorkoutTabbarState extends State<WorkoutTabbar> {
                   ),
                 ),
               ),
-              SizedBox(width: 16)],
+              ],
           ),
       ),
     ); 
