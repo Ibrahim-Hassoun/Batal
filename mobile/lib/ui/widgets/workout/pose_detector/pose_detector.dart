@@ -12,7 +12,7 @@ class _PoseDetectorState extends State<PoseDetector> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('data')
+        Padding(padding: EdgeInsets.only(left: 16, right: 16)),
       ],
     );
   }

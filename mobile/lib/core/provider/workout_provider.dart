@@ -18,6 +18,8 @@ class WorkoutProvider with ChangeNotifier {
       return const Text("my workout");
     }else if(_tab=="pose_detector"){
       return const PoseDetector();
+    }else if(_tab=="Leaderboard"){
+      return const Text("Leaderboard");
     }else{
       return const Text("Unknown Section");
     }
