@@ -92,10 +92,16 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan 15.237.142.115 >> ~/.ssh/known_hosts
 
-      - name: Copy files to EC2
+      - name: Copy deploy script to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@15.237.142.115 'bash -s' < ./batal-staging/Batal/deploy_script.sh
+          scp -o StrictHostKeyChecking=no ./batal-staging/Batal/deploy_script.sh ubuntu@15.237.142.115:/tmp/
 
-    env:
-      PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+      - name: Execute deploy script on EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@15.237.142.115 'chmod +x /tmp/deploy_script.sh && /tmp/deploy_script.sh'
+
+      - name: Clean up SSH key
+        run: |
+          rm -f ~/.ssh/id_rsa
