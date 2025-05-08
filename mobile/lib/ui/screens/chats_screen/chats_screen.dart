@@ -14,26 +14,37 @@ class _ChatsScreenState extends State<ChatsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new, color: secondaryColor,),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        title: TextField(
-          decoration: InputDecoration(
-        hintText: 'Search',
-        fillColor: bg_light_gray,
-        filled: true,
-        border: InputBorder.none,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 16),
+          child: IconButton(
+            icon: Icon(Icons.arrow_back_ios_new, color: secondaryColor,),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
           ),
-          style: TextStyle(color: secondaryColor),
+        ),
+        title: Padding(
+          padding: const EdgeInsets.only(right: 16),
+          child: TextField(
+            decoration: InputDecoration(
+            
+            hintText: 'Search',
+            fillColor: bg_light_gray,
+            filled: true,
+            border: InputBorder.none,
+              ),
+              style: TextStyle(color: secondaryColor),
+            ),
         ),
         backgroundColor: tertiaryColor,
       
       ),
-      body: Center(
-        child: ChatRow(chatId: 1, chatName: "John Doe", lastMessage: "Hello world", lastMessageTime: "9:00", chatImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg'),
+      body: Column(
+        children:[
+          SizedBox(height: 16,),
+           ChatRow(chatId: 1, chatName: "John Doe", lastMessage: "Hello world", lastMessageTime: "9:00", chatImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg')
+           
+           ],
       ),
     );
   }
