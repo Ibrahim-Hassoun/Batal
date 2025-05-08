@@ -93,13 +93,10 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan 15.237.142.115 >> ~/.ssh/known_hosts
 
-      - name: Copy deploy script to EC2
-        run: |
-          scp -o StrictHostKeyChecking=no ./deploy_script.sh ubuntu@15.237.142.115:/tmp/
-
       - name: Execute deploy script on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@15.237.142.115 'chmod +x /tmp/deploy_script.sh && /tmp/deploy_script.sh'
+          ssh -o StrictHostKeyChecking=no ubuntu@15.237.142.115 'chmod +x /home/ubuntu/batal-staging/Batal/deploy_script.sh && /home/ubuntu/batal-staging/Batal/deploy_script.sh'
+
 
       - name: Clean up SSH key
         run: |
