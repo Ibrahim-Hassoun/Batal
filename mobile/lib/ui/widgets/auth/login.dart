@@ -5,13 +5,13 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:provider/provider.dart';
 import '../../../core/provider/AuthProvider.dart'; 
 
-class Register1 extends StatelessWidget {
+class Login extends StatelessWidget {
   final Function incrementStep;
   final Function decrementStep;
   final Function handleChange;
   final Map data;
 
-  const Register1({super.key,required this.incrementStep,required this.decrementStep,required this.data,required this.handleChange});
+  const Login({super.key,required this.incrementStep,required this.decrementStep,required this.data,required this.handleChange});
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +31,14 @@ class Register1 extends StatelessWidget {
               ),
               const SizedBox(height: 56),
               PlatformText(
-                'Create an account',
+                'Login to your account',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               PlatformText(
-                'Enter your email to sign up for this app',
+                'Enter your email and password to login',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -46,12 +46,13 @@ class Register1 extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               LabeledInput(label: 'Email', placeholder: 'email@domain.com',dataKey:'email',value:data['email'],handleChange:handleChange,keyboardType: TextInputType.emailAddress,),
+              LabeledInput(label: "Password", placeholder: "********",dataKey:'password',value:data['password'],handleChange:handleChange,type: 'password'),
               SizedBox(height: 16,),
               Row(
                 children: [
                   Expanded(
                     child: PlatformElevatedButton(
-                      onPressed: () {incrementStep();},
+                      onPressed: () => Provider.of<AuthProvider>(context, listen: false).login(data),
                       color: bg_gray,
                       material: (_, __) => MaterialElevatedButtonData(
                         style: ElevatedButton.styleFrom(
@@ -66,13 +67,15 @@ class Register1 extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: 
-                          PlatformText('Next',style: TextStyle(fontSize: 20),),
+                          PlatformText('Login',style: TextStyle(fontSize: 20),),
                         
                       
                     ),
                   ),
                 ],
               ),
+              
+               
               const SizedBox(height: 32),
               Row(
                   children: [
@@ -163,20 +166,12 @@ class Register1 extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 24),
-              PlatformText(
-                'By clicking continue, you agree to our Terms of Service and Privacy Policy',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: text_gray,
-                ),
-              ),
-                Row(
+              SizedBox(height: 16,),
+               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   PlatformText(
-                  'Already have an account? ',
+                  'Dont\'t have an account? ',
                   style: TextStyle(color: Colors.grey.shade600),
                   ),
                   GestureDetector(
@@ -184,7 +179,7 @@ class Register1 extends StatelessWidget {
                     Provider.of<AuthProvider>(context, listen: false).toggleHasAccount();
                   },
                   child: PlatformText(
-                    'Login.',
+                    'Signup.',
                     
                     style: TextStyle(
                     color: secondaryColor,
@@ -195,6 +190,7 @@ class Register1 extends StatelessWidget {
                 ],
                 ),
             ],
+            
           ),
         ),
       );
