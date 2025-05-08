@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ExerciseRow extends StatefulWidget {
   final String title;
-  final String imageUrl; // Optional image
+  final String imageUrl;
   final int initialCount;
 
   const ExerciseRow({
@@ -27,29 +28,36 @@ class _ExerciseRowState extends State<ExerciseRow> {
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-      key: Key(widget.title), // must be unique
-      background: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+    return Slidable(
+      key: Key(widget.title),
+      endActionPane: ActionPane(
+        motion: const DrawerMotion(), // You can use StretchMotion or others too
+        extentRatio: 0.4, // 40% of the width
         children: [
-          Container(
-            color: Colors.green,
-            width: 60,
-            alignment: Alignment.center,
-            child: Icon(Icons.check, color: Colors.white),
+          SlidableAction(
+            onPressed: (context) {
+              // Confirm action
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('${widget.title} confirmed')),
+              );
+            },
+            backgroundColor: Colors.green,
+            icon: Icons.check,
+            label: 'Confirm',
           ),
-          Container(
-            color: Colors.red,
-            width: 60,
-            alignment: Alignment.center,
-            child: Icon(Icons.delete, color: Colors.white),
+          SlidableAction(
+            onPressed: (context) {
+              // Delete action (doesn't remove the widget)
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('${widget.title} delete clicked')),
+              );
+            },
+            backgroundColor: Colors.red,
+            icon: Icons.delete,
+            label: 'Delete',
           ),
         ],
       ),
-      direction: DismissDirection.endToStart,
-      onDismissed: (direction) {
-        // You can handle logic here (e.g. remove item)
-      },
       child: ListTile(
         leading: widget.imageUrl.isNotEmpty
             ? CircleAvatar(backgroundImage: NetworkImage(widget.imageUrl))
