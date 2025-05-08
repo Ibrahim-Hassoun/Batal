@@ -13,12 +13,18 @@ class _ChatsScreenState extends State<ChatsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: secondaryColor),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         title: TextField(
           decoration: InputDecoration(
         hintText: 'Search',
-        fillColor: bg_gray,
+        fillColor: bg_light_gray,
         filled: true,
-        
+        border: InputBorder.none,
           ),
           style: TextStyle(color: secondaryColor),
         ),

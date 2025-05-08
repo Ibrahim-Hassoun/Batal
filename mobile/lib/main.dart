@@ -15,8 +15,9 @@ const Color primaryColor =Color(0xFFF7713D);
 const Color secondaryColor =Color.fromARGB(255, 31, 31, 31);
 const Color tertiaryColor =Color.fromARGB(255, 255, 255, 255);
 const Color bg_gray = Color(0xEEEEEEEE);
+const Color bg_light_gray = Color.fromARGB(255, 248, 248, 248);
 const Color text_gray = Color.fromARGB(255, 179, 179, 179);
-const Color text_light_gray = Color.fromARGB(255, 248, 248, 248);
+
 
 // const Color darkmodeBackgroundColor = Color(0xFF121212);
 
