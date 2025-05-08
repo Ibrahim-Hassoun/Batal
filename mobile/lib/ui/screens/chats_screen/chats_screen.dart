@@ -14,7 +14,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: secondaryColor),
+          icon: Icon(Icons.arrow_back_ios_new, color: secondaryColor),
           onPressed: () {
             Navigator.of(context).pop();
           },
