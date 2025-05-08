@@ -13,7 +13,8 @@ Route::group(['prefix'=>"v0.1"],function(){
     Route::post('/login',[AuthController::class,'login'] );
     Route::get('/test',function(){
         return response()->json([
-            'message'=>'Hello World'
+            'message'=>'Hello World',
+            'message2'=>'Hello World 2'
         ]);
     });
     // Route::post('/logout',[AuthController::class,'logout'] ); to be implemented
