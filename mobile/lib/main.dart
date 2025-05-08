@@ -9,12 +9,16 @@ import './core/provider/bottom_navbar_provider.dart';
 import './ui/widgets/bottom_navbar/bottom_navbar.dart';
 import './core/provider/feed_provider.dart';
 import './core/provider/workout_provider.dart';
+import './ui/screens/chats_screen/chats_screen.dart';
 
 const Color primaryColor =Color(0xFFF7713D);
 const Color secondaryColor =Color.fromARGB(255, 31, 31, 31);
 const Color tertiaryColor =Color.fromARGB(255, 255, 255, 255);
 const Color bg_gray = Color(0xEEEEEEEE);
+const Color bg_light_gray = Color.fromARGB(255, 248, 248, 248);
 const Color text_gray = Color.fromARGB(255, 179, 179, 179);
+
+
 // const Color darkmodeBackgroundColor = Color(0xFF121212);
 
 void main() async {
@@ -46,7 +50,9 @@ class MyApp extends StatelessWidget {
     
     return PlatformApp(
       title: 'Flutter Demo',
-      
+      routes: {
+        '/chats': (context) => const ChatsScreen(),
+      },
       material: (_, __) => MaterialAppData(
         theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: Colors.white,
@@ -75,9 +81,7 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.system,  // Automatically switches between light/dark themes
       ),
       
-      routes: {
-        
-      },
+      
       
       cupertino: (_, __) => CupertinoAppData(
         theme: isDarkMode
