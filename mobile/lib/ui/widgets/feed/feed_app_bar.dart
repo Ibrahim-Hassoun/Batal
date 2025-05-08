@@ -21,7 +21,11 @@ class FeedAppBar extends StatelessWidget implements PreferredSizeWidget {
             SizedBox(width: 16),
           Icon(Icons.search, color: secondaryColor, size:32),
           SizedBox(width: 16),
-          Icon(Icons.chat, color: secondaryColor, size: 32),
+          GestureDetector(
+            onTap:(){
+              Navigator.pushNamed(context, '/chats');
+            } ,
+            child: Icon(Icons.chat, color: secondaryColor, size: 32)),
         ],
       ),
     );

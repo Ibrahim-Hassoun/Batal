@@ -9,6 +9,7 @@ import './core/provider/bottom_navbar_provider.dart';
 import './ui/widgets/bottom_navbar/bottom_navbar.dart';
 import './core/provider/feed_provider.dart';
 import './core/provider/workout_provider.dart';
+import './ui/screens/chats_screen/chats_screen.dart';
 
 const Color primaryColor =Color(0xFFF7713D);
 const Color secondaryColor =Color.fromARGB(255, 31, 31, 31);
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
     return PlatformApp(
       title: 'Flutter Demo',
       routes: {
-        '/chats': (context) => const AuthScreen(),
+        '/chats': (context) => const ChatsScreen(),
       },
       material: (_, __) => MaterialAppData(
         theme: ThemeData.light().copyWith(
