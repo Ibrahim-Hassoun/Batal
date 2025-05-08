@@ -27,9 +27,10 @@ class _ChatRowState extends State<ChatRow>
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 16,right: 16),
-      child: SizedBox(
-        height: 45,
-        child: ListTile(
+      child: 
+         ListTile(
+          
+
             leading: SizedBox(
             height: 45,
             width: 45,
@@ -46,7 +47,7 @@ class _ChatRowState extends State<ChatRow>
             
           },
         ),
-      ),
+      
     );
   }
 }
