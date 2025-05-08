@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './workout_item.dart';
+
 
 class MyWorkout extends StatefulWidget {
   const MyWorkout({Key? key}) : super(key: key);
@@ -16,7 +18,7 @@ class _MyWorkoutState extends State<MyWorkout> {
           physics: BouncingScrollPhysics(),
           child: Column(
             children: const [
-              Text("My Workouttttsdfdsfdsfasdjsaipdogfjhsodpiahgoisadhvuioxcnviujsadbnfiupasdfnhsdcvnasd;bfiusadhfxcvmnpknasiodgh"),
+              WorkoutItem()
             
          
             ],

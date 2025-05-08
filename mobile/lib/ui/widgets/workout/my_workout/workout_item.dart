@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class MyWorkout extends StatefulWidget {
-  const MyWorkout({Key? key}) : super(key: key);
+class WorkoutItem extends StatefulWidget {
+  const WorkoutItem({Key? key}) : super(key: key);
 
   @override
-  State<MyWorkout> createState() => _MyWorkoutState();
+  State<WorkoutItem> createState() => _WorkoutItemState();
 }
 
-class _MyWorkoutState extends State<MyWorkout> {
+class _WorkoutItemState extends State<WorkoutItem> {
   @override
   Widget build(BuildContext context) {
     return const Center(
