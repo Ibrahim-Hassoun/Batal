@@ -13,6 +13,7 @@ class WorkoutTabbar extends StatefulWidget {
 
 class _WorkoutTabbarState extends State<WorkoutTabbar> {
   late String tab;
+  late WorkoutProvider provider;
 
   @override
   void initState() {
@@ -21,18 +22,21 @@ class _WorkoutTabbarState extends State<WorkoutTabbar> {
   }
   @override
   Widget build(BuildContext context) {
+
       tab = Provider.of<WorkoutProvider>(context, listen: true).tab;
+      provider = Provider.of<WorkoutProvider>(context, listen: true);
+
     return  Padding(
       padding: const EdgeInsets.only(left:16,right: 16),
       child: SizedBox(
         width: double.infinity,
         child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             
             children: [
               GestureDetector(
                 onTap: () {
-                 
+                 provider.changeTab("my_workout");
                 },
                 child: Text(
                   'My Workout',
@@ -44,7 +48,7 @@ class _WorkoutTabbarState extends State<WorkoutTabbar> {
               ),
               GestureDetector(
                 onTap: () {
-                 
+                 provider.changeTab("pose_detector");
                 },
                 child: Text(
                   'Pose Detector',
@@ -56,7 +60,7 @@ class _WorkoutTabbarState extends State<WorkoutTabbar> {
               ),
               GestureDetector(
                 onTap: () {
-                 
+                    provider.changeTab("Leaderboard");
                 },
                 child: Text(
                   'Leaderboard',
@@ -66,7 +70,7 @@ class _WorkoutTabbarState extends State<WorkoutTabbar> {
                   ),
                 ),
               ),
-              SizedBox(width: 16)],
+              ],
           ),
       ),
     ); 
