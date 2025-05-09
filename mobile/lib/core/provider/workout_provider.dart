@@ -45,6 +45,7 @@ class WorkoutProvider with ChangeNotifier {
 
 
   //camera
+  CameraLogic cameraLogic = CameraLogic();
   bool _is_Recording = false;
   bool get is_Recording => _is_Recording;
 
@@ -60,10 +61,7 @@ class WorkoutProvider with ChangeNotifier {
 
 
 
-  void disposeCameraController() {
-    _controller!.dispose();
-    
-  }
+ 
 
   //pose detector
 
@@ -97,14 +95,14 @@ class WorkoutProvider with ChangeNotifier {
     if(!_is_Recording){
       print('we will try to launch the modellllllllllllllllllllllllllllllllllllllllll');
       await loadModel();
-      await CameraLogic().initializeCamera(this);
-      // startStreaming();
+      await cameraLogic.initializeCamera(this);
+            cameraLogic.startStreaming(this);
       _is_Recording = !_is_Recording;
       notifyListeners();
     }else{
       print('we will try to stop the modellllllllllllllllllllllllllllllllllllllllll');
       disposeModel();
-      disposeCameraController();
+      cameraLogic.disposeCameraController(this);
       _is_Recording = !_is_Recording;
     }
     notifyListeners();
