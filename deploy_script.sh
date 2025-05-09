@@ -5,3 +5,4 @@ docker-compose up -d
 
 echo "✅ Deployment complete"
 exit 0
+
