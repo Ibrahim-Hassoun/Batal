@@ -4,6 +4,7 @@ import 'package:mobile/main.dart';
 import 'package:provider/provider.dart';
 import '../../../layouts/drop_down_button.dart';
 import '../../../atoms/screen_wide_elevated_button.dart';
+import './camera_section.dart';
 
 class PoseDetector extends StatefulWidget {
   const PoseDetector({Key? key}) : super(key: key);
@@ -34,12 +35,7 @@ class _PoseDetectorState extends State<PoseDetector> {
           
         ),
         SizedBox(height: 24,),
-        Container(
-          color: Colors.red,
-          height: 550,
-          width: 290,
-
-        ),
+        CameraSection(),
         SizedBox(height: 24,),
         
         Padding(
