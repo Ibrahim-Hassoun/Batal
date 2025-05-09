@@ -53,7 +53,7 @@ class WorkoutProvider with ChangeNotifier {
   bool _modelLoaded = false;
   bool get modelLoaded => _modelLoaded;
 
-   Future<void> _loadModel() async {
+   Future<void> loadModel() async {
     try {
       // Load the model using tflite_flutter Interpreter
       _interpreter = await Interpreter.fromAsset('assets/movenet.tflite');
@@ -69,7 +69,6 @@ class WorkoutProvider with ChangeNotifier {
 
   void disposeModel() {
     _interpreter?.close(); 
-    super.dispose();
   }
 
   Widget provideCameraSection(){
@@ -78,6 +77,13 @@ class WorkoutProvider with ChangeNotifier {
 
   void toggleRecording() {
     _is_Recording = !_is_Recording;
+    if(_is_Recording){
+      print('we will try to launch the modellllllllllllllllllllllllllllllllllllllllll');
+      loadModel();
+    }else{
+      print('we will try to stop the modellllllllllllllllllllllllllllllllllllllllll');
+      disposeModel();
+    }
     notifyListeners();
   }
 
