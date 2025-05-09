@@ -19,4 +19,8 @@ Future<void> loadModel(WorkoutProvider workoutProvider) async {
   }
 }
 
+void test(){
+  print("this is a test function");
+}
+
 }

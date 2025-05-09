@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:provider/provider.dart';
+import '../../../../core/tensorflow/tensorflow.dart';
+import '../../../../core/provider/workout_provider.dart';
 
 class CameraSection extends StatefulWidget {
   @override
@@ -10,10 +13,16 @@ class _CameraSectionState extends State<CameraSection> {
   CameraController? _controller;
   List<CameraDescription>? _cameras;
   int? _selectedCameraIdx;
+  TensorflowFunctions tfFunctions= TensorflowFunctions();
+  late WorkoutProvider workoutProvider;
+
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      workoutProvider = Provider.of<WorkoutProvider>(context, listen: true);
+    });
     _initializeCamera();
   }
 
@@ -48,6 +57,7 @@ class _CameraSectionState extends State<CameraSection> {
   await _controller!.startImageStream((CameraImage image) {
     // Process the image here
     print('Received image with ${image.planes.length} planes');
+    tfFunctions.test();
   });
 }
   @override
