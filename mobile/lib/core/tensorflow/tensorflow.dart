@@ -18,24 +18,24 @@ Future<void> loadModel(WorkoutProvider workoutProvider) async {
   }
 }
 
-  Future<void> analyzeFrame(CameraImage cameraImage,WorkoutProvider workoutProvider) async {
-    if (workoutProvider.interpreter == null) return;
+  // Future<void> analyzeFrame(CameraImage cameraImage,WorkoutProvider workoutProvider) async {
+  //   if (workoutProvider.interpreter == null) return;
 
-    // Convert camera image (YUV) to RGB
-    var inputImage = _convertYUVToRGB(cameraImage);
+  //   // Convert camera image (YUV) to RGB
+  //   var inputImage = _convertYUVToRGB(cameraImage);
 
-    // Preprocess the image (resize and normalize)
-    var input = _preprocessImage(inputImage);
+  //   // Preprocess the image (resize and normalize)
+  //   var input = _preprocessImage(inputImage);
 
-    // Get model output
-    var output = List.generate(1, (index) => List.filled(17, 0.0));
+  //   // Get model output
+  //   var output = List.generate(1, (index) => List.filled(17, 0.0));
 
-    workoutProvider.interpreter!.run(input, output);
+  //   workoutProvider.interpreter!.run(input, output);
 
-    // Process the output
-    return _processPoses(output);
+  //   // Process the output
+  //   return _processPoses(output);
    
-  }
+  // }
 
   // Convert YUV420 camera image to RGB
   List<List<int>> _convertYUVToRGB(CameraImage image) {
