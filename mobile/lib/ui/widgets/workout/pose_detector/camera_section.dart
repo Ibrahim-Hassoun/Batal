@@ -27,13 +27,14 @@ class _CameraSectionState extends State<CameraSection> {
     
     _controller = CameraController(
       _cameras![_selectedCameraIdx!],
-      ResolutionPreset.high,
+      ResolutionPreset.medium,
       enableAudio: false,
+      imageFormatGroup: ImageFormatGroup.yuv420,
     );
 
    
     await _controller!.initialize();
-
+    startStreaming();
     setState(() {});
   }
 
@@ -43,6 +44,12 @@ class _CameraSectionState extends State<CameraSection> {
     super.dispose();
   }
 
+  void startStreaming() async {
+  await _controller!.startImageStream((CameraImage image) {
+    // Process the image here
+    print('Received image with ${image.planes.length} planes');
+  });
+}
   @override
   Widget build(BuildContext context) {
     if (_controller == null || !_controller!.value.isInitialized) {

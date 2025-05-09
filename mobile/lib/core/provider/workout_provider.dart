@@ -25,7 +25,7 @@ class WorkoutProvider with ChangeNotifier {
   bool _is_Recording = false;
   bool get is_Recording => _is_Recording;
 
-  Widget CameraSection =  pose_detector.CameraSection();
+  late Widget CameraSection ;
 
   //general
   void changeTab(newTab){
@@ -64,7 +64,7 @@ class WorkoutProvider with ChangeNotifier {
     notifyListeners();
     
   }
-  
+
   Future<void> loadModel() async {
      TensorflowFunctions().loadModel(this);
   }
