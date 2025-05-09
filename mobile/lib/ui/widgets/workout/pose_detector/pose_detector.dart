@@ -39,12 +39,9 @@ class _PoseDetectorState extends State<PoseDetector> {
         SizedBox(//camera section
             width: 300, 
             height: 550,
-            child:  is_recording?
-          provider.provideCameraSection()
-          : 
-          Container(
-            
-           
+            child:  is_recording
+          ? provider.provideCameraSection() as Widget
+          : Container(
             color: Colors.grey[300],
             child: Center(
               child: Text("Camera not initialized"),

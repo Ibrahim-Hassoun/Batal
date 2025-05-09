@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
+import 'package:camera/camera.dart';
 import '../../ui/widgets/workout/pose_detector/pose_detector.dart';
 import '../../ui/widgets/workout/my_workout/my_workout.dart';
 import '../../ui/widgets/workout/leaderboard/leaderboard.dart';
@@ -22,13 +23,50 @@ class WorkoutProvider with ChangeNotifier {
   String? _detected_exercise;
   String? get detected_exercise => _detected_exercise;
 
+  //camera
   bool _is_Recording = false;
   bool get is_Recording => _is_Recording;
 
+  CameraController? _controller;
+  CameraController? get controller => _controller;
+
   late Widget CameraSection ;
 
-  //general
-  void changeTab(newTab){
+  Future<void> _initializeCamera() async {
+    
+    List<CameraDescription>? cameras = await availableCameras();
+    
+    
+    int selectedCameraIdx = 1;
+
+    
+    _controller = CameraController(
+      cameras![selectedCameraIdx!],
+      ResolutionPreset.medium,
+      enableAudio: false,
+      imageFormatGroup: ImageFormatGroup.yuv420,
+    );
+
+   
+    await _controller!.initialize();
+    
+    notifyListeners();
+  }
+
+  void startStreaming() async {
+    await _controller!.startImageStream((CameraImage image) {
+      // Process the image here
+      print('Received image with ${image.planes.length} planes');
+      
+    });
+  }
+
+  void disposeCameraController() {
+    _controller!.dispose();
+    
+  }
+    //general
+    void changeTab(newTab){
     _tab=newTab;
     notifyListeners();
   }
@@ -70,24 +108,55 @@ class WorkoutProvider with ChangeNotifier {
   }
 
   void disposeModel() {
-    _interpreter?.close(); 
+    _interpreter!.close(); 
   }
 
   Widget provideCameraSection(){
     return pose_detector.CameraSection();
   }
 
-  void toggleRecording() {
-    _is_Recording = !_is_Recording;
-    if(_is_Recording){
+  void toggleRecording() async{
+    
+    if(!_is_Recording){
       print('we will try to launch the modellllllllllllllllllllllllllllllllllllllllll');
-      loadModel();
+      await loadModel();
+      await _initializeCamera();
+      // startStreaming();
+      _is_Recording = !_is_Recording;
     }else{
       print('we will try to stop the modellllllllllllllllllllllllllllllllllllllllll');
       disposeModel();
+      disposeCameraController();
+      _is_Recording = !_is_Recording;
     }
     notifyListeners();
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   void setDetectedArea(String area) {
     _detected_area = area;
