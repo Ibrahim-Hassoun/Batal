@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tflite_flutter/tflite_flutter.dart';
 import '../../ui/widgets/workout/pose_detector/pose_detector.dart';
 import '../../ui/widgets/workout/my_workout/my_workout.dart';
 import '../../ui/widgets/workout/leaderboard/leaderboard.dart';
+import '../../ui/widgets/workout/pose_detector/camera_section.dart' as pose_detector;
+import '../tensorflow/tensorflow.dart';
 
 class WorkoutProvider with ChangeNotifier {
   List<String> _workouts = [];
@@ -19,22 +22,12 @@ class WorkoutProvider with ChangeNotifier {
   String? _detected_exercise;
   String? get detected_exercise => _detected_exercise;
 
-  void setDetectedArea(String area) {
-    _detected_area = area;
-    print("this is from provider" + (_detected_area ?? "unknown"));
-    notifyListeners();
-  }
+  bool _is_Recording = false;
+  bool get is_Recording => _is_Recording;
 
-  void setDetectedMuscle(String muscle) {
-    _detected_muscle = muscle;
-    notifyListeners();
-  }
+  Widget CameraSection =  pose_detector.CameraSection();
 
-  void setDetectedExercice(String exercice) {
-    _detected_muscle = exercice;
-    notifyListeners();
-  }
-
+  //general
   void changeTab(newTab){
     _tab=newTab;
     notifyListeners();
@@ -51,7 +44,71 @@ class WorkoutProvider with ChangeNotifier {
       return const Text("Unknown Section");
     }
   }
+  
 
+  //pose detector
+
+  Interpreter? _interpreter;
+  Interpreter? get interpreter => _interpreter;
+  
+  bool _modelLoaded = false;
+  bool get modelLoaded => _modelLoaded;
+
+
+  void setModelLoaded(bool value) {
+    _modelLoaded = value;
+    notifyListeners();}
+
+  void setInterpreter(Interpreter interpreter) {
+    _interpreter = interpreter;
+    notifyListeners();
+    
+  }
+  
+  Future<void> loadModel() async {
+     TensorflowFunctions().loadModel(this);
+  }
+
+  void disposeModel() {
+    _interpreter?.close(); 
+  }
+
+  Widget provideCameraSection(){
+    return pose_detector.CameraSection();
+  }
+
+  void toggleRecording() {
+    _is_Recording = !_is_Recording;
+    if(_is_Recording){
+      print('we will try to launch the modellllllllllllllllllllllllllllllllllllllllll');
+      loadModel();
+    }else{
+      print('we will try to stop the modellllllllllllllllllllllllllllllllllllllllll');
+      disposeModel();
+    }
+    notifyListeners();
+  }
+
+  void setDetectedArea(String area) {
+    _detected_area = area;
+    print("this is from provider" + (_detected_area ?? "unknown"));
+    notifyListeners();
+  }
+
+  void setDetectedMuscle(String muscle) {
+    _detected_muscle = muscle;
+    notifyListeners();
+  }
+
+  void setDetectedExercice(String exercice) {
+    _detected_muscle = exercice;
+    notifyListeners();
+  }
+
+
+
+  
+  //my workout
   void addWorkout(String workout) {
     _workouts.add(workout);
     notifyListeners();

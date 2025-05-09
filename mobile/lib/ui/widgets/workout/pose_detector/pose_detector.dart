@@ -4,7 +4,6 @@ import 'package:mobile/main.dart';
 import 'package:provider/provider.dart';
 import '../../../layouts/drop_down_button.dart';
 import '../../../atoms/screen_wide_elevated_button.dart';
-import './camera_section.dart';
 
 class PoseDetector extends StatefulWidget {
   const PoseDetector({Key? key}) : super(key: key);
@@ -18,6 +17,8 @@ class _PoseDetectorState extends State<PoseDetector> {
   @override
   Widget build(BuildContext context) {
     WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen:true);
+    bool is_recording = provider.is_Recording;
+
     return Column(
       children: [
         Padding(//selections wrapper
@@ -35,17 +36,32 @@ class _PoseDetectorState extends State<PoseDetector> {
           
         ),
         SizedBox(height: 24,),
-        CameraSection(),
+        SizedBox(//camera section
+            width: 300, 
+            height: 550,
+            child:  is_recording?
+          provider.provideCameraSection()
+          : 
+          Container(
+            
+           
+            color: Colors.grey[300],
+            child: Center(
+              child: Text("Camera not initialized"),
+            ),
+          ),
+        ),
+       
         SizedBox(height: 24,),
         
         Padding(
           padding: const EdgeInsets.only(left: 108,right: 108),
           child: ScreenWideElevatedButton(
             onPressed: () {
-              // Handle button press
+              provider.toggleRecording();
             },
-            label: 'Start',
-            backgroundColor: primaryColor,
+            label: is_recording?'Stop':'Start',
+            backgroundColor: is_recording?secondaryColor: primaryColor,
             foregroundColor: tertiaryColor,
             
           ),

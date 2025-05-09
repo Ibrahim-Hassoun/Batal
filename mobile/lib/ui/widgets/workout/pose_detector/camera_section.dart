@@ -22,7 +22,7 @@ class _CameraSectionState extends State<CameraSection> {
     _cameras = await availableCameras();
     
     
-    _selectedCameraIdx = 0;
+    _selectedCameraIdx = 1;
 
     
     _controller = CameraController(
@@ -50,7 +50,7 @@ class _CameraSectionState extends State<CameraSection> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text("Camera Feed")),
+    
       body: CameraPreview(_controller!),
     );
   }
