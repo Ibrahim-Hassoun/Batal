@@ -6,7 +6,7 @@ import '../../ui/widgets/workout/my_workout/my_workout.dart';
 import '../../ui/widgets/workout/leaderboard/leaderboard.dart';
 import '../../ui/widgets/workout/pose_detector/camera_section.dart' as pose_detector;
 import '../tensorflow/tensorflow.dart';
-
+import '../camera_logic/camera_logic.dart';
 
 class WorkoutProvider with ChangeNotifier {
   List<String> _workouts = [];
@@ -24,47 +24,7 @@ class WorkoutProvider with ChangeNotifier {
   String? _detected_exercise;
   String? get detected_exercise => _detected_exercise;
 
-  //camera
-  bool _is_Recording = false;
-  bool get is_Recording => _is_Recording;
-
-  CameraController? _controller;
-  CameraController? get controller => _controller;
-
-  Future<void> _initializeCamera() async {
-    
-    List<CameraDescription>? cameras = await availableCameras();
-    
-    
-    int selectedCameraIdx = 1;
-
-    
-    _controller = CameraController(
-      cameras![selectedCameraIdx!],
-      ResolutionPreset.medium,
-      enableAudio: false,
-      imageFormatGroup: ImageFormatGroup.yuv420,
-    );
-
-   
-    await _controller!.initialize();
-    
-    notifyListeners();
-  }
-
-  void startStreaming() async {
-    await _controller!.startImageStream((CameraImage image) {
-      // Process the image here
-      print('Received image with ${image.planes.length} planes');
-      
-    });
-  }
-
-  void disposeCameraController() {
-    _controller!.dispose();
-    
-  }
-    //general
+      //general
     void changeTab(newTab){
     _tab=newTab;
     notifyListeners();
@@ -82,6 +42,34 @@ class WorkoutProvider with ChangeNotifier {
     }
   }
   
+
+
+  //camera
+  bool _is_Recording = false;
+  bool get is_Recording => _is_Recording;
+
+  CameraController? _controller;
+  CameraController? get controller => _controller;
+
+  void setController(CameraController? controller) {
+    _controller = controller;
+    notifyListeners();
+  }
+
+  
+
+  void startStreaming() async {
+    await _controller!.startImageStream((CameraImage image) {
+      // Process the image here
+      print('Received image with ${image.planes.length} planes');
+      
+    });
+  }
+
+  void disposeCameraController() {
+    _controller!.dispose();
+    
+  }
 
   //pose detector
 
@@ -115,9 +103,10 @@ class WorkoutProvider with ChangeNotifier {
     if(!_is_Recording){
       print('we will try to launch the modellllllllllllllllllllllllllllllllllllllllll');
       await loadModel();
-      await _initializeCamera();
+      await CameraLogic().initializeCamera(this);
       // startStreaming();
       _is_Recording = !_is_Recording;
+      notifyListeners();
     }else{
       print('we will try to stop the modellllllllllllllllllllllllllllllllllllllllll');
       disposeModel();
