@@ -11,4 +11,4 @@ RUN chmod +x /wait-for-it.sh
 
 EXPOSE 8000
 
-CMD ["/wait-for-it.sh", "batal-database:3306", "--timeout=300", "--", "bash", "-c", "php artisan migrate && php artisan serve --host=0.0.0.0 --port=8000"] 
+# CMD ["./wait-for-it.sh", "php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
