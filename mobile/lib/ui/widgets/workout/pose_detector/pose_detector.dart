@@ -38,13 +38,14 @@ class _PoseDetectorState extends State<PoseDetector> {
         ),
         SizedBox(height: 24,),
         SizedBox(//camera section
+            width: 300, 
             height: 550,
             child:  is_recording?
           provider.provideCameraSection()
           : 
           Container(
             
-            width: 300,
+           
             color: Colors.grey[300],
             child: Center(
               child: Text("Camera not initialized"),
@@ -60,8 +61,8 @@ class _PoseDetectorState extends State<PoseDetector> {
             onPressed: () {
               provider.toggleRecording();
             },
-            label: 'Start',
-            backgroundColor: primaryColor,
+            label: is_recording?'Stop':'Start',
+            backgroundColor: is_recording?secondaryColor: primaryColor,
             foregroundColor: tertiaryColor,
             
           ),

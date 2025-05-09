@@ -14,6 +14,7 @@ class _CameraSectionState extends State<CameraSection> {
   @override
   void initState() {
     super.initState();
+    _initializeCamera();
   }
 
   Future<void> _initializeCamera() async {
