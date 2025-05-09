@@ -37,17 +37,28 @@ class _PoseDetectorState extends State<PoseDetector> {
           
         ),
         SizedBox(height: 24,),
-        if(is_recording)
-        provider.provideCameraSection()
-        else 
-        Icon(Icons.play_circle_outline,size: 200,color: primaryColor,),
+        SizedBox(//camera section
+            height: 550,
+            child:  is_recording?
+          provider.provideCameraSection()
+          : 
+          Container(
+            
+            width: 300,
+            color: Colors.grey[300],
+            child: Center(
+              child: Text("Camera not initialized"),
+            ),
+          ),
+        ),
+       
         SizedBox(height: 24,),
         
         Padding(
           padding: const EdgeInsets.only(left: 108,right: 108),
           child: ScreenWideElevatedButton(
             onPressed: () {
-              // Handle button press
+              provider.toggleRecording();
             },
             label: 'Start',
             backgroundColor: primaryColor,

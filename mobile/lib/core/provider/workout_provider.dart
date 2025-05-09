@@ -41,11 +41,16 @@ class WorkoutProvider with ChangeNotifier {
       return const Text("Unknown Section");
     }
   }
-
+  
   Widget provideCameraSection(){
     return pose_detector.CameraSection();
   }
 
+  void toggleRecording() {
+    _is_Recording = !_is_Recording;
+    notifyListeners();
+  }
+  
   void setDetectedArea(String area) {
     _detected_area = area;
     print("this is from provider" + (_detected_area ?? "unknown"));
