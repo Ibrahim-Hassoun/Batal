@@ -22,7 +22,7 @@ class _CameraSectionState extends State<CameraSection> {
     _cameras = await availableCameras();
     
     
-    _selectedCameraIdx = 0;
+    _selectedCameraIdx = 1;
 
     
     _controller = CameraController(
