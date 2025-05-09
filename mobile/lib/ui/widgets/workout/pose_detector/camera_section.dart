@@ -18,20 +18,20 @@ class _CameraSectionState extends State<CameraSection> {
   }
 
   Future<void> _initializeCamera() async {
-    // Get the list of available cameras
+    
     _cameras = await availableCameras();
     
-    // Select the first camera by default (you can modify this to select the rear/front camera)
+    
     _selectedCameraIdx = 0;
 
-    // Initialize the camera controller
+    
     _controller = CameraController(
       _cameras![_selectedCameraIdx!],
       ResolutionPreset.high,
       enableAudio: false,
     );
 
-    // Initialize the camera controller
+   
     await _controller!.initialize();
 
     setState(() {});
