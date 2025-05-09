@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../ui/widgets/workout/pose_detector/pose_detector.dart';
 import '../../ui/widgets/workout/my_workout/my_workout.dart';
 import '../../ui/widgets/workout/leaderboard/leaderboard.dart';
+import '../../ui/widgets/workout/pose_detector/camera_section.dart' as pose_detector;
 
 class WorkoutProvider with ChangeNotifier {
   List<String> _workouts = [];
@@ -19,11 +20,32 @@ class WorkoutProvider with ChangeNotifier {
   String? _detected_exercise;
   String? get detected_exercise => _detected_exercise;
 
+  bool _is_Recording = false;
+  bool get is_Recording => _is_Recording;
+
+  Widget CameraSection =  pose_detector.CameraSection();
+
   void changeTab(newTab){
     _tab=newTab;
     notifyListeners();
   }
-  
+
+  Widget provideSection(){
+    if(_tab=="my_workout"){
+      return const MyWorkout();
+    }else if(_tab=="pose_detector"){
+      return const PoseDetector();
+    }else if(_tab=="Leaderboard"){
+      return Leaderboard();
+    }else{
+      return const Text("Unknown Section");
+    }
+  }
+
+  Widget provideCameraSection(){
+    return pose_detector.CameraSection();
+  }
+
   void setDetectedArea(String area) {
     _detected_area = area;
     print("this is from provider" + (_detected_area ?? "unknown"));
@@ -40,19 +62,9 @@ class WorkoutProvider with ChangeNotifier {
     notifyListeners();
   }
 
- 
 
-  Widget provideSection(){
-    if(_tab=="my_workout"){
-      return const MyWorkout();
-    }else if(_tab=="pose_detector"){
-      return const PoseDetector();
-    }else if(_tab=="Leaderboard"){
-      return Leaderboard();
-    }else{
-      return const Text("Unknown Section");
-    }
-  }
+
+  
 
   void addWorkout(String workout) {
     _workouts.add(workout);

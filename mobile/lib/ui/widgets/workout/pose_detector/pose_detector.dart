@@ -18,6 +18,8 @@ class _PoseDetectorState extends State<PoseDetector> {
   @override
   Widget build(BuildContext context) {
     WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen:true);
+    bool is_recording = provider.is_Recording;
+
     return Column(
       children: [
         Padding(//selections wrapper
@@ -35,7 +37,10 @@ class _PoseDetectorState extends State<PoseDetector> {
           
         ),
         SizedBox(height: 24,),
-        CameraSection(),
+        if(is_recording)
+        provider.provideCameraSection()
+        else 
+        Icon(Icons.play_circle_outline,size: 200,color: primaryColor,),
         SizedBox(height: 24,),
         
         Padding(
