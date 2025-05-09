@@ -58,13 +58,7 @@ class WorkoutProvider with ChangeNotifier {
 
   
 
-  void startStreaming() async {
-    await _controller!.startImageStream((CameraImage image) {
-      // Process the image here
-      print('Received image with ${image.planes.length} planes');
-      
-    });
-  }
+
 
   void disposeCameraController() {
     _controller!.dispose();

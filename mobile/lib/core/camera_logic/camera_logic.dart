@@ -26,4 +26,12 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
     
   }
 
+
+  void startStreaming(WorkoutProvider workoutProvider) async {
+    await workoutProvider.controller!.startImageStream((CameraImage image) {
+      // Process the image here
+      print('Received image with ${image.planes.length} planes');
+      
+    });
+  }
 }
