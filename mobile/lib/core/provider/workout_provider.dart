@@ -4,7 +4,6 @@ import 'package:camera/camera.dart';
 import '../../ui/widgets/workout/pose_detector/pose_detector.dart';
 import '../../ui/widgets/workout/my_workout/my_workout.dart';
 import '../../ui/widgets/workout/leaderboard/leaderboard.dart';
-import '../../ui/widgets/workout/pose_detector/camera_section.dart' as pose_detector;
 import '../tensorflow/tensorflow.dart';
 import '../camera_logic/camera_logic.dart';
 
@@ -63,7 +62,7 @@ class WorkoutProvider with ChangeNotifier {
 
  
 
-  //pose detector
+  //model
 
   Interpreter? _interpreter;
   Interpreter? get interpreter => _interpreter;
@@ -90,18 +89,21 @@ class WorkoutProvider with ChangeNotifier {
     _interpreter!.close(); 
   }
 
+
+  //head controller function
   void toggleRecording() async{
     
     if(!_is_Recording){
-      print('we will try to launch the modellllllllllllllllllllllllllllllllllllllllll');
+      
       await loadModel();
       await cameraLogic.initializeCamera(this);
             cameraLogic.startStreaming(this);
       _is_Recording = !_is_Recording;
       notifyListeners();
     }else{
-      print('we will try to stop the modellllllllllllllllllllllllllllllllllllllllll');
+    
       disposeModel();
+
       cameraLogic.disposeCameraController(this);
       _is_Recording = !_is_Recording;
     }

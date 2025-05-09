@@ -1,9 +1,10 @@
 import 'package:camera/camera.dart';
-import 'package:flutter/material.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
-
+import '../tensorflow/tensorflow.dart';
 
 class CameraLogic {
+TensorflowFunctions tensorflowFunctions = TensorflowFunctions();
+
 
 Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
     
@@ -14,7 +15,7 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
 
     
     workoutProvider.setController ( CameraController(
-      cameras![selectedCameraIdx!],
+      cameras[selectedCameraIdx],
       ResolutionPreset.medium,
       enableAudio: false,
       imageFormatGroup: ImageFormatGroup.yuv420,
@@ -30,7 +31,8 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
   void startStreaming(WorkoutProvider workoutProvider) async {
     await workoutProvider.controller!.startImageStream((CameraImage image) {
       // Process the image here
-      print('Received image with ${image.planes.length} planes');
+      tensorflowFunctions.process(image);
+      print('from streaming');
       
     });
   }

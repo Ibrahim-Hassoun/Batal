@@ -1,7 +1,7 @@
 import 'package:mobile/core/provider/workout_provider.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 import 'dart:async';
-
+import 'package:camera/camera.dart';
 
 
 class TensorflowFunctions {
@@ -23,4 +23,10 @@ void test(){
   print("this is a test function");
 }
 
+
+void process(CameraImage image){
+  print("this is a process function for");
+  print(image);
+ 
+}
 }
