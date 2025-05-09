@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tflite_flutter/tflite_flutter.dart';
 import '../../ui/widgets/workout/pose_detector/pose_detector.dart';
 import '../../ui/widgets/workout/my_workout/my_workout.dart';
 import '../../ui/widgets/workout/leaderboard/leaderboard.dart';
@@ -25,6 +26,7 @@ class WorkoutProvider with ChangeNotifier {
 
   Widget CameraSection =  pose_detector.CameraSection();
 
+  //general
   void changeTab(newTab){
     _tab=newTab;
     notifyListeners();
@@ -42,6 +44,34 @@ class WorkoutProvider with ChangeNotifier {
     }
   }
   
+
+  //pose detector
+
+  Interpreter? _interpreter;
+  Interpreter? get interpreter => _interpreter;
+
+  bool _modelLoaded = false;
+  bool get modelLoaded => _modelLoaded;
+
+   Future<void> _loadModel() async {
+    try {
+      // Load the model using tflite_flutter Interpreter
+      _interpreter = await Interpreter.fromAsset('assets/movenet.tflite');
+
+      _modelLoaded = true;
+      notifyListeners(); 
+
+      print("Model loaded successfully!");
+    } catch (e) {
+      print("Error loading model: $e");
+    }
+  }
+
+  void disposeModel() {
+    _interpreter?.close(); 
+    super.dispose();
+  }
+
   Widget provideCameraSection(){
     return pose_detector.CameraSection();
   }
@@ -50,7 +80,7 @@ class WorkoutProvider with ChangeNotifier {
     _is_Recording = !_is_Recording;
     notifyListeners();
   }
-  
+
   void setDetectedArea(String area) {
     _detected_area = area;
     print("this is from provider" + (_detected_area ?? "unknown"));
@@ -70,7 +100,7 @@ class WorkoutProvider with ChangeNotifier {
 
 
   
-
+  //my workout
   void addWorkout(String workout) {
     _workouts.add(workout);
     notifyListeners();
