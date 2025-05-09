@@ -4,6 +4,7 @@ import '../../ui/widgets/workout/pose_detector/pose_detector.dart';
 import '../../ui/widgets/workout/my_workout/my_workout.dart';
 import '../../ui/widgets/workout/leaderboard/leaderboard.dart';
 import '../../ui/widgets/workout/pose_detector/camera_section.dart' as pose_detector;
+import '../tensorflow/tensorflow.dart';
 
 class WorkoutProvider with ChangeNotifier {
   List<String> _workouts = [];
@@ -49,22 +50,23 @@ class WorkoutProvider with ChangeNotifier {
 
   Interpreter? _interpreter;
   Interpreter? get interpreter => _interpreter;
-
+  
   bool _modelLoaded = false;
   bool get modelLoaded => _modelLoaded;
 
-   Future<void> loadModel() async {
-    try {
-      // Load the model using tflite_flutter Interpreter
-      _interpreter = await Interpreter.fromAsset('assets/movenet.tflite');
 
-      _modelLoaded = true;
-      notifyListeners(); 
+  void setModelLoaded(bool value) {
+    _modelLoaded = value;
+    notifyListeners();}
 
-      print("Model loaded successfully!");
-    } catch (e) {
-      print("Error loading model: $e");
-    }
+  void setInterpreter(Interpreter interpreter) {
+    _interpreter = interpreter;
+    notifyListeners();
+    
+  }
+  
+  Future<void> loadModel() async {
+     TensorflowFunctions().loadModel(this);
   }
 
   void disposeModel() {
