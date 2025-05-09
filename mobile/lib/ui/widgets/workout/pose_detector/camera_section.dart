@@ -50,7 +50,7 @@ class _CameraSectionState extends State<CameraSection> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text("Camera Feed")),
+    
       body: CameraPreview(_controller!),
     );
   }
