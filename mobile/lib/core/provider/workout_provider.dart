@@ -7,6 +7,7 @@ import '../../ui/widgets/workout/leaderboard/leaderboard.dart';
 import '../../ui/widgets/workout/pose_detector/camera_section.dart' as pose_detector;
 import '../tensorflow/tensorflow.dart';
 
+
 class WorkoutProvider with ChangeNotifier {
   List<String> _workouts = [];
   List<String> get workouts => _workouts;
@@ -29,8 +30,6 @@ class WorkoutProvider with ChangeNotifier {
 
   CameraController? _controller;
   CameraController? get controller => _controller;
-
-  late Widget CameraSection ;
 
   Future<void> _initializeCamera() async {
     
@@ -109,10 +108,6 @@ class WorkoutProvider with ChangeNotifier {
 
   void disposeModel() {
     _interpreter!.close(); 
-  }
-
-  Widget provideCameraSection(){
-    return pose_detector.CameraSection();
   }
 
   void toggleRecording() async{
