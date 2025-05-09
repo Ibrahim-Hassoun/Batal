@@ -19,6 +19,11 @@ class WorkoutProvider with ChangeNotifier {
   String? _detected_exercise;
   String? get detected_exercise => _detected_exercise;
 
+  void changeTab(newTab){
+    _tab=newTab;
+    notifyListeners();
+  }
+  
   void setDetectedArea(String area) {
     _detected_area = area;
     print("this is from provider" + (_detected_area ?? "unknown"));
@@ -35,10 +40,7 @@ class WorkoutProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void changeTab(newTab){
-    _tab=newTab;
-    notifyListeners();
-  }
+ 
 
   Widget provideSection(){
     if(_tab=="my_workout"){
