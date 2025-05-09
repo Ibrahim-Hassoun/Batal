@@ -1,5 +1,4 @@
 import 'package:mobile/core/provider/workout_provider.dart';
-import 'package:provider/provider.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 
