@@ -24,7 +24,7 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
     
     
     int selectedCameraIdx = 1;
-    this.camera = cameras[selectedCameraIdx];
+   
     
     workoutProvider.setController ( CameraController(
       cameras[selectedCameraIdx],
@@ -48,7 +48,7 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
       final now = DateTime.now();
       if (now.difference(lastProcessed).inMilliseconds >= 1000) {
         lastProcessed = now;
-        mlPoseDetectorFunctions.processCameraImage(image, workoutProvider.poseDetector!);
+        mlPoseDetectorFunctions.processCameraImage(image, workoutProvider.poseDetector!,workoutProvider);
 
         
         // tensorflowFunctions.process(image, workoutProvider);

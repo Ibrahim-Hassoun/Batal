@@ -141,13 +141,22 @@ class WorkoutProvider with ChangeNotifier {
   PoseDetector? get poseDetector => _poseDetector;
 
   void createPoseDetector(){
+    if (_poseDetector != null) {
+      return;
+    }
     final options = PoseDetectorOptions();
     PoseDetector poseDetector = PoseDetector(options: options);
     _poseDetector = poseDetector;
     notifyListeners();
   }
 
+  List<Map<String, Map<String, double>>> _landmarks = [];
+  List<Map<String, Map<String, double>>> get landmarks => _landmarks;
 
+  void setLandmarks(List<Map<String, Map<String, double>>> landmarks) {
+    _landmarks = landmarks;
+    notifyListeners();
+  }
 
 
 

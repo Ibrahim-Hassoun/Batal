@@ -1,12 +1,13 @@
 import 'dart:typed_data';
-
+import './camera_section.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
 import 'package:mobile/main.dart';
 import 'package:provider/provider.dart';
 import '../../../layouts/drop_down_button.dart';
 import '../../../atoms/screen_wide_elevated_button.dart';
-import './camera_section.dart';
+import '../../../layouts/CustomCanva.dart';
+
 
 class PoseDetectorTab extends StatefulWidget {
   const PoseDetectorTab({Key? key}) : super(key: key);
@@ -22,6 +23,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
     WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen:true);
     bool is_recording = provider.is_Recording;
     Uint8List? pngBytes = provider.imageBytes;
+    List<Map<String, Map<String, double>>> landmarks = provider.landmarks;
 
     return Column(
       children: [
@@ -44,7 +46,26 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
             width: 300, 
             height: 350,
             child:  is_recording
-          ? CameraSection()
+            ? Stack(
+              children: [
+              CameraSection(), // The camera image
+              if (pngBytes != null)
+                Positioned.fill(
+                child: IgnorePointer(
+                  child: Image.memory(
+                  pngBytes,
+                  fit: BoxFit.cover,
+                  ),
+                ),
+                ),
+              
+                Positioned.fill(
+                child: CustomPaint(
+                  painter: !landmarks.isEmpty? CustomCanva(landmarks):null,
+                ),
+                ),
+              ],
+            )
           : Container(
             color: Colors.grey[300],
             child: Center(
@@ -67,10 +88,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
             
           ),
         ),
-        if (pngBytes != null) // Display the image if available
-          Image.memory(pngBytes)
-        else
-          const Text("No image captured"),
+        
       ],
     );
   }
