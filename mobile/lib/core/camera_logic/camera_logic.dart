@@ -31,7 +31,7 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
   void startStreaming(WorkoutProvider workoutProvider) async {
     await workoutProvider.controller!.startImageStream((CameraImage image) {
       // Process the image here
-      tensorflowFunctions.process(image);
+      tensorflowFunctions.process(image,workoutProvider);
       print('from streaming');
       
     });

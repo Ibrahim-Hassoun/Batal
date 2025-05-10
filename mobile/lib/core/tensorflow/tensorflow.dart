@@ -21,53 +21,149 @@ Future<void> loadModel(WorkoutProvider workoutProvider) async {
   }
 }
 
-void test(){
-  print("this is a test function");
+
+
+
+void process(CameraImage image, WorkoutProvider workoutProvider) {
+  // 1. Extract Y channel (luminance)
+  final Uint8List yBytes = image.planes[0].bytes;
+  print('[DEBUG] Y channel - First 10 bytes: ${yBytes.sublist(0, 10)}');
+  print('[DEBUG] Original Y size: ${image.width}x${image.height} (${yBytes.length} bytes)');
+
+  // 2. Resize Y channel directly
+  final Uint8List resizedY = resizeGrayscale(
+    yBytes,
+    image.width,
+    image.height,
+    192, // Target size for MoveNet
+  );
+  print('[DEBUG] Resized Y size: 192x192 (${resizedY.length} bytes)');
+  print('[DEBUG] Resized Y first 10 bytes: ${resizedY.sublist(0, 10)}');
+
+  // 3. Normalize values for model input
+  final List<double> inputTensor = resizedY.map((b) => (b / 127.5) - 1.0).toList();
+  print('[DEBUG] Tensor first 3 values: ${inputTensor.sublist(0, 3)}');
+
+  // 4. Feed to pose detection model
+  // workoutProvider.runPoseDetection(inputTensor);
+}
+
+Uint8List resizeGrayscale(
+  Uint8List yBytes,
+  int originalWidth,
+  int originalHeight,
+  int targetSize,
+) {
+  // Create grayscale image from Y channel (8-bit format)
+  final yImage = img.Image.fromBytes(
+    width:  originalWidth,
+    height:  originalHeight,
+    bytes:  yBytes.buffer,
+    format: img.Format.uint8,  // Explicit 8-bit format
+    // order: img.ChannelOrder.grayAlpha,  // Single channel
+    numChannels: 1,  // Grayscale
+  );
+
+  // Resize with aspect ratio preservation
+  final resizedImage = img.copyResize(
+    yImage,
+    width: targetSize,
+    height: targetSize,
+    interpolation: img.Interpolation.linear,
+  );
+
+  return resizedImage.getBytes();
 }
 
 
-void process(CameraImage image){
-  print("this is the format of the image");
-  Uint8List rgbImage = convertYUV420toRGB(image.planes[0].bytes,image.planes[1].bytes,image.planes[2].bytes,image.width,image.height,);
-  
- 
-}
 
-Uint8List convertYUV420toRGB(Uint8List yPlane, Uint8List uPlane, Uint8List vPlane, int width, int height) {
-  final int uvWidth = width ~/ 2;
-  final int uvHeight = height ~/ 2;
-  final List<int> rgb = List<int>.filled(width * height * 3, 0);
 
-  int yIndex = 0;
-  int uvIndex = 0;
-  for (int y = 0; y < height; y++) {
-    for (int x = 0; x < width; x++) {
-      final int uvX = x ~/ 2;
-      final int uvY = y ~/ 2;
-      final int uvOffset = uvY * uvWidth + uvX;
 
-      final int yValue = yPlane[yIndex];
-      final int uValue = uPlane[uvOffset] - 128;
-      final int vValue = vPlane[uvOffset] - 128;
 
-      // YUV → RGB conversion matrix
-      int r = (yValue + (1.402 * vValue)).round();
-      int g = (yValue - (0.344 * uValue) - (0.714 * vValue)).round();
-      int b = (yValue + (1.772 * uValue)).round();
+// void process(CameraImage image,WorkoutProvider workoutProvider) {
+//   print("Camera format: ${image.format.group}"); 
+//   print("camera is streaming: ${workoutProvider.controller!.value.isStreamingImages}");
+//   print("originalWidth: ${image.width}");
+//   print("originalHeight: ${image.height}");
+//   Uint8List rgbBytes = convertYUV420toRGB(image.planes[0].bytes,image.planes[1].bytes,image.planes[2].bytes,image.width,image.height,image.planes[0].bytesPerRow,image.planes[1].bytesPerRow,image.planes[2].bytesPerRow);
+//   print('Input bytes: ${rgbBytes.length}'); // Should be originalWidth * originalHeight * 3
+//   Uint8List resizedBytes = resizeRGBForModel(rgbBytes, image.width, image.height, 192);
+//   print('Output bytes: ${resizedBytes.length}');
+//   // First pixel’s RGB values (should not be all zeros)
+//   print('R: ${resizedBytes[0]}, G: ${resizedBytes[1]}, B: ${resizedBytes[2]}');
+// }
 
-      r = r.clamp(0, 255);
-      g = g.clamp(0, 255);
-      b = b.clamp(0, 255);
+// Uint8List convertYUV420toRGB(
+//   Uint8List yPlane,
+//   Uint8List uPlane,
+//   Uint8List vPlane,
+//   int width,
+//   int height,
+//   int yStride,
+//   int uStride,
+//   int vStride,
+// ) {
+//   final List<int> rgb = List<int>.filled(width * height * 3, 0);
+//   print("Y plane first 10 bytes: ${yPlane.sublist(0, 10)}");
+// print("U plane first 10 bytes: ${uPlane.sublist(0, 10)}");
+// print("V plane first 10 bytes: ${vPlane.sublist(0, 10)}");
+//   for (int y = 0; y < height; y++) {
+//     for (int x = 0; x < width; x++) {
+      
+//       final int uvX = x ~/ 2;
+//       final int uvY = y ~/ 2;
 
-      final int rgbIndex = (y * width + x) * 3;
-      rgb[rgbIndex] = r;
-      rgb[rgbIndex + 1] = g;
-      rgb[rgbIndex + 2] = b;
+      
+//       final int yIndex = y * yStride + x;
+//       final int uIndex = uvY * uStride + uvX;
+//       final int vIndex = uvY * vStride + uvX;
 
-      yIndex++;
-    }
-  }
-  return Uint8List.fromList(rgb);
-}
+//       final int yValue = yPlane[yIndex];
+//       final int uValue = uPlane[uIndex] - 128;
+//       final int vValue = vPlane[vIndex] - 128;
 
+//       // YUV → RGB conversion matrix
+//       int r = (yValue + (1.402 * vValue)).round();
+//       int g = (yValue - (0.344136 * uValue) - (0.714136 * vValue)).round();
+//       int b = (yValue + (1.772 * uValue)).round();
+
+//       // Clamp values and assign to RGB buffer
+//       final int rgbIndex = (y * width + x) * 3;
+//       rgb[rgbIndex] = r.clamp(0, 255);
+//       rgb[rgbIndex + 1] = g.clamp(0, 255);
+//       rgb[rgbIndex + 2] = b.clamp(0, 255);
+//     }
+//   }
+
+//   return Uint8List.fromList(rgb);
+// }
+
+// Uint8List resizeRGBForModel(
+//   Uint8List rgbBytes, 
+//   int originalWidth, 
+//   int originalHeight, 
+//   int targetSize,
+// ) {
+//   // 1. Create Image from RGB bytes (CORRECTED)
+//   final image = img.Image.fromBytes(
+//     width:  originalWidth,
+//     height:  originalHeight,
+//     bytes:  rgbBytes.buffer,
+//     order: img.ChannelOrder.rgb,  // ← Critical fix
+//     format: img.Format.uint8,     // ← 8-bit per channel
+//   );
+
+//   // 2. Resize (already correct)
+//   final resizedImage = img.copyResize(
+//     image,
+//     width: targetSize,
+//     height: targetSize,
+//     interpolation: img.Interpolation.linear,
+//   );
+
+//   // 3. Get bytes (CORRECTED)
+//   return resizedImage.getBytes(
+//     order: img.ChannelOrder.rgb,  // ← Preserve RGB order
+//   );
+// }
 }
