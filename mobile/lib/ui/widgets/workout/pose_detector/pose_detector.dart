@@ -1,12 +1,13 @@
 import 'dart:typed_data';
-
+import './camera_section.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
 import 'package:mobile/main.dart';
 import 'package:provider/provider.dart';
 import '../../../layouts/drop_down_button.dart';
 import '../../../atoms/screen_wide_elevated_button.dart';
-import './camera_section.dart';
+import '../../../layouts/CustomCanva.dart';
+
 
 class PoseDetectorTab extends StatefulWidget {
   const PoseDetectorTab({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
     WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen:true);
     bool is_recording = provider.is_Recording;
     Uint8List? pngBytes = provider.imageBytes;
-    Widget? canvas = provider.canvas;
+    List<Map<String, Map<String, double>>> landmarks = provider.landmarks;
 
     return Column(
       children: [
@@ -60,7 +61,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
               
                 Positioned.fill(
                 child: CustomPaint(
-                  painter: _SimpleShapePainter(),
+                  painter: !landmarks.isEmpty? CustomCanva(landmarks):null,
                 ),
                 ),
               ],
@@ -91,18 +92,4 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
       ],
     );
   }
-}
-
-// Simple CustomPainter that draws a sample shape (e.g., a red circle)
-class _SimpleShapePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.red.withOpacity(0.5)
-      ..style = PaintingStyle.fill;
-    canvas.drawCircle(size.center(Offset.zero), size.shortestSide * 0.2, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

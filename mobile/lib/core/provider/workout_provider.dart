@@ -150,13 +150,14 @@ class WorkoutProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Widget? _canvas;
-  Widget? get canvas => _canvas;
+  List<Map<String, Map<String, double>>> _landmarks = [];
+  List<Map<String, Map<String, double>>> get landmarks => _landmarks;
 
-  void setCanvas(Widget canvas) {
-    _canvas = canvas;
+  void setLandmarks(List<Map<String, Map<String, double>>> landmarks) {
+    _landmarks = landmarks;
     notifyListeners();
   }
+
 
 
 

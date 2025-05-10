@@ -17,7 +17,7 @@ class MlPoseDetectorFunctions {
     
     List<Map<String, Map<String, double>>> landmarks = await detectPose(poseDetector, inputImage!);
     
-    workoutProvider.setCanvas(drawLandmarks(landmarks));
+    workoutProvider.setLandmarks(landmarks);
   
 
 }
