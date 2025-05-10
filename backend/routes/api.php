@@ -56,8 +56,11 @@ Route::group(['prefix'=>"v0.1"],function(){
             
             Route::group(['prefix'=>'exercices'],function(){
                 Route::post('/add',[ExerciceController::class,'addExercice']);
+                
             });
 
         });
+        Route::post('/exercices/search',[ExerciceController::class,'searchExercice']);
+
     });
 });
