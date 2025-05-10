@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
 import 'package:mobile/main.dart';
@@ -6,19 +8,20 @@ import '../../../layouts/drop_down_button.dart';
 import '../../../atoms/screen_wide_elevated_button.dart';
 import './camera_section.dart';
 
-class PoseDetector extends StatefulWidget {
-  const PoseDetector({Key? key}) : super(key: key);
+class PoseDetectorTab extends StatefulWidget {
+  const PoseDetectorTab({Key? key}) : super(key: key);
 
   @override
   _PoseDetectorState createState() => _PoseDetectorState();
 }
 
-class _PoseDetectorState extends State<PoseDetector> {
+class _PoseDetectorState extends State<PoseDetectorTab> {
   
   @override
   Widget build(BuildContext context) {
     WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen:true);
     bool is_recording = provider.is_Recording;
+    Uint8List? pngBytes = provider.imageBytes;
 
     return Column(
       children: [
@@ -39,7 +42,7 @@ class _PoseDetectorState extends State<PoseDetector> {
         SizedBox(height: 24,),
         SizedBox(//camera section
             width: 300, 
-            height: 550,
+            height: 350,
             child:  is_recording
           ? CameraSection()
           : Container(
@@ -64,6 +67,10 @@ class _PoseDetectorState extends State<PoseDetector> {
             
           ),
         ),
+        if (pngBytes != null) // Display the image if available
+          Image.memory(pngBytes)
+        else
+          const Text("No image captured"),
       ],
     );
   }

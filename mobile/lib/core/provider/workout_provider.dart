@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
+import 'package:image/image.dart' as img;
 import 'package:flutter/material.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:camera/camera.dart';
@@ -33,7 +36,7 @@ class WorkoutProvider with ChangeNotifier {
     if(_tab=="my_workout"){
       return const MyWorkout();
     }else if(_tab=="pose_detector"){
-      return const PoseDetector();
+      return const PoseDetectorTab();
     }else if(_tab=="Leaderboard"){
       return Leaderboard();
     }else{
@@ -57,10 +60,26 @@ class WorkoutProvider with ChangeNotifier {
   }
 
   
+  Uint8List ? _imageBytes;
+  Uint8List? get imageBytes => _imageBytes;
 
+  void setImageBytes(Uint8List imageBytes) {
+    _imageBytes = imageBytes;
+    notifyListeners();
+  }
+   Uint8List ? _pngBytes;
+  Uint8List? get pngBytes => _pngBytes;
 
-
- 
+  void buildPngBytes() {
+     final image = img.Image.fromBytes(
+    width:  192,
+    height:  192,
+    bytes:  _imageBytes!.buffer,
+    order: img.ChannelOrder.rgb,  // ← Critical fix
+    format: img.Format.uint8,     // ← 8-bit per channel
+  );
+    notifyListeners();
+  }
 
   //model
 
@@ -99,24 +118,34 @@ class WorkoutProvider with ChangeNotifier {
     
     if(!_is_Recording){
       
-      await loadModel();
+      createPoseDetector();
+      // await loadModel();
       await cameraLogic.initializeCamera(this);
             cameraLogic.startStreaming(this);
       _is_Recording = !_is_Recording;
       notifyListeners();
     }else{
-    
-      disposeModel();
-
-      cameraLogic.disposeCameraController(this);
       _is_Recording = !_is_Recording;
+      // interpreter!.close();
+      
+      cameraLogic.disposeCameraController(this);
+      
     }
     notifyListeners();
   }
 
 
 
+  //ml pose detector
+  PoseDetector? _poseDetector;
+  PoseDetector? get poseDetector => _poseDetector;
 
+  void createPoseDetector(){
+    final options = PoseDetectorOptions();
+    PoseDetector poseDetector = PoseDetector(options: options);
+    _poseDetector = poseDetector;
+    notifyListeners();
+  }
 
 
 

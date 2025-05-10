@@ -1,10 +1,22 @@
+import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:camera/camera.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
 import '../tensorflow/tensorflow.dart';
+import '../ml_pose_detector/ml_pose_detector.dart';
 
 class CameraLogic {
 TensorflowFunctions tensorflowFunctions = TensorflowFunctions();
+MlPoseDetectorFunctions mlPoseDetectorFunctions = MlPoseDetectorFunctions();
 
+
+late final camera ;
+final _orientations = {
+  DeviceOrientation.portraitUp: 0,
+  DeviceOrientation.landscapeLeft: 90,
+  DeviceOrientation.portraitDown: 180,
+  DeviceOrientation.landscapeRight: 270,
+};
 
 Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
     
@@ -12,13 +24,15 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
     
     
     int selectedCameraIdx = 1;
-
+    this.camera = cameras[selectedCameraIdx];
     
     workoutProvider.setController ( CameraController(
       cameras[selectedCameraIdx],
-      ResolutionPreset.medium,
+      ResolutionPreset.low,
       enableAudio: false,
-      imageFormatGroup: ImageFormatGroup.yuv420,
+      imageFormatGroup: Platform.isAndroid
+          ? ImageFormatGroup.nv21 // for Android
+          : ImageFormatGroup.bgra8888,
     ));
 
    
@@ -28,17 +42,26 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
   }
 
 
-  void startStreaming(WorkoutProvider workoutProvider) async {
-    await workoutProvider.controller!.startImageStream((CameraImage image) {
-      // Process the image here
-      tensorflowFunctions.process(image,workoutProvider);
-      print('from streaming');
-      
+  void startStreaming(WorkoutProvider workoutProvider) {
+    DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 1000));
+    workoutProvider.controller!.startImageStream((CameraImage image) {
+      final now = DateTime.now();
+      if (now.difference(lastProcessed).inMilliseconds >= 1000) {
+        lastProcessed = now;
+        mlPoseDetectorFunctions.processCameraImage(image, workoutProvider.poseDetector!);
+
+        
+        // tensorflowFunctions.process(image, workoutProvider);
+        print('from streaming');
+      }
     });
   }
 
    void disposeCameraController(WorkoutProvider workoutProvider) {
+
+    workoutProvider.controller!.stopImageStream();
     workoutProvider.controller!.dispose();
     
   }
+
 }

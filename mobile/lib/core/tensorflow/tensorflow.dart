@@ -83,6 +83,12 @@ Future<void> loadModel(WorkoutProvider workoutProvider) async {
 
 
 void process(CameraImage image, WorkoutProvider workoutProvider) {
+  
+  Interpreter interpreter = workoutProvider.interpreter!;
+  // final inputTensor=interpreter.getInputTensors().first;
+  // print('Input shape: ${inputTensor.shape}');
+
+
   // 1. Convert YUV420 to RGB
   Uint8List rgbBytes = convertYUV420toRGB(
     image.planes[0].bytes,
@@ -94,28 +100,24 @@ void process(CameraImage image, WorkoutProvider workoutProvider) {
     image.planes[1].bytesPerRow,
     image.planes[2].bytesPerRow
   );
-
-  // 2. Resize RGB to 192x192
+  print(rgbBytes);
+  workoutProvider.setImageBytes(rgbBytes);
   Uint8List resizedBytes = resizeRGBForModel(rgbBytes, image.width, image.height, 192);
 
-  // 3. Convert to float32 and normalize to [-1, 1]
-  Float32List inputTensor = Float32List(1 * 192 * 192 * 3);
-  for (int i = 0; i < resizedBytes.length; i++) {
-    inputTensor[i] = (resizedBytes[i] / 127.5) - 1.0;
-  }
 
-  // 4. Reshape to [1, 192, 192, 3] - CRITICAL STEP!
-  var input = inputTensor.reshape([1, 192, 192, 3]);
+  Float32List normalizedData = convertToMoveNetInput(resizedBytes);
+  
 
-  // 5. Prepare output tensor
-  final output = List.filled(1 * 17 * 3, 0.0).reshape([1, 17, 3]);
 
-  // 6. Run inference
-  workoutProvider.interpreter?.run(input, output);
+  final inputBuffer = normalizedData.buffer;
+ 
 
-  // 7. Get results
-  final keypoints = output[0];
-  print(keypoints);
+  final outputTensor = interpreter.getOutputTensors().first;
+  final outputBuffer = Float32List(outputTensor.shape.reduce((a, b) => a * b));
+
+  final poseNetArray = getCoordinates(inputBuffer, outputBuffer, interpreter);
+  final parsedDataObject = parsePoseNetData(poseNetArray);
+  // print(parsedDataObject);
 }
 
 
@@ -130,9 +132,9 @@ Uint8List convertYUV420toRGB(
   int vStride,
 ) {
   final List<int> rgb = List<int>.filled(width * height * 3, 0);
-  print("Y plane first 10 bytes: ${yPlane.sublist(0, 10)}");
-print("U plane first 10 bytes: ${uPlane.sublist(0, 10)}");
-print("V plane first 10 bytes: ${vPlane.sublist(0, 10)}");
+//   print("Y plane first 10 bytes: ${yPlane.sublist(0, 10)}");
+// print("U plane first 10 bytes: ${uPlane.sublist(0, 10)}");
+// print("V plane first 10 bytes: ${vPlane.sublist(0, 10)}");
   for (int y = 0; y < height; y++) {
     for (int x = 0; x < width; x++) {
       
@@ -158,6 +160,7 @@ print("V plane first 10 bytes: ${vPlane.sublist(0, 10)}");
       rgb[rgbIndex] = r.clamp(0, 255);
       rgb[rgbIndex + 1] = g.clamp(0, 255);
       rgb[rgbIndex + 2] = b.clamp(0, 255);
+      //  print("RGB values: ${rgb[rgbIndex]}, ${rgb[rgbIndex + 1]}, ${rgb[rgbIndex + 2]}");
     }
   }
 
@@ -191,5 +194,47 @@ Uint8List resizeRGBForModel(
   return resizedImage.getBytes(
     order: img.ChannelOrder.rgb,  // ← Preserve RGB order
   );
+}
+
+Float32List convertToMoveNetInput(Uint8List uint8List) {
+  final float32List = Float32List(uint8List.length);
+  for (int i = 0; i < uint8List.length; i++) {
+    float32List[i] = (uint8List[i] / 127.5) - 1.0; // Normalize to [-1, 1]
+  }
+  return float32List;
+}
+
+List<double> getCoordinates(ByteBuffer inputBuffer,Float32List outputBuffer,Interpreter interpreter){
+  interpreter.run(inputBuffer, outputBuffer.buffer);
+   return outputBuffer;
+}
+
+Map<String, Map<String, double>> parsePoseNetData(List<double> poseNetArray) {
+  const keypoints = [
+    'nose',
+    'leftEye', 'rightEye',
+    'leftEar', 'rightEar',
+    'leftShoulder', 'rightShoulder',
+    'leftElbow', 'rightElbow',
+    'leftWrist', 'rightWrist',
+    'leftHip', 'rightHip',
+    'leftKnee', 'rightKnee',
+    'leftAnkle', 'rightAnkle',
+  ];
+
+  final result = <String, Map<String, double>>{};
+  
+  for (int i = 0; i < keypoints.length; i++) {
+    final index = i * 3;
+    if (index + 2 < poseNetArray.length) {
+      result[keypoints[i]] = {
+        'x': poseNetArray[index],
+        'y': poseNetArray[index + 1],
+        'confidence': poseNetArray[index + 2],
+      };
+    }
+  }
+
+  return result;
 }
 }
