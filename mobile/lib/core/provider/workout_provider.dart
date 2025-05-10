@@ -90,6 +90,10 @@ class WorkoutProvider with ChangeNotifier {
   }
 
 
+
+
+
+
   //head controller function
   void toggleRecording() async{
     
