@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use App\Services\ExerciceServices;
+
 use Illuminate\Support\ServiceProvider;
+use App\Services\ExerciceServices\ExerciceServices;
 
 class ExerciceServicesProvider extends ServiceProvider
 {
