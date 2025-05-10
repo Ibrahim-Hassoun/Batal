@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GymController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExerciceController;
 use App\Http\Controllers\JobProfileController;
+
 
 
 Route::group(['prefix'=>"v0.1"],function(){
@@ -51,11 +53,11 @@ Route::group(['prefix'=>"v0.1"],function(){
         });
 
         Route::group(['middleware' => 'isAdmin'], function () {
-            Route::get("admin-test",function(){
-                return response()->json([
-                    'message'=>'Hello Admin',
-                ]);
+            
+            Route::group(['prefix'=>'exercice'],function(){
+                Route::get('/add',[ExerciceController::class,'addExercice']);
             });
+
         });
     });
 });
