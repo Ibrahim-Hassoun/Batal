@@ -150,8 +150,13 @@ class WorkoutProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Widget? _canvas;
+  Widget? get canvas => _canvas;
 
-
+  void setCanvas(Widget canvas) {
+    _canvas = canvas;
+    notifyListeners();
+  }
 
 
 

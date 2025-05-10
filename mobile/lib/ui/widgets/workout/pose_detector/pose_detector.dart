@@ -22,6 +22,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
     WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen:true);
     bool is_recording = provider.is_Recording;
     Uint8List? pngBytes = provider.imageBytes;
+    Widget? canvas = provider.canvas;
 
     return Column(
       children: [
@@ -56,12 +57,12 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
                   ),
                 ),
                 ),
-              // You can add a CustomPainter here for more advanced painting
-              // Positioned.fill(
-              //   child: CustomPaint(
-              //     painter: YourCustomPainter(),
-              //   ),
-              // ),
+              
+                Positioned.fill(
+                child: CustomPaint(
+                  painter: _SimpleShapePainter(),
+                ),
+                ),
               ],
             )
           : Container(
@@ -90,4 +91,18 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
       ],
     );
   }
+}
+
+// Simple CustomPainter that draws a sample shape (e.g., a red circle)
+class _SimpleShapePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.red.withOpacity(0.5)
+      ..style = PaintingStyle.fill;
+    canvas.drawCircle(size.center(Offset.zero), size.shortestSide * 0.2, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

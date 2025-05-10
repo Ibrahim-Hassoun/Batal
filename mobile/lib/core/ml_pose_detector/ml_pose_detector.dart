@@ -1,20 +1,23 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
+import 'package:mobile/core/provider/workout_provider.dart';
 
 class MlPoseDetectorFunctions {
   get camera => null;
 
 
-  void processCameraImage(CameraImage image, PoseDetector poseDetector) {
+  void processCameraImage(CameraImage image, PoseDetector poseDetector,WorkoutProvider workoutProvider) async{
     InputImage? inputImage = _inputImageFromCameraImage(image);
     
     print(inputImage);
     
     
-    detectPose(poseDetector, inputImage!);
+    List<Map<String, Map<String, double>>> landmarks = await detectPose(poseDetector, inputImage!);
     
+    workoutProvider.setCanvas(drawLandmarks(landmarks));
   
 
 }
@@ -43,7 +46,7 @@ class MlPoseDetectorFunctions {
 } 
 
 
-  void detectPose(PoseDetector poseDetector, InputImage inputImage) async {
+  Future<List<Map<String, Map<String, double>>>> detectPose(PoseDetector poseDetector, InputImage inputImage) async {
     final List<Pose> poses = await poseDetector.processImage(inputImage);
     // Create a list to hold all poses' landmarks data
     List<Map<String, Map<String, double>>> allPosesLandmarks = [];
@@ -65,8 +68,39 @@ class MlPoseDetectorFunctions {
 
     // Now allPosesLandmarks contains all landmarks with their x, y, and likelihood for each pose
     print(allPosesLandmarks);
+    return allPosesLandmarks;
   }
 
-
-
+  Widget drawLandmarks(List<Map<String, Map<String, double>>> posesLandmarks, {double pointSize = 6.0}) {
+    return CustomPaint(
+      painter: _LandmarksPainter(posesLandmarks, pointSize),
+      child: Container(),
+    );
+  }
 }
+
+class _LandmarksPainter extends CustomPainter {
+  final List<Map<String, Map<String, double>>> posesLandmarks;
+  final double pointSize;
+
+  _LandmarksPainter(this.posesLandmarks, this.pointSize);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = const Color(0xFFFF0000)
+      ..style = PaintingStyle.fill;
+
+    for (final pose in posesLandmarks) {
+      for (final landmark in pose.values) {
+        final x = landmark['x'] ?? 0.0;
+        final y = landmark['y'] ?? 0.0;
+        canvas.drawCircle(Offset(x, y), pointSize, paint);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+}
+
