@@ -19,7 +19,7 @@ class ExerciceFactory extends Factory
         return [
             'area' => $this->faker->word(),
             'muscle' => $this->faker->word(),
-            'exercice' => $this->faker->words(2, true),
+            'exercice' => $this->faker->word(),
             'description' => $this->faker->optional()->sentence(),
             'difficulty' => $this->faker->numberBetween(1, 5),
             'equipment' => $this->faker->optional()->word(),
