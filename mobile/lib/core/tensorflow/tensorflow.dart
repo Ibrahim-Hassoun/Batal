@@ -84,8 +84,10 @@ Future<void> loadModel(WorkoutProvider workoutProvider) async {
 
 void process(CameraImage image, WorkoutProvider workoutProvider) {
   Interpreter interpreter = workoutProvider.interpreter!;
-  final inputTensor=interpreter.getInputTensors().first;
-  print('Input shape: ${inputTensor.shape}');
+  // final inputTensor=interpreter.getInputTensors().first;
+  // print('Input shape: ${inputTensor.shape}');
+
+
   // 1. Convert YUV420 to RGB
   Uint8List rgbBytes = convertYUV420toRGB(
     image.planes[0].bytes,
@@ -105,10 +107,20 @@ void process(CameraImage image, WorkoutProvider workoutProvider) {
   print("Resized RGB bytes: ${resizedBytes.sublist(0, 10)}");
   print("Resized RGB size: 192x192 (${resizedBytes.length} bytes)");
 
-  Float32List convertedBytes = convertToMoveNetInput(resizedBytes);
-  print("Converted RGB bytes: ${convertedBytes.sublist(0, 10)}");
+  Float32List normalizedData = convertToMoveNetInput(resizedBytes);
+  print("Converted RGB bytes: ${normalizedData.sublist(0, 10)}");
 
 
+  final inputBuffer = normalizedData.buffer;
+  print('inputBuffer: $inputBuffer');
+
+  final outputTensor = interpreter.getOutputTensors().first;
+  final outputBuffer = Float32List(outputTensor.shape.reduce((a, b) => a * b));
+
+  interpreter.run(inputBuffer, outputBuffer.buffer);
+
+// Now use outputBuffer (e.g., keypoints)
+  print(outputBuffer);
   
   // 3. Convert to float32 and normalize to [-1, 1]
   // Float32List inputTensor = Float32List(1 * 192 * 192 * 3);
