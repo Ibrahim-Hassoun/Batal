@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
             GymSeeder::class,
             PostSeeder::class,
             ReactionSeeder::class,
-            JobProfileSeeder::class
-
+            JobProfileSeeder::class,
+            ExerciceSeeder::class,
         ]);
         // User::factory(10)->create();
 
