@@ -43,18 +43,20 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
 
 
   void startStreaming(WorkoutProvider workoutProvider) {
-    DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 200));
-    workoutProvider.controller!.startImageStream((CameraImage image) {
-      final now = DateTime.now();
-      if (now.difference(lastProcessed).inMilliseconds >= 200) {
-        lastProcessed = now;
-        mlPoseDetectorFunctions.processCameraImage(image, workoutProvider.poseDetector!,workoutProvider);
+    DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 150));
+    List<List<Map<String, Map<String, double>>>> landmarks = [];
 
-        
-        // tensorflowFunctions.process(image, workoutProvider);
+    workoutProvider.controller!.startImageStream((CameraImage image) async{
+      final now = DateTime.now();
+      if (now.difference(lastProcessed).inMilliseconds >= 150) {
+        lastProcessed = now;
+        List<Map<String, Map<String, double>>> newLandmark =await mlPoseDetectorFunctions.processCameraImage(image, workoutProvider.poseDetector!,workoutProvider);
+
         print('from streaming');
       }
     });
+  
+  
   }
 
    void disposeCameraController(WorkoutProvider workoutProvider) {

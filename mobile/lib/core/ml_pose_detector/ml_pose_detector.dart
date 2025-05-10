@@ -9,7 +9,7 @@ class MlPoseDetectorFunctions {
   get camera => null;
 
 
-  void processCameraImage(CameraImage image, PoseDetector poseDetector,WorkoutProvider workoutProvider) async{
+  Future<List<Map<String, Map<String, double>>>> processCameraImage(CameraImage image, PoseDetector poseDetector,WorkoutProvider workoutProvider) async{
     InputImage? inputImage = _inputImageFromCameraImage(image);
     
     print(inputImage);
@@ -18,8 +18,8 @@ class MlPoseDetectorFunctions {
     List<Map<String, Map<String, double>>> landmarks = await detectPose(poseDetector, inputImage!);
     
     workoutProvider.setLandmarks(landmarks);
-  
-
+    return landmarks;
+    
 }
 
   InputImage? _inputImageFromCameraImage(CameraImage image) {

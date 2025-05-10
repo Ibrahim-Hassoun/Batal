@@ -127,7 +127,7 @@ class WorkoutProvider with ChangeNotifier {
     }else{
       _is_Recording = !_is_Recording;
       // interpreter!.close();
-      
+      poseDetector!.close();
       cameraLogic.disposeCameraController(this);
       
     }
