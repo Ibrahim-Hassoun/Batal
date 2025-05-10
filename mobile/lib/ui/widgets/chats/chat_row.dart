@@ -44,7 +44,7 @@ class _ChatRowState extends State<ChatRow>
           subtitle: Text(widget.lastMessage),
           trailing: Text(widget.lastMessageTime,style: TextStyle(fontSize: 16,color: secondaryColor),),
           onTap: () {
-            
+            Navigator.pushNamed(context, '/conversation', );
           },
         ),
       
