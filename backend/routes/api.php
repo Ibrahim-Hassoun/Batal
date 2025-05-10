@@ -49,5 +49,13 @@ Route::group(['prefix'=>"v0.1"],function(){
             Route::post('/approve',[JobProfileController::class,'approveJobProfile']);
 
         });
+
+        Route::group(['middleware' => 'isAdmin'], function () {
+            Route::get("admin-test",function(){
+                return response()->json([
+                    'message'=>'Hello Admin',
+                ]);
+            });
+        });
     });
 });
