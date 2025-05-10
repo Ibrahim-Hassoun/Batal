@@ -11,8 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exercices', function (Blueprint $table) {
+       Schema::create('exercices', function (Blueprint $table) {
             $table->id();
+            $table->string('area');                      
+            $table->string('muscle');                   
+            $table->string('exercice');                 
+            $table->text('description')->nullable();   
+            $table->integer('difficulty')->default(1);   
+            $table->string('equipment')->nullable();    
+            $table->string('type')->nullable();         
+            $table->integer('duration')->nullable();    
+            $table->string('image_url')->nullable();     
+            $table->string('video_url')->nullable();     
+            $table->json('tags')->nullable();            
             $table->timestamps();
         });
     }
