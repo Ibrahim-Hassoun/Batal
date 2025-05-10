@@ -10,7 +10,10 @@ class Coaching{
 
 
   void evaluate() {
-  
+    print('started evaluating');
+    print('area: $area');
+    print('muscle: $muscle');
+    print('exercise: $exercise');
     if(area=='shoulder'){
       evaluateShoulderExercise();
     }else if(area=='arm'){
@@ -27,7 +30,18 @@ class Coaching{
   void evaluateArmExercise() {
     // Implement your logic to evaluate arm exercises
     if (muscle == 'biceps' && exercise == 'curl') {
-      print('evaluating bicep curl');
+      if (landmarks != null && landmarks!.isNotEmpty) {
+        for (var frame in landmarks!) {
+          for (var landmark in frame) {
+            final rightWrist = landmark['rightWrist'];
+            final rightElbow = landmark['rightElbow'];
+            final rightShoulder = landmark['rightShoulder'];
+            print('rightWrist: $rightWrist');
+            print('rightElbow: $rightElbow');
+            print('rightShoulder: $rightShoulder');
+          }
+        }
+      }
     }
   }
 
