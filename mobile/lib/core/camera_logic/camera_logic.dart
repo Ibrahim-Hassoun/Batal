@@ -1,13 +1,14 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
 import 'package:camera/camera.dart';
-import 'package:flutter/foundation.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
 import '../tensorflow/tensorflow.dart';
+import '../ml_pose_detector/ml_pose_detector.dart';
 
 class CameraLogic {
 TensorflowFunctions tensorflowFunctions = TensorflowFunctions();
+MlPoseDetectorFunctions mlPoseDetectorFunctions = MlPoseDetectorFunctions();
+
 
 late final camera ;
 final _orientations = {
@@ -47,9 +48,10 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
       final now = DateTime.now();
       if (now.difference(lastProcessed).inMilliseconds >= 1000) {
         lastProcessed = now;
-        // Process the image here
+        mlPoseDetectorFunctions.processCameraImage(image, workoutProvider.poseDetector!);
+
         
-        tensorflowFunctions.process(image, workoutProvider);
+        // tensorflowFunctions.process(image, workoutProvider);
         print('from streaming');
       }
     });
@@ -61,26 +63,5 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
     workoutProvider.controller!.dispose();
     
   }
-InputImage? _inputImageFromCameraImage(CameraImage image) {
-  final camera =  this.camera;
-  
-   final format = InputImageFormatValue.fromRawValue(image.format.raw);
 
-   if (format == null ||
-          (Platform.isAndroid && format != InputImageFormat.nv21) ||
-          (Platform.isIOS && format != InputImageFormat.bgra8888)) return null;
-
-      if (image.planes.length != 1) return null;
-  final plane = image.planes.first;
-
-    return InputImage.fromBytes(
-    bytes: plane.bytes,
-     metadata: InputImageMetadata(
-      size: Size(image.width.toDouble(), image.height.toDouble()),
-      rotation: InputImageRotation.rotation0deg, // used only in Android
-      format: format, // used only in iOS
-      bytesPerRow: plane.bytesPerRow, // used only in iOS
-    ),
-    );
-} 
 }

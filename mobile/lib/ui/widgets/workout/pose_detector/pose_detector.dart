@@ -8,14 +8,14 @@ import '../../../layouts/drop_down_button.dart';
 import '../../../atoms/screen_wide_elevated_button.dart';
 import './camera_section.dart';
 
-class PoseDetector extends StatefulWidget {
-  const PoseDetector({Key? key}) : super(key: key);
+class PoseDetectorTab extends StatefulWidget {
+  const PoseDetectorTab({Key? key}) : super(key: key);
 
   @override
   _PoseDetectorState createState() => _PoseDetectorState();
 }
 
-class _PoseDetectorState extends State<PoseDetector> {
+class _PoseDetectorState extends State<PoseDetectorTab> {
   
   @override
   Widget build(BuildContext context) {
