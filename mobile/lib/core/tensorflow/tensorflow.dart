@@ -99,28 +99,24 @@ void process(CameraImage image, WorkoutProvider workoutProvider) {
     image.planes[1].bytesPerRow,
     image.planes[2].bytesPerRow
   );
-  print("RGB bytes: ${rgbBytes.sublist(0, 10)}");
-  print("Original RGB size: ${image.width}x${image.height} (${rgbBytes.length} bytes)");
-  print("RGB bytes length: ${rgbBytes.length}"); // Debugging line
-  // 2. Resize RGB to 192x192
+  
   Uint8List resizedBytes = resizeRGBForModel(rgbBytes, image.width, image.height, 192);
-  print("Resized RGB bytes: ${resizedBytes.sublist(0, 10)}");
-  print("Resized RGB size: 192x192 (${resizedBytes.length} bytes)");
+
 
   Float32List normalizedData = convertToMoveNetInput(resizedBytes);
-  print("Converted RGB bytes: ${normalizedData.sublist(0, 10)}");
+  
 
 
   final inputBuffer = normalizedData.buffer;
-  print('inputBuffer: $inputBuffer');
+ 
 
   final outputTensor = interpreter.getOutputTensors().first;
   final outputBuffer = Float32List(outputTensor.shape.reduce((a, b) => a * b));
 
   interpreter.run(inputBuffer, outputBuffer.buffer);
-
-// Now use outputBuffer (e.g., keypoints)
   print(outputBuffer);
+// Now use outputBuffer (e.g., keypoints)
+ 
   
   // 3. Convert to float32 and normalize to [-1, 1]
   // Float32List inputTensor = Float32List(1 * 192 * 192 * 3);

@@ -39,7 +39,7 @@ class _PoseDetectorState extends State<PoseDetector> {
         SizedBox(height: 24,),
         SizedBox(//camera section
             width: 300, 
-            height: 550,
+            height: 350,
             child:  is_recording
           ? CameraSection()
           : Container(

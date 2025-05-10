@@ -28,12 +28,16 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
   }
 
 
-  void startStreaming(WorkoutProvider workoutProvider) async {
-    await workoutProvider.controller!.startImageStream((CameraImage image) {
-      // Process the image here
-      tensorflowFunctions.process(image,workoutProvider);
-      print('from streaming');
-      
+  void startStreaming(WorkoutProvider workoutProvider) {
+    DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 1000));
+    workoutProvider.controller!.startImageStream((CameraImage image) {
+      final now = DateTime.now();
+      if (now.difference(lastProcessed).inMilliseconds >= 1000) {
+        lastProcessed = now;
+        // Process the image here
+        tensorflowFunctions.process(image, workoutProvider);
+        print('from streaming');
+      }
     });
   }
 
