@@ -115,27 +115,7 @@ void process(CameraImage image, WorkoutProvider workoutProvider) {
 
   interpreter.run(inputBuffer, outputBuffer.buffer);
   print(outputBuffer);
-// Now use outputBuffer (e.g., keypoints)
- 
   
-  // 3. Convert to float32 and normalize to [-1, 1]
-  // Float32List inputTensor = Float32List(1 * 192 * 192 * 3);
-  // for (int i = 0; i < resizedBytes.length; i++) {
-  //   inputTensor[i] = (resizedBytes[i] / 127.5) - 1.0;
-  // }
-
-  // // 4. Reshape to [1, 192, 192, 3] - CRITICAL STEP!
-  // var input = inputTensor.reshape([1, 192, 192, 3]);
-
-  // // 5. Prepare output tensor
-  // final output = List.filled(1 * 17 * 3, 0.0).reshape([1, 17, 3]);
-
-  // // 6. Run inference
-  // workoutProvider.interpreter?.run(input, output);
-
-  // // 7. Get results
-  // final keypoints = output[0];
-  // print(keypoints);
 }
 
 

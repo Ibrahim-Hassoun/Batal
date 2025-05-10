@@ -105,11 +105,11 @@ class WorkoutProvider with ChangeNotifier {
       _is_Recording = !_is_Recording;
       notifyListeners();
     }else{
-    
-      disposeModel();
-
-      cameraLogic.disposeCameraController(this);
       _is_Recording = !_is_Recording;
+      interpreter!.close();
+      
+      cameraLogic.disposeCameraController(this);
+      
     }
     notifyListeners();
   }

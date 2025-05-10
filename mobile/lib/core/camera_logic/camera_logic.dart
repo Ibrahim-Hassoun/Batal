@@ -42,6 +42,8 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
   }
 
    void disposeCameraController(WorkoutProvider workoutProvider) {
+    
+    workoutProvider.controller!.stopImageStream();
     workoutProvider.controller!.dispose();
     
   }
