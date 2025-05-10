@@ -113,8 +113,8 @@ void process(CameraImage image, WorkoutProvider workoutProvider) {
   final outputTensor = interpreter.getOutputTensors().first;
   final outputBuffer = Float32List(outputTensor.shape.reduce((a, b) => a * b));
 
-  interpreter.run(inputBuffer, outputBuffer.buffer);
-  print(outputBuffer);
+  getCoordinates(inputBuffer, outputBuffer, interpreter);
+  
   
 }
 
@@ -200,5 +200,10 @@ Float32List convertToMoveNetInput(Uint8List uint8List) {
     float32List[i] = (uint8List[i] / 127.5) - 1.0; // Normalize to [-1, 1]
   }
   return float32List;
+}
+
+static void getCoordinates(ByteBuffer inputBuffer,Float32List outputBuffer,Interpreter interpreter){
+   interpreter.run(inputBuffer, outputBuffer.buffer);
+   print(outputBuffer);
 }
 }

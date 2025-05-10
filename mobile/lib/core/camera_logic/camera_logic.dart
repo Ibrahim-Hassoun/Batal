@@ -35,6 +35,7 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
       if (now.difference(lastProcessed).inMilliseconds >= 1000) {
         lastProcessed = now;
         // Process the image here
+        
         tensorflowFunctions.process(image, workoutProvider);
         print('from streaming');
       }
@@ -42,7 +43,7 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
   }
 
    void disposeCameraController(WorkoutProvider workoutProvider) {
-    
+
     workoutProvider.controller!.stopImageStream();
     workoutProvider.controller!.dispose();
     
