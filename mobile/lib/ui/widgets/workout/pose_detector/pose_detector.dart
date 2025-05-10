@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
 import 'package:mobile/main.dart';
@@ -19,6 +21,7 @@ class _PoseDetectorState extends State<PoseDetector> {
   Widget build(BuildContext context) {
     WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen:true);
     bool is_recording = provider.is_Recording;
+    Uint8List? pngBytes = provider.imageBytes;
 
     return Column(
       children: [
@@ -64,6 +67,10 @@ class _PoseDetectorState extends State<PoseDetector> {
             
           ),
         ),
+        if (pngBytes != null) // Display the image if available
+          Image.memory(pngBytes)
+        else
+          const Text("No image captured"),
       ],
     );
   }

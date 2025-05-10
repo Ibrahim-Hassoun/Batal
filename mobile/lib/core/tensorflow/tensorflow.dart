@@ -83,6 +83,7 @@ Future<void> loadModel(WorkoutProvider workoutProvider) async {
 
 
 void process(CameraImage image, WorkoutProvider workoutProvider) {
+  
   Interpreter interpreter = workoutProvider.interpreter!;
   // final inputTensor=interpreter.getInputTensors().first;
   // print('Input shape: ${inputTensor.shape}');
@@ -99,7 +100,8 @@ void process(CameraImage image, WorkoutProvider workoutProvider) {
     image.planes[1].bytesPerRow,
     image.planes[2].bytesPerRow
   );
-  
+  print(rgbBytes);
+  workoutProvider.setImageBytes(rgbBytes);
   Uint8List resizedBytes = resizeRGBForModel(rgbBytes, image.width, image.height, 192);
 
 
@@ -113,9 +115,9 @@ void process(CameraImage image, WorkoutProvider workoutProvider) {
   final outputTensor = interpreter.getOutputTensors().first;
   final outputBuffer = Float32List(outputTensor.shape.reduce((a, b) => a * b));
 
-  getCoordinates(inputBuffer, outputBuffer, interpreter);
-  
-  
+  final poseNetArray = getCoordinates(inputBuffer, outputBuffer, interpreter);
+  final parsedDataObject = parsePoseNetData(poseNetArray);
+  // print(parsedDataObject);
 }
 
 
@@ -202,8 +204,37 @@ Float32List convertToMoveNetInput(Uint8List uint8List) {
   return float32List;
 }
 
-static void getCoordinates(ByteBuffer inputBuffer,Float32List outputBuffer,Interpreter interpreter){
-   interpreter.run(inputBuffer, outputBuffer.buffer);
-   print(outputBuffer);
+List<double> getCoordinates(ByteBuffer inputBuffer,Float32List outputBuffer,Interpreter interpreter){
+  interpreter.run(inputBuffer, outputBuffer.buffer);
+   return outputBuffer;
+}
+
+Map<String, Map<String, double>> parsePoseNetData(List<double> poseNetArray) {
+  const keypoints = [
+    'nose',
+    'leftEye', 'rightEye',
+    'leftEar', 'rightEar',
+    'leftShoulder', 'rightShoulder',
+    'leftElbow', 'rightElbow',
+    'leftWrist', 'rightWrist',
+    'leftHip', 'rightHip',
+    'leftKnee', 'rightKnee',
+    'leftAnkle', 'rightAnkle',
+  ];
+
+  final result = <String, Map<String, double>>{};
+  
+  for (int i = 0; i < keypoints.length; i++) {
+    final index = i * 3;
+    if (index + 2 < poseNetArray.length) {
+      result[keypoints[i]] = {
+        'x': poseNetArray[index],
+        'y': poseNetArray[index + 1],
+        'confidence': poseNetArray[index + 2],
+      };
+    }
+  }
+
+  return result;
 }
 }
