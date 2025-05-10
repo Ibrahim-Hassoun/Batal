@@ -24,7 +24,7 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
     
     
     int selectedCameraIdx = 1;
-    this.camera = cameras[selectedCameraIdx];
+   
     
     workoutProvider.setController ( CameraController(
       cameras[selectedCameraIdx],

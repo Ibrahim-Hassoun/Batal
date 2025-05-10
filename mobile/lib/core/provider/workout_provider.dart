@@ -141,6 +141,9 @@ class WorkoutProvider with ChangeNotifier {
   PoseDetector? get poseDetector => _poseDetector;
 
   void createPoseDetector(){
+    if (_poseDetector != null) {
+      return;
+    }
     final options = PoseDetectorOptions();
     PoseDetector poseDetector = PoseDetector(options: options);
     _poseDetector = poseDetector;

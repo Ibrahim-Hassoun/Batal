@@ -44,7 +44,26 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
             width: 300, 
             height: 350,
             child:  is_recording
-          ? CameraSection()
+            ? Stack(
+              children: [
+              CameraSection(), // The camera image
+              if (pngBytes != null)
+                Positioned.fill(
+                child: IgnorePointer(
+                  child: Image.memory(
+                  pngBytes,
+                  fit: BoxFit.cover,
+                  ),
+                ),
+                ),
+              // You can add a CustomPainter here for more advanced painting
+              // Positioned.fill(
+              //   child: CustomPaint(
+              //     painter: YourCustomPainter(),
+              //   ),
+              // ),
+              ],
+            )
           : Container(
             color: Colors.grey[300],
             child: Center(
