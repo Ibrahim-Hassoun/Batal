@@ -8,6 +8,8 @@ class Coaching{
   static String? muscle;
   static String? exercise;
 
+  static double? minAngle;
+  static double? maxAngle;
 
   void evaluate() {
     print('started evaluating');
@@ -31,15 +33,14 @@ class Coaching{
     // Implement your logic to evaluate arm exercises
     if (muscle == 'biceps' && exercise == 'curl') {
       if (landmarks != null && landmarks!.isNotEmpty) {
-        for (var frame in landmarks!) {
-          for (var landmark in frame) {
-            final rightWrist = landmark['rightWrist'];
-            final rightElbow = landmark['rightElbow'];
-            final rightShoulder = landmark['rightShoulder'];
-            print('rightWrist: $rightWrist');
-            print('rightElbow: $rightElbow');
-            print('rightShoulder: $rightShoulder');
-          }
+        var lastFrame = landmarks!.last;
+        for (var landmark in lastFrame) {
+          final rightWrist = landmark['rightWrist'];
+          final rightElbow = landmark['rightElbow'];
+          final rightShoulder = landmark['rightShoulder'];
+          print('rightWrist: $rightWrist');
+          print('rightElbow: $rightElbow');
+          print('rightShoulder: $rightShoulder');
         }
       }
     }
