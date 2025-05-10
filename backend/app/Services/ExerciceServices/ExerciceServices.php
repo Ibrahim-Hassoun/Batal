@@ -28,4 +28,48 @@ class ExerciceServices
         }
         return $exercice;
     }
+
+    public function searchExercice($request)
+    {
+        $query = Exercice::query();
+        if ($request->query('id')) {
+            $query->where('id', $request->query('id'));
+        }
+        if ($request->query('area')) {
+            $query->where('area', 'like', '%' . $request->query('area') . '%');
+        }
+        if ($request->query('muscle')) {
+            $query->where('muscle', 'like', '%' . $request->query('muscle') . '%');
+        }
+        if ($request->query('exercice')) {
+            $query->where('exercice', 'like', '%' . $request->query('exercice') . '%');
+        }
+        if ($request->query('description')) {
+            $query->where('description', 'like', '%' . $request->query('description') . '%');
+        }
+        if ($request->query('min_difficulty')) {
+            $query->where('difficulty', '>=', $request->query('min_difficulty'));
+        }
+        if ($request->query('max_difficulty')) {
+            $query->where('difficulty', '<=', $request->query('max_difficulty'));
+        }
+        if ($request->query('equipment')) {
+            $query->where('equipment', 'like', '%' . $request->query('equipment') . '%');
+        }
+        if ($request->query('type')) {
+            $query->where('type', 'like', '%' . $request->query('type') . '%');
+        }
+        if ($request->query('duration')) {
+            $query->where('duration', 'like', '%' . $request->query('duration') . '%');
+        }
+        if ($request->query('tags')) {
+            $query->where('tags', 'like', '%' . $request->query('tags') . '%');
+        }
+
+        $exercices = $query->get();
+        if (!$exercices) {
+            throw new \Exception('No exercices found', 404);
+        }
+        return $exercices;
+    }
 }
