@@ -45,21 +45,27 @@ class MlPoseDetectorFunctions {
 
   void detectPose(PoseDetector poseDetector, InputImage inputImage) async {
     final List<Pose> poses = await poseDetector.processImage(inputImage);
-    
-      for (Pose pose in poses) {
-        // to access all landmarks
-        pose.landmarks.forEach((_, landmark) {
-          final type = landmark.type;
-          final x = landmark.x;
-          final y = landmark.y;
+    // Create a list to hold all poses' landmarks data
+    List<Map<String, Map<String, double>>> allPosesLandmarks = [];
+
+    for (Pose pose in poses) {
+      // Map to hold this pose's landmarks
+      Map<String, Map<String, double>> landmarksMap = {};
+
+      pose.landmarks.forEach((type, landmark) {
+        landmarksMap[type.name] = {
+          'x': landmark.x,
+          'y': landmark.y,
+          'likelihood': landmark.likelihood,
+        };
       });
 
-        // to access specific landmarks
-        final landmark = pose.landmarks[PoseLandmarkType.rightEye];
-          
+      allPosesLandmarks.add(landmarksMap);
+    }
+
+    // Now allPosesLandmarks contains all landmarks with their x, y, and likelihood for each pose
+    print(allPosesLandmarks);
   }
-      
-}
 
 
 

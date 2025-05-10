@@ -67,10 +67,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
             
           ),
         ),
-        if (pngBytes != null) // Display the image if available
-          Image.memory(pngBytes)
-        else
-          const Text("No image captured"),
+        
       ],
     );
   }
