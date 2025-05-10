@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
+import 'package:camera/camera.dart';
 import '../../ui/widgets/workout/pose_detector/pose_detector.dart';
 import '../../ui/widgets/workout/my_workout/my_workout.dart';
 import '../../ui/widgets/workout/leaderboard/leaderboard.dart';
-import '../../ui/widgets/workout/pose_detector/camera_section.dart' as pose_detector;
 import '../tensorflow/tensorflow.dart';
+import '../camera_logic/camera_logic.dart';
 
 class WorkoutProvider with ChangeNotifier {
   List<String> _workouts = [];
@@ -22,13 +23,8 @@ class WorkoutProvider with ChangeNotifier {
   String? _detected_exercise;
   String? get detected_exercise => _detected_exercise;
 
-  bool _is_Recording = false;
-  bool get is_Recording => _is_Recording;
-
-  Widget CameraSection =  pose_detector.CameraSection();
-
-  //general
-  void changeTab(newTab){
+      //general
+    void changeTab(newTab){
     _tab=newTab;
     notifyListeners();
   }
@@ -46,7 +42,27 @@ class WorkoutProvider with ChangeNotifier {
   }
   
 
-  //pose detector
+
+  //camera
+  CameraLogic cameraLogic = CameraLogic();
+  bool _is_Recording = false;
+  bool get is_Recording => _is_Recording;
+
+  CameraController? _controller;
+  CameraController? get controller => _controller;
+
+  void setController(CameraController? controller) {
+    _controller = controller;
+    notifyListeners();
+  }
+
+  
+
+
+
+ 
+
+  //model
 
   Interpreter? _interpreter;
   Interpreter? get interpreter => _interpreter;
@@ -64,30 +80,65 @@ class WorkoutProvider with ChangeNotifier {
     notifyListeners();
     
   }
-  
+
   Future<void> loadModel() async {
      TensorflowFunctions().loadModel(this);
   }
 
   void disposeModel() {
-    _interpreter?.close(); 
+    _interpreter!.close(); 
   }
 
-  Widget provideCameraSection(){
-    return pose_detector.CameraSection();
-  }
 
-  void toggleRecording() {
-    _is_Recording = !_is_Recording;
-    if(_is_Recording){
-      print('we will try to launch the modellllllllllllllllllllllllllllllllllllllllll');
-      loadModel();
+
+
+
+
+  //head controller function
+  void toggleRecording() async{
+    
+    if(!_is_Recording){
+      
+      await loadModel();
+      await cameraLogic.initializeCamera(this);
+            cameraLogic.startStreaming(this);
+      _is_Recording = !_is_Recording;
+      notifyListeners();
     }else{
-      print('we will try to stop the modellllllllllllllllllllllllllllllllllllllllll');
+    
       disposeModel();
+
+      cameraLogic.disposeCameraController(this);
+      _is_Recording = !_is_Recording;
     }
     notifyListeners();
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   void setDetectedArea(String area) {
     _detected_area = area;
