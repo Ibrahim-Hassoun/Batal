@@ -19,13 +19,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            ExerciceSeeder::class,
             UserSeeder::class,
             LogSeeder::class,
             GymSeeder::class,
             PostSeeder::class,
             ReactionSeeder::class,
             JobProfileSeeder::class,
-            ExerciceSeeder::class,
+            
         ]);
         // User::factory(10)->create();
 

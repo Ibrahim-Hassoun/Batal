@@ -17,17 +17,20 @@ class ExerciceFactory extends Factory
     public function definition(): array
     {
         return [
-            'area' => $this->faker->word(),
+           'area' => $this->faker->word(),
             'muscle' => $this->faker->word(),
-            'exercice' => $this->faker->word(),
+            'exercice' => $this->faker->word(), // make sure it's a string, not an array
             'description' => $this->faker->optional()->sentence(),
             'difficulty' => $this->faker->numberBetween(1, 5),
             'equipment' => $this->faker->optional()->word(),
             'type' => $this->faker->optional()->word(),
-            'duration' => $this->faker->optional()->numberBetween(1, 5),
+            'duration' => $this->faker->optional()->numberBetween(1, 60),
             'image_url' => $this->faker->optional()->imageUrl(),
             'video_url' => $this->faker->optional()->url(),
-            'tags' => $this->faker->optional()->randomElements(['strength', 'cardio', 'flexibility', 'balance', 'endurance'], $this->faker->numberBetween(1, 3)),
+            'tags' => $this->faker->optional()->randomElements(
+                ['strength', 'cardio', 'flexibility', 'balance', 'endurance'],
+                $this->faker->numberBetween(1, 3)
+            ),    
         ];
     }
 }

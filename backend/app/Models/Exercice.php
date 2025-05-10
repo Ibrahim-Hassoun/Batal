@@ -9,4 +9,8 @@ class Exercice extends Model
 {
     /** @use HasFactory<\Database\Factories\ExerciceFactory> */
     use HasFactory;
+
+    protected $casts = [
+    'tags' => 'array',
+];
 }
