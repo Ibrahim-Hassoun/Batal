@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       routes: {
         '/chats': (context) => const ChatsScreen(),
-        '/conversation': (context) => const ConversationScreen(),
+        '/conversation': (context) => ConversationScreen(chatId: 1,chatName:  'John Doe',chatMessages:  ['Hello', 'How are you?'],lastSeen:  DateTime.now()),
       },
       material: (_, __) => MaterialAppData(
         theme: ThemeData.light().copyWith(
