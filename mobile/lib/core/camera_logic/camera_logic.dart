@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
 import '../tensorflow/tensorflow.dart';
 
@@ -18,7 +21,9 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
       cameras[selectedCameraIdx],
       ResolutionPreset.low,
       enableAudio: false,
-      imageFormatGroup: ImageFormatGroup.yuv420,
+      imageFormatGroup: Platform.isAndroid
+          ? ImageFormatGroup.nv21 // for Android
+          : ImageFormatGroup.bgra8888,
     ));
 
    
