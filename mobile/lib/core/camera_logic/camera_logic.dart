@@ -43,10 +43,10 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
 
 
   void startStreaming(WorkoutProvider workoutProvider) {
-    DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 1000));
+    DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 200));
     workoutProvider.controller!.startImageStream((CameraImage image) {
       final now = DateTime.now();
-      if (now.difference(lastProcessed).inMilliseconds >= 1000) {
+      if (now.difference(lastProcessed).inMilliseconds >= 200) {
         lastProcessed = now;
         mlPoseDetectorFunctions.processCameraImage(image, workoutProvider.poseDetector!,workoutProvider);
 
