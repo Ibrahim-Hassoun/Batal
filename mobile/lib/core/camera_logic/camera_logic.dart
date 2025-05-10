@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
 import '../tensorflow/tensorflow.dart';
 import '../ml_pose_detector/ml_pose_detector.dart';
+import '../ml_pose_detector/coaching.dart';
 
 class CameraLogic {
 TensorflowFunctions tensorflowFunctions = TensorflowFunctions();
@@ -44,6 +45,7 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
 
   void startStreaming(WorkoutProvider workoutProvider) {
     DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 150));
+
     List<List<Map<String, Map<String, double>>>> landmarks = [];
 
     workoutProvider.controller!.startImageStream((CameraImage image) async{
@@ -51,12 +53,13 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
       if (now.difference(lastProcessed).inMilliseconds >= 150) {
         lastProcessed = now;
         List<Map<String, Map<String, double>>> newLandmark =await mlPoseDetectorFunctions.processCameraImage(image, workoutProvider.poseDetector!,workoutProvider);
-
+        landmarks.add(newLandmark);
         print('from streaming');
+         Coaching().evaluate("shoulder", "front deltoid", "shoulderPress", landmarks);
       }
     });
-  
-  
+
+   
   }
 
    void disposeCameraController(WorkoutProvider workoutProvider) {

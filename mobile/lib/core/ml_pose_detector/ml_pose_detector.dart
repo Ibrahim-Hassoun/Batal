@@ -12,7 +12,7 @@ class MlPoseDetectorFunctions {
   Future<List<Map<String, Map<String, double>>>> processCameraImage(CameraImage image, PoseDetector poseDetector,WorkoutProvider workoutProvider) async{
     InputImage? inputImage = _inputImageFromCameraImage(image);
     
-    print(inputImage);
+   
     
     
     List<Map<String, Map<String, double>>> landmarks = await detectPose(poseDetector, inputImage!);
@@ -67,7 +67,7 @@ class MlPoseDetectorFunctions {
     }
 
     // Now allPosesLandmarks contains all landmarks with their x, y, and likelihood for each pose
-    print(allPosesLandmarks);
+    
     return allPosesLandmarks;
   }
 
