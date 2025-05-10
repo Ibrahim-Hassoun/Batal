@@ -9,6 +9,7 @@ import '../../ui/widgets/workout/my_workout/my_workout.dart';
 import '../../ui/widgets/workout/leaderboard/leaderboard.dart';
 import '../tensorflow/tensorflow.dart';
 import '../camera_logic/camera_logic.dart';
+import '../ml_pose_detector/coaching.dart';
 
 class WorkoutProvider with ChangeNotifier {
   List<String> _workouts = [];
@@ -17,13 +18,13 @@ class WorkoutProvider with ChangeNotifier {
   String _tab='pose_detector';
   String get tab =>_tab;
 
-  String? _detected_area='shoulder';
+  String? _detected_area='Arm';
   String? get detected_area => _detected_area;
 
-  String? _detected_muscle='front deltoid';
+  String? _detected_muscle='Biceps';
   String? get detected_muscle => _detected_muscle;
 
-  String? _detected_exercise ='shoulder press';
+  String? _detected_exercise ='Curl';
   String? get detected_exercise => _detected_exercise;
 
       //general
@@ -181,15 +182,18 @@ class WorkoutProvider with ChangeNotifier {
   void setDetectedArea(String area) {
     _detected_area = area;
     print("this is from provider" + (_detected_area ?? "unknown"));
+    Coaching.area = area;
     notifyListeners();
   }
 
   void setDetectedMuscle(String muscle) {
+    Coaching.muscle = muscle;
     _detected_muscle = muscle;
     notifyListeners();
   }
 
   void setDetectedExercice(String exercice) {
+    Coaching.exercise = exercice;
     _detected_muscle = exercice;
     notifyListeners();
   }

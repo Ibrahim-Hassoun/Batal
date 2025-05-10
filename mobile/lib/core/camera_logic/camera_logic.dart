@@ -44,6 +44,13 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
 
 
   void startStreaming(WorkoutProvider workoutProvider) {
+    //prepare the coaching class variables
+    Coaching.area = workoutProvider.detected_area;
+    Coaching.muscle = workoutProvider.detected_muscle;
+    Coaching.exercise = workoutProvider.detected_exercise;
+    
+
+
     DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 150));
 
     List<List<Map<String, Map<String, double>>>> landmarks = [];
@@ -55,7 +62,8 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
         List<Map<String, Map<String, double>>> newLandmark =await mlPoseDetectorFunctions.processCameraImage(image, workoutProvider.poseDetector!,workoutProvider);
         landmarks.add(newLandmark);
         print('from streaming');
-         Coaching().evaluate("shoulder", "front deltoid", "shoulderPress", landmarks);
+        Coaching.landmarks = landmarks;
+        Coaching().evaluate( );
       }
     });
 

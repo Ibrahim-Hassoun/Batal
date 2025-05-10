@@ -9,41 +9,38 @@ class Coaching{
   static String? exercise;
 
 
-  void evaluate(String area, String muscle, String exercise,List<List<Map<String, Map<String, double>>>> landmarks) {
-    print('started evaluating...');
-    
-
-
-
-
-
+  void evaluate() {
+  
     if(area=='shoulder'){
-      evaluateShoulderExercise(muscle, exercise);
+      evaluateShoulderExercise();
+    }else if(area=='arm'){
+      evaluateArmExercise();
     }
   }
 
-  void evaluateShoulderExercise(String muscle, String exercise) {
+  void evaluateShoulderExercise() {
     // Implement your logic to evaluate shoulder exercises
-    if (muscle == 'front deltoid' && exercise == 'shoulderPress') {
+    if (muscle == 'front deltoid' && exercise == 'shoulder press') {
       shoulderPress();
     }
   }
+  void evaluateArmExercise() {
+    // Implement your logic to evaluate arm exercises
+    if (muscle == 'biceps' && exercise == 'curl') {
+      print('evaluating bicep curl');
+    }
+  }
+
+
+
+
+
+
+
+
 
   void shoulderPress() {
-    // // Implement your logic to evaluate shoulder press
-    // // For example, check the angles of the shoulders and elbows
-    // if (landmarks.isNotEmpty) {
-    //   final shoulderLeft = landmarks[0]['leftShoulder'];
-    //   final shoulderRight = landmarks[0]['rightShoulder'];
-    //   final elbowLeft = landmarks[0]['leftElbow'];
-    //   final elbowRight = landmarks[0]['rightElbow'];
-
-    //   if (shoulderLeft != null && shoulderRight != null && elbowLeft != null && elbowRight != null) {
-    //     // Calculate angles and provide feedback
-    //     print('Evaluating shoulder press...');
-    //   }
-    //   
-    // }
+    
     print ('finished evaluating shoulder press');
   }
 }
