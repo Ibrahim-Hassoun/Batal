@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GymController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExerciceController;
 use App\Http\Controllers\JobProfileController;
+
 
 
 Route::group(['prefix'=>"v0.1"],function(){
@@ -49,5 +51,16 @@ Route::group(['prefix'=>"v0.1"],function(){
             Route::post('/approve',[JobProfileController::class,'approveJobProfile']);
 
         });
+
+        Route::group(['middleware' => 'isAdmin'], function () {
+            
+            Route::group(['prefix'=>'exercices'],function(){
+                Route::post('/add',[ExerciceController::class,'addExercice']);
+                
+            });
+
+        });
+        Route::post('/exercices/search',[ExerciceController::class,'searchExercice']);
+
     });
 });

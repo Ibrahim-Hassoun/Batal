@@ -9,6 +9,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\PostSeeder;
 use Database\Seeders\ReactionSeeder;
 use Database\Seeders\JobProfileSeeder;
+use Database\Seeders\ExerciceSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,12 +19,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            ExerciceSeeder::class,
             UserSeeder::class,
             LogSeeder::class,
             GymSeeder::class,
             PostSeeder::class,
             ReactionSeeder::class,
-            JobProfileSeeder::class
+            JobProfileSeeder::class,
+            
         ]);
         // User::factory(10)->create();
 
