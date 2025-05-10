@@ -16,7 +16,7 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
     
     workoutProvider.setController ( CameraController(
       cameras[selectedCameraIdx],
-      ResolutionPreset.medium,
+      ResolutionPreset.low,
       enableAudio: false,
       imageFormatGroup: ImageFormatGroup.yuv420,
     ));

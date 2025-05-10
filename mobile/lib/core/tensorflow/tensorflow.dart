@@ -94,28 +94,32 @@ void process(CameraImage image, WorkoutProvider workoutProvider) {
     image.planes[1].bytesPerRow,
     image.planes[2].bytesPerRow
   );
-
+  print("RGB bytes: ${rgbBytes.sublist(0, 10)}");
+  print("Original RGB size: ${image.width}x${image.height} (${rgbBytes.length} bytes)");
+  print("RGB bytes length: ${rgbBytes.length}"); // Debugging line
   // 2. Resize RGB to 192x192
   Uint8List resizedBytes = resizeRGBForModel(rgbBytes, image.width, image.height, 192);
+  print("Resized RGB bytes: ${resizedBytes.sublist(0, 10)}");
+  print("Resized RGB size: 192x192 (${resizedBytes.length} bytes)");
 
   // 3. Convert to float32 and normalize to [-1, 1]
   Float32List inputTensor = Float32List(1 * 192 * 192 * 3);
-  for (int i = 0; i < resizedBytes.length; i++) {
-    inputTensor[i] = (resizedBytes[i] / 127.5) - 1.0;
-  }
+  // for (int i = 0; i < resizedBytes.length; i++) {
+  //   inputTensor[i] = (resizedBytes[i] / 127.5) - 1.0;
+  // }
 
-  // 4. Reshape to [1, 192, 192, 3] - CRITICAL STEP!
-  var input = inputTensor.reshape([1, 192, 192, 3]);
+  // // 4. Reshape to [1, 192, 192, 3] - CRITICAL STEP!
+  // var input = inputTensor.reshape([1, 192, 192, 3]);
 
-  // 5. Prepare output tensor
-  final output = List.filled(1 * 17 * 3, 0.0).reshape([1, 17, 3]);
+  // // 5. Prepare output tensor
+  // final output = List.filled(1 * 17 * 3, 0.0).reshape([1, 17, 3]);
 
-  // 6. Run inference
-  workoutProvider.interpreter?.run(input, output);
+  // // 6. Run inference
+  // workoutProvider.interpreter?.run(input, output);
 
-  // 7. Get results
-  final keypoints = output[0];
-  print(keypoints);
+  // // 7. Get results
+  // final keypoints = output[0];
+  // print(keypoints);
 }
 
 
@@ -130,9 +134,9 @@ Uint8List convertYUV420toRGB(
   int vStride,
 ) {
   final List<int> rgb = List<int>.filled(width * height * 3, 0);
-  print("Y plane first 10 bytes: ${yPlane.sublist(0, 10)}");
-print("U plane first 10 bytes: ${uPlane.sublist(0, 10)}");
-print("V plane first 10 bytes: ${vPlane.sublist(0, 10)}");
+//   print("Y plane first 10 bytes: ${yPlane.sublist(0, 10)}");
+// print("U plane first 10 bytes: ${uPlane.sublist(0, 10)}");
+// print("V plane first 10 bytes: ${vPlane.sublist(0, 10)}");
   for (int y = 0; y < height; y++) {
     for (int x = 0; x < width; x++) {
       
@@ -158,6 +162,7 @@ print("V plane first 10 bytes: ${vPlane.sublist(0, 10)}");
       rgb[rgbIndex] = r.clamp(0, 255);
       rgb[rgbIndex + 1] = g.clamp(0, 255);
       rgb[rgbIndex + 2] = b.clamp(0, 255);
+      //  print("RGB values: ${rgb[rgbIndex]}, ${rgb[rgbIndex + 1]}, ${rgb[rgbIndex + 2]}");
     }
   }
 
@@ -191,5 +196,13 @@ Uint8List resizeRGBForModel(
   return resizedImage.getBytes(
     order: img.ChannelOrder.rgb,  // ← Preserve RGB order
   );
+}
+
+Float32List convertToMoveNetInput(Uint8List uint8List) {
+  final float32List = Float32List(uint8List.length);
+  for (int i = 0; i < uint8List.length; i++) {
+    float32List[i] = (uint8List[i] / 127.5) - 1.0; // Normalize to [-1, 1]
+  }
+  return float32List;
 }
 }
