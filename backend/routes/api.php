@@ -54,8 +54,8 @@ Route::group(['prefix'=>"v0.1"],function(){
 
         Route::group(['middleware' => 'isAdmin'], function () {
             
-            Route::group(['prefix'=>'exercice'],function(){
-                Route::get('/add',[ExerciceController::class,'addExercice']);
+            Route::group(['prefix'=>'exercices'],function(){
+                Route::post('/add',[ExerciceController::class,'addExercice']);
             });
 
         });

@@ -14,7 +14,7 @@ class ExerciceServices
             'muscle' => $request->muscle,
             'exercice' => $request->exercice,
             'description' => $request->description ?? null,
-            'difficulty' => $request->difficulty ?? null,
+            'difficulty' => $request->difficulty ,
             'equipment' => $request->equipment ?? null,
             'type' => $request->type ?? null,
             'duration' => $request->duration ?? null,
