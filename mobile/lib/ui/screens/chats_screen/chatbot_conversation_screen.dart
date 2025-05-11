@@ -24,6 +24,8 @@ class ChatbotConversationScreen extends StatefulWidget {
 
 
 class _ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
+  final ScrollController _scrollController = ScrollController();
+
   static final List<Map<String, dynamic>> messages = [
     {'text': 'This is the main chat template', 'isMe': true, 'time': 'Nov 30, 2023, 9:41 AM'},
     {'text': 'Oh?', 'isMe': false},
@@ -44,40 +46,61 @@ class _ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
   static String temp='';
 
 
-  void sendMessage()async{
-    // print('trying to send this message: $temp');
-    if (temp !=null && temp!.isNotEmpty){
-      print('trying to send this message inside: $temp');
-      var response = await request(
-        endpoint: '/api/v0.1/chatbot/send',
-        method: 'POST',
-        body: {
+ void sendMessage() async {
+  if (temp.isNotEmpty) {
+    print('trying to send this message inside: $temp');
+
+    var response = await request(
+      endpoint: '/api/v0.1/chatbot/send',
+      method: 'POST',
+      body: {
         "prompt": temp,
       },
-        optimistic: (){
-          setState(() {
-            _ChatbotConversationScreenState.messages.add(
-              {'text': temp, 'isMe': true, 'time': DateTime.now().toString()},
-            );
-          });
-        },
-        rollback: (){
-          setState(() {
-            _ChatbotConversationScreenState.messages.removeLast();
-          });
-        },
-      );
-      if(response['success']){
-        print(response['data']);
+      optimistic: () {
         setState(() {
-          _ChatbotConversationScreenState.messages.add(
-            {'text': response['data']['data'], 'isMe': false, 'time': DateTime.now().toString()},
+          _ChatbotConversationScreenState.messages.add({
+            'text': temp,
+            'isMe': true,
+            'time': DateTime.now().toString(),
+          });
+        });
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _scrollController.animateTo(
+            _scrollController.position.maxScrollExtent,
+            duration: Duration(milliseconds: 300),
+            curve: Curves.easeOut,
           );
         });
-      }
+      },
+      rollback: () {
+        setState(() {
+          _ChatbotConversationScreenState.messages.removeLast();
+        });
+      },
+    );
+
+    if (response['success']) {
+      print(response['data']);
+      setState(() {
+        _ChatbotConversationScreenState.messages.add({
+          'text': response['data']['data'],
+          'isMe': false,
+          'time': DateTime.now().toString(),
+        });
+      });
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      });
     }
   }
+}
 TextEditingController _controller = TextEditingController();
+
+
 
   @override
 void initState() {
@@ -126,6 +149,7 @@ void initState() {
         children: [
           Expanded(
             child: ListView.builder(
+              controller: _scrollController,
               physics: BouncingScrollPhysics(),
               padding: EdgeInsets.all(12),
               itemCount: messages.length,
