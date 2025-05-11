@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
 import '../tensorflow/tensorflow.dart';
 import '../ml_pose_detector/ml_pose_detector.dart';
+import '../ml_pose_detector/coaching.dart';
 
 class CameraLogic {
 TensorflowFunctions tensorflowFunctions = TensorflowFunctions();
@@ -43,18 +44,30 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
 
 
   void startStreaming(WorkoutProvider workoutProvider) {
-    DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 1000));
-    workoutProvider.controller!.startImageStream((CameraImage image) {
-      final now = DateTime.now();
-      if (now.difference(lastProcessed).inMilliseconds >= 1000) {
-        lastProcessed = now;
-        mlPoseDetectorFunctions.processCameraImage(image, workoutProvider.poseDetector!,workoutProvider);
+    //prepare the coaching class variables
+    Coaching.area = workoutProvider.detected_area;
+    Coaching.muscle = workoutProvider.detected_muscle;
+    Coaching.exercise = workoutProvider.detected_exercise;
+    // these setters are used for testing purposes
 
-        
-        // tensorflowFunctions.process(image, workoutProvider);
+
+    DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 100));
+
+    List<List<Map<String, Map<String, double>>>> landmarks = [];
+
+    workoutProvider.controller!.startImageStream((CameraImage image) async{
+      final now = DateTime.now();
+      if (now.difference(lastProcessed).inMilliseconds >= 100) {
+        lastProcessed = now;
+        List<Map<String, Map<String, double>>> newLandmark =await mlPoseDetectorFunctions.processCameraImage(image, workoutProvider.poseDetector!,workoutProvider);
+        landmarks.add(newLandmark);
         print('from streaming');
+        Coaching.landmarks = landmarks;
+        Coaching().evaluate( );
       }
     });
+
+   
   }
 
    void disposeCameraController(WorkoutProvider workoutProvider) {
