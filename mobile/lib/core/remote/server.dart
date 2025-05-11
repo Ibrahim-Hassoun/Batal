@@ -9,6 +9,8 @@ Future<Map<String, dynamic>> request({
   required String method,
   Map<String, dynamic>? body,
   Map<String, String>? headers,
+  Function? optimistic,
+  Function? rollback
 }) async {
   final url = Uri.parse('$baseUrl$endpoint');
   final defaultHeaders = {
@@ -17,6 +19,7 @@ Future<Map<String, dynamic>> request({
   };
 
   try {
+    optimistic?.call();
     http.Response response;
 
     switch (method.toUpperCase()) {
@@ -69,7 +72,9 @@ Future<Map<String, dynamic>> request({
         'statusCode': response.statusCode,
       };
     }
+    
   } catch (e) {
+    rollback?.call();
     return {
       'success': false,
       'message': e.toString(),

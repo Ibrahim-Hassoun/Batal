@@ -41,6 +41,7 @@ class _ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
     {'text': 'Bye!', 'isMe': true},
     {'text': 'See ya!', 'isMe': false},
   ];
+  static String? temp;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +57,7 @@ class _ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
         ),
        title: Row(
           children: [
-            CircleAvatar(backgroundImage: AssetImage('assets/avatar.png')), // Add a default image
+            // CircleAvatar(backgroundImage: NetworkImage(widget.chatImageUrl ?? 'https://randomuser.me/api/portraits')), // Add a default image
             SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,9 +130,17 @@ class _ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
               children: [
                 Expanded(
                   child: TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        temp = value;
+                      });
+                    },
+                    controller: TextEditingController(text: temp),
                     decoration: InputDecoration(
-                      hintText: "Message...",
+                      
+                      hintText: "Message..." ,
                       border: InputBorder.none,
+                      
                     ),
                   ),
                 ),
