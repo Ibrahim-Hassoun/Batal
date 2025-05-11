@@ -18,13 +18,31 @@ class ChatbotServices
 {
     public function sendMessage($request)
     {   
-        //extract user id from request
+        
         $userId = $request->user()->id;
-        $user = User::find($userId);
-
-
         $session = $this->getSession($userId);
+        $sent = ChatbotMessage::create([
+            'chatbot_session_id' => $session->id,
+            'role' => 'user',
+            'content' => $request->prompt,
+        ]);
+        if(!$sent){
+            throw new \Exception('Error in saving the message to the database', 500);
+        }
 
+        $received = $this->sendToModel($request, $userId);
+        
+        $message = ChatbotMessage::create([
+            'chatbot_session_id' => $session->id,
+            'role' => 'assistant',
+            'content' => $received->text,
+        ]);
+
+
+        return $received->text;
+    }
+
+    private function sendToModel($request, $userId){
         $usersChunkSelectionSchema = ChunkSelectors::makeChunkSelector(ChunkSelectors::getUserChunks());
         //usersChunkSelectionSchema will return an array of the needed chunks
 
@@ -39,6 +57,8 @@ class ChatbotServices
         ->asStructured();
         
         $selectedChunks = $response->structured['selected_chunks'];
+        $user = User::find($userId);
+
         $contextText = ContextBuilder::buildContext($user, $selectedChunks);
 
         $finalPrompt = "User info:\n$contextText\n\nUser question:\n" . $request->prompt . "\n\n" ;
@@ -51,22 +71,8 @@ class ChatbotServices
         if(!$response){
             throw new \Exception('Error in getting response from the chatbot', 500);
         }
-        //save the messages to the database
-        $message = ChatbotMessage::create([
-            'chatbot_session_id' => $session->id,
-            'role' => 'user',
-            'content' => $request->prompt,
-        ]);
-        $message = ChatbotMessage::create([
-            'chatbot_session_id' => $session->id,
-            'role' => 'assistant',
-            'content' => $response->text,
-        ]);
-
-
-        return ['response'=>$response->text];
+        return $response;
     }
-
 
     private function getSession($userId)
     {
