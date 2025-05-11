@@ -6,7 +6,7 @@ class ChunkSelectors {
 
     public static function getUserChunks(){
         return [
-             'id',
+                        'id',
                         'username',
                         'phone_number',
                         'bio',

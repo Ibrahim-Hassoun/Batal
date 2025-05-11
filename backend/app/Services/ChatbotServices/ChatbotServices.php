@@ -11,7 +11,7 @@ use Prism\Prism\Enums\Provider;
 use Prism\Prism\Schema\ObjectSchema;
 use Prism\Prism\Schema\EnumSchema;
 use Prism\Prism\Schema\ArraySchema;
-
+use App\Prism\ChunkSelectors\ChunkSelectors;
 class ChatbotServices
 {
     public function sendMessage($request)
@@ -21,7 +21,9 @@ class ChatbotServices
         $user = User::find($userId);
         $session = $this->getSession($userId);
 
-        $chunkSelectorSchema = PrismHelper::buildSchema( 'chunk_selector','Schema for selecting relevant context chunks',
+        $chunkSelectorSchema = PrismHelper::buildSchema( 
+            'chunk_selector',
+            'Schema for selecting relevant context chunks',
         [
             new ArraySchema(
                 name: 'selected_chunks',
@@ -29,51 +31,9 @@ class ChatbotServices
                 items: new EnumSchema(
                     name: 'chunk_item',
                     description: 'Individual chunk selection',
-                    options: [
-                        'id',
-                        'username',
-                        'phone_number',
-                        'bio',
-                        'profile_photo_path',
-                        'first_name',
-                        'last_name',
-                        'is_completed',
-                        'completed_at',
-                        'is_verified',
-                        'verified_at',
-                        'email',
-                        'email_verified_at',
-                        'password',
-                        'date_of_birth',
-                        'location_of_birth',
-                        'role',
-                        'country',
-                        'province',
-                        'city',
-                        'street',
-                        'followers_count',
-                        'following_count',
-                        'gym_location',
-                        'streak',
-                        'coins',
-                        'sets',
-                        'current_xp',
-                        'total_xp',
-                        'trophies_count',
-                        'last_login_at',
-                        'last_login_ip',
-                        
-                        'fitness_level',
-                        'fitness_goal',
-                        'fitness_interests',
-                        'injuries',
-                        'medical_conditions',
-                        'allergies',
-                        'dietary_preferences',
-                        'dietary_restrictions',
-                        'fitness_equipment',
-                        'fitness_experience'
-                    ]
+                    options: 
+                       ChunkSelectors::getUserChunks()
+                    
                     )
                 )
             ],
