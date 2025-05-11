@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Services\ChatbotServices\ChatbotServices;
 
 class ChatbotServicesProvider extends ServiceProvider
 {
@@ -11,7 +12,9 @@ class ChatbotServicesProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+         $this->app->singleton(ChatbotServices::class, function ($app) {
+            return new ChatbotServices();
+        });
     }
 
     /**
