@@ -3,17 +3,17 @@
 namespace App\Entities;
 
 use OpenSouth\Prism\Types\Schemas\StringSchema;
+use OpenSouth\Prism\Types\Schemas\ObjectSchema;
+
 
 class PrismHelper
 {
-    public static function makeStringSchemasFromArray(array $data): array
+    public static function stringSchemas(array $fields): array
     {
         $schemas = [];
 
-        foreach ($data as $label => $value) {
-            $schemas[] = StringSchema::make()
-                ->label($label)
-                ->value($value);
+        foreach ($fields as $key => $description) {
+            $schemas[] = new StringSchema($key, $description);
         }
 
         return $schemas;
