@@ -19,7 +19,7 @@ class ChatbotSession extends Model
         'external_session_id',
     ];
 
-    public function ChatbotMessages()
+    public function chatbotMessages()
     {
         return $this->hasMany(ChatbotMessage::class);
     }
