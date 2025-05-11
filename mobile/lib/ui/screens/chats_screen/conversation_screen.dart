@@ -10,13 +10,13 @@ class ConversationScreen extends StatefulWidget {
   final String? chatImageUrl;
 
   const ConversationScreen({
-    Key? key,
+    super.key,
     required this.chatId,
     required this.chatName,
     required this.chatMessages,
     required this.lastSeen,
     this.chatImageUrl,
-  }) : super(key: key);
+  });
 
   @override
   State<ConversationScreen> createState() => _ConversationScreenState();

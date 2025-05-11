@@ -7,11 +7,11 @@ class PostButton extends StatefulWidget {
   final IconData icon;
 
   const PostButton({
-    Key? key,
+    super.key,
     required this.onClicked,
     required this.label,
     required this.icon,
-  }) : super(key: key);
+  });
 
   @override
   _PostButtonState createState() => _PostButtonState();

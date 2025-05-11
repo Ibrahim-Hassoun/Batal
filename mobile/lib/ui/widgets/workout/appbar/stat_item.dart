@@ -7,7 +7,7 @@ class StatItem extends StatelessWidget{
   final String value;
   final Color color;
 
-  StatItem({required this.icon, required this.value,required this.color});
+  const StatItem({super.key, required this.icon, required this.value,required this.color});
 
   @override
   Widget build(BuildContext context) {

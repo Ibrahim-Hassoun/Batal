@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import '../../../../core/provider/workout_provider.dart';
 
 class CameraSection extends StatefulWidget {
+  const CameraSection({super.key});
+
   @override
   _CameraSectionState createState() => _CameraSectionState();
 }

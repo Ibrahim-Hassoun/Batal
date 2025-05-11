@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 class WorkoutTabbar extends StatefulWidget {
   final String currentTab;
-  const WorkoutTabbar({this.currentTab = 'my_workout'});
+  const WorkoutTabbar({super.key, this.currentTab = 'my_workout'});
 
   @override
   _WorkoutTabbarState createState() => _WorkoutTabbarState();

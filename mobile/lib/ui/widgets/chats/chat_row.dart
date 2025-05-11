@@ -9,13 +9,13 @@ class ChatRow extends StatefulWidget {
   final String? chatImageUrl;
 
   const ChatRow({
-    Key? key,
+    super.key,
     required this.chatId,
     required this.chatName,
     required this.lastMessage,
     required this.lastMessageTime,
     required this.chatImageUrl,
-  }) : super(key: key);
+  });
   
   @override
   State<ChatRow> createState() => _ChatRowState();

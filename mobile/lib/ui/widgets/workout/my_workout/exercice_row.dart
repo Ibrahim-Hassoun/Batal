@@ -79,8 +79,9 @@ class _ExerciseRowState extends State<ExerciseRow> {
               icon: Icon(Icons.add_circle),
               onPressed: () {
                 setState(() {
-                  if(count<5)
-                  count++;
+                  if(count<5) {
+                    count++;
+                  }
                 });
               },
             ),
