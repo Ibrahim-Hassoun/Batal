@@ -9,13 +9,13 @@ class ChatRow extends StatefulWidget {
   final String? chatImageUrl;
 
   const ChatRow({
-    Key? key,
+    super.key,
     required this.chatId,
     required this.chatName,
     required this.lastMessage,
     required this.lastMessageTime,
     required this.chatImageUrl,
-  }) : super(key: key);
+  });
   
   @override
   State<ChatRow> createState() => _ChatRowState();
@@ -44,7 +44,7 @@ class _ChatRowState extends State<ChatRow>
           subtitle: Text(widget.lastMessage),
           trailing: Text(widget.lastMessageTime,style: TextStyle(fontSize: 16,color: secondaryColor),),
           onTap: () {
-            Navigator.pushNamed(context, '/conversation', );
+            Navigator.pushNamed(context, '/chatbot-conversation', );
           },
         ),
       

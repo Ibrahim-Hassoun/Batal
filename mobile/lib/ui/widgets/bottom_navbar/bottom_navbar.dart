@@ -4,6 +4,8 @@ import '../../screens/feedScreen/feed_screen.dart';
 import '../../screens/workout_screen/workout_screen.dart';
 
 class BottomNavbar extends StatefulWidget implements PreferredSizeWidget {
+  const BottomNavbar({super.key});
+
   
   @override
   _BottomNavbarState createState() => _BottomNavbarState();

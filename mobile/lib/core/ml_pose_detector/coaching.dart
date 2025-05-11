@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../lib/angles/geometry.dart';
+import 'package:mobile/lib/angles/geometry.dart';
 
 class Coaching{
 

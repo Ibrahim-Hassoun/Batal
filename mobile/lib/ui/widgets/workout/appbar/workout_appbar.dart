@@ -9,7 +9,7 @@ class WorkoutAppbar extends StatefulWidget implements PreferredSizeWidget {
   final int coins;
   final int sets;
 
-  const WorkoutAppbar({
+  const WorkoutAppbar({super.key, 
     required this.trophies,
     required this.streak,
     required this.coins,

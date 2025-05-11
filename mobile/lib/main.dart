@@ -10,7 +10,7 @@ import './ui/widgets/bottom_navbar/bottom_navbar.dart';
 import './core/provider/feed_provider.dart';
 import './core/provider/workout_provider.dart';
 import './ui/screens/chats_screen/chats_screen.dart';
-import './ui/screens/chats_screen/conversation_screen.dart';
+import 'ui/screens/chats_screen/chatbot_conversation_screen.dart';
 
 
 const Color primaryColor =Color(0xFFF7713D);
@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       routes: {
         '/chats': (context) => const ChatsScreen(),
-        '/conversation': (context) => ConversationScreen(chatId: 1,chatName:  'John Doe',chatMessages:  ['Hello', 'How are you?'],lastSeen:  DateTime.now()),
+        '/chatbot-conversation': (context) => ChatbotConversationScreen(chatId: 1,chatName:  'John Doe',chatMessages:  ['Hello', 'How are you?'],lastSeen:  DateTime.now()),
       },
       material: (_, __) => MaterialAppData(
         theme: ThemeData.light().copyWith(

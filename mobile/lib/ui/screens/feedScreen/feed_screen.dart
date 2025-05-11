@@ -5,6 +5,8 @@ import '../../widgets/feed/story.dart';
 import '../../widgets/feed/post.dart';
 
 class FeedScreen extends StatefulWidget {
+  const FeedScreen({super.key});
+
   @override
   _FeedScreenState createState() => _FeedScreenState();
 }
