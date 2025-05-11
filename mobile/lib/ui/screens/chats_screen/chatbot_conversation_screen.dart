@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mobile/main.dart';
 
 
-class ConversationScreen extends StatefulWidget {
+class ChatbotConversationScreen extends StatefulWidget {
   final int chatId;
   final String chatName;
   final List<String> chatMessages;
   final DateTime? lastSeen;
   final String? chatImageUrl;
 
-  const ConversationScreen({
+  const ChatbotConversationScreen({
     super.key,
     required this.chatId,
     required this.chatName,
@@ -19,11 +19,11 @@ class ConversationScreen extends StatefulWidget {
   });
 
   @override
-  State<ConversationScreen> createState() => _ConversationScreenState();
+  State<ChatbotConversationScreen> createState() => _ChatbotConversationScreenState();
 }
 
 
-class _ConversationScreenState extends State<ConversationScreen> {
+class _ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
   final List<Map<String, dynamic>> messages = [
     {'text': 'This is the main chat template', 'isMe': true, 'time': 'Nov 30, 2023, 9:41 AM'},
     {'text': 'Oh?', 'isMe': false},
