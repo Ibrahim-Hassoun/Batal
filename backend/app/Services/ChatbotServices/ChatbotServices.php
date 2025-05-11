@@ -17,7 +17,7 @@ class ChatbotServices
         $userId = $request->user()->id;
         $user = User::find($userId);
         if (!$user) {
-            throw new \Exception('User not found');
+            throw new \Exception('User not found', 404);
         }
         //check if user has a session and if not create one
         $session = $user->chatbotSession;
@@ -37,7 +37,22 @@ class ChatbotServices
         ->withSystemPrompt('You are a helpful assistant. Respond only to gym related queries,Make your responses short and concise.')
         ->withPrompt($request->prompt)
         ->asText();
+        if(!$response){
+            throw new \Exception('Error in getting response from the chatbot', 500);
+        }
+        //save the messages to the database
+        $message = ChatbotMessage::create([
+            'chatbot_session_id' => $session->id,
+            'role' => 'user',
+            'content' => $request->prompt,
+        ]);
+        $message = ChatbotMessage::create([
+            'chatbot_session_id' => $session->id,
+            'role' => 'assistant',
+            'content' => $response->text,
+        ]);
+
         
-        return ["response"=>$response->text,"userId"=>$userId,"user"=>$user,"session"=>$session,"messages"=>$messages];
+        return ["response"=>$response->text];
     }
 }
