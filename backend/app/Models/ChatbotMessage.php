@@ -9,4 +9,10 @@ class ChatbotMessage extends Model
 {
     /** @use HasFactory<\Database\Factories\ChatbotMessageFactory> */
     use HasFactory;
+    protected $fillable = [
+        'chatbot_session_id',
+        'role',
+        'content',
+        'meta',
+    ];
 }
