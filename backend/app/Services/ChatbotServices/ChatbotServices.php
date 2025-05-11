@@ -44,13 +44,7 @@ class ChatbotServices
 
     private function sendToModel($request, $userId){
        
-        $selectedChunks = PrismHelper::decideChunks('users', $request->prompt);
-        $rawRow = User::find($userId);
-
-        $finalContextText = ContextBuilder::buildContext($rawRow, $selectedChunks);
-
-        $finalPrompt = "User info:\n$finalContextText\n\nUser question:\n" . $request->prompt . "\n\n" ;
-        
+        $finalPrompt = $this->getFinalPrompt($request, $userId);
         $response = Prism::text()
         ->using(Provider::OpenAI, 'gpt-4o')
         ->withSystemPrompt('You are a helpful assistant. "Answer the question based on the user info provided. If the information is not available, say I do not know.')
@@ -60,8 +54,18 @@ class ChatbotServices
             throw new \Exception('Error in getting response from the chatbot', 500);
         }
         return $response;
+        
     }
 
+    private function getFinalPrompt($request, $userId){
+        $selectedChunks = PrismHelper::decideChunks('users', $request->prompt);
+        $rawRow = User::find($userId);
+
+        $finalContextText = ContextBuilder::buildContext($rawRow, $selectedChunks);
+
+        $finalPrompt = "User info:\n$finalContextText\n\nUser question:\n" . $request->prompt . "\n\n" ;
+        return $finalPrompt;
+    }
     private function getSession($userId)
     {
         $user = User::find($userId);
