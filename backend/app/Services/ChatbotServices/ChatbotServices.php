@@ -21,10 +21,12 @@ class ChatbotServices
         //extract user id from request
         $userId = $request->user()->id;
         $user = User::find($userId);
+
+
         $session = $this->getSession($userId);
 
-        $chunkSelectorSchema = ChunkSelectors::makeChunkSelector(ChunkSelectors::getUserChunks());
-
+        $usersChunkSelectionSchema = ChunkSelectors::makeChunkSelector(ChunkSelectors::getUserChunks());
+        //usersChunkSelectionSchema will return an array of the needed chunks
 
         $prompt = "The user asked: '{$request->prompt}'\n" .
                   "From the list of available data, select only the ones most relevant to answering this question.";
@@ -32,10 +34,10 @@ class ChatbotServices
 
         $response = Prism::structured()
         ->using(Provider::OpenAI, 'gpt-4o')
-        ->withSchema($chunkSelectorSchema)
+        ->withSchema($usersChunkSelectionSchema)
         ->withPrompt($prompt)
         ->asStructured();
-
+        
         $selectedChunks = $response->structured['selected_chunks'];
         $contextData = [];
 
@@ -75,6 +77,7 @@ class ChatbotServices
 
         return ['response'=>$response->text];
     }
+
 
     private function getSession($userId)
     {
