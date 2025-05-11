@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/core/provider/feed_provider.dart';
-import 'package:provider/provider.dart';
 import '../../widgets/feed/feed_app_bar.dart';
 import '../../widgets/feed/feed_tab_bar.dart';
-import '../../widgets/bottom_navbar/bottom_navbar.dart';
-import '../../../core/provider/bottom_navbar_provider.dart';
 import '../../widgets/feed/story.dart';
 import '../../widgets/feed/post.dart';
 

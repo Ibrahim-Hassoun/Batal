@@ -17,15 +17,19 @@ class _WorkoutScreenState extends State<WorkoutScreen>{
     return Scaffold(
       appBar: WorkoutAppbar(trophies: 0, streak: 0, coins: 0, sets: 0),
       
-      body: Expanded(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            WorkoutTabbar(),
-            Expanded(child: CurrentSection),
-          ],
-        ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                WorkoutTabbar(),
+                Expanded(child: CurrentSection),
+              ],
+            ),
+          ),
+        ],
       ),
      
       

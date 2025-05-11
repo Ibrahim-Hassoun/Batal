@@ -81,6 +81,7 @@ jobs:
 
   Staging-deployment:
 
+    needs: laravel-ci
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

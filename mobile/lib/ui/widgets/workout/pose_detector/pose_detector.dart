@@ -1,23 +1,30 @@
+import 'dart:typed_data';
+import './camera_section.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
 import 'package:mobile/main.dart';
 import 'package:provider/provider.dart';
 import '../../../layouts/drop_down_button.dart';
 import '../../../atoms/screen_wide_elevated_button.dart';
-import './camera_section.dart';
+import '../../../layouts/CustomCanva.dart';
 
-class PoseDetector extends StatefulWidget {
-  const PoseDetector({Key? key}) : super(key: key);
+
+class PoseDetectorTab extends StatefulWidget {
+  const PoseDetectorTab({Key? key}) : super(key: key);
 
   @override
   _PoseDetectorState createState() => _PoseDetectorState();
 }
 
-class _PoseDetectorState extends State<PoseDetector> {
+class _PoseDetectorState extends State<PoseDetectorTab> {
   
   @override
   Widget build(BuildContext context) {
     WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen:true);
+    bool is_recording = provider.is_Recording;
+    Uint8List? pngBytes = provider.imageBytes;
+    List<Map<String, Map<String, double>>> landmarks = provider.landmarks;
+
     return Column(
       children: [
         Padding(//selections wrapper
@@ -35,21 +42,53 @@ class _PoseDetectorState extends State<PoseDetector> {
           
         ),
         SizedBox(height: 24,),
-        CameraSection(),
+        SizedBox(//camera section
+            width: 300, 
+            height: 350,
+            child:  is_recording
+            ? Stack(
+              children: [
+              CameraSection(), // The camera image
+              if (pngBytes != null)
+                Positioned.fill(
+                child: IgnorePointer(
+                  child: Image.memory(
+                  pngBytes,
+                  fit: BoxFit.cover,
+                  ),
+                ),
+                ),
+              
+                Positioned.fill(
+                child: CustomPaint(
+                  painter: !landmarks.isEmpty? CustomCanva(landmarks):null,
+                ),
+                ),
+              ],
+            )
+          : Container(
+            color: Colors.grey[300],
+            child: Center(
+              child: Text("Camera not initialized"),
+            ),
+          ),
+        ),
+       
         SizedBox(height: 24,),
         
         Padding(
           padding: const EdgeInsets.only(left: 108,right: 108),
           child: ScreenWideElevatedButton(
             onPressed: () {
-              // Handle button press
+              provider.toggleRecording();
             },
-            label: 'Start',
-            backgroundColor: primaryColor,
+            label: is_recording?'Stop':'Start',
+            backgroundColor: is_recording?secondaryColor: primaryColor,
             foregroundColor: tertiaryColor,
             
           ),
         ),
+        
       ],
     );
   }
