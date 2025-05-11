@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('years_of_experience', 3, 1);
             $table->decimal('rating', 3, 2)->default(0.0);
             $table->boolean('is_approved')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
