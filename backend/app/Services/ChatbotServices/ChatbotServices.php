@@ -12,7 +12,7 @@ use Prism\Prism\Schema\ObjectSchema;
 use Prism\Prism\Schema\EnumSchema;
 use Prism\Prism\Schema\ArraySchema;
 use App\Prism\ChunkSelectors\ChunkSelectors;
-
+use App\Prism\ContextBuilder\ContextBuilder;
 
 class ChatbotServices
 {
@@ -39,18 +39,7 @@ class ChatbotServices
         ->asStructured();
         
         $selectedChunks = $response->structured['selected_chunks'];
-        $contextData = [];
-
-        foreach ($selectedChunks as $key) {
-            $value = $user->$key;
-            if (!empty($value)) {
-                $contextData[$key] = $value;
-            }
-        }
-        $contextText = '';
-        foreach ($contextData as $key => $value) {
-            $contextText .= ucfirst(str_replace('_', ' ', $key)) . ': ' . $value . "\n";
-        }
+        $contextText = ContextBuilder::buildContext($user, $selectedChunks);
 
         $finalPrompt = "User info:\n$contextText\n\nUser question:\n" . $request->prompt . "\n\n" ;
         

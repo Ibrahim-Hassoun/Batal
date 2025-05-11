@@ -18,5 +18,7 @@ class ContextBuilder
         foreach ($contextData as $key => $value) {
             $contextText .= ucfirst(str_replace('_', ' ', $key)) . ': ' . $value . "\n";
         }
+
+        return $contextText;
     }
 }
