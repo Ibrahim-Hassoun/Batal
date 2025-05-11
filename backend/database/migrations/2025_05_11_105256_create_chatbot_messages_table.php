@@ -19,6 +19,8 @@ return new class extends Migration
             $table->json('meta')->nullable();
             $table->softDeletes();
             $table->timestamps();
+
+            $table->index(['chatbot_session_id', 'created_at']);
         });
     }
 
