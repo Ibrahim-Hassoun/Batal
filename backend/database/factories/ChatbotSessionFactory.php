@@ -19,7 +19,6 @@ class ChatbotSessionFactory extends Factory
     {
         return [
             'user_id' => User::factory(), 
-            'title' => $this->faker->sentence(3), 
             'external_session_id' => $this->faker->uuid(), 
             
         ];

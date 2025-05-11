@@ -10,7 +10,7 @@ use Database\Seeders\PostSeeder;
 use Database\Seeders\ReactionSeeder;
 use Database\Seeders\JobProfileSeeder;
 use Database\Seeders\ExerciceSeeder;
-use Database\Seeders\ChatbotSeeder;
+use Database\Seeders\ChatbotSessionSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,14 +20,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            ExerciceSeeder::class,
+            ChatbotSessionSeeder::class,
             UserSeeder::class,
             LogSeeder::class,
             GymSeeder::class,
             PostSeeder::class,
             ReactionSeeder::class,
             JobProfileSeeder::class,
-            ChatbotSeeder::class,
+            ExerciceSeeder::class,
+           
         ]);
         // User::factory(10)->create();
 
