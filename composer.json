@@ -1,0 +1,5 @@
+{
+    "require": {
+        "prism-php/prism": "^0.66.0"
+    }
+}
