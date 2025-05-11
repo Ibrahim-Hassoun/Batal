@@ -42,6 +42,12 @@ class _ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
     {'text': 'See ya!', 'isMe': false},
   ];
   static String? temp;
+
+
+  void sendMessage(){
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,6 +141,7 @@ class _ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
                         temp = value;
                       });
                     },
+                    
                     controller: TextEditingController(text: temp),
                     decoration: InputDecoration(
                       
@@ -146,7 +153,12 @@ class _ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
                 ),
                 IconButton(icon: Icon(Icons.mic), onPressed: () {}),
                 IconButton(icon: Icon(Icons.image), onPressed: () {}),
-                IconButton(icon: Icon(Icons.add), onPressed: () {}),
+                IconButton(icon: Icon(Icons.send), onPressed: ()=> {
+                      setState(() {
+                        temp = '';
+                        sendMessage();
+                      })
+                    },),
               ],
             ),
           ),
