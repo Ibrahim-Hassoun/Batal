@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\ChatbotSession;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 
 class ChatbotMessageSeeder extends Seeder
 {
@@ -12,6 +14,8 @@ class ChatbotMessageSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        ChatbotSession::factory()
+            ->count(10)
+            ->create();
     }
 }
