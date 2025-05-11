@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/main.dart';
 import '../.../../../../core/remote/server.dart';
+import './chatbot_logic.dart';
 
 class ChatbotConversationScreen extends StatefulWidget {
   final int chatId;
@@ -9,7 +10,12 @@ class ChatbotConversationScreen extends StatefulWidget {
   final DateTime? lastSeen;
   final String? chatImageUrl;
 
-  const ChatbotConversationScreen({
+
+
+  static String temp='';
+  static final ScrollController scrollController = ScrollController();
+  
+  ChatbotConversationScreen({
     super.key,
     required this.chatId,
     required this.chatName,
@@ -17,14 +23,14 @@ class ChatbotConversationScreen extends StatefulWidget {
     required this.lastSeen,
     this.chatImageUrl,
   });
-
+  
   @override
-  State<ChatbotConversationScreen> createState() => _ChatbotConversationScreenState();
+  State<ChatbotConversationScreen> createState() => ChatbotConversationScreenState();
 }
 
 
-class _ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
-  final ScrollController _scrollController = ScrollController();
+class ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
+  
 
   static final List<Map<String, dynamic>> messages = [
     {'text': 'This is the main chat template', 'isMe': true, 'time': 'Nov 30, 2023, 9:41 AM'},
@@ -43,61 +49,10 @@ class _ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
     {'text': 'Bye!', 'isMe': true},
     {'text': 'See ya!', 'isMe': false},
   ];
-  static String temp='';
+  
 
 
- void sendMessage() async {
-  if (temp.isNotEmpty) {
-    print('trying to send this message inside: $temp');
-
-    var response = await request(
-      endpoint: '/api/v0.1/chatbot/send',
-      method: 'POST',
-      body: {
-        "prompt": temp,
-      },
-      optimistic: () {
-        setState(() {
-          _ChatbotConversationScreenState.messages.add({
-            'text': temp,
-            'isMe': true,
-            'time': DateTime.now().toString(),
-          });
-        });
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          _scrollController.animateTo(
-            _scrollController.position.maxScrollExtent,
-            duration: Duration(milliseconds: 300),
-            curve: Curves.easeOut,
-          );
-        });
-      },
-      rollback: () {
-        setState(() {
-          _ChatbotConversationScreenState.messages.removeLast();
-        });
-      },
-    );
-
-    if (response['success']) {
-      print(response['data']);
-      setState(() {
-        _ChatbotConversationScreenState.messages.add({
-          'text': response['data']['data'],
-          'isMe': false,
-          'time': DateTime.now().toString(),
-        });
-      });
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
-          duration: Duration(milliseconds: 300),
-          curve: Curves.easeOut,
-        );
-      });
-    }
-  }
-}
+ 
 TextEditingController _controller = TextEditingController();
 
 
@@ -105,7 +60,7 @@ TextEditingController _controller = TextEditingController();
   @override
 void initState() {
   super.initState();
-  _controller.text = temp;
+  _controller.text = ChatbotConversationScreen.temp;
 }
   @override
   Widget build(BuildContext context) {
@@ -149,7 +104,7 @@ void initState() {
         children: [
           Expanded(
             child: ListView.builder(
-              controller: _scrollController,
+              controller: ChatbotConversationScreen.scrollController, 
               physics: BouncingScrollPhysics(),
               padding: EdgeInsets.all(12),
               itemCount: messages.length,
@@ -198,7 +153,7 @@ void initState() {
                   child: TextField(
                     onChanged: (value) {
                       setState(() {
-                        temp = value;
+                        ChatbotConversationScreen.temp = value;
                       });
                     },
                     
@@ -216,9 +171,9 @@ void initState() {
                 IconButton(icon: Icon(Icons.send), onPressed: ()=> {
                       setState(() {
                         
-                        sendMessage();
+                        sendMessage(this);
                         _controller.clear();
-                        temp = '';
+                        ChatbotConversationScreen.temp = '';
                       })
                     },),
               ],
