@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('rating')->nullable();
             $table->text('notes')->nullable();
             $table->boolean('is_completed')->default(false);
+            $table->softDeletes();
             $table->timestamp('completed_at')->nullable();
         });
     }
