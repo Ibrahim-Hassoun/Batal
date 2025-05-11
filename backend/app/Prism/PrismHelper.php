@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entities;
+namespace App\Prism;
 
 use Prism\Prism\Prism;
 use Prism\Prism\Enums\Provider;

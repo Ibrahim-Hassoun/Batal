@@ -4,7 +4,7 @@ namespace App\Services\ChatbotServices;
 
 use App\Models\User;
 use Prism\Prism\Prism;
-use App\Entities\PrismHelper;
+use App\Prism\PrismHelper;
 use App\Models\ChatbotSession;
 use App\Models\ChatbotMessage;
 use Prism\Prism\Enums\Provider;
@@ -33,7 +33,6 @@ class ChatbotServices
                     description: 'Individual chunk selection',
                     options: 
                        ChunkSelectors::getUserChunks()
-                    
                     )
                 )
             ],
