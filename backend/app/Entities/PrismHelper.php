@@ -17,8 +17,7 @@ class PrismHelper
 
         foreach ($objects as $obj) {
             if (isset($obj['role']) && isset($obj['content'])) {
-                \Log::info('Role: ' . $obj['role']);
-                \Log::info('Content: ' . $obj['content']);
+                
                 $schemas[] = new StringSchema($obj['role'], $obj['content']);
             }
         }
@@ -26,7 +25,7 @@ class PrismHelper
         return $schemas;
     }
 
-    public static function buildSchema($name,$description,array $properties,array $requiredFields): array
+    public static function buildSchema($name,$description,array $properties,array $requiredFields)
     {
        return new ObjectSchema(
                 name: $name,

@@ -29,33 +29,29 @@ class ChatbotServices
 
         }
         
-        //get messages belonging to the session
-        $messages = $session->chatbotMessages;
+        $response = Prism::text()
+        ->using(Provider::OpenAI, 'gpt-4')
+        ->withSystemPrompt('You are a helpful assistant')
+        ->withPrompt($response->prompt)
+        ->asText();
         
-        $schemas=PrismHelper::makeStringSchemas($messages->toArray());
-        $schema = PrismHelper::buildSchema('chatbot', 'this is previous chat:', $schemas, ['user', 'assistant']);
-
-        // $response = Prism::text()
-        // ->using(Provider::OpenAI, 'gpt-4')
-        // ->withSystemPrompt('You are a helpful assistant. Respond only to gym related queries,Make your responses short and concise.')
-        // ->withPrompt($request->prompt)
-        // ->asText();
-        // if(!$response){
-        //     throw new \Exception('Error in getting response from the chatbot', 500);
-        // }
-        // //save the messages to the database
-        // $message = ChatbotMessage::create([
-        //     'chatbot_session_id' => $session->id,
-        //     'role' => 'user',
-        //     'content' => $request->prompt,
-        // ]);
-        // $message = ChatbotMessage::create([
-        //     'chatbot_session_id' => $session->id,
-        //     'role' => 'assistant',
-        //     'content' => $response->text,
-        // ]);
+                    
+        if(!$response){
+            throw new \Exception('Error in getting response from the chatbot', 500);
+        }
+        //save the messages to the database
+        $message = ChatbotMessage::create([
+            'chatbot_session_id' => $session->id,
+            'role' => 'user',
+            'content' => $request->prompt,
+        ]);
+        $message = ChatbotMessage::create([
+            'chatbot_session_id' => $session->id,
+            'role' => 'assistant',
+            'content' => $response->text,
+        ]);
 
 
-        return ['schemas'=>$schemas];
+        return $result;
     }
 }
