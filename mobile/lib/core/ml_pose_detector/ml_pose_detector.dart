@@ -56,6 +56,7 @@ class MlPoseDetectorFunctions {
       Map<String, Map<String, double>> landmarksMap = {};
 
       pose.landmarks.forEach((type, landmark) {
+        
         landmarksMap[type.name] = {
           'x': landmark.x,
           'y': landmark.y,
@@ -67,7 +68,7 @@ class MlPoseDetectorFunctions {
     }
 
     // Now allPosesLandmarks contains all landmarks with their x, y, and likelihood for each pose
-    
+    // print(allPosesLandmarks);
     return allPosesLandmarks;
   }
 

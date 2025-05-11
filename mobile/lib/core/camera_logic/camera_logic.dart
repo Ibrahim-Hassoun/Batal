@@ -51,13 +51,13 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
     // these setters are used for testing purposes
 
 
-    DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 3000));
+    DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 100));
 
     List<List<Map<String, Map<String, double>>>> landmarks = [];
 
     workoutProvider.controller!.startImageStream((CameraImage image) async{
       final now = DateTime.now();
-      if (now.difference(lastProcessed).inMilliseconds >= 3000) {
+      if (now.difference(lastProcessed).inMilliseconds >= 100) {
         lastProcessed = now;
         List<Map<String, Map<String, double>>> newLandmark =await mlPoseDetectorFunctions.processCameraImage(image, workoutProvider.poseDetector!,workoutProvider);
         landmarks.add(newLandmark);

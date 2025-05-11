@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../lib/angles/geometry.dart';
 
 class Coaching{
 
@@ -38,9 +38,17 @@ class Coaching{
           final rightWrist = landmark['rightWrist'];
           final rightElbow = landmark['rightElbow'];
           final rightShoulder = landmark['rightShoulder'];
-          print('rightWrist: $rightWrist');
-          print('rightElbow: $rightElbow');
-          print('rightShoulder: $rightShoulder');
+          // print('rightWrist: $rightWrist');
+          // print('rightElbow: $rightElbow');
+          // print('rightShoulder: $rightShoulder');
+          if (rightShoulder != null && rightElbow != null && rightWrist != null) {
+            double angle = Geometry.calculateAngle(
+              rightShoulder['x']!, rightShoulder['y']!,
+              rightElbow['x']!, rightElbow['y']!,
+              rightWrist['x']!, rightWrist['y']!,
+            );
+            print('Elbow angle: $angle');
+          }
         }
       }
     }
