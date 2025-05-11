@@ -10,6 +10,7 @@ use Database\Seeders\PostSeeder;
 use Database\Seeders\ReactionSeeder;
 use Database\Seeders\JobProfileSeeder;
 use Database\Seeders\ExerciceSeeder;
+use Database\Seeders\ChatbotSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,7 +27,7 @@ class DatabaseSeeder extends Seeder
             PostSeeder::class,
             ReactionSeeder::class,
             JobProfileSeeder::class,
-            
+            ChatbotSeeder::class,
         ]);
         // User::factory(10)->create();
 
