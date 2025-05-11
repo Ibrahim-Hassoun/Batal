@@ -55,7 +55,7 @@ return new class extends Migration
             $table->string('dietary_restrictions')->nullable();
             $table->string('fitness_equipment')->nullable();
             $table->string('fitness_experience')->nullable();
-
+            
 
 
             $table->rememberToken();
