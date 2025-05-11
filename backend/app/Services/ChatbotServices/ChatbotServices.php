@@ -115,23 +115,34 @@ $chunkSelectorSchema = new ObjectSchema(
                 $contextData[$key] = $value;
             }
         }
+        $contextText = '';
+        foreach ($contextData as $key => $value) {
+            $contextText .= ucfirst(str_replace('_', ' ', $key)) . ': ' . $value . "\n";
+        }
+
+        $finalPrompt = "User info:\n$contextText\n\nUser question:\n" . $request->prompt . "\n\n" ;
         
-        // if(!$response){
-        //     throw new \Exception('Error in getting response from the chatbot', 500);
-        // }
-        // //save the messages to the database
-        // $message = ChatbotMessage::create([
-        //     'chatbot_session_id' => $session->id,
-        //     'role' => 'user',
-        //     'content' => $request->prompt,
-        // ]);
-        // $message = ChatbotMessage::create([
-        //     'chatbot_session_id' => $session->id,
-        //     'role' => 'assistant',
-        //     'content' => $response->text,
-        // ]);
+        $response = Prism::text()
+        ->using(Provider::OpenAI, 'gpt-4o')
+        ->withSystemPrompt('You are a helpful assistant. "Answer the question based on the user info provided. If the information is not available, say I do not know.')
+        ->withPrompt($finalPrompt)
+        ->asText();
+        if(!$response){
+            throw new \Exception('Error in getting response from the chatbot', 500);
+        }
+        //save the messages to the database
+        $message = ChatbotMessage::create([
+            'chatbot_session_id' => $session->id,
+            'role' => 'user',
+            'content' => $request->prompt,
+        ]);
+        $message = ChatbotMessage::create([
+            'chatbot_session_id' => $session->id,
+            'role' => 'assistant',
+            'content' => $response->text,
+        ]);
 
 
-        return ["chunks"=>$selectedChunks,"contextData"=>$contextData];
+        return ['response'=>$response->text];
     }
 }
