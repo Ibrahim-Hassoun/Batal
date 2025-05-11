@@ -9,7 +9,7 @@ use App\Services\ChatbotServices\ChatbotServices;
 class ChatbotController extends Controller
 {
     use HttpResponseTrait;
-    use ChatbotServices;
+    protected $chatbotService;
 
     public function __construct(ChatbotServices $chatbotServices)
     {
