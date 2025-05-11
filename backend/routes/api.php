@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GymController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\ExerciceController;
 use App\Http\Controllers\JobProfileController;
 
@@ -52,6 +53,10 @@ Route::group(['prefix'=>"v0.1"],function(){
 
         });
 
+        Route::group(['prefix'=>'chatbot'],function(){
+            Route::post('/send',[ChatbotController::class,'sendMessage']);
+           
+        });
         Route::group(['middleware' => 'isAdmin'], function () {
             
             Route::group(['prefix'=>'exercices'],function(){
