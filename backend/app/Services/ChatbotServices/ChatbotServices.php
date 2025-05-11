@@ -29,7 +29,7 @@ class ChatbotServices
         }
         
         //get messages belonging to the session
-        $messages = $session->ChatbotMessages();
+        $messages = $session->chatbotMessages;
 
         
         $response = Prism::text()
@@ -52,7 +52,7 @@ class ChatbotServices
             'content' => $response->text,
         ]);
 
-        
-        return ["response"=>$response->text];
+
+        return ["response"=>$response->text, 'session'=>$session];
     }
 }
