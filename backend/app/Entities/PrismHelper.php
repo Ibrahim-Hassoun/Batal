@@ -18,4 +18,14 @@ class PrismHelper
 
         return $schemas;
     }
+
+    public static function buildSchema($name,$description,array $properties,array $requiredFields): array
+    {
+       return new ObjectSchema(
+                name: $name,
+                description: $description,
+                properties: $properties,
+                requiredFields: $requiredFields
+            );
+    }
 }
