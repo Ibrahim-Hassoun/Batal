@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/main.dart';
-
+import '../.../../../../core/remote/server.dart';
 
 class ChatbotConversationScreen extends StatefulWidget {
   final int chatId;
@@ -24,7 +24,7 @@ class ChatbotConversationScreen extends StatefulWidget {
 
 
 class _ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
-  final List<Map<String, dynamic>> messages = [
+  static final List<Map<String, dynamic>> messages = [
     {'text': 'This is the main chat template', 'isMe': true, 'time': 'Nov 30, 2023, 9:41 AM'},
     {'text': 'Oh?', 'isMe': false},
     {'text': 'Cool', 'isMe': false},
@@ -41,13 +41,49 @@ class _ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
     {'text': 'Bye!', 'isMe': true},
     {'text': 'See ya!', 'isMe': false},
   ];
-  static String? temp;
+  static String temp='';
 
 
-  void sendMessage(){
-    
+  void sendMessage()async{
+    // print('trying to send this message: $temp');
+    if (temp !=null && temp!.isNotEmpty){
+      print('trying to send this message inside: $temp');
+      var response = await request(
+        endpoint: '/api/v0.1/chatbot/send',
+        method: 'POST',
+        body: {
+        "prompt": temp,
+      },
+        optimistic: (){
+          setState(() {
+            _ChatbotConversationScreenState.messages.add(
+              {'text': temp, 'isMe': true, 'time': DateTime.now().toString()},
+            );
+          });
+        },
+        rollback: (){
+          setState(() {
+            _ChatbotConversationScreenState.messages.removeLast();
+          });
+        },
+      );
+      if(response['success']){
+        print(response['data']);
+        setState(() {
+          _ChatbotConversationScreenState.messages.add(
+            {'text': response['data']['data'], 'isMe': false, 'time': DateTime.now().toString()},
+          );
+        });
+      }
+    }
   }
+TextEditingController _controller = TextEditingController();
 
+  @override
+void initState() {
+  super.initState();
+  _controller.text = temp;
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,7 +178,7 @@ class _ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
                       });
                     },
                     
-                    controller: TextEditingController(text: temp),
+                    controller: _controller,
                     decoration: InputDecoration(
                       
                       hintText: "Message..." ,
@@ -155,8 +191,10 @@ class _ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
                 IconButton(icon: Icon(Icons.image), onPressed: () {}),
                 IconButton(icon: Icon(Icons.send), onPressed: ()=> {
                       setState(() {
-                        temp = '';
+                        
                         sendMessage();
+                        _controller.clear();
+                        temp = '';
                       })
                     },),
               ],

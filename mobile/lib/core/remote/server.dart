@@ -21,14 +21,21 @@ Future<Map<String, dynamic>> request({
   try {
     optimistic?.call();
     http.Response response;
-
+    
     switch (method.toUpperCase()) {
       case 'POST':
+      
+        // Add Bearer token if provided in headers
+        final token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YwLjEvbG9naW4iLCJpYXQiOjE3NDcwMDE4NjcsImV4cCI6MTc0NzAwNTQ2NywibmJmIjoxNzQ3MDAxODY3LCJqdGkiOiJyZ0FjY1VkNkVyQ29JVTVBIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.vG3VMfrXhiORxFz12w1KTesE3bMqJZBuo3466Y2tPbM';
+        final postHeaders = Map<String, String>.from(defaultHeaders);
+        postHeaders['Authorization'] = 'Bearer $token';
+       
         response = await http.post(
           url,
-          headers: defaultHeaders,
+          headers: postHeaders,
           body: jsonEncode(body),
         );
+        print('response: ${response.body}');
         break;
       case 'GET':
         response = await http.get(
@@ -75,6 +82,7 @@ Future<Map<String, dynamic>> request({
     
   } catch (e) {
     rollback?.call();
+    print('error: $e');
     return {
       'success': false,
       'message': e.toString(),
