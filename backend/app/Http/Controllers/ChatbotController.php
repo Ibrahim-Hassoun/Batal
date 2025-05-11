@@ -18,6 +18,12 @@ class ChatbotController extends Controller
 
     public function sendMessage(Request $request)
     {
-        
+        try{
+            $message = $this->chatbotServices->sendMessage($request);
+            return $this->respond(true,'Message sent successfully',$message,201);
+
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
     }
 }
