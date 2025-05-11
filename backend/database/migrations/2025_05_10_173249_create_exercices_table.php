@@ -23,7 +23,8 @@ return new class extends Migration
             $table->integer('duration')->nullable();        
             $table->string('image_url')->nullable();        
             $table->string('video_url')->nullable();        
-            $table->json('tags')->nullable();               
+            $table->json('tags')->nullable();       
+            $table->softDeletes();        
             $table->timestamps();
         });
     }

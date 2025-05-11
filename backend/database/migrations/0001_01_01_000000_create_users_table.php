@@ -44,6 +44,20 @@ return new class extends Migration
             $table->integer('trophies_count')->default(0);
             $table->timestamp('last_login_at')->nullable();
             $table->string('last_login_ip')->nullable();
+
+            $table->string('fitness_level')->nullable();
+            $table->string('fitness_goal')->nullable();
+            $table->string('fitness_interests')->nullable();
+            $table->string('injuries')->nullable();
+            $table->string('medical_conditions')->nullable();
+            $table->string('allergies')->nullable();
+            $table->string('dietary_preferences')->nullable();
+            $table->string('dietary_restrictions')->nullable();
+            $table->string('fitness_equipment')->nullable();
+            $table->string('fitness_experience')->nullable();
+            
+
+
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes(); 
