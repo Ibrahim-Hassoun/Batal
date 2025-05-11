@@ -43,25 +43,13 @@ class ChatbotServices
     }
 
     private function sendToModel($request, $userId){
-        $usersChunkSelectionSchema = ChunkSelectors::makeChunkSelector(ChunkSelectors::getUserChunks());
-        //usersChunkSelectionSchema will return an array of the needed chunks
+       
+        $selectedChunks = PrismHelper::decideChunks('users', $request->prompt);
+        $rawRow = User::find($userId);
 
-        $prompt = "The user asked: '{$request->prompt}'\n" .
-                  "From the list of available data, select only the ones most relevant to answering this question.";
+        $finalContextText = ContextBuilder::buildContext($rawRow, $selectedChunks);
 
-
-        $response = Prism::structured()
-        ->using(Provider::OpenAI, 'gpt-4o')
-        ->withSchema($usersChunkSelectionSchema)
-        ->withPrompt($prompt)
-        ->asStructured();
-        
-        $selectedChunks = $response->structured['selected_chunks'];
-        $user = User::find($userId);
-
-        $contextText = ContextBuilder::buildContext($user, $selectedChunks);
-
-        $finalPrompt = "User info:\n$contextText\n\nUser question:\n" . $request->prompt . "\n\n" ;
+        $finalPrompt = "User info:\n$finalContextText\n\nUser question:\n" . $request->prompt . "\n\n" ;
         
         $response = Prism::text()
         ->using(Provider::OpenAI, 'gpt-4o')
