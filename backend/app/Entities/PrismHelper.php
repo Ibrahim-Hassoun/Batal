@@ -2,18 +2,25 @@
 
 namespace App\Entities;
 
-use OpenSouth\Prism\Types\Schemas\StringSchema;
-use OpenSouth\Prism\Types\Schemas\ObjectSchema;
-
+use Prism\Prism\Prism;
+use Prism\Prism\Enums\Provider;
+use Prism\Prism\Schema\ObjectSchema;
+use Prism\Prism\Schema\StringSchema;
 
 class PrismHelper
 {
-    public static function stringSchemas(array $fields): array
+
+
+    public static function makeStringSchemas(array $objects): array
     {
         $schemas = [];
 
-        foreach ($fields as $key => $description) {
-            $schemas[] = new StringSchema($key, $description);
+        foreach ($objects as $obj) {
+            if (isset($obj['role']) && isset($obj['content'])) {
+                \Log::info('Role: ' . $obj['role']);
+                \Log::info('Content: ' . $obj['content']);
+                $schemas[] = new StringSchema($obj['role'], $obj['content']);
+            }
         }
 
         return $schemas;
