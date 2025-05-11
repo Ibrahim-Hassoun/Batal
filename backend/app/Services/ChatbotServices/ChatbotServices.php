@@ -12,6 +12,8 @@ use Prism\Prism\Schema\ObjectSchema;
 use Prism\Prism\Schema\EnumSchema;
 use Prism\Prism\Schema\ArraySchema;
 use App\Prism\ChunkSelectors\ChunkSelectors;
+
+
 class ChatbotServices
 {
     public function sendMessage($request)
@@ -21,23 +23,7 @@ class ChatbotServices
         $user = User::find($userId);
         $session = $this->getSession($userId);
 
-        $chunkSelectorSchema = PrismHelper::buildSchema( 
-            'chunk_selector',
-            'Schema for selecting relevant context chunks',
-        [
-            new ArraySchema(
-                name: 'selected_chunks',
-                description: 'Most relevant user info chunks for this question',
-                items: new EnumSchema(
-                    name: 'chunk_item',
-                    description: 'Individual chunk selection',
-                    options: 
-                       ChunkSelectors::getUserChunks()
-                    )
-                )
-            ],
-            ['selected_chunks']
-        );
+        $chunkSelectorSchema = ChunkSelectors::makeChunkSelector(ChunkSelectors::getUserChunks());
 
 
         $prompt = "The user asked: '{$request->prompt}'\n" .

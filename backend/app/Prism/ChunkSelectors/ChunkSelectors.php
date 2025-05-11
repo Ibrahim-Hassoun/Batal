@@ -2,7 +2,32 @@
 
 namespace App\Prism\ChunkSelectors;
 
+use App\Prism\PrismHelper;
+use Prism\Prism\Schema\EnumSchema;
+use Prism\Prism\Schema\ArraySchema;
+use Prism\Prism\Schema\ObjectSchema;
+
 class ChunkSelectors {
+
+    public static function makeChunkSelector( $chunks){
+        return PrismHelper::buildSchema( 
+                'chunk_selector',
+                'Schema for selecting relevant context chunks',
+            [
+                new ArraySchema(
+                    name: 'selected_chunks',
+                    description: 'Most relevant user info chunks for this question',
+                    items: new EnumSchema(
+                        name: 'chunk_item',
+                        description: 'Individual chunk selection',
+                        options: 
+                            $chunks
+                        )
+                    )
+                ],
+                ['selected_chunks']
+            );
+    }
 
     public static function getUserChunks(){
         return [
