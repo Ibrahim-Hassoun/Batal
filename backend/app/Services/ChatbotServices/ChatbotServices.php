@@ -20,15 +20,16 @@ class ChatbotServices
             throw new \Exception('User not found');
         }
         //check if user has a session and if not create one
-        $sessionId = $request->chatbotSession->id;
-        if (!$sessionId) {
-            $sessionId=ChatbotSession::create([
+        $session = $user->chatbotSession;
+        if (!$session) {
+            $session=ChatbotSession::create([
                 'user_id' => $userId,
-            ])->id;
+            ]);
 
         }
+        
         //get messages belonging to the session
-        $messages = ChatbotMessage::find( $sessionId)->ChatbotMessages();
+        $messages = $session->ChatbotMessages();
 
         
         $response = Prism::text()
@@ -36,7 +37,7 @@ class ChatbotServices
         ->withSystemPrompt('You are a helpful assistant. Respond only to gym related queries,Make your responses short and concise.')
         ->withPrompt($request->prompt)
         ->asText();
-
-        return $response->text;
+        
+        return ["response"=>$response->text,"userId"=>$userId,"user"=>$user,"session"=>$session,"messages"=>$messages];
     }
 }
