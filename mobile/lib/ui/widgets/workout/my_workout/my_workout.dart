@@ -5,7 +5,7 @@ import 'exercice_row.dart';
 
 
 class MyWorkout extends StatefulWidget {
-  const MyWorkout({Key? key}) : super(key: key);
+  const MyWorkout({super.key});
 
   @override
   State<MyWorkout> createState() => _MyWorkoutState();

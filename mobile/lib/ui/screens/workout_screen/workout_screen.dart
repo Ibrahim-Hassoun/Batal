@@ -5,6 +5,8 @@ import '../../widgets/workout/appbar/workout_appbar.dart';
 import '../../widgets/workout/tabbar/tabbar.dart';
 
 class WorkoutScreen extends StatefulWidget{
+  const WorkoutScreen({super.key});
+
   @override
   State<WorkoutScreen> createState() => _WorkoutScreenState();
 }

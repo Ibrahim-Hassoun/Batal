@@ -11,13 +11,13 @@ class PlayerRow extends StatelessWidget {
   final String imageUrl;
 
   const PlayerRow({
-    Key? key,
+    super.key,
     required this.playerName,
     required this.playerScore,
     required this.rank,
     required this.imageUrl,
     required this.streak,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class PlayerRow extends StatelessWidget {
           ),
         ],
           ),
-          trailing: Text('${playerScore} Points',style: TextStyle(fontSize: 16,color: text_gray,fontWeight: FontWeight.w800),),
+          trailing: Text('$playerScore Points',style: TextStyle(fontSize: 16,color: text_gray,fontWeight: FontWeight.w800),),
         ),
       )
       );

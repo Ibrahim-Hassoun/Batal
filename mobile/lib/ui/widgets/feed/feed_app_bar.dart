@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mobile/main.dart';
 
 class FeedAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const FeedAppBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return AppBar(

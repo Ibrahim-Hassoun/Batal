@@ -12,7 +12,7 @@ class BottomNavbarItem extends StatefulWidget implements PreferredSizeWidget {
   final String state;
  
 
-  BottomNavbarItem({
+  const BottomNavbarItem({super.key, 
     required this.icon,
     required this.label,
     required this.widget,

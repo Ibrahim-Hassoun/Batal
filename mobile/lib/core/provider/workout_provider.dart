@@ -12,7 +12,7 @@ import '../camera_logic/camera_logic.dart';
 import '../ml_pose_detector/coaching.dart';
 
 class WorkoutProvider with ChangeNotifier {
-  List<String> _workouts = [];
+  final List<String> _workouts = [];
   List<String> get workouts => _workouts;
   
   String _tab='pose_detector';
@@ -24,7 +24,7 @@ class WorkoutProvider with ChangeNotifier {
   String? _detected_muscle='biceps';
   String? get detected_muscle => _detected_muscle;
 
-  String? _detected_exercise ='curl';
+  final String? _detected_exercise ='curl';
   String? get detected_exercise => _detected_exercise;
 
       //general
@@ -181,7 +181,7 @@ class WorkoutProvider with ChangeNotifier {
 
   void setDetectedArea(String area) {
     _detected_area = area;
-    print("this is from provider" + (_detected_area ?? "unknown"));
+    print("this is from provider${_detected_area ?? "unknown"}");
     Coaching.area = area;
     notifyListeners();
   }

@@ -1,30 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/main.dart';
+import '../.../../../../core/remote/server.dart';
+import './chatbot_logic.dart';
 
-
-class ConversationScreen extends StatefulWidget {
+class ChatbotConversationScreen extends StatefulWidget {
   final int chatId;
   final String chatName;
   final List<String> chatMessages;
   final DateTime? lastSeen;
   final String? chatImageUrl;
 
-  const ConversationScreen({
-    Key? key,
+
+
+  static String temp='';
+  static final ScrollController scrollController = ScrollController();
+  
+  ChatbotConversationScreen({
+    super.key,
     required this.chatId,
     required this.chatName,
     required this.chatMessages,
     required this.lastSeen,
     this.chatImageUrl,
-  }) : super(key: key);
-
+  });
+  
   @override
-  State<ConversationScreen> createState() => _ConversationScreenState();
+  State<ChatbotConversationScreen> createState() => ChatbotConversationScreenState();
 }
 
 
-class _ConversationScreenState extends State<ConversationScreen> {
-  final List<Map<String, dynamic>> messages = [
+class ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
+  
+
+  static final List<Map<String, dynamic>> messages = [
     {'text': 'This is the main chat template', 'isMe': true, 'time': 'Nov 30, 2023, 9:41 AM'},
     {'text': 'Oh?', 'isMe': false},
     {'text': 'Cool', 'isMe': false},
@@ -41,6 +49,19 @@ class _ConversationScreenState extends State<ConversationScreen> {
     {'text': 'Bye!', 'isMe': true},
     {'text': 'See ya!', 'isMe': false},
   ];
+  
+
+
+ 
+TextEditingController _controller = TextEditingController();
+
+
+
+  @override
+void initState() {
+  super.initState();
+  _controller.text = ChatbotConversationScreen.temp;
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +77,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
         ),
        title: Row(
           children: [
-            CircleAvatar(backgroundImage: AssetImage('assets/avatar.png')), // Add a default image
+            // CircleAvatar(backgroundImage: NetworkImage(widget.chatImageUrl ?? 'https://randomuser.me/api/portraits')), // Add a default image
             SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,6 +104,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
         children: [
           Expanded(
             child: ListView.builder(
+              controller: ChatbotConversationScreen.scrollController, 
               physics: BouncingScrollPhysics(),
               padding: EdgeInsets.all(12),
               itemCount: messages.length,
@@ -129,15 +151,31 @@ class _ConversationScreenState extends State<ConversationScreen> {
               children: [
                 Expanded(
                   child: TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        ChatbotConversationScreen.temp = value;
+                      });
+                    },
+                    
+                    controller: _controller,
                     decoration: InputDecoration(
-                      hintText: "Message...",
+                      
+                      hintText: "Message..." ,
                       border: InputBorder.none,
+                      
                     ),
                   ),
                 ),
                 IconButton(icon: Icon(Icons.mic), onPressed: () {}),
                 IconButton(icon: Icon(Icons.image), onPressed: () {}),
-                IconButton(icon: Icon(Icons.add), onPressed: () {}),
+                IconButton(icon: Icon(Icons.send), onPressed: ()=> {
+                      setState(() {
+                        
+                        sendMessage(this);
+                        _controller.clear();
+                        ChatbotConversationScreen.temp = '';
+                      })
+                    },),
               ],
             ),
           ),

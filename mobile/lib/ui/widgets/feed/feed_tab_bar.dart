@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import '../../../core/provider/feed_provider.dart';
 
 class FeedTabBar extends StatefulWidget implements PreferredSizeWidget {
+  const FeedTabBar({super.key});
+
   @override
   _FeedTabBarState createState() => _FeedTabBarState();
 

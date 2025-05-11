@@ -10,7 +10,7 @@ import '../../../layouts/CustomCanva.dart';
 
 
 class PoseDetectorTab extends StatefulWidget {
-  const PoseDetectorTab({Key? key}) : super(key: key);
+  const PoseDetectorTab({super.key});
 
   @override
   _PoseDetectorState createState() => _PoseDetectorState();
@@ -21,7 +21,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
   @override
   Widget build(BuildContext context) {
     WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen:true);
-    bool is_recording = provider.is_Recording;
+    bool isRecording = provider.is_Recording;
     Uint8List? pngBytes = provider.imageBytes;
     List<Map<String, Map<String, double>>> landmarks = provider.landmarks;
 
@@ -45,7 +45,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
         SizedBox(//camera section
             width: 300, 
             height: 350,
-            child:  is_recording
+            child:  isRecording
             ? Stack(
               children: [
               CameraSection(), // The camera image
@@ -61,7 +61,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
               
                 Positioned.fill(
                 child: CustomPaint(
-                  painter: !landmarks.isEmpty? CustomCanva(landmarks):null,
+                  painter: landmarks.isNotEmpty? CustomCanva(landmarks):null,
                 ),
                 ),
               ],
@@ -82,8 +82,8 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
             onPressed: () {
               provider.toggleRecording();
             },
-            label: is_recording?'Stop':'Start',
-            backgroundColor: is_recording?secondaryColor: primaryColor,
+            label: isRecording?'Stop':'Start',
+            backgroundColor: isRecording?secondaryColor: primaryColor,
             foregroundColor: tertiaryColor,
             
           ),

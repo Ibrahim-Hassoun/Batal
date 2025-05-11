@@ -3,7 +3,7 @@ import 'package:mobile/main.dart';
 import 'package:mobile/ui/widgets/chats/chat_row.dart';
 
 class ChatsScreen extends StatefulWidget {
-  const ChatsScreen({Key? key}) : super(key: key);
+  const ChatsScreen({super.key});
 
   @override
   State<ChatsScreen> createState() => _ChatsScreenState();
