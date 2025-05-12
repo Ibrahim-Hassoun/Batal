@@ -46,14 +46,14 @@ Future<Map<String, dynamic>> request({
       case 'PUT':
         response = await http.put(
           url,
-          headers: defaultHeaders,
+          headers: postHeaders,
           body: jsonEncode(body),
         );
         break;
       case 'DELETE':
         response = await http.delete(
           url,
-          headers: defaultHeaders,
+          headers: postHeaders,
           body: jsonEncode(body),
         );
         break;
