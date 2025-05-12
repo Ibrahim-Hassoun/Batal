@@ -95,7 +95,7 @@ void initState() {
           
           Expanded(
             child: ChatbotConversationScreen.loadingMessages?
-            Center(child: CircularProgressIndicator(color: primaryColor))
+            Center(child: Column(mainAxisAlignment: MainAxisAlignment.center,children: [CircularProgressIndicator(color: primaryColor),Text('Loading messages')],))
             :
             ChatbotConversationScreen.messages.isEmpty?
             Center(child: Text('No messages yet'),):
