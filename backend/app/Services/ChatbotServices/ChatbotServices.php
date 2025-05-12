@@ -16,6 +16,16 @@ use App\Prism\ContextBuilder\ContextBuilder;
 
 class ChatbotServices
 {   
+    public function resetSession($request)
+    {
+        $userId = $request->user()->id;
+        $session = $this->getSession($userId);
+        if (!$session->delete()) {
+            throw new \Exception('Failed to delete the session', 500);
+        }
+        return true;
+    }
+    
     public function getMessages($request)
     {
         $userId = $request->user()->id;
