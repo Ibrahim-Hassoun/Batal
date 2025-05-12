@@ -14,11 +14,12 @@ void sendMessage(ChatbotConversationScreenState screenState) async {
       },
       optimistic: () {
         screenState.setState(() {
-          ChatbotConversationScreenState.messages.add({
+          ChatbotConversationScreen.messages.add({
             'text': ChatbotConversationScreen.temp,
             'isMe': true,
             'time': DateTime.now().toString(),
           });
+          ChatbotConversationScreen.isTyping = true;
         });
         WidgetsBinding.instance.addPostFrameCallback((_) {
           ChatbotConversationScreen.scrollController.animateTo(
@@ -30,15 +31,16 @@ void sendMessage(ChatbotConversationScreenState screenState) async {
       },
       rollback: () {
         screenState.setState(() {
-          ChatbotConversationScreenState.messages.removeLast();
+          ChatbotConversationScreen.messages.removeLast();
         });
       },
     );
 
+    ChatbotConversationScreen.isTyping = false;
     if (response['success']) {
       print(response['data']);
       screenState.setState(() {
-        ChatbotConversationScreenState.messages.add({
+        ChatbotConversationScreen.messages.add({
           'text': response['data']['data'],
           'isMe': false,
           'time': DateTime.now().toString(),
@@ -61,7 +63,7 @@ void clearChat(ChatbotConversationScreenState screenState) async{
     method: 'DELETE',
     optimistic: () {
       screenState.setState(() {
-        ChatbotConversationScreenState.messages.clear();
+        ChatbotConversationScreen.messages.clear();
       });
     },
     rollback: () {
@@ -69,6 +71,27 @@ void clearChat(ChatbotConversationScreenState screenState) async{
     },
   );
   screenState.setState(() {
-    ChatbotConversationScreenState.messages.clear();
+    ChatbotConversationScreen.messages.clear();
   });
+}
+
+void loadMessages() async{
+  var response = await request(
+    endpoint: '/api/v0.1/chatbot/messages',
+    method: 'GET',
+  );
+  if (response['success']) {
+    print(response['data']);
+    List<dynamic> messages = response['data']['messages'];
+    ChatbotConversationScreen.messages.clear();
+    for (var msg in messages) {
+      ChatbotConversationScreen.messages.add({
+        'text': msg['text'],
+        'isMe': msg['isMe'],
+        'time': msg['time'],
+      });
+    }
+  } else {
+    print('Error loading messages: ${response['message']}');
+  }
 }

@@ -14,7 +14,8 @@ class ChatbotConversationScreen extends StatefulWidget {
 
   static String temp='';
   static final ScrollController scrollController = ScrollController();
-  
+  static bool isTyping = false;
+
   ChatbotConversationScreen({
     super.key,
     required this.chatId,
@@ -94,45 +95,55 @@ void initState() {
             child: ListView.builder(
               controller: ChatbotConversationScreen.scrollController, 
               physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.all(12),
+              padding: EdgeInsets.all(16),
               itemCount: messages.length,
               itemBuilder: (context, index) {
                 final message = messages[index];
                 final isMe = message['isMe'];
                 return Align(
-                  alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
-                  child: Column(
-                    crossAxisAlignment:
-                        isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-                    children: [
-                      if (message.containsKey('time'))
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: Text(
-                            message['time'],
-                            style: TextStyle(fontSize: 12, color: bg_gray),
-                          ),
-                        ),
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 4),
-                        padding: EdgeInsets.all(12),
-                        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
-                        decoration: BoxDecoration(
-                          color: isMe ? Colors.grey.shade300 : Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Text(
-                          message['text'],
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
+  alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+  child: Column(
+    crossAxisAlignment:
+        isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+    children: [
+      if (message.containsKey('time'))
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Text(
+            message['time'],
+            style: TextStyle(fontSize: 12, color: bg_gray),
+          ),
+        ),
+      Container(
+        margin: EdgeInsets.symmetric(vertical: 4),
+        padding: EdgeInsets.all(12),
+        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
+        decoration: BoxDecoration(
+          color: isMe ? Colors.grey.shade300 : Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Text(
+          message['text'],
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
+
+      // Show arrow only after last chatbot message
+      if (index == messages.length - 1  && ChatbotConversationScreen.isTyping)
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [CircularProgressIndicator(color: primaryColor,)]
+        ),
+    ],
+  ),
+);
+
               },
             ),
           ),
+          
           Divider(height: 1),
+          
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6),
             child: Row(
