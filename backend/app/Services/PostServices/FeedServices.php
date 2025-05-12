@@ -3,6 +3,7 @@
 namespace App\Services\PostServices;
 
 use App\Models\Post;
+use Illuminate\Support\Facades\DB;
 
 
 class FeedServices {
@@ -24,10 +25,10 @@ class FeedServices {
 
     public function getTrendingPosts($request)
     {
-        $posts = Post::orderByDesc(DB::raw('likes_count * 1 + comments_count * 2 + shares_count * 3'))
+        $posts = Post::orderByDesc(DB::raw('reactions * 1 + comments * 2 + shares * 3'))
                 ->orderByDesc('created_at')
                 ->take(10)
                 ->get();
-
+        return $posts;
     }
 }

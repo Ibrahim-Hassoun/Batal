@@ -115,7 +115,7 @@ class PostController extends Controller
             $posts = $this->feedServices->getTrendingPosts($request);
             return $this->respond(true,"Trending posts fetched successfully",$posts,200);
         }catch(\Exception $e){
-            return $this->respond(false, $e->getMessage(), null, $e->getCode() ?: 500);
+            return $this->respond(false, $e->getMessage(), null,  500);
         } 
     }
 }
