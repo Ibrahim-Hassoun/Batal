@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponseTrait;
 use App\Services\PostServices\PostServices;
+use App\Services\PostServices\FeedServices;
 use App\Services\PostServices\ReactionServices;
 use App\Http\Requests\PostRequests\AddPostRequest;
 use App\Http\Requests\PostRequests\UpdatePostRequest;
@@ -16,11 +17,14 @@ class PostController extends Controller
     use HttpResponseTrait;
     protected $postServices;
     protected $reactionServices;
+    protected $feedServices;
 
-    public function __construct(PostServices $postServices,ReactionServices $reactionServices)
+    public function __construct(PostServices $postServices,ReactionServices $reactionServices,FeedServices $feedServices)
     {
         $this->postServices = $postServices;
         $this->reactionServices = $reactionServices;
+        $this->feedServices = $feedServices;
+
     }
 
 
@@ -93,5 +97,25 @@ class PostController extends Controller
         }catch(\Exception $e){
             return $this->respond(false, $e->getMessage(), null, $e->getCode() ?: 500);
         }
+    }
+
+    public function getFollowingsPosts(Request $request)
+    {
+        try{
+            $posts = $this->feedServices->getFollowingsPosts($request);
+            return $this->respond(true,"Following posts fetched successfully",$posts,200);
+        }catch(\Exception $e){
+            return $this->respond(false, $e->getMessage(), null, $e->getCode() ?: 500);
+        } 
+    }
+
+    public function getTrendingPosts(Request $request)
+    {
+        try{
+            $posts = $this->feedServices->getTrendingPosts($request);
+            return $this->respond(true,"Trending posts fetched successfully",$posts,200);
+        }catch(\Exception $e){
+            return $this->respond(false, $e->getMessage(), null,  500);
+        } 
     }
 }

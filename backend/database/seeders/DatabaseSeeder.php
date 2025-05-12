@@ -2,16 +2,18 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\GymSeeder;
-use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use Database\Seeders\GymSeeder;
 use Illuminate\Database\Seeder;
 use Database\Seeders\PostSeeder;
 use Database\Seeders\ReactionSeeder;
+use Database\Seeders\FollowingSeeder;
 use Database\Seeders\JobProfileSeeder;
 use Database\Seeders\ExerciceSeeder;
 use Database\Seeders\ChatbotMessageSeeder;
 use Database\Seeders\ChatbotSessionSeeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +23,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+             FollowingSeeder::class,
             UserSeeder::class,
             LogSeeder::class,
             GymSeeder::class,
@@ -30,6 +33,7 @@ class DatabaseSeeder extends Seeder
             ExerciceSeeder::class,
             ChatbotSessionSeeder::class,
             ChatbotMessageSeeder::class,
+
         ]);
         // User::factory(10)->create();
 
