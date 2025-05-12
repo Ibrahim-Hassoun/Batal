@@ -12,6 +12,12 @@ class FeedScreen extends StatefulWidget {
 }
 
 class _FeedScreenState extends State<FeedScreen> {
+
+  @override
+  void _initState(){
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
