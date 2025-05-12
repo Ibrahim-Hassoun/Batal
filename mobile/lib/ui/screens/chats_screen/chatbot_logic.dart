@@ -67,7 +67,13 @@ void clearChat(ChatbotConversationScreenState screenState) async{
       });
     },
     rollback: () {
-      // Handle rollback if needed
+      screenState.setState(() {
+        ChatbotConversationScreen.messages.add({
+          'text': 'session not deleted',
+          'isMe': false,
+          'time': DateTime.now().toString(),
+        });
+      });
     },
   );
   screenState.setState(() {
@@ -83,7 +89,6 @@ void loadMessages(ChatbotConversationScreenState screenState) async{
 
   if (response['success']) {
     screenState.setState(() {
-      print(response['data']);
       List<dynamic> messages = response['data']['data'];
       ChatbotConversationScreen.messages.clear();
       for (var msg in messages) {

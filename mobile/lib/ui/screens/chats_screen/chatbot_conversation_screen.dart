@@ -97,6 +97,8 @@ void initState() {
             child: ChatbotConversationScreen.loadingMessages?
             Center(child: CircularProgressIndicator(color: primaryColor))
             :
+            ChatbotConversationScreen.messages.isEmpty?
+            Center(child: Text('No messages yet'),):
             ListView.builder(
               controller: ChatbotConversationScreen.scrollController, 
               physics: BouncingScrollPhysics(),
