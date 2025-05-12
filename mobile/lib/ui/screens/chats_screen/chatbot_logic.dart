@@ -75,22 +75,25 @@ void clearChat(ChatbotConversationScreenState screenState) async{
   });
 }
 
-void loadMessages() async{
+void loadMessages(ChatbotConversationScreenState screenState) async{
   var response = await request(
     endpoint: '/api/v0.1/chatbot/messages',
     method: 'GET',
   );
+
   if (response['success']) {
-    print(response['data']);
-    List<dynamic> messages = response['data']['messages'];
-    ChatbotConversationScreen.messages.clear();
-    for (var msg in messages) {
-      ChatbotConversationScreen.messages.add({
-        'text': msg['text'],
-        'isMe': msg['isMe'],
-        'time': msg['time'],
-      });
-    }
+    screenState.setState(() {
+      print(response['data']);
+      List<dynamic> messages = response['data']['data'];
+      ChatbotConversationScreen.messages.clear();
+      for (var msg in messages) {
+        ChatbotConversationScreen.messages.add({
+          'text': msg['content'],
+          'isMe': msg['role'] == 'user' ? true : false,
+          'time': msg['created_at'],
+        });
+      }
+    });
   } else {
     print('Error loading messages: ${response['message']}');
   }

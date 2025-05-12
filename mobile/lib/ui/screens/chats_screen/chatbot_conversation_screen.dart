@@ -16,6 +16,13 @@ class ChatbotConversationScreen extends StatefulWidget {
   static final ScrollController scrollController = ScrollController();
   static bool isTyping = false;
 
+  
+  static final List<Map<String, dynamic>> messages = [
+    {'text': 'This is the main chat template', 'isMe': true, 'time': 'Nov 30, 2023, 9:41 AM'},
+    {'text': 'Oh?', 'isMe': false},
+    
+  ];
+
   ChatbotConversationScreen({
     super.key,
     required this.chatId,
@@ -33,11 +40,6 @@ class ChatbotConversationScreen extends StatefulWidget {
 class ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
   
 
-  static final List<Map<String, dynamic>> messages = [
-    {'text': 'This is the main chat template', 'isMe': true, 'time': 'Nov 30, 2023, 9:41 AM'},
-    {'text': 'Oh?', 'isMe': false},
-    
-  ];
   
 
 
@@ -50,6 +52,7 @@ TextEditingController _controller = TextEditingController();
 void initState() {
   super.initState();
   _controller.text = ChatbotConversationScreen.temp;
+  loadMessages(this);
 }
   @override
   Widget build(BuildContext context) {
@@ -96,9 +99,9 @@ void initState() {
               controller: ChatbotConversationScreen.scrollController, 
               physics: BouncingScrollPhysics(),
               padding: EdgeInsets.all(16),
-              itemCount: messages.length,
+              itemCount: ChatbotConversationScreen.messages.length,
               itemBuilder: (context, index) {
-                final message = messages[index];
+                final message = ChatbotConversationScreen.messages[index];
                 final isMe = message['isMe'];
                 return Align(
   alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
@@ -129,7 +132,7 @@ void initState() {
       ),
 
       // Show arrow only after last chatbot message
-      if (index == messages.length - 1  && ChatbotConversationScreen.isTyping)
+      if (index == ChatbotConversationScreen.messages.length - 1  && ChatbotConversationScreen.isTyping)
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [CircularProgressIndicator(color: primaryColor,)]
@@ -166,7 +169,7 @@ void initState() {
                     ),
                   ),
                 ),
-                
+                GestureDetector(child: Text('testing'),onTap: (){loadMessages(this);},),
                 IconButton(icon: Icon(Icons.send), onPressed: ()=> {
                       setState(() {
                         
