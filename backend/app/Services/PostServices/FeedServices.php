@@ -11,8 +11,9 @@ class PostServices {
     {
         $followingIds = auth()->user()->followings()->where('status', 'accepted')->pluck('followed_id');
 
-        Post::whereIn('user_id', $followingIds)->latest()->paginate(10);
-
+        $posts = Post::whereIn('user_id', $followingIds)->latest()->paginate(10);
+        
+        return $posts;
     }
 
 }
