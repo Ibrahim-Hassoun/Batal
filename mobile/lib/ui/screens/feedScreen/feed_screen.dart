@@ -8,10 +8,10 @@ class FeedScreen extends StatefulWidget {
   const FeedScreen({super.key});
 
   @override
-  _FeedScreenState createState() => _FeedScreenState();
+  FeedScreenState createState() => FeedScreenState();
 }
 
-class _FeedScreenState extends State<FeedScreen> {
+class FeedScreenState extends State<FeedScreen> {
 
   @override
   void _initState(){
