@@ -35,19 +35,7 @@ class ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
   static final List<Map<String, dynamic>> messages = [
     {'text': 'This is the main chat template', 'isMe': true, 'time': 'Nov 30, 2023, 9:41 AM'},
     {'text': 'Oh?', 'isMe': false},
-    {'text': 'Cool', 'isMe': false},
-    {'text': 'How does it work?', 'isMe': false},
-    {'text': 'You just edit any text to type in the conversation you want to show, and delete any bubbles you don’t want to use', 'isMe': true},
-    {'text': 'Boom!', 'isMe': true},
-    {'text': 'Hmmm', 'isMe': false},
-    {'text': 'I think I get it', 'isMe': false},
-    {'text': 'Will head to the Help Center if I have more questions tho', 'isMe': false},
-    {'text': 'Sure thing! I’m here to help', 'isMe': true},
-    {'text': 'Thanks!', 'isMe': false},
-    {'text': 'No problem', 'isMe': true},
-    {'text': 'See you around!', 'isMe': false},
-    {'text': 'Bye!', 'isMe': true},
-    {'text': 'See ya!', 'isMe': false},
+    
   ];
   
 
