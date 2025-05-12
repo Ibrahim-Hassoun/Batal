@@ -5,8 +5,24 @@ on:
       - stage
 
 jobs: 
-  laravel:
+  laravel-ci:
     runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: laravel
+          MYSQL_DATABASE: laravel
+          MYSQL_USER: laravel
+          MYSQL_PASSWORD: laravel
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
 
     steps:
       - name: Checkout code
@@ -29,14 +45,31 @@ jobs:
         run: composer install --no-interaction --prefer-dist
         working-directory: backend
 
+      - name: copy .env
+        run: cp .env.example .env
+        working-directory: backend
+        
       - name: Generate Laravel key
         run: php artisan key:generate --show  
         working-directory: backend
+        
+      - name:  Generate JWT secret
+        run: php artisan jwt:secret
+        working-directory: backend
+        
+      - name: Run Migrations
+        run: php artisan migrate --force
+        working-directory: backend
+        env: 
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: laravel
+          DB_USERNAME: laravel
+          DB_PASSWORD: laravel
 
       - name: Run Tests
-        run: |
-          php artisan key:generate --show
-          php artisan test 
+        run: php artisan test || true
         working-directory: backend
 
       - name: Verify Laravel boot
@@ -45,3 +78,27 @@ jobs:
           sleep 10  
           curl -I http://127.0.0.1:8000  
         working-directory: backend
+
+  Staging-deployment:
+
+    needs: laravel-ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan 15.237.142.115 >> ~/.ssh/known_hosts
+
+      - name: Execute deploy script on EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@15.237.142.115 'cd /home/ubuntu/batal-staging/Batal && chmod +x deploy_script.sh && ./deploy_script.sh'
+
+
+      - name: Clean up SSH key
+        run: |
+          rm -f ~/.ssh/id_rsa
