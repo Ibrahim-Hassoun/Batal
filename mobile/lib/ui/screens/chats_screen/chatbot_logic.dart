@@ -54,3 +54,21 @@ void sendMessage(ChatbotConversationScreenState screenState) async {
     }
   }
 }
+
+void clearChat(ChatbotConversationScreenState screenState) async{
+  var response = await request(
+    endpoint: '/api/v0.1/chatbot/session',
+    method: 'DELETE',
+    optimistic: () {
+      screenState.setState(() {
+        ChatbotConversationScreenState.messages.clear();
+      });
+    },
+    rollback: () {
+      // Handle rollback if needed
+    },
+  );
+  screenState.setState(() {
+    ChatbotConversationScreenState.messages.clear();
+  });
+}

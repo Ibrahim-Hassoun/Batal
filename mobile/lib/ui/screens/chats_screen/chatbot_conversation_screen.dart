@@ -137,6 +137,7 @@ void initState() {
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6),
             child: Row(
               children: [
+                IconButton(icon: Icon(Icons.refresh), onPressed: () {clearChat(this);}),
                 Expanded(
                   child: TextField(
                     onChanged: (value) {
@@ -154,8 +155,7 @@ void initState() {
                     ),
                   ),
                 ),
-                IconButton(icon: Icon(Icons.mic), onPressed: () {}),
-                IconButton(icon: Icon(Icons.image), onPressed: () {}),
+                
                 IconButton(icon: Icon(Icons.send), onPressed: ()=> {
                       setState(() {
                         
