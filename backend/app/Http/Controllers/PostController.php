@@ -102,8 +102,18 @@ class PostController extends Controller
     public function getFollowingsPosts(Request $request)
     {
         try{
-            $reaction = $this->feedServices->getFollowingsPosts($request);
-            return $this->respond(true,"Following posts fetched successfully",$reaction,200);
+            $posts = $this->feedServices->getFollowingsPosts($request);
+            return $this->respond(true,"Following posts fetched successfully",$posts,200);
+        }catch(\Exception $e){
+            return $this->respond(false, $e->getMessage(), null, $e->getCode() ?: 500);
+        } 
+    }
+
+    public function getTrendingPosts(Request $request)
+    {
+        try{
+            $posts = $this->feedServices->getTrendingPosts($request);
+            return $this->respond(true,"Trending posts fetched successfully",$posts,200);
         }catch(\Exception $e){
             return $this->respond(false, $e->getMessage(), null, $e->getCode() ?: 500);
         } 
