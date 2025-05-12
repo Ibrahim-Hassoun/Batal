@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +18,8 @@ class FollowingFactory extends Factory
     public function definition(): array
     {
         return [
-            'follower_id' => \App\Models\User::factory(),
-            'followed_id' => \App\Models\User::factory(),
+            'follower_id' => User::factory()->create()->id,
+            'followed_id' => User::factory()->create()->id,
             'status' => $this->faker->randomElement(['pending', 'accepted', 'rejected']),
         ];
     }
