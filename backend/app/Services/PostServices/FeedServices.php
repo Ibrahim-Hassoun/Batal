@@ -14,7 +14,7 @@ class FeedServices {
             throw new \Exception('No followings found.',500);
         }
         $posts = Post::with(['user:id,first_name,last_name'])->whereIn('user_id', $followingIds)->latest()->paginate(10);
-        
+
         if (!$posts) {
             throw new \Exception('No posts found for followings.', 404);
         }
@@ -22,4 +22,12 @@ class FeedServices {
         return $posts;
     }
 
+    public function getTrendingPosts($request)
+    {
+        $posts = Post::orderByDesc(DB::raw('likes_count * 1 + comments_count * 2 + shares_count * 3'))
+                ->orderByDesc('created_at')
+                ->take(10)
+                ->get();
+
+    }
 }
