@@ -23,6 +23,8 @@ return new class extends Migration
 
             $table->unique(['follower_id', 'followed_id']); // Prevent duplicate follows
 
+            $table->index('follower_id');
+            $table->index('followed_id');
 
         });
     }
