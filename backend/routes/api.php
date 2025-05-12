@@ -5,12 +5,22 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GymController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\ExerciceController;
 use App\Http\Controllers\JobProfileController;
+
 
 
 Route::group(['prefix'=>"v0.1"],function(){
     Route::post('/register',[AuthController::class,'register'] );
     Route::post('/login',[AuthController::class,'login'] );
+    Route::get('/test',function(){
+        return response()->json([
+            'message'=>'Hello World',
+            'message2sads'=>'Hello World2',
+            'last test'=>'last test'
+        ]);
+    });
     // Route::post('/logout',[AuthController::class,'logout'] ); to be implemented
     
 
@@ -45,5 +55,21 @@ Route::group(['prefix'=>"v0.1"],function(){
             Route::post('/approve',[JobProfileController::class,'approveJobProfile']);
 
         });
+
+        Route::group(['prefix'=>'chatbot'],function(){
+            Route::post('/send',[ChatbotController::class,'sendMessage']);
+            Route::get('/messages',[ChatbotController::class,'getMessages']);
+            Route::delete('/session',[ChatbotController::class,'resetSession']);
+        });
+        Route::group(['middleware' => 'isAdmin'], function () {
+            
+            Route::group(['prefix'=>'exercices'],function(){
+                Route::post('/add',[ExerciceController::class,'addExercice']);
+                
+            });
+
+        });
+        Route::post('/exercices/search',[ExerciceController::class,'searchExercice']);
+
     });
 });

@@ -1,5 +1,8 @@
-cd Batal
-git pull origin main
+git checkout stage
+git pull origin stage
 docker-compose down
-docker-compose up -d --build
+docker-compose up -d
+
+echo "✅ Deployment complete"
+exit 0
 

@@ -20,8 +20,9 @@ services:
       context: ./backend
       dockerfile: Dockerfile.laravel
     command: >
-      /wait-for-it.sh batal-database:3306 --timeout=300 -- 
-      bash -c "composer install && php artisan migrate && php artisan serve --host=0.0.0.0 --port=8000"
+      bash -c "/backend/wait-for-it.sh batal-database:3306 --timeout=300 -- php artisan migrate && exec php artisan serve --host=0.0.0.0 --port=8000"
+
+
 
   database:
     image: bitnami/mysql
@@ -33,7 +34,6 @@ services:
       - MYSQL_DATABASE=batal
       - MYSQL_USER=batal
       - MYSQL_PASSWORD=DerB@t@l150
-       
+
 volumes:
   database:
-

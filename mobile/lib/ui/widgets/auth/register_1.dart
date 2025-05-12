@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mobile/main.dart';
 import '../../layouts/labeled_input.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:provider/provider.dart';
+import '../../../core/provider/AuthProvider.dart'; 
 
 class Register1 extends StatelessWidget {
   final Function incrementStep;
@@ -170,6 +172,28 @@ class Register1 extends StatelessWidget {
                   color: text_gray,
                 ),
               ),
+                Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  PlatformText(
+                  'Already have an account? ',
+                  style: TextStyle(color: Colors.grey.shade600),
+                  ),
+                  GestureDetector(
+                  onTap: () {
+                    Provider.of<AuthProvider>(context, listen: false).toggleHasAccount();
+                  },
+                  child: PlatformText(
+                    'Login.',
+                    
+                    style: TextStyle(
+                    color: secondaryColor,
+                    fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  ),
+                ],
+                ),
             ],
           ),
         ),
