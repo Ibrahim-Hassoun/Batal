@@ -99,7 +99,7 @@ class PostController extends Controller
     {
         try{
             $reaction = $this->feedServices->getFollowingsPosts($request);
-            return $this->respond(true,"Reaction updated successfully",$reaction,200);
+            return $this->respond(true,"Following posts fetched successfully",$reaction,200);
         }catch(\Exception $e){
             return $this->respond(false, $e->getMessage(), null, $e->getCode() ?: 500);
         } 
