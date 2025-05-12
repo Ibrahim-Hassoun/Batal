@@ -21,15 +21,15 @@ Future<Map<String, dynamic>> request({
   try {
     optimistic?.call();
     http.Response response;
-    
+    final token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YwLjEvbG9naW4iLCJpYXQiOjE3NDcwNDg3OTksImV4cCI6MTc0NzA1MjM5OSwibmJmIjoxNzQ3MDQ4Nzk5LCJqdGkiOiJVU3RJY2FmTGRlc2xRVlR3Iiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.GcraRuyUkLVf3FQusakfXp8YUnvvUQ71id-Oe82fU1w';
+        final postHeaders = Map<String, String>.from(defaultHeaders);
+        postHeaders['Authorization'] = 'Bearer $token';
+       
     switch (method.toUpperCase()) {
       case 'POST':
       
         // Add Bearer token if provided in headers
-        final token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YwLjEvbG9naW4iLCJpYXQiOjE3NDcwMDU2MzQsImV4cCI6MTc0NzAwOTIzNCwibmJmIjoxNzQ3MDA1NjM0LCJqdGkiOiJvWDFmbkxZUUowanhncUQ0Iiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.vdBG5L20No6H8nwJrHC9hmn2w1Qz67MEgO4_oU72OWs';
-        final postHeaders = Map<String, String>.from(defaultHeaders);
-        postHeaders['Authorization'] = 'Bearer $token';
-       
+        
         response = await http.post(
           url,
           headers: postHeaders,
@@ -40,20 +40,20 @@ Future<Map<String, dynamic>> request({
       case 'GET':
         response = await http.get(
           url,
-          headers: defaultHeaders,
+          headers: postHeaders,
         );
         break;
       case 'PUT':
         response = await http.put(
           url,
-          headers: defaultHeaders,
+          headers: postHeaders,
           body: jsonEncode(body),
         );
         break;
       case 'DELETE':
         response = await http.delete(
           url,
-          headers: defaultHeaders,
+          headers: postHeaders,
           body: jsonEncode(body),
         );
         break;

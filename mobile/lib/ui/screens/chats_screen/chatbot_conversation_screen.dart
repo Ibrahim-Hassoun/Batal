@@ -14,7 +14,13 @@ class ChatbotConversationScreen extends StatefulWidget {
 
   static String temp='';
   static final ScrollController scrollController = ScrollController();
+  static bool isTyping = false;
+  static bool loadingMessages = true;
   
+  static final List<Map<String, dynamic>> messages = [
+    
+  ];
+
   ChatbotConversationScreen({
     super.key,
     required this.chatId,
@@ -32,23 +38,6 @@ class ChatbotConversationScreen extends StatefulWidget {
 class ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
   
 
-  static final List<Map<String, dynamic>> messages = [
-    {'text': 'This is the main chat template', 'isMe': true, 'time': 'Nov 30, 2023, 9:41 AM'},
-    {'text': 'Oh?', 'isMe': false},
-    {'text': 'Cool', 'isMe': false},
-    {'text': 'How does it work?', 'isMe': false},
-    {'text': 'You just edit any text to type in the conversation you want to show, and delete any bubbles you don’t want to use', 'isMe': true},
-    {'text': 'Boom!', 'isMe': true},
-    {'text': 'Hmmm', 'isMe': false},
-    {'text': 'I think I get it', 'isMe': false},
-    {'text': 'Will head to the Help Center if I have more questions tho', 'isMe': false},
-    {'text': 'Sure thing! I’m here to help', 'isMe': true},
-    {'text': 'Thanks!', 'isMe': false},
-    {'text': 'No problem', 'isMe': true},
-    {'text': 'See you around!', 'isMe': false},
-    {'text': 'Bye!', 'isMe': true},
-    {'text': 'See ya!', 'isMe': false},
-  ];
   
 
 
@@ -61,6 +50,7 @@ TextEditingController _controller = TextEditingController();
 void initState() {
   super.initState();
   _controller.text = ChatbotConversationScreen.temp;
+  loadMessages(this);
 }
   @override
   Widget build(BuildContext context) {
@@ -102,53 +92,70 @@ void initState() {
         ],),
       body: Column(
         children: [
+          
           Expanded(
-            child: ListView.builder(
+            child: ChatbotConversationScreen.loadingMessages?
+            Center(child: Column(mainAxisAlignment: MainAxisAlignment.center,children: [CircularProgressIndicator(color: primaryColor),Text('Loading messages')],))
+            :
+            ChatbotConversationScreen.messages.isEmpty?
+            Center(child: Text('No messages yet'),):
+            ListView.builder(
               controller: ChatbotConversationScreen.scrollController, 
               physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.all(12),
-              itemCount: messages.length,
+              padding: EdgeInsets.all(16),
+              itemCount: ChatbotConversationScreen.messages.length,
               itemBuilder: (context, index) {
-                final message = messages[index];
+                final message = ChatbotConversationScreen.messages[index];
                 final isMe = message['isMe'];
                 return Align(
-                  alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
-                  child: Column(
-                    crossAxisAlignment:
-                        isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-                    children: [
-                      if (message.containsKey('time'))
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: Text(
-                            message['time'],
-                            style: TextStyle(fontSize: 12, color: bg_gray),
-                          ),
-                        ),
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 4),
-                        padding: EdgeInsets.all(12),
-                        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
-                        decoration: BoxDecoration(
-                          color: isMe ? Colors.grey.shade300 : Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Text(
-                          message['text'],
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
+  alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+  child: Column(
+    crossAxisAlignment:
+        isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+    children: [
+      if (message.containsKey('time'))
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Text(
+            message['time'],
+            style: TextStyle(fontSize: 12, color: bg_gray),
+          ),
+        ),
+      Container(
+        margin: EdgeInsets.symmetric(vertical: 4),
+        padding: EdgeInsets.all(12),
+        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
+        decoration: BoxDecoration(
+          color: isMe ? Colors.grey.shade300 : Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Text(
+          message['text'],
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
+
+      // Show arrow only after last chatbot message
+      if (index == ChatbotConversationScreen.messages.length - 1  && ChatbotConversationScreen.isTyping)
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [CircularProgressIndicator(color: primaryColor,)]
+        ),
+    ],
+  ),
+);
+
               },
             ),
           ),
+          
           Divider(height: 1),
+          
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6),
             child: Row(
               children: [
+                IconButton(icon: Icon(Icons.refresh), onPressed: () {clearChat(this);}),
                 Expanded(
                   child: TextField(
                     onChanged: (value) {
@@ -166,8 +173,7 @@ void initState() {
                     ),
                   ),
                 ),
-                IconButton(icon: Icon(Icons.mic), onPressed: () {}),
-                IconButton(icon: Icon(Icons.image), onPressed: () {}),
+                
                 IconButton(icon: Icon(Icons.send), onPressed: ()=> {
                       setState(() {
                         
