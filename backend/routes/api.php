@@ -35,6 +35,7 @@ Route::group(['prefix'=>"v0.1"],function(){
             // Route::post('/updateReaction',[PostController::class,'updateReaction']);
 
             Route::get('/following',[PostController::class,'getFollowingsPosts']);
+            Route::get('/trending',[PostController::class,'getTrendingPosts']);
             
         });
 
