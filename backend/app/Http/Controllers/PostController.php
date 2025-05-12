@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponseTrait;
 use App\Services\PostServices\PostServices;
+use App\Services\PostServices\FeedServices;
 use App\Services\PostServices\ReactionServices;
 use App\Http\Requests\PostRequests\AddPostRequest;
 use App\Http\Requests\PostRequests\UpdatePostRequest;

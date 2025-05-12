@@ -5,13 +5,13 @@ namespace App\Services\PostServices;
 use App\Models\Post;
 
 
-class PostServices {
+class FeedServices {
 
     public function getFollowingsPosts($request)
     {
         $followingIds = auth()->user()->followings()->where('status', 'accepted')->pluck('followed_id');
 
-        $posts = Post::whereIn('user_id', $followingIds)->latest()->paginate(10);
+        $posts = Post::with(['user:id,first_name,last_name'])->whereIn('user_id', $followingIds)->latest()->paginate(10);
         
         return $posts;
     }
