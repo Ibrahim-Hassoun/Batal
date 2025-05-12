@@ -14,11 +14,12 @@ void sendMessage(ChatbotConversationScreenState screenState) async {
       },
       optimistic: () {
         screenState.setState(() {
-          ChatbotConversationScreenState.messages.add({
+          ChatbotConversationScreen.messages.add({
             'text': ChatbotConversationScreen.temp,
             'isMe': true,
             'time': DateTime.now().toString(),
           });
+          ChatbotConversationScreen.isTyping = true;
         });
         WidgetsBinding.instance.addPostFrameCallback((_) {
           ChatbotConversationScreen.scrollController.animateTo(
@@ -30,15 +31,16 @@ void sendMessage(ChatbotConversationScreenState screenState) async {
       },
       rollback: () {
         screenState.setState(() {
-          ChatbotConversationScreenState.messages.removeLast();
+          ChatbotConversationScreen.messages.removeLast();
         });
       },
     );
 
+    ChatbotConversationScreen.isTyping = false;
     if (response['success']) {
       print(response['data']);
       screenState.setState(() {
-        ChatbotConversationScreenState.messages.add({
+        ChatbotConversationScreen.messages.add({
           'text': response['data']['data'],
           'isMe': false,
           'time': DateTime.now().toString(),
@@ -52,5 +54,53 @@ void sendMessage(ChatbotConversationScreenState screenState) async {
         );
       });
     }
+  }
+}
+
+void clearChat(ChatbotConversationScreenState screenState) async{
+  var response = await request(
+    endpoint: '/api/v0.1/chatbot/session',
+    method: 'DELETE',
+    optimistic: () {
+      screenState.setState(() {
+        ChatbotConversationScreen.messages.clear();
+      });
+    },
+    rollback: () {
+      screenState.setState(() {
+        ChatbotConversationScreen.messages.add({
+          'text': 'session not deleted',
+          'isMe': false,
+          'time': DateTime.now().toString(),
+        });
+      });
+    },
+  );
+  screenState.setState(() {
+    ChatbotConversationScreen.messages.clear();
+  });
+}
+
+void loadMessages(ChatbotConversationScreenState screenState) async{
+  var response = await request(
+    endpoint: '/api/v0.1/chatbot/messages',
+    method: 'GET',
+  );
+
+  if (response['success']) {
+    screenState.setState(() {
+      List<dynamic> messages = response['data']['data'];
+      ChatbotConversationScreen.messages.clear();
+      for (var msg in messages) {
+        ChatbotConversationScreen.messages.add({
+          'text': msg['content'],
+          'isMe': msg['role'] == 'user' ? true : false,
+          'time': msg['created_at'],
+        });
+      };
+      ChatbotConversationScreen.loadingMessages=false;
+    });
+  } else {
+    print('Error loading messages: ${response['message']}');
   }
 }
