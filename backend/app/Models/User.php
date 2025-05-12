@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Log;
 use App\Models\Post;
+use App\Models\Following;
 use App\Models\ChatbotSession;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
@@ -43,6 +44,15 @@ class User extends Authenticatable implements JWTSubject
 
     public function logs(){
         return $this->hasMany(Log::class);
+    }
+    public function followings()
+    {
+        return $this->hasMany(Following::class, 'follower_id');
+    }
+
+    public function followers()
+    {
+        return $this->hasMany(Following::class, 'followed_id');
     }
 
     public function posts()
