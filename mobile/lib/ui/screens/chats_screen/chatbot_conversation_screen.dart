@@ -15,11 +15,9 @@ class ChatbotConversationScreen extends StatefulWidget {
   static String temp='';
   static final ScrollController scrollController = ScrollController();
   static bool isTyping = false;
-
+  static bool loadingMessages = true;
   
   static final List<Map<String, dynamic>> messages = [
-    {'text': 'This is the main chat template', 'isMe': true, 'time': 'Nov 30, 2023, 9:41 AM'},
-    {'text': 'Oh?', 'isMe': false},
     
   ];
 
@@ -94,8 +92,12 @@ void initState() {
         ],),
       body: Column(
         children: [
+          
           Expanded(
-            child: ListView.builder(
+            child: ChatbotConversationScreen.loadingMessages?
+            Center(child: CircularProgressIndicator(color: primaryColor))
+            :
+            ListView.builder(
               controller: ChatbotConversationScreen.scrollController, 
               physics: BouncingScrollPhysics(),
               padding: EdgeInsets.all(16),
@@ -169,7 +171,7 @@ void initState() {
                     ),
                   ),
                 ),
-                GestureDetector(child: Text('testing'),onTap: (){loadMessages(this);},),
+                
                 IconButton(icon: Icon(Icons.send), onPressed: ()=> {
                       setState(() {
                         
