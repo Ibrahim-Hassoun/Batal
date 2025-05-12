@@ -4,7 +4,7 @@ namespace App\Services\PostServices;
 
 use App\Traits\IpApi;
 use App\Models\Reaction;
-
+use App\Models\Post;
 
 class ReactionServices
 {
@@ -19,7 +19,13 @@ class ReactionServices
                 ->where('post_id', $request['post_id'])
                 ->first();
         if($reaction){
-            $reaction->restore();
+            
+            if($reaction->trashed()){
+                 Post::where('id',$request['post_id'])->increment('reactions');
+                 return 'is trashed';
+            }
+           $reaction->restore();
+
             return $reaction;
         }
 
@@ -38,6 +44,8 @@ class ReactionServices
         if(!$reaction){
             throw new \Exception("couldn't add reaction",400);
         }
+        Post::where('id',$request['post_id'])->increment('reactions');
+
         return $reaction;
     }
 
@@ -54,7 +62,7 @@ class ReactionServices
         }
 
         $reaction->delete();
-
+        Post::where('id',$request['post_id'])->decrement('reactions');
         return $reaction;
     }
 
