@@ -26,4 +26,15 @@ class ChatbotController extends Controller
             return $this->respond(false,$e->getMessage(),null,500);
         }
     }
+
+    public function getMessages(Request $request)
+    {
+        try{
+            $messages = $this->chatbotServices->getMessages($request);
+            return $this->respond(true,'Messages retrieved successfully',$messages,200);
+
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
+    }
 }
