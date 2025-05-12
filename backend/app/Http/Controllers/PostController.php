@@ -16,11 +16,14 @@ class PostController extends Controller
     use HttpResponseTrait;
     protected $postServices;
     protected $reactionServices;
+    protected $feedServices;
 
-    public function __construct(PostServices $postServices,ReactionServices $reactionServices)
+    public function __construct(PostServices $postServices,ReactionServices $reactionServices,FeedServices $feedServices)
     {
         $this->postServices = $postServices;
         $this->reactionServices = $reactionServices;
+        $this->feedServices = $feedServices;
+
     }
 
 
