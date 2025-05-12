@@ -14,7 +14,7 @@ class FeedScreen extends StatefulWidget {
 }
 
 class FeedScreenState extends State<FeedScreen> {
-List< dynamic> posts= [{'post example'}] ;
+List< dynamic> posts= [] ;
 @override
 void initState() {
   super.initState();
@@ -78,11 +78,12 @@ void _loadPostsAsync() async {
             ),
            
             ListView.builder(
+              physics: const NeverScrollableScrollPhysics(), // Disable scrolling
               shrinkWrap: true,
               itemCount: posts.length,
               itemBuilder: (context,index){
                  var postData = posts[index]; 
-                 return  Post(Name: 'John Doe',PostImageUrl:'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',description: 'This is a post description for fffffffffffffffffffffffffffffffffffffffffffertgdfvljkhsdfgiophasdfoiuhweoufihwasdoiufhsdljkvnsdfoivjweiofgmy postt',);
+                 return  Post(Name: postData['user']['first_name']+' '+ postData['user']['last_name'],PostImageUrl:postData['image_path'],description: postData['description'],comments:postData['comments']);
               },
             ),
              

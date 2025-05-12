@@ -11,17 +11,18 @@ class Post extends StatefulWidget {
   final bool isViewed;
   final bool hasStory;
   final bool? storyIsSeen;
-
+  final int comments;
 
   const Post({
     super.key,
     required this.Name,
-    required this.PostImageUrl,
+    this.PostImageUrl,
     this.profileImageUrl,
     this.description,
     this.isViewed = false,
     this.hasStory = false,
-    this.storyIsSeen
+    this.storyIsSeen,
+    required this.comments
   });
 
   @override
@@ -55,12 +56,14 @@ class _PostState extends State<Post> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(color: Colors.orange, width: 2),
-                          image: widget.profileImageUrl != null
-                            ? DecorationImage(
-                              image: NetworkImage(widget.profileImageUrl!),
+                          image:  DecorationImage(
+                                image: NetworkImage(
+                                widget.profileImageUrl ??
+                                  'https://ui-avatars.com/api/?name=&background=eeeeee&color=ffffff'
+                                ),
                               fit: BoxFit.cover,
                             )
-                            : null,
+                            ,
                         ),
                         child: widget.profileImageUrl == null
                           ? Icon(Icons.person, size: 30, color: Colors.grey)
@@ -71,7 +74,7 @@ class _PostState extends State<Post> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('John Doe',style: TextStyle(color: secondaryColor,fontSize: 16,fontWeight:FontWeight.w500),),
+                          Text(widget.Name,style: TextStyle(color: secondaryColor,fontSize: 16,fontWeight:FontWeight.w500),),
                           Text('Just now',style: TextStyle(color: text_gray,fontSize: 16,fontWeight:FontWeight.w400,),)
                         ],
                       ),
@@ -170,8 +173,15 @@ class _PostState extends State<Post> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-          Text('12 Comments',style: TextStyle(color: text_gray),),
-          Text('5 shares',style: TextStyle(color: text_gray),)
+            Row(
+              children: [
+              Text("${widget.comments}", style: TextStyle(color: text_gray)),
+              SizedBox(width: 4),
+              Icon(Icons.favorite_border, color: text_gray, size: 20),
+             
+            ],
+            ),
+          Text("${widget.comments} comments",style: TextStyle(color: text_gray),)
         ]),
       ),
 
