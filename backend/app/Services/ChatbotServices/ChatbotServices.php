@@ -15,7 +15,17 @@ use App\Prism\ChunkSelectors\ChunkSelectors;
 use App\Prism\ContextBuilder\ContextBuilder;
 
 class ChatbotServices
-{
+{   
+    public function getMessages($request)
+    {
+        $userId = $request->user()->id;
+        $session = $this->getSession($userId);
+        $messages = ChatbotMessage::where('chatbot_session_id', $session->id)->get();
+        if(!$messages){
+            throw new \Exception('Error in getting messages from the database', 500);
+        }
+        return $messages;
+    }
     public function sendMessage($request)
     {   
         
