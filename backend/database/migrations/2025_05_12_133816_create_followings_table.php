@@ -15,13 +15,13 @@ return new class extends Migration
                 $table->id();
             $table->unsignedBigInteger('follower_id');
             $table->unsignedBigInteger('followed_id');
-            $table->enum('status', ['pending', 'accepted', 'blocked'])->default('accepted'); // Optional
+            $table->enum('status', ['pending', 'accepted', 'rejected'])->default('accepted'); 
             $table->timestamps();
 
             $table->foreign('follower_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('followed_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unique(['follower_id', 'followed_id']); // Prevent duplicate follows
+            $table->unique(['follower_id', 'followed_id']); 
 
             $table->index('follower_id');
             $table->index('followed_id');
