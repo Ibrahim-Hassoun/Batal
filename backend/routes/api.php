@@ -55,7 +55,7 @@ Route::group(['prefix'=>"v0.1"],function(){
 
         Route::group(['prefix'=>'chatbot'],function(){
             Route::post('/send',[ChatbotController::class,'sendMessage']);
-           
+            Route::get('/getMessages',[ChatbotController::class,'getMessages']);
         });
         Route::group(['middleware' => 'isAdmin'], function () {
             
