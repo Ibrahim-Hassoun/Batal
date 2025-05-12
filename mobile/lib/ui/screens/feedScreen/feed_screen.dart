@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import '../../widgets/feed/feed_app_bar.dart';
 import '../../widgets/feed/feed_tab_bar.dart';
 import '../../widgets/feed/story.dart';
 import '../../widgets/feed/post.dart';
+import './feed_logic.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({super.key});
@@ -12,11 +14,19 @@ class FeedScreen extends StatefulWidget {
 }
 
 class FeedScreenState extends State<FeedScreen> {
+List< dynamic> posts= [{'post example'}] ;
+@override
+void initState() {
+  super.initState();
+  _loadPostsAsync();
+}
 
-  @override
-  void _initState(){
-    
-  }
+void _loadPostsAsync() async {
+  final loadedPosts = await loadPosts();
+  setState(() {
+    posts = loadedPosts;
+  });
+}
 
   @override
   Widget build(BuildContext context) {
@@ -67,9 +77,16 @@ class FeedScreenState extends State<FeedScreen> {
                       color: const Color.fromARGB(255, 244, 240, 240),
             ),
            
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: posts.length,
+              itemBuilder: (context,index){
+                 var postData = posts[index]; 
+                 return  Post(Name: 'John Doe',PostImageUrl:'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',description: 'This is a post description for fffffffffffffffffffffffffffffffffffffffffffertgdfvljkhsdfgiophasdfoiuhweoufihwasdoiufhsdljkvnsdfoivjweiofgmy postt',);
+              },
+            ),
              
-             
-            Post(Name: 'John Doe',PostImageUrl:'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',description: 'This is a post description for fffffffffffffffffffffffffffffffffffffffffffertgdfvljkhsdfgiophasdfoiuhweoufihwasdoiufhsdljkvnsdfoivjweiofgmy postt',)
+          
         
           ],
         ),
