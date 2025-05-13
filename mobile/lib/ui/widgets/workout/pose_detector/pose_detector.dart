@@ -76,7 +76,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
         ),
        
         SizedBox(height: 24,),
-        Text(feedback),
+       
         Padding(
           padding: const EdgeInsets.only(left: 108,right: 108),
           child: ScreenWideElevatedButton(
@@ -89,6 +89,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
             
           ),
         ),
+         Text(feedback),
         
       ],
     );

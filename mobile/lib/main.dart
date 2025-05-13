@@ -104,7 +104,7 @@ class MyApp extends StatelessWidget {
 
       home:Scaffold(
         body: isLoggedIn ? currentScreen: AuthScreen(),
-        bottomNavigationBar:BottomNavbar(),
+        bottomNavigationBar:isLoggedIn ?BottomNavbar():null,
         )
       
 
