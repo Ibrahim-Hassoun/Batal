@@ -121,6 +121,7 @@ class WorkoutProvider with ChangeNotifier {
       
       createPoseDetector();
       // await loadModel();
+      resetMLFeedback();
       await cameraLogic.initializeCamera(this);
             cameraLogic.startStreaming(this);
       _is_Recording = !_is_Recording;
@@ -177,7 +178,8 @@ class WorkoutProvider with ChangeNotifier {
 
 
 
-
+  String _MLFeedback ='';
+  String get MLFeedback => _MLFeedback;
 
   void setDetectedArea(String area) {
     _detected_area = area;
@@ -197,7 +199,15 @@ class WorkoutProvider with ChangeNotifier {
     _detected_muscle = exercice;
     notifyListeners();
   }
-
+  void setMLFeedback(String feedback){
+    _MLFeedback+='\n';
+    _MLFeedback += feedback;
+    notifyListeners();
+  }
+  void resetMLFeedback(){
+    _MLFeedback='';
+    notifyListeners();
+  }
 
 
   
