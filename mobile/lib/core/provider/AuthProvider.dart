@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import '../remote/server.dart';
 
 class AuthProvider with ChangeNotifier {
-  bool _isLoggedIn = true;
+  bool _isLoggedIn = false;
   bool _hasAccount = false;
   bool get hasAccount => _hasAccount;
   bool get isLoggedIn => _isLoggedIn;
 
- String? _access_token; 
-String? get access_token => _access_token;
+  String? _access_token; 
+  String? get access_token => _access_token;
+
+  void setAccessToken(String token) {
+    _access_token = token;
+    notifyListeners();
+  }
 
   void toggleHasAccount() {
     _hasAccount = !_hasAccount;
