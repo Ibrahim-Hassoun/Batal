@@ -16,7 +16,7 @@ class FeedTabBar extends StatefulWidget implements PreferredSizeWidget {
 class _FeedTabBarState extends State<FeedTabBar> {
   @override
   Widget build(BuildContext context) {
-    String active = Provider.of<FeedProvider>(context).active;
+    String active = Provider.of<FeedProvider>(context).activeTab;
     return AppBar(
       backgroundColor: Colors.white,
       title: Row(

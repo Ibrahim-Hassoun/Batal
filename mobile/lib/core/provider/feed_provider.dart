@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import '../../ui/screens/feedScreen/feed_screen.dart';
 
 class FeedProvider with ChangeNotifier {
-  String active = 'following';
+  String activeTab = 'following';
 
   void setActive(element){
-    active = element;
+    activeTab= element;
     notifyListeners();
   }
 
