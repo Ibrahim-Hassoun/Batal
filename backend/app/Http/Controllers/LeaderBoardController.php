@@ -9,12 +9,24 @@ use App\Services\LeaderBoardServices\LeaderBoardServices;
 class LeaderBoardController extends Controller
 {
     use HttpResponseTrait;
-    private $leaderBoardServices ;
+    protected $leaderBoardServices ;
 
-    protected $authServices;
+   
 
     public function __construct(LeaderBoardServices $leaderBoardServices)
     {
         $this->leaderBoardServices = $leaderBoardServices;
     }
+
+    public function getWeeklyLeaderboard(Request $request)
+    {
+         try{
+            $leaderboard = $this->leaderBoardServices->getWeeklyLeaderboard($request);
+            return $this->respond(true,'Messages retrieved successfully',$leaderboard,200);
+
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
+    }
+
 }
