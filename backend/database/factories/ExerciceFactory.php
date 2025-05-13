@@ -27,10 +27,8 @@ class ExerciceFactory extends Factory
             'duration' => $this->faker->optional()->numberBetween(1, 60),
             'image_url' => $this->faker->optional()->imageUrl(),
             'video_url' => $this->faker->optional()->url(),
-            'tags' => $this->faker->json_encode(
-                ['strength', 'cardio', 'flexibility', 'balance', 'endurance'],
-                $this->faker->numberBetween(1, 3)
-            ),    
+            'tags' => json_encode([fake()->randomElement( ['strength', 'cardio', 'flexibility', 'balance', 'endurance'])]),
+            
         ];
     }
 }
