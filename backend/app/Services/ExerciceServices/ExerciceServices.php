@@ -91,7 +91,7 @@ class ExerciceServices
             }
 
             foreach (json_decode($user->fitness_interests) as $interest) {
-                if (in_array($interest, $exercise->tags ?? [])) {
+                if (in_array($interest, json_decode($exercise->tags) ?? [])) {
                     $score += 10;
                 }
             }
