@@ -78,6 +78,8 @@ flutter:
     - assets/flame-kindling.svg
     - assets/coins.svg
     - assets/movenet.tflite
+    - assets/image-plus.svg
+    - assets/message-circle.svg
     
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

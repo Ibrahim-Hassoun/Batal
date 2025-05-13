@@ -48,18 +48,22 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
     Coaching.area = workoutProvider.detected_area;
     Coaching.muscle = workoutProvider.detected_muscle;
     Coaching.exercise = workoutProvider.detected_exercise;
+    Coaching.provider = workoutProvider;
+    Coaching.maxAngle=0;
+    Coaching.minAngle=200;
     // these setters are used for testing purposes
 
 
-    DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 100));
+    DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 200));
 
     List<List<Map<String, Map<String, double>>>> landmarks = [];
 
     workoutProvider.controller!.startImageStream((CameraImage image) async{
       final now = DateTime.now();
-      if (now.difference(lastProcessed).inMilliseconds >= 100) {
+      if (now.difference(lastProcessed).inMilliseconds >= 200) {
         lastProcessed = now;
         List<Map<String, Map<String, double>>> newLandmark =await mlPoseDetectorFunctions.processCameraImage(image, workoutProvider.poseDetector!,workoutProvider);
+        // print(newLandmark);
         landmarks.add(newLandmark);
         print('from streaming');
         Coaching.landmarks = landmarks;

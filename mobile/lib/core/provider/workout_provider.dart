@@ -121,6 +121,7 @@ class WorkoutProvider with ChangeNotifier {
       
       createPoseDetector();
       // await loadModel();
+      resetMLFeedback();
       await cameraLogic.initializeCamera(this);
             cameraLogic.startStreaming(this);
       _is_Recording = !_is_Recording;
@@ -177,7 +178,8 @@ class WorkoutProvider with ChangeNotifier {
 
 
 
-
+  String _MLFeedback ='';
+  String get MLFeedback => _MLFeedback;
 
   void setDetectedArea(String area) {
     _detected_area = area;
@@ -197,7 +199,15 @@ class WorkoutProvider with ChangeNotifier {
     _detected_muscle = exercice;
     notifyListeners();
   }
-
+  void setMLFeedback(String feedback){
+    _MLFeedback+='\n';
+    _MLFeedback += feedback;
+    notifyListeners();
+  }
+  void resetMLFeedback(){
+    _MLFeedback='';
+    notifyListeners();
+  }
 
 
   
@@ -216,4 +226,32 @@ class WorkoutProvider with ChangeNotifier {
     _workouts.clear();
     notifyListeners();
   }
+
+  //exercices screen
+  String? _selectedMode;
+  String? get selectedMode => _selectedMode;
+
+  void setSelectedMode(String? mode) {
+    _selectedMode = mode;
+    notifyListeners();
+  }
+
+  String? _selectedAreaForExercicesScreen;
+  String? get selectedAreaForExercicesScreen => _selectedAreaForExercicesScreen;
+
+  void setSelectedAreaForExercicesScreen(String? area) {
+    _selectedAreaForExercicesScreen = area;
+    notifyListeners();
+  }
+
+  String? _selectedMuscleForExercicesScreen;
+  String? get selectedMuscleForExercicesScreen => _selectedMuscleForExercicesScreen;
+
+  void setSelectedMuscleForExercicesScreen(String? muscle) {
+    _selectedMuscleForExercicesScreen = muscle;
+    notifyListeners();
+  }
+
+  
+
 }

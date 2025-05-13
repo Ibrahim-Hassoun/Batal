@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/main.dart';
 
 class FeedAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -15,10 +16,10 @@ class FeedAppBar extends StatelessWidget implements PreferredSizeWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: secondaryColor, width: 2),
+              
+             
             ),
-            child: Icon(Icons.add, color: secondaryColor, size:24),
+            child:SvgPicture.asset('assets/bell.svg'),
             ),
             SizedBox(width: 16),
           Icon(Icons.search, color: secondaryColor, size:32),
@@ -27,7 +28,7 @@ class FeedAppBar extends StatelessWidget implements PreferredSizeWidget {
             onTap:(){
               Navigator.pushNamed(context, '/chats');
             } ,
-            child: Icon(Icons.chat, color: secondaryColor, size: 32)),
+            child: SvgPicture.asset('assets/message-circle.svg',)),
         ],
       ),
     );
