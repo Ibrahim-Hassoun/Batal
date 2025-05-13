@@ -6,7 +6,7 @@ void sendMessage(ChatbotConversationScreenState screenState) async {
   if (ChatbotConversationScreen.temp.isNotEmpty) {
     
 
-    var response = await request(
+    var response = await ApiServices.request(
       endpoint: '/api/v0.1/chatbot/send',
       method: 'POST',
       body: {
@@ -58,7 +58,7 @@ void sendMessage(ChatbotConversationScreenState screenState) async {
 }
 
 void clearChat(ChatbotConversationScreenState screenState) async{
-  var response = await request(
+  var response = await ApiServices.request(
     endpoint: '/api/v0.1/chatbot/session',
     method: 'DELETE',
     optimistic: () {
@@ -82,7 +82,7 @@ void clearChat(ChatbotConversationScreenState screenState) async{
 }
 
 void loadMessages(ChatbotConversationScreenState screenState) async{
-  var response = await request(
+  var response = await ApiServices.request(
     endpoint: '/api/v0.1/chatbot/messages',
     method: 'GET',
   );
