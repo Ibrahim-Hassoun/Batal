@@ -45,7 +45,7 @@ return new class extends Migration
             $table->timestamp('last_login_at')->nullable();
             $table->string('last_login_ip')->nullable();
 
-            $table->int('fitness_level');
+            $table->integer('fitness_level');
             $table->string('fitness_goal')->nullable();
             $table->string('fitness_interests')->nullable();
             $table->enum('injuries', ['arm', 'shoulder', 'chest', 'back', 'leg'])->nullable();
