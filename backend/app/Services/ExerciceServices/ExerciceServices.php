@@ -81,7 +81,7 @@ class ExerciceServices
         $exercises = Exercice::all();
         foreach ($exercises as $exercise) {
             $score = 0;
-
+        
             
             if ($exercise->difficulty === $user->fitness_level) {
                 $score += 20;

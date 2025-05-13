@@ -47,7 +47,7 @@ return new class extends Migration
 
             $table->integer('fitness_level');
             $table->string('fitness_goal')->nullable();
-            $table->string('fitness_interests')->nullable();
+            $table->json('fitness_interests');
             $table->enum('injuries', ['arm', 'shoulder', 'chest', 'back', 'leg'])->nullable();
             $table->string('medical_conditions')->nullable();
             $table->string('allergies')->nullable();
