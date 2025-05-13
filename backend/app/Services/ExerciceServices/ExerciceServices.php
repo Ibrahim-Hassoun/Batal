@@ -76,7 +76,7 @@ class ExerciceServices
 
     public function getRecommendedExercices($request)
     {
-        $user = auth()->user()->id;
+        $user = auth()->user();
         $recommendations = [];
         $exercises = Exercice::all();
         foreach ($exercises as $exercise) {
