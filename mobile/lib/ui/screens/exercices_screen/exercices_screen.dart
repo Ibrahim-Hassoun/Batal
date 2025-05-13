@@ -4,6 +4,7 @@ import 'package:mobile/main.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/exercices/exercice_row_in_screen.dart';
 import '../../../ui/layouts/drop_down_button.dart';
+import './exercices_logic.dart';
 
 class ExercicesScreen extends StatefulWidget{
 
@@ -14,13 +15,26 @@ class ExercicesScreen extends StatefulWidget{
 }
 
 class _ExercicesScreenState extends State<ExercicesScreen> {
+late List<dynamic> AllExercices = [];
 
+    @override
+    void initState() {
+      super.initState();
+      fetchExercicesList();
+    }
+
+    Future<void> fetchExercicesList() async {
+      AllExercices = await fetchExercices();
+      setState(() {});
+    }
 
 
 
   @override
   Widget build(BuildContext context) {
     WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen: true);
+    
+
 
     return Scaffold(
       appBar: AppBar(
@@ -49,25 +63,32 @@ class _ExercicesScreenState extends State<ExercicesScreen> {
               ],
           ),
           
-          SizedBox(
-            child: Positioned.fill(
+          
+          Expanded(
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 padding: EdgeInsets.only(bottom: 100), 
                 child: Column(
                   children: [
-                    SizedBox(height: 16),
-                    ExerciseRowInScreen(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg'),
-                    SizedBox(height: 8),
-                    ExerciseRowInScreen(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg'),
-                    SizedBox(height: 8),
-                    ExerciseRowInScreen(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg'),
-                    SizedBox(height: 40),
+                    // ...exercices.map((exercice) =>
+                    //   ExerciseRowInScreen(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg')
+                    // ).toList()
+
+                    
+            ListView.builder(
+              physics: const NeverScrollableScrollPhysics(), // Disable scrolling
+              shrinkWrap: true,
+              itemCount: AllExercices.length,
+              itemBuilder: (context,index){
+                 var exerciceData = AllExercices[index]; 
+                 return ExerciseRowInScreen(title: exerciceData['exercice'], imageUrl: exerciceData['image_url']==null?'https://cdn-icons-png.flaticon.com/512/2331/2331943.png':exerciceData['image_url']);
+              },
+            ),
                   ],
                 ),
               ),
             ),
-          ),
+          
         ],
       ),
     );

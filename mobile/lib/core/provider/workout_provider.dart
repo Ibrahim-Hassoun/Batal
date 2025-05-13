@@ -228,7 +228,7 @@ class WorkoutProvider with ChangeNotifier {
   }
 
   //exercices screen
-  String? _selectedMode;
+  String? _selectedMode='all';
   String? get selectedMode => _selectedMode;
 
   void setSelectedMode(String? mode) {
