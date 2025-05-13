@@ -2,6 +2,7 @@
 
 namespace App\Services\ExerciceServices;
 
+use App\Models\User;
 use App\Models\Exercice;
 
 
@@ -71,5 +72,50 @@ class ExerciceServices
             throw new \Exception('No exercices found', 404);
         }
         return $exercices;
+    }
+
+    public function getRecommendedExercices($request)
+    {
+        $user = auth()->user();
+        $recommendations = [];
+        $exercises = Exercice::all();
+        foreach ($exercises as $exercise) {
+            $score = 0;
+        
+            
+            if ($exercise->difficulty === $user->fitness_level) {
+                $score += 20;
+            }
+            if ($exercise->difficulty < $user->fitness_level) {
+                $score += 10;
+            }
+
+            foreach (json_decode($user->fitness_interests) as $interest) {
+                if (in_array($interest, json_decode($exercise->tags) ?? [])) {
+                    $score += 10;
+                }
+            }
+
+            
+            if (in_array($exercise->equipment,  json_decode($user->fitness_equipment))) {
+                $score += 15;
+            }
+
+            
+            if ( json_decode($user->injuries) && !in_array($exercise->area, json_decode($user->injuries))) {
+                $score += 20;
+            }
+
+            $recommendations[] = [
+                'exercise' => $exercise,
+                'score' => $score,
+            ];
+        }
+        usort($recommendations, fn($a, $b) => $b['score'] <=> $a['score']);
+
+        $topExercises = array_slice($recommendations, 0, 10);
+
+        return $topExercises;
+
     }
 }

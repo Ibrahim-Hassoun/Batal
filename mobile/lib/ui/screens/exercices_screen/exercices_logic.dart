@@ -15,7 +15,7 @@ Future<List<dynamic>> fetchExercices() async{
 
 Future<List<dynamic>> fetchRecommendedExercices() async{
   var response = await ApiServices.request(
-    endpoint: '/api/v0.1/exercices/search?id=10',
+    endpoint: '/api/v0.1/exercices/recommended',
     method: 'GET'
   );
   if (response['success']){
