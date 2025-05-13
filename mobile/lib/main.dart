@@ -11,7 +11,7 @@ import './core/provider/feed_provider.dart';
 import './core/provider/workout_provider.dart';
 import './ui/screens/chats_screen/chats_screen.dart';
 import 'ui/screens/chats_screen/chatbot_conversation_screen.dart';
-import './ui/screens/exercices/exercices_screen.dart';
+import 'ui/screens/exercices_screen/exercices_screen.dart';
 
 const Color primaryColor =Color(0xFFF7713D);
 const Color secondaryColor =Color.fromARGB(255, 31, 31, 31);
