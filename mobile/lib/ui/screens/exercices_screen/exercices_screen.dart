@@ -15,16 +15,21 @@ class ExercicesScreen extends StatefulWidget{
 }
 
 class _ExercicesScreenState extends State<ExercicesScreen> {
-late List<dynamic> AllExercices = [];
+
+    late List<dynamic> AllExercices = [];
+    late List<dynamic> recommendedExercices = [];
+    
 
     @override
     void initState() {
       super.initState();
       fetchExercicesList();
+     
     }
 
     Future<void> fetchExercicesList() async {
       AllExercices = await fetchExercices();
+      recommendedExercices = await fetchRecommendedExercices();
       setState(() {});
     }
 
@@ -33,7 +38,7 @@ late List<dynamic> AllExercices = [];
   @override
   Widget build(BuildContext context) {
     WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen: true);
-    
+    String mode = provider.selectedMode!;
 
 
     return Scaffold(
@@ -57,7 +62,9 @@ late List<dynamic> AllExercices = [];
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children:[ 
-              CustomDropdownButton(items: ['all','recommended'],onChanged: (value){provider.setSelectedMode(value);}, label: 'Mode',selectedValue: provider.selectedMode,),
+              CustomDropdownButton(items: ['all','recommended'],onChanged: (value){provider.setSelectedMode(value);this.setState(() {
+                 
+              });}, label: 'Mode',selectedValue: provider.selectedMode,),
               // CustomDropdownButton(items: ['arm','abs','shoulder','leg'],onChanged: (value){provider.setSelectedAreaForExercicesScreen(value);}, label: 'Area',selectedValue: provider.selectedAreaForExercicesScreen,),
               // CustomDropdownButton(items: ['option 1','option 2'],onChanged: (value){provider.setSelectedMuscleForExercicesScreen(value);}, label: 'Muscle',selectedValue: provider.selectedMuscleForExercicesScreen,)
               ],
@@ -74,16 +81,28 @@ late List<dynamic> AllExercices = [];
                     //   ExerciseRowInScreen(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg')
                     // ).toList()
 
-                    
+            mode=='all'?
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(), // Disable scrolling
               shrinkWrap: true,
+              
               itemCount: AllExercices.length,
               itemBuilder: (context,index){
                  var exerciceData = AllExercices[index]; 
                  return ExerciseRowInScreen(title: exerciceData['exercice'], imageUrl: exerciceData['image_url']==null?'https://cdn-icons-png.flaticon.com/512/2331/2331943.png':exerciceData['image_url']);
               },
-            ),
+            )
+            :
+            ListView.builder(
+              physics: const NeverScrollableScrollPhysics(), // Disable scrolling
+              shrinkWrap: true,
+              
+              itemCount: recommendedExercices.length,
+              itemBuilder: (context,index){
+                 var exerciceData = recommendedExercices[index]; 
+                 return ExerciseRowInScreen(title: exerciceData['exercice'], imageUrl: exerciceData['image_url']==null?'https://cdn-icons-png.flaticon.com/512/2331/2331943.png':exerciceData['image_url']);
+              },
+            )
                   ],
                 ),
               ),
