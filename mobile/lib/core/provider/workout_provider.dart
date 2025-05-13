@@ -121,6 +121,7 @@ class WorkoutProvider with ChangeNotifier {
       
       createPoseDetector();
       // await loadModel();
+      resetMLFeedback();
       await cameraLogic.initializeCamera(this);
             cameraLogic.startStreaming(this);
       _is_Recording = !_is_Recording;
@@ -201,6 +202,10 @@ class WorkoutProvider with ChangeNotifier {
   void setMLFeedback(String feedback){
     _MLFeedback+='\n';
     _MLFeedback += feedback;
+    notifyListeners();
+  }
+  void resetMLFeedback(){
+    _MLFeedback='';
     notifyListeners();
   }
 

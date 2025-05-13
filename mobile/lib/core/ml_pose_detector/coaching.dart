@@ -35,6 +35,7 @@ class Coaching{
   
   void evaluateArmExercise() {
     
+
     if (muscle == 'biceps' && exercise == 'curl') {
       if (landmarks != null && landmarks!.isNotEmpty) {
         var lastFrame = landmarks!.last;
@@ -56,7 +57,30 @@ class Coaching{
               
             );
             print('Elbow angle: $angle');
-            provider?.setMLFeedback('new feedbackkkk');
+
+            
+            if (minAngle == null || angle < minAngle!) {
+              minAngle = angle;
+            }
+            
+            if (maxAngle == null || angle > maxAngle!) {
+              maxAngle = angle;
+            }
+            print('minAngle ${minAngle}');        
+            print('maxAngle ${maxAngle}');        
+            const feedbackMsg = 'you tuck your arm too much!';
+            if (angle < 70) {
+              if (!(provider?.MLFeedback?.contains(feedbackMsg) ?? false)) {
+              provider?.setMLFeedback(feedbackMsg);
+              }
+            }
+            if (angle > 160) {
+              const feedbackMsg = 'you open your arm too much!';
+              if (!(provider?.MLFeedback?.contains(feedbackMsg) ?? false)) {
+              provider?.setMLFeedback(feedbackMsg);
+              }
+            }
+            
 
 
           }
