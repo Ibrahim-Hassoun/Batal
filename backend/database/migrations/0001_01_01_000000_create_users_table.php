@@ -45,7 +45,7 @@ return new class extends Migration
             $table->timestamp('last_login_at')->nullable();
             $table->string('last_login_ip')->nullable();
 
-            $table->int('fitness_level')->nullable();
+            $table->int('fitness_level');
             $table->string('fitness_goal')->nullable();
             $table->string('fitness_interests')->nullable();
             $table->enum('injuries', ['arm', 'shoulder', 'chest', 'back', 'leg'])->nullable();
@@ -53,7 +53,7 @@ return new class extends Migration
             $table->string('allergies')->nullable();
             $table->string('dietary_preferences')->nullable();
             $table->string('dietary_restrictions')->nullable();
-            $table->json('fitness_equipment')->nullable();
+            $table->json('fitness_equipment');
             $table->string('fitness_experience')->nullable();
             
 
