@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mobile/main.dart';
 import './post_button.dart';
+import '../../../lib/time_formatter/time_formatter.dart';
+
 
 class Post extends StatefulWidget {
   final String Name;
@@ -12,6 +14,7 @@ class Post extends StatefulWidget {
   final bool hasStory;
   final bool? storyIsSeen;
   final int comments;
+  final DateTime time;
 
   const Post({
     super.key,
@@ -22,7 +25,8 @@ class Post extends StatefulWidget {
     this.isViewed = false,
     this.hasStory = false,
     this.storyIsSeen,
-    required this.comments
+    required this.comments,
+    required this.time
   });
 
   @override
@@ -75,7 +79,7 @@ class _PostState extends State<Post> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(widget.Name,style: TextStyle(color: secondaryColor,fontSize: 16,fontWeight:FontWeight.w500),),
-                          Text('Just now',style: TextStyle(color: text_gray,fontSize: 16,fontWeight:FontWeight.w400,),)
+                          Text(formatTimeAgo(widget.time),style: TextStyle(color: text_gray,fontSize: 16,fontWeight:FontWeight.w400,),)
                         ],
                       ),
                     ],
