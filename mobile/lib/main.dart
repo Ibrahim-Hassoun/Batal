@@ -11,7 +11,7 @@ import './core/provider/feed_provider.dart';
 import './core/provider/workout_provider.dart';
 import './ui/screens/chats_screen/chats_screen.dart';
 import 'ui/screens/chats_screen/chatbot_conversation_screen.dart';
-
+import './ui/screens/exercices/exercices_screen.dart';
 
 const Color primaryColor =Color(0xFFF7713D);
 const Color secondaryColor =Color.fromARGB(255, 31, 31, 31);
@@ -55,6 +55,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/chats': (context) => const ChatsScreen(),
         '/chatbot-conversation': (context) => ChatbotConversationScreen(chatId: 1,chatName:  'John Doe',chatMessages:  ['Hello', 'How are you?'],lastSeen:  DateTime.now()),
+        '/exercices': (context) => const ExercicesScreen(),
       },
       material: (_, __) => MaterialAppData(
         theme: ThemeData.light().copyWith(
