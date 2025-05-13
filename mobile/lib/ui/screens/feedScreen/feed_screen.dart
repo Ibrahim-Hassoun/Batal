@@ -83,7 +83,7 @@ void _loadPostsAsync() async {
               itemCount: posts.length,
               itemBuilder: (context,index){
                  var postData = posts[index]; 
-                 return  Post(id: postData['id'],Name: postData['user']['first_name']+' '+ postData['user']['last_name'],profileImageUrl: postData['user']['profile_photo_path'],PostImageUrl:postData['image_path'],description: postData['description'],comments:postData['comments'],time: DateTime.parse(postData['created_at']) ,isLiked: false,);
+                 return  Post(id: postData['id'],Name: postData['user']['first_name']+' '+ postData['user']['last_name'],profileImageUrl: postData['user']['profile_photo_path'],PostImageUrl:postData['image_path'],description: postData['description'],comments:postData['comments'],time: DateTime.parse(postData['created_at']) ,isLiked: postData['my_reaction']==null?false:true,);
               },
             ),
              

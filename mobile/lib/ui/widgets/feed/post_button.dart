@@ -29,7 +29,7 @@ class PostButtonState extends State<PostButton> {
   void initState() {
     super.initState();
     _isLiked = widget.isLiked ?? false;
-    print('initial value of isLiked in button is: ${_isLiked}');
+   
   }
 
   @override
