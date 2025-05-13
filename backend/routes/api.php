@@ -8,7 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\ExerciceController;
 use App\Http\Controllers\JobProfileController;
-
+use App\Http\Controllers\LeaderBoardController;
 
 
 Route::group(['prefix'=>"v0.1"],function(){
