@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart';
 import 'package:mobile/main.dart';
 import '../../widgets/feed/feed_app_bar.dart';
@@ -48,7 +49,7 @@ void _loadPostsAsync() async {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('What\'s on your mind?',style: TextStyle(color: text_gray),),
-                  Icon(Icons.picture_as_pdf)
+                  SvgPicture.asset('assets/image-plus.svg',color: text_gray,)
                 ],
               ),
               ),
