@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import '../../widgets/feed/feed_app_bar.dart';
 import '../../widgets/feed/feed_tab_bar.dart';
 import '../../widgets/feed/story.dart';
 import '../../widgets/feed/post.dart';
+import './feed_logic.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({super.key});
 
   @override
-  _FeedScreenState createState() => _FeedScreenState();
+  FeedScreenState createState() => FeedScreenState();
 }
 
-class _FeedScreenState extends State<FeedScreen> {
+class FeedScreenState extends State<FeedScreen> {
+List< dynamic> posts= [] ;
+@override
+void initState() {
+  super.initState();
+  _loadPostsAsync();
+}
+
+void _loadPostsAsync() async {
+  final loadedPosts = await loadPosts();
+  setState(() {
+    posts = loadedPosts;
+  });
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,9 +77,17 @@ class _FeedScreenState extends State<FeedScreen> {
                       color: const Color.fromARGB(255, 244, 240, 240),
             ),
            
+            ListView.builder(
+              physics: const NeverScrollableScrollPhysics(), // Disable scrolling
+              shrinkWrap: true,
+              itemCount: posts.length,
+              itemBuilder: (context,index){
+                 var postData = posts[index]; 
+                 return  Post(Name: postData['user']['first_name']+' '+ postData['user']['last_name'],profileImageUrl: postData['user']['profile_photo_path'],PostImageUrl:postData['image_path'],description: postData['description'],comments:postData['comments'],time: DateTime.parse(postData['created_at']) ,);
+              },
+            ),
              
-             
-            Post(Name: 'John Doe',PostImageUrl:'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',description: 'This is a post description for fffffffffffffffffffffffffffffffffffffffffffertgdfvljkhsdfgiophasdfoiuhweoufihwasdoiufhsdljkvnsdfoivjweiofgmy postt',)
+          
         
           ],
         ),
