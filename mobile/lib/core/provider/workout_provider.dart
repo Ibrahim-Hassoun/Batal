@@ -177,7 +177,8 @@ class WorkoutProvider with ChangeNotifier {
 
 
 
-
+  String _MLFeedback ='';
+  String get MLFeedback => _MLFeedback;
 
   void setDetectedArea(String area) {
     _detected_area = area;
@@ -197,7 +198,11 @@ class WorkoutProvider with ChangeNotifier {
     _detected_muscle = exercice;
     notifyListeners();
   }
-
+  void setMLFeedback(String feedback){
+    _MLFeedback+='\n';
+    _MLFeedback += feedback;
+    notifyListeners();
+  }
 
 
   

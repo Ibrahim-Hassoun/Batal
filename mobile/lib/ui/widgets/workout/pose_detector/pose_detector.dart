@@ -24,6 +24,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
     bool isRecording = provider.is_Recording;
     Uint8List? pngBytes = provider.imageBytes;
     List<Map<String, Map<String, double>>> landmarks = provider.landmarks;
+    String feedback = provider.MLFeedback;
 
     return Column(
       children: [
@@ -75,7 +76,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
         ),
        
         SizedBox(height: 24,),
-        
+        Text(feedback),
         Padding(
           padding: const EdgeInsets.only(left: 108,right: 108),
           child: ScreenWideElevatedButton(
