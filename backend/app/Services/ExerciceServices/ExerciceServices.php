@@ -97,7 +97,7 @@ class ExerciceServices
             }
 
             
-            if (in_array($exercise->equipment, $user->fitness_equipment)) {
+            if (in_array($exercise->equipment,  json_decode($user->fitness_equipment))) {
                 $score += 15;
             }
 
