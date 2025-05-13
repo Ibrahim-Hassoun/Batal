@@ -60,7 +60,7 @@ class UserFactory extends Factory
             'fitness_level' => fake()->numberBetween(1,3),
             'fitness_goal' => fake()->randomElement(['weight loss', 'muscle gain', 'endurance', 'flexibility', 'general fitness']),
             'fitness_interests' => fake()->words(3, true),
-            'injuries' => fake()->optional()->randomElement(['arm', 'shoulder', 'chest', 'back', 'leg']),
+            'injuries' => fake()->randomElement(['arm', 'shoulder', 'chest', 'back', 'leg']),
             'medical_conditions' => fake()->words(2, true),
             'allergies' => fake()->optional()->words(2, true),
             'dietary_preferences' => fake()->randomElement(['vegan', 'vegetarian', 'pescatarian', 'omnivore', 'keto', 'none']),
