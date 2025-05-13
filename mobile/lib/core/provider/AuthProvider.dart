@@ -11,7 +11,7 @@ class AuthProvider with ChangeNotifier {
   String? get access_token => _access_token;
 
   List<Map<String,dynamic>>? _user;
-  
+  List<Map<String,dynamic>>? get user => _user;
 
   void setAccessToken(String token) {
     _access_token = token;
