@@ -6,6 +6,7 @@ import '../../../lib/time_formatter/time_formatter.dart';
 
 
 class Post extends StatefulWidget {
+  final String id;
   final String Name;
   final String? PostImageUrl;
   final String? profileImageUrl;
@@ -15,9 +16,11 @@ class Post extends StatefulWidget {
   final bool? storyIsSeen;
   final int comments;
   final DateTime time;
+  bool isLiked;
 
-  const Post({
+  Post({
     super.key,
+    required this.id,
     required this.Name,
     this.PostImageUrl,
     this.profileImageUrl,
@@ -26,7 +29,8 @@ class Post extends StatefulWidget {
     this.hasStory = false,
     this.storyIsSeen,
     required this.comments,
-    required this.time
+    required this.time,
+    required this.isLiked
   });
 
   @override
@@ -194,10 +198,10 @@ class _PostState extends State<Post> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-          PostButton(onClicked: (){}, label: 'Like',icon: Icons.thumb_up,),
-          PostButton(onClicked: (){}, label: 'Comment',icon: Icons.comment,),
+          PostButton(onClicked: (){}, label: 'Like',icon: Icons.thumb_up,PostId: widget.id,isLiked: widget.isLiked,),
+          PostButton(onClicked: (){}, label: 'Comment',icon: Icons.comment,PostId: widget.id),
           
-          PostButton(onClicked: (){}, label: 'Share',icon: Icons.share),
+          PostButton(onClicked: (){}, label: 'Share',icon: Icons.share,PostId: widget.id),
           
         ]),
       ),

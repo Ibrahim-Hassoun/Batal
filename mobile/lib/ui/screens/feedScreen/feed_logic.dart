@@ -16,10 +16,15 @@ Future<List< dynamic>> loadPosts() async {
   throw Exception('Failed to load posts');
 }
 
-Future<void> addReaction(BuildContext context) async{
+Future<void> addReaction(BuildContext context,String postId) async{
   
   var response = await ApiServices.request(
     endpoint: '/api/v0.1/posts/addReaction',
-    method: 'POST');
-
+    method: 'POST',
+    body: {
+      "type":'like',
+      "post_id":postId
+    }
+    );
+  print(response['data']);
 }
