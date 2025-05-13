@@ -43,9 +43,9 @@ class _ExercicesScreenState extends State<ExercicesScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children:[ 
-              CustomDropdownButton(items: ['option 1','option 2'],onChanged: (value){}, label: 'Area',selectedValue: provider.detected_area,),
-              CustomDropdownButton(items: ['option 1','option 2'],onChanged: (value){}, label: 'Area',selectedValue: provider.detected_area,),
-              CustomDropdownButton(items: ['option 1','option 2'],onChanged: (value){}, label: 'Area',selectedValue: provider.detected_area,)
+              CustomDropdownButton(items: ['all','recommended'],onChanged: (value){provider.setSelectedMode(value);}, label: 'Mode',selectedValue: provider.selectedMode,),
+              // CustomDropdownButton(items: ['arm','abs','shoulder','leg'],onChanged: (value){provider.setSelectedAreaForExercicesScreen(value);}, label: 'Area',selectedValue: provider.selectedAreaForExercicesScreen,),
+              // CustomDropdownButton(items: ['option 1','option 2'],onChanged: (value){provider.setSelectedMuscleForExercicesScreen(value);}, label: 'Muscle',selectedValue: provider.selectedMuscleForExercicesScreen,)
               ],
           ),
           
