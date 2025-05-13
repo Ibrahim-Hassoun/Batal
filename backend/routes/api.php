@@ -66,9 +66,9 @@ Route::group(['prefix'=>"v0.1"],function(){
             Route::get('/search',[ExerciceController::class,'searchExercice']);
             Route::get('/recommended',[ExerciceController::class,'getRecommendedExercices']);
         });
-        
-        Route::group(['prefix'=>'leaderboard'],function(){
 
+        Route::group(['prefix'=>'leaderboard'],function(){
+            Route::get('/weekly',[LeaderBoardController::class,'getWeeklyLeaderBoard']);
         });
 
         Route::group(['middleware' => 'isAdmin'], function () {
