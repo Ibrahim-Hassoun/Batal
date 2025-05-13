@@ -2,6 +2,7 @@
 
 namespace App\Services\ExerciceServices;
 
+use App\Models\User;
 use App\Models\Exercice;
 
 
@@ -75,6 +76,47 @@ class ExerciceServices
 
     public function getRecommendedExercices($request)
     {
-        
+        $recommendations = [];
+        $exercises = Exercice::all();
+        foreach ($exercises as $exercise) {
+            $score = 0;
+
+            
+            if ($exercise->difficulty === $user->fitness_level) {
+                $score += 20;
+            }
+            if ($exercise->difficulty < $user->fitness_level) {
+                $score += 10;
+            }
+
+
+            
+            foreach ($user->fitness_interests as $interest) {
+                if (in_array($interest, $exercise->tags ?? [])) {
+                    $score += 10;
+                }
+            }
+
+            
+            if (in_array($exercise->equipment, $user->fitness_equipment)) {
+                $score += 15;
+            }
+
+            
+            if (!in_array($exercise->area, $user->injuries)) {
+                $score += 20;
+            }
+
+            $recommendations[] = [
+                'exercise' => $exercise,
+                'score' => $score,
+            ];
+        }
+        usort($recommendations, fn($a, $b) => $b['score'] <=> $a['score']);
+
+        $topExercises = array_slice($recommendations, 0, 10);
+
+        return $topExercises;
+
     }
 }
