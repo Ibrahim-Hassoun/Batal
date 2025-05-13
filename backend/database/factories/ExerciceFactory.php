@@ -17,7 +17,7 @@ class ExerciceFactory extends Factory
     public function definition(): array
     {
         return [
-           'area' => $this->faker->word(),
+            'area' => $this->faker->word(),
             'muscle' => $this->faker->word(),
             'exercice' => $this->faker->word(), // make sure it's a string, not an array
             'description' => $this->faker->optional()->sentence(),
