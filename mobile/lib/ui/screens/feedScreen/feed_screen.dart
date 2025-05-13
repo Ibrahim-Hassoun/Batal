@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:mobile/main.dart';
 import '../../widgets/feed/feed_app_bar.dart';
 import '../../widgets/feed/feed_tab_bar.dart';
 import '../../widgets/feed/story.dart';
@@ -40,6 +41,18 @@ void _loadPostsAsync() async {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 16,right: 16),
+              child: SizedBox(height: 72,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('What\'s on your mind?',style: TextStyle(color: text_gray),),
+                  Icon(Icons.picture_as_pdf)
+                ],
+              ),
+              ),
+            ),
             Container(
               height: 4,
               width: MediaQuery.of(context).size.width,
