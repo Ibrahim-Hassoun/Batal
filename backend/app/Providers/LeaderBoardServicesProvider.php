@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Services\LeaderBoardServices\LeaderBoardServices;
 
 class LeaderBoardServicesProvider extends ServiceProvider
 {
@@ -11,7 +12,9 @@ class LeaderBoardServicesProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(LeaderBoardServices::class, function($app) {
+            return new LeaderBoardServices();
+        });
     }
 
     /**
