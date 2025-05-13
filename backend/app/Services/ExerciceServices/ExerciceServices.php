@@ -102,7 +102,7 @@ class ExerciceServices
             }
 
             
-            if (!in_array($exercise->area, $user->injuries)) {
+            if ( json_decode($user->injuries) && !in_array($exercise->area, json_decode($user->injuries))) {
                 $score += 20;
             }
 
