@@ -63,7 +63,7 @@ class UserFactory extends Factory
             'injuries' => fake()->optional()->randomElement(['arm', 'shoulder', 'chest', 'back', 'leg']),
             'medical_conditions' => fake()->optional()->words(2, true),
             'allergies' => fake()->optional()->words(2, true),
-            'dietary_preferences' => fake()->optional()->randomElement(['vegan', 'vegetarian', 'pescatarian', 'omnivore', 'keto', 'none']),
+            'dietary_preferences' => fake()->randomElement(['vegan', 'vegetarian', 'pescatarian', 'omnivore', 'keto', 'none']),
             'dietary_restrictions' => fake()->optional()->words(2, true),
             'fitness_equipment' => json_encode([fake()->randomElement(['none','home','gym'])]),
             'fitness_experience' => fake()->optional()->randomElement(['none', 'some', 'regular', 'expert']),
