@@ -57,10 +57,10 @@ class UserFactory extends Factory
             'last_login_ip' => fake()->optional()->ipv4(),
             'remember_token' => Str::random(10),
 
-            'fitness_level' => fake()->optional()->randomElement(['beginner', 'intermediate', 'advanced']),
+            'fitness_level' => fake()->optional()->numberBetween(1,3),
             'fitness_goal' => fake()->optional()->randomElement(['weight loss', 'muscle gain', 'endurance', 'flexibility', 'general fitness']),
             'fitness_interests' => fake()->optional()->words(3, true),
-            'injuries' => fake()->optional()->words(2, true),
+            'injuries' => fake()->optional()->randomElement(['arm', 'shoulder', 'chest', 'back', 'leg']),
             'medical_conditions' => fake()->optional()->words(2, true),
             'allergies' => fake()->optional()->words(2, true),
             'dietary_preferences' => fake()->optional()->randomElement(['vegan', 'vegetarian', 'pescatarian', 'omnivore', 'keto', 'none']),
