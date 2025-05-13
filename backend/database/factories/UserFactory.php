@@ -65,7 +65,7 @@ class UserFactory extends Factory
             'allergies' => fake()->optional()->words(2, true),
             'dietary_preferences' => fake()->optional()->randomElement(['vegan', 'vegetarian', 'pescatarian', 'omnivore', 'keto', 'none']),
             'dietary_restrictions' => fake()->optional()->words(2, true),
-            'fitness_equipment' => fake()->randomElement(['none','home','gym']),
+            'fitness_equipment' => json_encode([fake()->randomElement(['none','home','gym'])]),
             'fitness_experience' => fake()->optional()->randomElement(['none', 'some', 'regular', 'expert']),
         ];
     }
