@@ -31,7 +31,10 @@ class _MyWorkoutState extends State<MyWorkout> {
                 ExerciseRow(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg'),
                 SizedBox(height: 8),
                 ExerciseRow(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg'),
-                
+                GestureDetector(
+                  child: Text('add exercice'),
+                  onTap: ()=>{ Navigator.pushNamed(context, '/exercices', )},
+                ),
                 SizedBox(height: 40),
                 // Your content here
               ],
