@@ -72,4 +72,9 @@ class ExerciceServices
         }
         return $exercices;
     }
+
+    public function getRecommendedExercices($request)
+    {
+        
+    }
 }
