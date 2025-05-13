@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+
 class ExerciseRowInScreen extends StatefulWidget {
   final String title;
   final String imageUrl;
@@ -19,13 +20,6 @@ class ExerciseRowInScreen extends StatefulWidget {
 
 class _ExerciseRowInScreenState extends State<ExerciseRowInScreen> {
   int count = 1;
-
-  @override
-  void initState() {
-    super.initState();
-    
-  }
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(

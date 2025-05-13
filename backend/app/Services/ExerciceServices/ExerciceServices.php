@@ -66,7 +66,7 @@ class ExerciceServices
             $query->where('tags', 'like', '%' . $request->query('tags') . '%');
         }
 
-        $exercices = $query->get();
+        $exercices = $query->orderBy('area')->get();
         if (!$exercices) {
             throw new \Exception('No exercices found', 404);
         }

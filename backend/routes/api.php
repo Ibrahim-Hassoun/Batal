@@ -69,7 +69,7 @@ Route::group(['prefix'=>"v0.1"],function(){
             });
 
         });
-        Route::post('/exercices/search',[ExerciceController::class,'searchExercice']);
+        Route::get('/exercices/search',[ExerciceController::class,'searchExercice']);
 
     });
 });
