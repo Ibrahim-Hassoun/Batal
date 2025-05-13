@@ -226,4 +226,32 @@ class WorkoutProvider with ChangeNotifier {
     _workouts.clear();
     notifyListeners();
   }
+
+  //exercices screen
+  String? _selectedMode;
+  String? get selectedMode => _selectedMode;
+
+  void setSelectedMode(String? mode) {
+    _selectedMode = mode;
+    notifyListeners();
+  }
+
+  String? _selectedAreaForExercicesScreen;
+  String? get selectedAreaForExercicesScreen => _selectedAreaForExercicesScreen;
+
+  void setSelectedAreaForExercicesScreen(String? area) {
+    _selectedAreaForExercicesScreen = area;
+    notifyListeners();
+  }
+
+  String? _selectedMuscleForExercicesScreen;
+  String? get selectedMuscleForExercicesScreen => _selectedMuscleForExercicesScreen;
+
+  void setSelectedMuscleForExercicesScreen(String? muscle) {
+    _selectedMuscleForExercicesScreen = muscle;
+    notifyListeners();
+  }
+
+  
+
 }
