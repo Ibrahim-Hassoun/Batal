@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('muscle');                       
             $table->string('exercice');                     
             $table->text('description')->nullable();        
-            $table->integer('difficulty')->default(1);      
-            $table->string('equipment')->nullable();        
+            $table->integer('difficulty');      
+            $table->string('equipment');        
             $table->string('type')->nullable();             
             $table->integer('duration')->nullable();        
             $table->string('image_url')->nullable();        
             $table->string('video_url')->nullable();        
-            $table->json('tags')->nullable();       
+            $table->json('tags');       
             $table->softDeletes();        
             $table->timestamps();
         });

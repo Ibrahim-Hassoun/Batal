@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart';
+import 'package:mobile/main.dart';
 import '../../widgets/feed/feed_app_bar.dart';
 import '../../widgets/feed/feed_tab_bar.dart';
 import '../../widgets/feed/story.dart';
@@ -40,6 +42,18 @@ void _loadPostsAsync() async {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 16,right: 16),
+              child: SizedBox(height: 48,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('What\'s on your mind?',style: TextStyle(color: text_gray),),
+                  SvgPicture.asset('assets/image-plus.svg',color: text_gray,)
+                ],
+              ),
+              ),
+            ),
             Container(
               height: 4,
               width: MediaQuery.of(context).size.width,
@@ -83,7 +97,7 @@ void _loadPostsAsync() async {
               itemCount: posts.length,
               itemBuilder: (context,index){
                  var postData = posts[index]; 
-                 return  Post(Name: postData['user']['first_name']+' '+ postData['user']['last_name'],profileImageUrl: postData['user']['profile_photo_path'],PostImageUrl:postData['image_path'],description: postData['description'],comments:postData['comments'],time: DateTime.parse(postData['created_at']) ,);
+                 return  Post(id: postData['id'],Name: postData['user']['first_name']+' '+ postData['user']['last_name'],profileImageUrl: postData['user']['profile_photo_path'],PostImageUrl:postData['image_path'],description: postData['description'],comments:postData['comments'],time: DateTime.parse(postData['created_at']) ,isLiked: postData['my_reaction']==null?false:true,);
               },
             ),
              

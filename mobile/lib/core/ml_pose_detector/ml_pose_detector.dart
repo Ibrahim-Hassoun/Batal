@@ -62,6 +62,7 @@ class MlPoseDetectorFunctions {
         landmarksMap[type.name] = {
           'x': landmark.x,
           'y': landmark.y,
+          'z': landmark.z,
           'likelihood': landmark.likelihood,
         };
       });

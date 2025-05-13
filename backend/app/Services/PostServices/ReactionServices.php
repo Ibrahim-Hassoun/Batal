@@ -22,7 +22,7 @@ class ReactionServices
             
             if($reaction->trashed()){
                  Post::where('id',$request['post_id'])->increment('reactions');
-                 return 'is trashed';
+                 
             }
            $reaction->restore();
 

@@ -21,7 +21,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   void login(data) async {
-  final response = await request(
+  final response = await ApiServices.request(
     endpoint: '/api/v0.1/login',
     method: 'POST',
     body: data,
@@ -30,6 +30,7 @@ class AuthProvider with ChangeNotifier {
   if (response['success']) {
     _isLoggedIn = true;
    _access_token = response['data']['data']['token'];
+   ApiServices.access_token=response['data']['data']['token'];
     print('User Data: ${response['data']}');
     print('token is: $_access_token');
   } else {
