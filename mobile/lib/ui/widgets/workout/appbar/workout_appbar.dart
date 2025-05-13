@@ -37,10 +37,10 @@ class _WorkoutAppbarState extends State<WorkoutAppbar>{
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                StatItem(icon: 'assets/trophy.svg', value: '${2}',color: primaryColor,),
-                StatItem(icon: 'assets/flame-kindling.svg', value: '${2}',color: primaryColor,),
-                StatItem(icon: 'assets/coins.svg', value: '${2}',color: Colors.blue,),
-                StatItem(icon: 'assets/dumbbell.svg', value: '${2}',color: secondaryColor,)
+                StatItem(icon: 'assets/trophy.svg', value: '${widget.trophies}',color: primaryColor,),
+                StatItem(icon: 'assets/flame-kindling.svg', value: '${widget.streak}',color: primaryColor,),
+                StatItem(icon: 'assets/coins.svg', value: '${widget.coins}',color: Colors.blue,),
+                StatItem(icon: 'assets/dumbbell.svg', value: '${widget.sets}',color: secondaryColor,)
                 
                ],
             ),

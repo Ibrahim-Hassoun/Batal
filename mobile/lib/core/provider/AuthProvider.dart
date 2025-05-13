@@ -7,8 +7,16 @@ class AuthProvider with ChangeNotifier {
   bool get hasAccount => _hasAccount;
   bool get isLoggedIn => _isLoggedIn;
 
- String? _access_token; 
-String? get access_token => _access_token;
+  String? _access_token; 
+  String? get access_token => _access_token;
+
+  Map<String,dynamic>? _user;
+  Map<String,dynamic>? get user => _user;
+
+  void setAccessToken(String token) {
+    _access_token = token;
+    notifyListeners();
+  }
 
   void toggleHasAccount() {
     _hasAccount = !_hasAccount;
@@ -25,6 +33,7 @@ String? get access_token => _access_token;
   if (response['success']) {
     _isLoggedIn = true;
    _access_token = response['data']['data']['token'];
+   _user = response['data']['data']['user'];
    ApiServices.access_token=response['data']['data']['token'];
     print('User Data: ${response['data']}');
     print('token is: $_access_token');
