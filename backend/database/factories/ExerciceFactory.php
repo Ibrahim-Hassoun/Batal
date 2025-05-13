@@ -22,7 +22,7 @@ class ExerciceFactory extends Factory
             'exercice' => $this->faker->word(), 
             'description' => $this->faker->optional()->sentence(),
             'difficulty' => $this->faker->numberBetween(1, 5),
-            'equipment' => $this->faker->optional()->word(),
+            'equipment' => $this->faker->randomElement(['none','home','gym']),
             'type' => $this->faker->optional()->word(),
             'duration' => $this->faker->optional()->numberBetween(1, 60),
             'image_url' => $this->faker->optional()->imageUrl(),
