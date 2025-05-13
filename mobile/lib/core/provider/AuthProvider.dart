@@ -33,6 +33,7 @@ class AuthProvider with ChangeNotifier {
   if (response['success']) {
     _isLoggedIn = true;
    _access_token = response['data']['data']['token'];
+   _user = response['data']['data']['user'];
    ApiServices.access_token=response['data']['data']['token'];
     print('User Data: ${response['data']}');
     print('token is: $_access_token');
