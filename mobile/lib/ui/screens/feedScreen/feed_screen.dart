@@ -44,7 +44,7 @@ void _loadPostsAsync() async {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 16,right: 16),
-              child: SizedBox(height: 72,
+              child: SizedBox(height: 48,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
