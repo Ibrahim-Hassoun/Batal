@@ -5,20 +5,32 @@ class PostButton extends StatefulWidget {
   final VoidCallback onClicked;
   final String label;
   final IconData icon;
+  final bool? isLiked;
+  final int PostId;
 
   const PostButton({
     super.key,
     required this.onClicked,
     required this.label,
     required this.icon,
+    required this.PostId,
+    this.isLiked
   });
 
   @override
-  _PostButtonState createState() => _PostButtonState();
+  PostButtonState createState() => PostButtonState();
 }
 
-class _PostButtonState extends State<PostButton> {
+class PostButtonState extends State<PostButton> {
   bool _isHovered = false;
+  late bool _isLiked;
+
+  @override
+  void initState() {
+    super.initState();
+    _isLiked = widget.isLiked ?? false;
+    print('initial value of isLiked in button is: ${_isLiked}');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +48,14 @@ class _PostButtonState extends State<PostButton> {
         children: [
         Icon(
           widget.icon,
-          color: text_gray,
+          color:_isLiked? const Color.fromARGB(255, 14, 120, 207):text_gray,
           size: 20,
         ),
         const SizedBox(width: 8),
         Text(
           widget.label,
-          style: const TextStyle(
-          color: text_gray,
+          style: TextStyle(
+          color: _isLiked ? const Color.fromARGB(255, 14, 120, 207) : text_gray,
           fontSize: 16,
           fontWeight: FontWeight.bold,
           ),

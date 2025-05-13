@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/ui/widgets/feed/post_button.dart';
 
 import '../../../core/remote/server.dart';
 
@@ -16,7 +17,20 @@ Future<List< dynamic>> loadPosts() async {
   throw Exception('Failed to load posts');
 }
 
-Future<void> addReaction(BuildContext context,String postId) async{
+Future<void> addReaction(BuildContext context,int postId) async{
+  
+  var response = await ApiServices.request(
+    endpoint: '/api/v0.1/posts/addReaction',
+    method: 'POST',
+    body: {
+      "type":'like',
+      "post_id":postId
+    }
+    );
+  print(response['data']);
+}
+
+Future<void> removeReaction(BuildContext context,int postId) async{
   
   var response = await ApiServices.request(
     endpoint: '/api/v0.1/posts/addReaction',

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mobile/main.dart';
+import 'package:mobile/ui/screens/feedScreen/feed_logic.dart';
 import './post_button.dart';
 import '../../../lib/time_formatter/time_formatter.dart';
 
 
 class Post extends StatefulWidget {
-  final String id;
+  final int id;
   final String Name;
   final String? PostImageUrl;
   final String? profileImageUrl;
@@ -39,7 +40,23 @@ class Post extends StatefulWidget {
 
 class _PostState extends State<Post> {
   bool _isExpanded = false;
+  late bool _isLiked;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _isLiked = widget.isLiked;
+  }
+
+
+  void _toggleLike() {
+  setState(() {
+    _isLiked = !_isLiked;
+  });
+  print('_isLiked: $_isLiked');
+}
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -198,7 +215,19 @@ class _PostState extends State<Post> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-          PostButton(onClicked: (){}, label: 'Like',icon: Icons.thumb_up,PostId: widget.id,isLiked: widget.isLiked,),
+            // GestureDetector(child: Text('test'),onTap: _toggleLike
+            // ,),
+          
+          this._isLiked?
+          PostButton(   key: const ValueKey('liked'),onClicked: (){addReaction(context,widget.id);setState(() {
+            this._isLiked=!this._isLiked;
+          });}, label: 'Like',icon: Icons.thumb_up,PostId: widget.id,isLiked: true,)
+          :
+          PostButton(key: const ValueKey('not_liked'),onClicked: (){addReaction(context,widget.id);setState(() {
+            this._isLiked=!this._isLiked;
+          });}, label: 'Like',icon: Icons.thumb_up,PostId: widget.id,isLiked: false,),
+        
+
           PostButton(onClicked: (){}, label: 'Comment',icon: Icons.comment,PostId: widget.id),
           
           PostButton(onClicked: (){}, label: 'Share',icon: Icons.share,PostId: widget.id),
