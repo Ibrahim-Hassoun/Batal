@@ -2,15 +2,22 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-final String baseUrl = dotenv.env['LARAVEL_SERVER_URL'] ?? '';
 
-Future<Map<String, dynamic>> request({
+class ApiServices {
+
+
+static final String baseUrl = dotenv.env['LARAVEL_SERVER_URL'] ?? '';
+static String access_token='';
+
+
+static Future<Map<String, dynamic>> request({
   required String endpoint,
   required String method,
   Map<String, dynamic>? body,
   Map<String, String>? headers,
   Function? optimistic,
-  Function? rollback
+  Function? rollback,
+  
 }) async {
   final url = Uri.parse('$baseUrl$endpoint');
   final defaultHeaders = {
@@ -88,4 +95,5 @@ Future<Map<String, dynamic>> request({
       'message': e.toString(),
     };
   }
+}
 }
