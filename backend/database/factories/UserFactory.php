@@ -33,7 +33,7 @@ class UserFactory extends Factory
             'is_completed' => fake()->boolean(30), 
             'completed_at' => fake()->optional(0.3)->dateTimeThisYear(), 
             'is_verified' => fake()->boolean(70), 
-            'verified_at' => fake()->optional(0.7)->dateTimeThisYear(), 
+            // 'verified_at' => fake()->optional(0.7)->dateTimeThisYear(), 
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' =>  Hash::make('password'),
