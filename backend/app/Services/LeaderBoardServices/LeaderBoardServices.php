@@ -4,7 +4,7 @@ namespace App\Services\LeaderBoardServices;
 
 use App\Models\User;
 
-class JobProfileServices 
+class LeaderBoardServices 
 {
     public function getWeeklyLeaderboard($request)
     {
