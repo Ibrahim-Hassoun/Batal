@@ -21,7 +21,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>{
 
     AuthProvider authProvider = Provider.of<AuthProvider>(context, listen: true);
     return Scaffold(
-      appBar: WorkoutAppbar(trophies: authProvider.user!['trophies_count'], streak: 0, coins: 0, sets: 0),
+      appBar: WorkoutAppbar(trophies: authProvider.user!['trophies_count'], streak: authProvider.user!['streak'], coins: 0, sets: 0),
       
       body: Column(
         children: [
