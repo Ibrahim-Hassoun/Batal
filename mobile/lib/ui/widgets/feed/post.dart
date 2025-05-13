@@ -4,7 +4,7 @@ import 'package:mobile/main.dart';
 import 'package:mobile/ui/screens/feedScreen/feed_logic.dart';
 import './post_button.dart';
 import '../../../lib/time_formatter/time_formatter.dart';
-
+import '../../../core/remote/server.dart';
 
 class Post extends StatefulWidget {
   final int id;
@@ -50,12 +50,7 @@ class _PostState extends State<Post> {
   }
 
 
-  void _toggleLike() {
-  setState(() {
-    _isLiked = !_isLiked;
-  });
-  print('_isLiked: $_isLiked');
-}
+
   
   @override
   Widget build(BuildContext context) {
@@ -219,7 +214,7 @@ class _PostState extends State<Post> {
             // ,),
           
           this._isLiked?
-          PostButton(   key: const ValueKey('liked'),onClicked: (){addReaction(context,widget.id);setState(() {
+          PostButton(   key: const ValueKey('liked'),onClicked: (){removeReaction(context,widget.id);setState(() {
             this._isLiked=!this._isLiked;
           });}, label: 'Like',icon: Icons.thumb_up,PostId: widget.id,isLiked: true,)
           :
