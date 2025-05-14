@@ -44,7 +44,7 @@ class ExerciseRowState extends State<ExerciseRow> {
           children: [
             SlidableAction(
               onPressed: (context) {
-                
+                completeExercice(this);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('${widget.title} done!')),
                 );
