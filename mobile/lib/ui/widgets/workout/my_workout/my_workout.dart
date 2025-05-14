@@ -23,7 +23,9 @@ class _MyWorkoutState extends State<MyWorkout> {
 
   void fetchExercices()async{
     exercices = await fetchSavedExercices();
-    
+    setState(() {
+      
+    });
   }
 
   @override
