@@ -167,4 +167,9 @@ class ExerciceServices
         }
         return $row;
     }
+
+    public function deleteExercice($id)
+    {
+        
+    }
 }
