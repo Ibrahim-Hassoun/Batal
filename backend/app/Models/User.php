@@ -73,7 +73,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function exercices()
     {
-           return $this->belongsToMany(Exercice::class);
+           return $this->belongsToMany(Exercice::class,'user_exercice');
     }
 
     public function getJWTIdentifier()
