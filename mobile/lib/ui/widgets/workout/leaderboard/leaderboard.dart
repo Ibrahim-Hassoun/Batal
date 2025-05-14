@@ -34,6 +34,17 @@ class _LeaderboardState extends State<Leaderboard> {
           imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',
           streak: 40,
         ),
+         ListView.builder(
+              physics: const NeverScrollableScrollPhysics(), // Disable scrolling
+              shrinkWrap: true,
+              
+              itemCount: players.length,
+              itemBuilder: (context,index){
+                 var exerciceData = players[index]; 
+                 return PlayerRow(playerName: 'John Doe',playerScore: 100,rank: 2,imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',streak: 40,
+                  );
+              },
+            )
       ],
     );
   }
