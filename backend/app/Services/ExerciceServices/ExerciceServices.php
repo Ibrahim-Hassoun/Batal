@@ -122,6 +122,6 @@ class ExerciceServices
      public function getSavedExercices($request)
     {
         $user = auth()->user();
-        return $user->savedExercices()->get();
+        return $user->exercices()->get();
     }
 }
