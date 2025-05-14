@@ -17,7 +17,13 @@ class UserExerciceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => \App\Models\User::factory(),
+            'exercice_id' => \App\Models\Exercice::factory(),
+            'sets' => $this->faker->numberBetween(1, 5),
+            'rating' => $this->faker->optional()->numberBetween(1, 10),
+            'notes' => $this->faker->optional()->sentence(),
+            'is_completed' => $this->faker->boolean(),
+            'completed_at' => $this->faker->optional()->dateTime(),
         ];
     }
 }
