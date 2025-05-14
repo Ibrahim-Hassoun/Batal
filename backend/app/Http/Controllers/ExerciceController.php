@@ -56,4 +56,14 @@ class ExerciceController extends Controller
             return $this->respond(false,$e->getMessage(),null,500);
         }
     }
+
+    public function incrementSetCount(Request $request)
+    {
+          try{
+            $result = $this->exerciceServices->incrementSetCount($request);
+            return $this->respond(true,'Saved exercices fetched successfully',$result,201);
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
+    }
 }
