@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-             FollowingSeeder::class,
+            UserExercice::class,
             UserSeeder::class,
             LogSeeder::class,
             GymSeeder::class,
@@ -35,7 +35,8 @@ class DatabaseSeeder extends Seeder
             ExerciceSeeder::class,
             ChatbotSessionSeeder::class,
             ChatbotMessageSeeder::class,
-
+            FollowingSeeder::class,
+            
         ]);
         // User::factory(10)->create();
 
