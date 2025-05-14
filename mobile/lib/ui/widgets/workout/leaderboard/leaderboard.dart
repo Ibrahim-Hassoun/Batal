@@ -11,7 +11,7 @@ class Leaderboard extends StatefulWidget {
 }
 
 class _LeaderboardState extends State<Leaderboard> {
-  late final List< dynamic> players;
+  late List< dynamic> players=[];
 
   @override
   void initState() {
@@ -21,27 +21,24 @@ class _LeaderboardState extends State<Leaderboard> {
   }
   void loadRows()async{
     players = await fetchRows();
+    setState(() {
+      
+    });
   }
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         SizedBox(height: 16),
-        PlayerRow(
-          playerName: 'John Doe',
-          playerScore: 100,
-          rank: 2,
-          imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',
-          streak: 40,
-        ),
+        
          ListView.builder(
-              physics: const NeverScrollableScrollPhysics(), // Disable scrolling
+              physics: const NeverScrollableScrollPhysics(), 
               shrinkWrap: true,
               
               itemCount: players.length,
               itemBuilder: (context,index){
-                 var exerciceData = players[index]; 
-                 return PlayerRow(playerName: 'John Doe',playerScore: 100,rank: 2,imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',streak: 40,
+                 var playerData = players[index]; 
+                 return PlayerRow(playerName: playerData['first_name']+' '+playerData['last_name'],playerScore: playerData['current_xp'],rank: index+1,imageUrl: playerData['profile_photo_url'] ?? 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y',streak: playerData['streak'],
                   );
               },
             )
