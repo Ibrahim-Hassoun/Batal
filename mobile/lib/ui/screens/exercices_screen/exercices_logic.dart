@@ -2,7 +2,7 @@ import '../../../core/remote/server.dart';
 
 Future<List<dynamic>> fetchExercices() async{
   var response = await ApiServices.request(
-    endpoint: '/api/v0.1/exercices/search',
+    endpoint: '/api/v0.1/exercices/all-previews',
     method: 'GET'
   );
   if (response['success']){
