@@ -66,10 +66,13 @@ Route::group(['prefix'=>"v0.1"],function(){
             Route::get('/search',[ExerciceController::class,'searchExercice']);
             Route::get('/recommended',[ExerciceController::class,'getRecommendedExercices']);
 
-            Route::get('/saved',[ExerciceController::class,'getSavedExercices']);
-            Route::patch('/saved/{id}/increment',[ExerciceController::class,'incrementSetCount']);
-            Route::patch('/saved/{id}/decrement',[ExerciceController::class,'decrementSetCount']);
-            Route::patch('/saved/{id}/complete',[ExerciceController::class,'completeExercice']);
+            Route::group(['prefix'=>'saved'],function(){
+                Route::get('/',[ExerciceController::class,'getSavedExercices']);
+                Route::patch('/{id}/increment',[ExerciceController::class,'incrementSetCount']);
+                Route::patch('/{id}/decrement',[ExerciceController::class,'decrementSetCount']);
+                Route::patch('/{id}/complete',[ExerciceController::class,'completeExercice']);
+            });
+           
 
         });
 
