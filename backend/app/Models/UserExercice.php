@@ -11,6 +11,11 @@ class UserExercice extends Model
 {   
     use SoftDeletes;
     protected $table = 'user_exercice';
+
+    protected $fillable = [
+        'user_id',
+        'exercice_id'
+    ];
     /** @use HasFactory<\Database\Factories\UserExerciceFactory> */
     use HasFactory;
 }

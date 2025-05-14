@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('exercice_id')->constrained()->onDelete('cascade');
-            $table->integer('sets')->nullable();
+            $table->integer('sets')->default(1);
             $table->integer('rating')->nullable();
             $table->text('notes')->nullable();
             $table->boolean('is_completed')->default(false);
