@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile/main.dart';
 import 'package:mobile/ui/atoms/screen_wide_elevated_button.dart';
 import 'exercice_row.dart';
-
+import './my_workout_logic.dart';
 
 class MyWorkout extends StatefulWidget {
   const MyWorkout({super.key});
@@ -18,7 +18,7 @@ class _MyWorkoutState extends State<MyWorkout> {
   void initState() {
     
     super.initState();
-    
+  
   }
 
   @override
