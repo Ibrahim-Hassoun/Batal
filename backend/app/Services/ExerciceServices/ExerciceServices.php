@@ -123,7 +123,7 @@ class ExerciceServices
     public function getSavedExercices($request)
     {
         $user = auth()->user();
-        return $user->exercices()->withPivot('sets')->wherePivotNull('deleted_at')->wherePivot('is_completed',false)->get();
+        return $user->exercices()->withPivot('id','sets')->wherePivotNull('deleted_at')->wherePivot('is_completed',false)->get();
     }
     
     public function incrementSetCount($id)
