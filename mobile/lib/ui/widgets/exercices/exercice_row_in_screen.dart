@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:mobile/ui/widgets/exercices/exercice_row_in_screen_logic.dart';
 
 
 class ExerciseRowInScreen extends StatefulWidget {
@@ -48,11 +49,7 @@ class ExerciseRowInScreenState extends State<ExerciseRowInScreen> {
                 IconButton(
                   icon: Icon(Icons.add_circle,size: 24,),
                   onPressed: () {
-                    setState(() {
-                      if(count<5) {
-                        count++;
-                      }
-                    });
+                    saveExercice(this);
                   },
                 ),
               ],
