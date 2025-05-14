@@ -11,7 +11,7 @@ class Leaderboard extends StatefulWidget {
 }
 
 class _LeaderboardState extends State<Leaderboard> {
-  late final List<Map<String, dynamic>> players;
+  late final List< dynamic> players;
 
   @override
   void initState() {

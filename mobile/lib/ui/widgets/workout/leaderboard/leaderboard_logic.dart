@@ -1,7 +1,7 @@
 import 'package:mobile/core/remote/server.dart';
 
 
-Future <List<Map<String,dynamic>>>  fetchRows() async{
+Future <List<dynamic>>  fetchRows() async{
 
   var response = await ApiServices.request(
     endpoint: '/api/v0.1/leaderboard/weekly',
