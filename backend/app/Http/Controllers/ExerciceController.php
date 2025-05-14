@@ -49,6 +49,11 @@ class ExerciceController extends Controller
 
     public function getSavedExercices(Request $request)
     {
-
+        try{
+            $exercices = $this->exerciceServices->getSavedExercices($request);
+            return $this->respond(true,'Saved exercices fetched successfully',$exercices,201);
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
     }
 }
