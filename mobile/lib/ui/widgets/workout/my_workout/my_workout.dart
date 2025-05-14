@@ -12,6 +12,15 @@ class MyWorkout extends StatefulWidget {
 }
 
 class _MyWorkoutState extends State<MyWorkout> {
+  late List<dynamic> exercices;
+
+  @override
+  void initState() {
+    
+    super.initState();
+    
+  }
+
   @override
   Widget build(BuildContext context) {
    return  Stack(
