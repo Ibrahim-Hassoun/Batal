@@ -15,10 +15,10 @@ class ExerciseRowInScreen extends StatefulWidget {
   });
 
   @override
-  State<ExerciseRowInScreen> createState() => _ExerciseRowInScreenState();
+  State<ExerciseRowInScreen> createState() => ExerciseRowInScreenState();
 }
 
-class _ExerciseRowInScreenState extends State<ExerciseRowInScreen> {
+class ExerciseRowInScreenState extends State<ExerciseRowInScreen> {
   int count = 1;
   @override
   Widget build(BuildContext context) {
