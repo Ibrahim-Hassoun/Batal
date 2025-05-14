@@ -119,9 +119,10 @@ class ExerciceServices
 
     }
 
-     public function getSavedExercices($request)
+    public function getSavedExercices($request)
     {
         $user = auth()->user();
         return $user->exercices()->withPivot('sets')->get();
     }
+    
 }
