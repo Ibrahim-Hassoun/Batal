@@ -11,8 +11,10 @@ use Database\Seeders\ReactionSeeder;
 use Database\Seeders\FollowingSeeder;
 use Database\Seeders\JobProfileSeeder;
 use Database\Seeders\ExerciceSeeder;
+use Database\Seeders\UserExerciceSeeder;
 use Database\Seeders\ChatbotMessageSeeder;
 use Database\Seeders\ChatbotSessionSeeder;
+
 
 
 class DatabaseSeeder extends Seeder
