@@ -22,11 +22,13 @@ class ExerciseRow extends StatefulWidget {
 
 class ExerciseRowState extends State<ExerciseRow> {
   int count = 1;
+  late int id ;
 
   @override
   void initState() {
     super.initState();
     count = widget.initialCount;
+    id = widget.id;
   }
 
   @override
@@ -76,9 +78,7 @@ class ExerciseRowState extends State<ExerciseRow> {
                 IconButton(
                   icon: Icon(Icons.remove_circle),
                   onPressed: () {
-                    setState(() {
-                      if (count > 1) count--;
-                    });
+                    decrementsSets(this);
                   },
                 ),
                 Text(count.toString(), style: TextStyle(fontSize: 16)),

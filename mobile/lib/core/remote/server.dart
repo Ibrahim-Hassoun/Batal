@@ -57,6 +57,13 @@ static Future<Map<String, dynamic>> request({
           body: jsonEncode(body),
         );
         break;
+      case 'PATCH':
+        response = await http.patch(
+          url,
+          headers: postHeaders,
+          body: jsonEncode(body),
+        );
+        break;
       case 'DELETE':
         response = await http.delete(
           url,

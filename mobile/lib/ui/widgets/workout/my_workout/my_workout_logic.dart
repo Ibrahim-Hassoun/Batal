@@ -15,10 +15,20 @@ Future<List<dynamic>> fetchSavedExercices() async{
 }
 
 void decrementsSets(ExerciseRowState exercicRowState) async {
+  print ("/api/v0.1/exercices/saved/${exercicRowState.id}/decrement");
   var response = await ApiServices.request(
-    endpoint: '/api/v0.1/exercices/saved/1/decrement',
+    endpoint: '/api/v0.1/exercices/saved/${exercicRowState.id}/decrement',
     method: 'PATCH',
-    optimistic: (){exercicRowState.count++;},
-    rollback: (){exercicRowState.count--;}
+    optimistic: () {
+      exercicRowState.setState(() => exercicRowState.count--);
+    },
+    rollback: (){
+      exercicRowState.setState(() => exercicRowState.count++);
+    }
     );
+
+    if(response['success']){
+      print('after decrement: ');
+      print(response['data']['data']);
+    }
 }
