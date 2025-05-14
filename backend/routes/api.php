@@ -65,7 +65,16 @@ Route::group(['prefix'=>"v0.1"],function(){
         Route::group(['prefix'=>'exercices'],function(){
             Route::get('/search',[ExerciceController::class,'searchExercice']);
             Route::get('/recommended',[ExerciceController::class,'getRecommendedExercices']);
-            Route::get('/saved',[ExerciceController::class,'getSavedExercices']);
+
+            Route::group(['prefix'=>'saved'],function(){
+                Route::get('/',[ExerciceController::class,'getSavedExercices']);
+                Route::patch('/{id}/increment',[ExerciceController::class,'incrementSetCount']);
+                Route::patch('/{id}/decrement',[ExerciceController::class,'decrementSetCount']);
+                Route::patch('/{id}/complete',[ExerciceController::class,'completeExercice']);
+                Route::delete('/{id}',[ExerciceController::class,'deleteExercice']);
+            });
+           
+
         });
 
         Route::group(['prefix'=>'leaderboard'],function(){

@@ -56,4 +56,44 @@ class ExerciceController extends Controller
             return $this->respond(false,$e->getMessage(),null,500);
         }
     }
+
+    public function incrementSetCount($id)
+    {
+        try{
+            $result = $this->exerciceServices->incrementSetCount($id);
+            return $this->respond(true,'set incremented successfully',$result,201);
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
+    }
+
+    public function decrementSetCount($id)
+    {
+        try{
+            $result = $this->exerciceServices->decrementSetCount($id);
+            return $this->respond(true,'set decremented successfully',$result,201);
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
+    }
+
+    public function completeExercice($id)
+    {
+         try{
+            $result = $this->exerciceServices->completeExercice($id);
+            return $this->respond(true,'Exercice completed successfully',$result,201);
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
+    }
+
+    public function deleteExercice($id)
+    {
+         try{
+            $result = $this->exerciceServices->deleteExercice($id);
+            return $this->respond(true,'Exercice deleted successfully',$result,201);
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Services\ExerciceServices;
 
 use App\Models\User;
 use App\Models\Exercice;
+use App\Models\UserExercice;
 
 
 class ExerciceServices
@@ -119,9 +120,63 @@ class ExerciceServices
 
     }
 
-     public function getSavedExercices($request)
+    public function getSavedExercices($request)
     {
         $user = auth()->user();
-        return $user->exercices()->withPivot('sets')->get();
+        return $user->exercices()->withPivot('sets')->wherePivotNull('deleted_at')->wherePivot('is_completed',false)->get();
+    }
+    
+    public function incrementSetCount($id)
+    {
+        $row=UserExercice::find($id);
+        if(!$row){
+            throw new Exception('Row not found',404);
+        }
+        $result=$row->increment('sets');
+        if(!$result){
+            throw new Exception('Could not increment',500);
+        }
+        $newRow = UserExercice::find($id);
+        return $newRow;
+    }
+
+    public function decrementSetCount($id)
+    {
+        $row=UserExercice::find($id);
+        if(!$row){
+            throw new Exception('Row not found',404);
+        }
+        $result=$row->decrement('sets');
+        if(!$result){
+            throw new Exception('Could not decrement',500);
+        }
+        $newRow = UserExercice::find($id);
+        return $newRow;
+    }
+
+    public function completeExercice($id)
+    {
+        $row = UserExercice::find($id);
+        if(!$row){
+            throw new Exception("Row not found",404);
+        }
+        $row->is_completed = true;
+        $row->completed_at = now();
+        if (!$row->save()){
+            throw new Exception("Could not save row",500);
+        }
+        return $row;
+    }
+
+    public function deleteExercice($id)
+    {
+        $row = UserExercice::find($id);
+        if(!$row){
+            throw new Exception("Row not found",404);
+        }
+        if(!$row->delete()){
+            throw new Exception("Row not deleted",500);
+        }
+        return;
     }
 }
