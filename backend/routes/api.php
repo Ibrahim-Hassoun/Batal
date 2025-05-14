@@ -71,6 +71,7 @@ Route::group(['prefix'=>"v0.1"],function(){
                 Route::patch('/{id}/increment',[ExerciceController::class,'incrementSetCount']);
                 Route::patch('/{id}/decrement',[ExerciceController::class,'decrementSetCount']);
                 Route::patch('/{id}/complete',[ExerciceController::class,'completeExercice']);
+                Route::delete('/{id}',[ExerciceController::class,'deleteExercice']);
             });
            
 
