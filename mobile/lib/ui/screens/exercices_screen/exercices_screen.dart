@@ -77,9 +77,7 @@ class _ExercicesScreenState extends State<ExercicesScreen> {
                 padding: EdgeInsets.only(bottom: 100), 
                 child: Column(
                   children: [
-                    // ...exercices.map((exercice) =>
-                    //   ExerciseRowInScreen(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg')
-                    // ).toList()
+                    
 
             mode=='all'?
             ListView.builder(
