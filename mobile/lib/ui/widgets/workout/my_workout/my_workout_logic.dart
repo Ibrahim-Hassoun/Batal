@@ -1,5 +1,5 @@
 import 'package:mobile/core/remote/server.dart';
-
+import './exercice_row.dart';
 
 Future<List<dynamic>> fetchSavedExercices() async{
   var response = await ApiServices.request(
@@ -14,7 +14,11 @@ Future<List<dynamic>> fetchSavedExercices() async{
     }
 }
 
-void decrementsSets()
-{
-  
+void decrementsSets(ExerciseRowState exercicRowState) async {
+  var response = await ApiServices.request(
+    endpoint: '/api/v0.1/exercices/saved/1/decrement',
+    method: 'PATCH',
+    optimistic: (){exercicRowState.count++;},
+    rollback: (){exercicRowState.count--;}
+    );
 }

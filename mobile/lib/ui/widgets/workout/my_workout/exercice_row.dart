@@ -16,10 +16,10 @@ class ExerciseRow extends StatefulWidget {
   });
 
   @override
-  State<ExerciseRow> createState() => _ExerciseRowState();
+  State<ExerciseRow> createState() => ExerciseRowState();
 }
 
-class _ExerciseRowState extends State<ExerciseRow> {
+class ExerciseRowState extends State<ExerciseRow> {
   int count = 1;
 
   @override
