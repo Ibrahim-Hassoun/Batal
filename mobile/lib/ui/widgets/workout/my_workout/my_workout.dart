@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile/main.dart';
 import 'package:mobile/ui/atoms/screen_wide_elevated_button.dart';
 import 'exercice_row.dart';
-
+import './my_workout_logic.dart';
 
 class MyWorkout extends StatefulWidget {
   const MyWorkout({super.key});
@@ -12,6 +12,22 @@ class MyWorkout extends StatefulWidget {
 }
 
 class _MyWorkoutState extends State<MyWorkout> {
+  late List<dynamic> exercices=[];
+
+  @override
+  void initState() {
+    
+    super.initState();
+    fetchExercices();
+  }
+
+  void fetchExercices()async{
+    exercices = await fetchSavedExercices();
+    setState(() {
+      
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
    return  Stack(
@@ -25,12 +41,17 @@ class _MyWorkoutState extends State<MyWorkout> {
             padding: EdgeInsets.only(bottom: 100), // Space for button
             child: Column(
               children: [
-                SizedBox(height: 20),
-                ExerciseRow(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg'),
-                SizedBox(height: 8),
-                ExerciseRow(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg'),
-                SizedBox(height: 8),
-                ExerciseRow(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg'),
+              
+                ListView.builder(
+                physics: const NeverScrollableScrollPhysics(), // Disable scrolling
+                shrinkWrap: true,
+                
+                itemCount: exercices.length,
+                itemBuilder: (context,index){
+                  var exerciceData = exercices[index]; 
+                  return ExerciseRow(title: exerciceData['exercice'], imageUrl: exerciceData['image_url']??'https://images.unsplash.com/photo-1605296867304-46d5465a13f1',initialCount: exerciceData['pivot']['sets'],);
+                },
+                ),
                 GestureDetector(
                   child: Text('add exercice'),
                   onTap: ()=>{ Navigator.pushNamed(context, '/exercices', )},
