@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import './my_workout_logic.dart';
 
 class ExerciseRow extends StatefulWidget {
   final String title;
