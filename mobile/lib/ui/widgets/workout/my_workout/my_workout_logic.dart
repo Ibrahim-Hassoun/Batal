@@ -13,3 +13,8 @@ Future<List<dynamic>> fetchSavedExercices() async{
       throw new Exception('Could not load saved exercices');
     }
 }
+
+void decrementsSets()
+{
+  
+}
