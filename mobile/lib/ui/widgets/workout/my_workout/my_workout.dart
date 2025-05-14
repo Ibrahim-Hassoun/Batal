@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/main.dart';
 import 'package:mobile/ui/atoms/screen_wide_elevated_button.dart';
-import 'package:mobile/ui/screens/exercices_screen/exercices_logic.dart';
 import 'exercice_row.dart';
 import './my_workout_logic.dart';
 
@@ -19,13 +18,13 @@ class _MyWorkoutState extends State<MyWorkout> {
   void initState() {
     
     super.initState();
-
+    fetchExercices();
   }
 
-  void fetchSavedExercices()async{
-    exercices = await fetchExercices();
+  void fetchExercices()async{
+    exercices = await fetchSavedExercices();
   }
-  
+
   @override
   Widget build(BuildContext context) {
    return  Stack(
