@@ -49,7 +49,7 @@ class _MyWorkoutState extends State<MyWorkout> {
                 itemCount: exercices.length,
                 itemBuilder: (context,index){
                   var exerciceData = exercices[index]; 
-                  return ExerciseRow(title: exerciceData['exercice'], imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg');
+                  return ExerciseRow(title: exerciceData['exercice'], imageUrl: exerciceData['image_url']??'https://images.unsplash.com/photo-1605296867304-46d5465a13f1');
                 },
                 ),
                 GestureDetector(
