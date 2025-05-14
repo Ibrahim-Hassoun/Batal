@@ -38,12 +38,12 @@ class ExerciseRowState extends State<ExerciseRow> {
         
         key: Key(widget.title),
         endActionPane: ActionPane(
-          motion: const StretchMotion(), // You can use StretchMotion or others too
+          motion: const StretchMotion(), 
           extentRatio: 0.6, 
           children: [
             SlidableAction(
               onPressed: (context) {
-                // Confirm action
+               
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('${widget.title} done!')),
                 );
@@ -78,18 +78,14 @@ class ExerciseRowState extends State<ExerciseRow> {
                 IconButton(
                   icon: Icon(Icons.remove_circle),
                   onPressed: () {
-                    decrementsSets(this);
+                    decrementSets(this);
                   },
                 ),
                 Text(count.toString(), style: TextStyle(fontSize: 16)),
                 IconButton(
                   icon: Icon(Icons.add_circle),
                   onPressed: () {
-                    setState(() {
-                      if(count<5) {
-                        count++;
-                      }
-                    });
+                    incrementSets(this);
                   },
                 ),
               ],
