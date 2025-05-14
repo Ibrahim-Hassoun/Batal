@@ -8,7 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\ExerciceController;
 use App\Http\Controllers\JobProfileController;
-
+use App\Http\Controllers\LeaderBoardController;
 
 
 Route::group(['prefix'=>"v0.1"],function(){
@@ -66,7 +66,11 @@ Route::group(['prefix'=>"v0.1"],function(){
             Route::get('/search',[ExerciceController::class,'searchExercice']);
             Route::get('/recommended',[ExerciceController::class,'getRecommendedExercices']);
         });
-        
+
+        Route::group(['prefix'=>'leaderboard'],function(){
+            Route::get('/weekly',[LeaderBoardController::class,'getWeeklyLeaderBoard']);
+        });
+
         Route::group(['middleware' => 'isAdmin'], function () {
             
             Route::group(['prefix'=>'exercices'],function(){

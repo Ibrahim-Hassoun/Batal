@@ -7,5 +7,6 @@ return [
     App\Providers\ExerciceServicesProvider::class,
     App\Providers\GymServicesProvider::class,
     App\Providers\JobProfileServicesProvider::class,
+    App\Providers\LeaderBoardServicesProvider::class,
     App\Providers\PostServicesProvider::class,
 ];
