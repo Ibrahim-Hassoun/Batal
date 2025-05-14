@@ -4,6 +4,7 @@ namespace App\Services\ExerciceServices;
 
 use App\Models\User;
 use App\Models\Exercice;
+use App\Models\UserExercice;
 
 
 class ExerciceServices
@@ -119,9 +120,37 @@ class ExerciceServices
 
     }
 
-     public function getSavedExercices($request)
+    public function getSavedExercices($request)
     {
         $user = auth()->user();
         return $user->exercices()->withPivot('sets')->get();
+    }
+    
+    public function incrementSetCount($id)
+    {
+        $row=UserExercice::find($id);
+        if(!$row){
+            throw new Exception('Row not found',404);
+        }
+        $result=$row->increment('sets');
+        if(!$result){
+            throw new Exception('Could not increment',500);
+        }
+        $newRow = UserExercice::find($id);
+        return $newRow;
+    }
+
+    public function decrementSetCount($id)
+    {
+        $row=UserExercice::find($id);
+        if(!$row){
+            throw new Exception('Row not found',404);
+        }
+        $result=$row->decrement('sets');
+        if(!$result){
+            throw new Exception('Could not decrement',500);
+        }
+        $newRow = UserExercice::find($id);
+        return $newRow;
     }
 }
