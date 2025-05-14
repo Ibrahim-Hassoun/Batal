@@ -16,7 +16,7 @@ Future<List<dynamic>> fetchSavedExercices() async{
 
 void decrementSets(ExerciseRowState exercicRowState) async {
   
-  if(exercicRowState.count>1){
+  if(exercicRowState.count>0){
     var response = await ApiServices.request(
     endpoint: '/api/v0.1/exercices/saved/${exercicRowState.id}/decrement',
     method: 'PATCH',

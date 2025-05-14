@@ -33,7 +33,8 @@ class ExerciseRowState extends State<ExerciseRow> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+     if( count == 0) return SizedBox(height: 0,) ;
+     return SizedBox(
       child: Slidable(
         
         key: Key(widget.title),
