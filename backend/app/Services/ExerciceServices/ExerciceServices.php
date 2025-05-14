@@ -123,7 +123,7 @@ class ExerciceServices
     public function getSavedExercices($request)
     {
         $user = auth()->user();
-        return $user->exercices()->withPivot('sets')->wherePivotNull('deleted_at')->wherePivot('is_completed',false)->get();
+        return $user->exercices()->withPivot('id','sets')->wherePivotNull('deleted_at')->wherePivot('is_completed',false)->get();
     }
     
     public function incrementSetCount($id)
@@ -178,5 +178,21 @@ class ExerciceServices
             throw new Exception("Row not deleted",500);
         }
         return;
+    }
+
+    public function saveExercice($exerciceId)
+    {
+        $userId = auth()->user()->id;
+        $exercice = Exercice::find($exerciceId);
+        if(!$exercice){
+            throw new Exception("exercice not found",404);
+        }
+
+        $userExercice = UserExercice::create([
+            'user_id'=>$userId,
+            'exercice_id'=>$exerciceId
+        ]);
+
+        return $userExercice;
     }
 }

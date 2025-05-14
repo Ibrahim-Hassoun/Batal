@@ -1,25 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:mobile/ui/widgets/exercices/exercice_row_in_screen_logic.dart';
 
 
 class ExerciseRowInScreen extends StatefulWidget {
   final String title;
   final String imageUrl;
-  
+  final int id;
 
   const ExerciseRowInScreen({
     super.key,
     required this.title,
     required this.imageUrl,
+    required this.id,
     
   });
 
   @override
-  State<ExerciseRowInScreen> createState() => _ExerciseRowInScreenState();
+  State<ExerciseRowInScreen> createState() => ExerciseRowInScreenState();
 }
 
-class _ExerciseRowInScreenState extends State<ExerciseRowInScreen> {
+class ExerciseRowInScreenState extends State<ExerciseRowInScreen> {
   int count = 1;
+  late int id;
+
+  @override
+  void initState() {
+    
+    super.initState();
+    id = widget.id;
+  }
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -39,11 +49,7 @@ class _ExerciseRowInScreenState extends State<ExerciseRowInScreen> {
                 IconButton(
                   icon: Icon(Icons.add_circle,size: 24,),
                   onPressed: () {
-                    setState(() {
-                      if(count<5) {
-                        count++;
-                      }
-                    });
+                    saveExercice(this);
                   },
                 ),
               ],
