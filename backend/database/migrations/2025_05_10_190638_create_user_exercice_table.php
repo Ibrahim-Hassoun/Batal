@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('is_completed')->default(false);
             $table->softDeletes();
             $table->timestamp('completed_at')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users_exercices');
+        Schema::dropIfExists('user_exercice');
     }
 };
