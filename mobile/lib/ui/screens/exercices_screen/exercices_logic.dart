@@ -9,6 +9,8 @@ Future<List<dynamic>> fetchExercices() async{
     print(response['data']['data']);
     return response['data']['data'];
   }
+  print('failed to retrieve exercices:');
+  print(response);
   print(response['message']);
   throw Exception('Failed to fetch exercices');
 }
