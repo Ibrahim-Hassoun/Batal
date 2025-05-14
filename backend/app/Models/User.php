@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Log;
 use App\Models\Post;
+use App\Models\Exercice;
 use App\Models\Following;
 use App\Models\ChatbotSession;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -68,6 +69,11 @@ class User extends Authenticatable implements JWTSubject
     public function chatbotSession()
     {
         return $this->hasOne(ChatbotSession::class);
+    }
+
+    public function exercices()
+    {
+           return $this->belongsToMany(Exercice::class);
     }
 
     public function getJWTIdentifier()
