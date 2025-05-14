@@ -69,6 +69,8 @@ Route::group(['prefix'=>"v0.1"],function(){
             Route::get('/saved',[ExerciceController::class,'getSavedExercices']);
             Route::patch('/saved/{id}/increment',[ExerciceController::class,'incrementSetCount']);
             Route::patch('/saved/{id}/decrement',[ExerciceController::class,'decrementSetCount']);
+            Route::patch('/saved/{id}/complete',[ExerciceController::class,'completeExercice']);
+
         });
 
         Route::group(['prefix'=>'leaderboard'],function(){
