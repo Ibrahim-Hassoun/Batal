@@ -65,6 +65,7 @@ Route::group(['prefix'=>"v0.1"],function(){
         Route::group(['prefix'=>'exercices'],function(){
             Route::get('/search',[ExerciceController::class,'searchExercice']);
             Route::get('/recommended',[ExerciceController::class,'getRecommendedExercices']);
+            Route::post('/{id}/save',[ExerciceController::class,'saveExercice']);
 
             Route::group(['prefix'=>'saved'],function(){
                 Route::get('/',[ExerciceController::class,'getSavedExercices']);
