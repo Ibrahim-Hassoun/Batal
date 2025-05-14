@@ -125,4 +125,8 @@ class ExerciceServices
         return $user->exercices()->withPivot('sets')->get();
     }
     
+    public function incrementSetCount($request)
+    {
+        
+    }
 }
