@@ -118,4 +118,9 @@ class ExerciceServices
         return $topExercises;
 
     }
+
+     public function getSavedExercices($request)
+    {
+        
+    }
 }
