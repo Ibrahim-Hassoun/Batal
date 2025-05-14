@@ -170,6 +170,13 @@ class ExerciceServices
 
     public function deleteExercice($id)
     {
-        
+        $row = UserExercice::find($id);
+        if(!$row){
+            throw new Exception("Row not found",404);
+        }
+        if(!$row->delete()){
+            throw new Exception("Row not deleted",500);
+        }
+        return;
     }
 }
