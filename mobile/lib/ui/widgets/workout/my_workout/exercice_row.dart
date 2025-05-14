@@ -5,11 +5,13 @@ class ExerciseRow extends StatefulWidget {
   final String title;
   final String imageUrl;
   final int initialCount;
+  final int id;
 
   const ExerciseRow({
     super.key,
     required this.title,
     required this.imageUrl,
+    required this.id,
     this.initialCount = 1,
   });
 
