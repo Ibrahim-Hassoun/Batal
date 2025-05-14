@@ -153,4 +153,30 @@ class ExerciceServices
         $newRow = UserExercice::find($id);
         return $newRow;
     }
+
+    public function completeExercice($id)
+    {
+        $row = UserExercice::find($id);
+        if(!$row){
+            throw new Exception("Row not found",404);
+        }
+        $row->is_completed = true;
+        $row->completed_at = now();
+        if (!$row->save()){
+            throw new Exception("Could not save row",500);
+        }
+        return $row;
+    }
+
+    public function deleteExercice($id)
+    {
+        $row = UserExercice::find($id);
+        if(!$row){
+            throw new Exception("Row not found",404);
+        }
+        if(!$row->delete()){
+            throw new Exception("Row not deleted",500);
+        }
+        return;
+    }
 }
