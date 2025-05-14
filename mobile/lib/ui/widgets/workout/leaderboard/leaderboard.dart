@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import './player_row.dart';
 
 class Leaderboard extends StatelessWidget {
-  const Leaderboard({super.key});
-
+  Leaderboard({super.key});
+  late final List<Map<String,dynamic>> players;
  
   @override
   Widget build(BuildContext context) {
