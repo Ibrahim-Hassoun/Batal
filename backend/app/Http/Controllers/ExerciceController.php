@@ -37,6 +37,16 @@ class ExerciceController extends Controller
         }
     }
 
+    public function getExercicesPreviews(Request $request)
+    {
+        try{
+            $post = $this->exerciceServices->getExercicesPreviews($request);
+            return $this->respond(true,'Exercices fetched successfully',$post,201);
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
+    }
+
     public function getRecommendedExercices(Request $request)
     {
         try{
