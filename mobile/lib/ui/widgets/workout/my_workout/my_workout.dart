@@ -23,6 +23,7 @@ class _MyWorkoutState extends State<MyWorkout> {
 
   void fetchExercices()async{
     exercices = await fetchSavedExercices();
+    
   }
 
   @override
@@ -38,12 +39,17 @@ class _MyWorkoutState extends State<MyWorkout> {
             padding: EdgeInsets.only(bottom: 100), // Space for button
             child: Column(
               children: [
-                SizedBox(height: 20),
-                ExerciseRow(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg'),
-                SizedBox(height: 8),
-                ExerciseRow(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg'),
-                SizedBox(height: 8),
-                ExerciseRow(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg'),
+              
+                ListView.builder(
+                physics: const NeverScrollableScrollPhysics(), // Disable scrolling
+                shrinkWrap: true,
+                
+                itemCount: exercices.length,
+                itemBuilder: (context,index){
+                  var exerciceData = exercices[index]; 
+                  return ExerciseRow(title: exerciceData['exercice'], imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg');
+                },
+                ),
                 GestureDetector(
                   child: Text('add exercice'),
                   onTap: ()=>{ Navigator.pushNamed(context, '/exercices', )},
