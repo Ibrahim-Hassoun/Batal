@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\UserExercice;
 
 class UserExerciceSeeder extends Seeder
 {
@@ -12,6 +13,6 @@ class UserExerciceSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        UserExercice::factory()->count(10)->create();
     }
 }
