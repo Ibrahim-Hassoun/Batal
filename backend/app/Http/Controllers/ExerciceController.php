@@ -87,11 +87,21 @@ class ExerciceController extends Controller
         }
     }
 
-    public function deleteExercice($id)
+    public function deleteExercice($id)//deletes saved exercices from pivot table,not the exercice itself
     {
          try{
             $result = $this->exerciceServices->deleteExercice($id);
             return $this->respond(true,'Exercice deleted successfully',$result,201);
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
+    }
+
+     public function saveExercice($id)
+    {
+         try{
+            $result = $this->exerciceServices->saveExercice($id);
+            return $this->respond(true,'Exercice saved successfully',$result,201);
         }catch(\Exception $e){
             return $this->respond(false,$e->getMessage(),null,500);
         }
