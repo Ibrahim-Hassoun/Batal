@@ -132,11 +132,11 @@ class ExerciceServices
         if(!$row){
             throw new Exception('Row not found',404);
         }
-        $result=$row->sets->increment();
+        $result=$row->increment('sets');
         if(!$result){
             throw new Exception('Could not increment',500);
         }
-        $newRow = UserExcercice::find($id);
+        $newRow = UserExercice::find($id);
         return $newRow;
     }
 }
