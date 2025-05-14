@@ -49,6 +49,7 @@ void incrementSets(ExerciseRowState exercicRowState) async {
 
 
 void removeExercice(ExerciseRowState exercicRowState) async{
+  print("/api/v0.1/exercices/saved/${exercicRowState.id}");
   int prevCount = exercicRowState.count;
   var response = await ApiServices.request(
     endpoint: '/api/v0.1/exercices/saved/${exercicRowState.id}',
@@ -60,6 +61,10 @@ void removeExercice(ExerciseRowState exercicRowState) async{
       exercicRowState.count=prevCount
       }),
     );
+    if(!response['success']){
+      print('failed to delete exercice:');
+      print(response);
+    }
 }
 
 void completeExercice(ExerciseRowState exercicRowState) async{
