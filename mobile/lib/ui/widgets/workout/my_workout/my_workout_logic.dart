@@ -61,3 +61,17 @@ void removeExercice(ExerciseRowState exercicRowState) async{
       }),
     );
 }
+
+void completeExercice(ExerciseRowState exercicRowState) async{
+  int prevCount = exercicRowState.count;
+  var response = await ApiServices.request(
+    endpoint: '/api/v0.1/exercices/saved/${exercicRowState.id}/complete',
+    method: 'PATCH',
+    optimistic: ()=>exercicRowState.setState(() => {
+      exercicRowState.count=0
+      }),
+    rollback: ()=>exercicRowState.setState(() => {
+      exercicRowState.count=prevCount
+      }),
+    );
+}
