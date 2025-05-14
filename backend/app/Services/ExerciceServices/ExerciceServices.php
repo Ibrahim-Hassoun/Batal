@@ -180,8 +180,19 @@ class ExerciceServices
         return;
     }
 
-    public function saveExercice($id)
+    public function saveExercice($exerciceId)
     {
-        
+        $userId = auth()->user()->id;
+        $exercice = Exercice::find($exerciceId);
+        if(!$exercice){
+            throw new Exception("exercice not found",404);
+        }
+
+        $userExercice = UserExercice::create([
+            'user_id'=>$userId,
+            'exercice_id'=>$exerciceId
+        ]);
+
+        return $userExercice;
     }
 }
