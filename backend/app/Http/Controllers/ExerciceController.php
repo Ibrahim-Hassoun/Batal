@@ -61,7 +61,17 @@ class ExerciceController extends Controller
     {
         try{
             $result = $this->exerciceServices->incrementSetCount($id);
-            return $this->respond(true,'Saved exercices fetched successfully',$result,201);
+            return $this->respond(true,'set incremented successfully',$result,201);
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
+    }
+
+    public function decrementSetCount($id)
+    {
+        try{
+            $result = $this->exerciceServices->decrementSetCount($id);
+            return $this->respond(true,'set decremented successfully',$result,201);
         }catch(\Exception $e){
             return $this->respond(false,$e->getMessage(),null,500);
         }
