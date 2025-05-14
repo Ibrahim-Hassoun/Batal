@@ -44,7 +44,7 @@ class ExerciseRowState extends State<ExerciseRow> {
           children: [
             SlidableAction(
               onPressed: (context) {
-               
+                completeExercice(this);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('${widget.title} done!')),
                 );
@@ -55,7 +55,7 @@ class ExerciseRowState extends State<ExerciseRow> {
             ),
             SlidableAction(
               onPressed: (context) {
-                // Delete action (doesn't remove the widget)
+                removeExercice(this);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('${widget.title} delete clicked')),
                 );
