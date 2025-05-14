@@ -46,4 +46,9 @@ class ExerciceController extends Controller
             return $this->respond(false,$e->getMessage(),null,500);
         }
     }
+
+    public function getSavedExercices(Request $request)
+    {
+
+    }
 }
