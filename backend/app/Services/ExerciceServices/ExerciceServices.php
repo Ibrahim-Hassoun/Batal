@@ -4,6 +4,7 @@ namespace App\Services\ExerciceServices;
 
 use App\Models\User;
 use App\Models\Exercice;
+use App\Models\UserExercice;
 
 
 class ExerciceServices
@@ -125,8 +126,17 @@ class ExerciceServices
         return $user->exercices()->withPivot('sets')->get();
     }
     
-    public function incrementSetCount($request)
+    public function incrementSetCount($id)
     {
-        
+        $row=UserExercice::find($id);
+        if(!$row){
+            throw new Exception('Row not found',404);
+        }
+        $result=$row->sets->increment();
+        if(!$result){
+            throw new Exception('Could not increment',500);
+        }
+        $newRow = UserExcercice::find($id);
+        return $newRow;
     }
 }
