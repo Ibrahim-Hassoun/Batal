@@ -179,4 +179,9 @@ class ExerciceServices
         }
         return;
     }
+
+    public function saveExercice($id)
+    {
+        
+    }
 }
