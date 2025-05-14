@@ -139,4 +139,18 @@ class ExerciceServices
         $newRow = UserExercice::find($id);
         return $newRow;
     }
+
+    public function decrementSetCount($id)
+    {
+        $row=UserExercice::find($id);
+        if(!$row){
+            throw new Exception('Row not found',404);
+        }
+        $result=$row->decrement('sets');
+        if(!$result){
+            throw new Exception('Could not decrement',500);
+        }
+        $newRow = UserExercice::find($id);
+        return $newRow;
+    }
 }
