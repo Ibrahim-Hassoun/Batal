@@ -76,4 +76,14 @@ class ExerciceController extends Controller
             return $this->respond(false,$e->getMessage(),null,500);
         }
     }
+
+    public function completeExercice($id)
+    {
+         try{
+            $result = $this->exerciceServices->decrementSetCount($id);
+            return $this->respond(true,'set decremented successfully',$result,201);
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
+    }
 }
