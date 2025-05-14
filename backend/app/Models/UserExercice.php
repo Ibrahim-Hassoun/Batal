@@ -12,7 +12,7 @@ class UserExercice extends Model
     use SoftDeletes;
     protected $table = 'user_exercice';
 
-    protected $fillables = [
+    protected $fillable = [
         'user_id',
         'exercice_id'
     ];
