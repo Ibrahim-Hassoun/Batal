@@ -61,7 +61,7 @@ class _MyWorkoutState extends State<MyWorkout> {
             padding: EdgeInsets.only(bottom: 100),
             child: Column(
               children: [
-              
+                SizedBox(height: 24),
                 ListView.builder(
                 physics: const NeverScrollableScrollPhysics(), 
                 shrinkWrap: true,
@@ -73,8 +73,35 @@ class _MyWorkoutState extends State<MyWorkout> {
                 },
                 ),
                 
+                SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.only(left: 32,right: 32),
+                    child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.white10, width: 0.1),
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 4,
+                        offset: Offset(0, 2),
+                      ),
+                      ],
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [ 
+                        GestureDetector(
+                        child:Icon(Icons.add),
+                        onTap: () => { Navigator.pushNamed(context, '/exercices') },
+                          ),],
+                    ),
+                    ),
+                ),
                 SizedBox(height: 40),
-                // Your content here
+                
               ],
             ),
           ),
