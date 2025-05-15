@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/main.dart';
 import 'package:mobile/ui/widgets/workout/leaderboard/leaderboard_logic.dart';
 import './player_row.dart';
 import './leaderboard.dart';
@@ -7,11 +8,12 @@ class Leaderboard extends StatefulWidget {
   const Leaderboard({super.key});
 
   @override
-  State<Leaderboard> createState() => _LeaderboardState();
+  State<Leaderboard> createState() => LeaderboardState();
 }
 
-class _LeaderboardState extends State<Leaderboard> {
+class LeaderboardState extends State<Leaderboard> {
   late List< dynamic> players=[];
+  bool loading = true;
 
   @override
   void initState() {
@@ -20,14 +22,19 @@ class _LeaderboardState extends State<Leaderboard> {
     loadRows();
   }
   void loadRows()async{
-    players = await fetchRows();
+    players = await fetchRows(this);
     setState(() {
       
     });
   }
   @override
   Widget build(BuildContext context) {
-    return Column(
+    
+    return
+     loading?
+    Center(child: CircularProgressIndicator(color: primaryColor,))
+    :
+    Column(
       children: [
         SizedBox(height: 16),
         
