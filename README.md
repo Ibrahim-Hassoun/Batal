@@ -77,7 +77,7 @@
 
 | Services                            | Validation                       | Testing                        |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/development-testing/validation-request.png) | ![fsdaf](./readme/development-testing/tests.png) |
+| ![Landing](./readme/development-testing/service.png) | ![fsdaf](./readme/development-testing/validation-request.png) | ![fsdaf](./readme/development-testing/tests.png) |
 
 
 <br><br>

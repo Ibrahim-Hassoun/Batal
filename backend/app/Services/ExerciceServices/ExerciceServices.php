@@ -31,6 +31,16 @@ class ExerciceServices
         return $exercice;
     }
 
+    public function getExercicesPreviews($request)
+    {
+        $exercices = Exercice::orderBy('area')
+            ->get(['id', 'exercice', 'image_url']);
+        if ($exercices->isEmpty()) {
+            throw new \Exception('Could not fetch exercices', 500);
+        }
+        return $exercices;
+    }
+
     public function searchExercice($request)
     {
         $query = Exercice::query();
@@ -75,15 +85,7 @@ class ExerciceServices
         return $exercices;
     }
 
-    public function getExercicesPreviews($request)
-    {
-        $exercices = Exercice::orderBy('area')
-            ->get(['id', 'exercice', 'image_url']);
-        if ($exercices->isEmpty()) {
-            throw new \Exception('Could not fetch exercices', 500);
-        }
-        return $exercices;
-    }
+    
 
     public function getRecommendedExercices($request)
     {
