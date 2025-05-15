@@ -45,15 +45,15 @@ return new class extends Migration
             $table->timestamp('last_login_at')->nullable();
             $table->string('last_login_ip')->nullable();
 
-            $table->integer('fitness_level');
+            $table->integer('fitness_level')->default(1);
             $table->string('fitness_goal')->nullable();
-            $table->json('fitness_interests');
+            $table->json('fitness_interests')->nullable();
             $table->enum('injuries', ['arm', 'shoulder', 'chest', 'back', 'leg'])->nullable();
             $table->string('medical_conditions')->nullable();
             $table->string('allergies')->nullable();
             $table->string('dietary_preferences')->nullable();
             $table->string('dietary_restrictions')->nullable();
-            $table->json('fitness_equipment');
+            $table->json('fitness_equipment')->default("[\"none\"]");
             $table->string('fitness_experience')->nullable();
             
 
