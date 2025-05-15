@@ -37,7 +37,7 @@ class _ChatRowState extends State<ChatRow>
             child: GestureDetector(
               onTap: () =>{} ,
               child: CircleAvatar(
-                backgroundImage: NetworkImage('https://randomuser.me/api/portraits/men/1.jpg'),
+                backgroundImage: NetworkImage(widget.chatImageUrl ?? 'https://randomuser.me/api/portraits/men/1.jpg'),
             ),
             )
             ),

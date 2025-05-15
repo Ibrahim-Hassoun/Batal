@@ -124,7 +124,7 @@ class ExerciceServices
         }
         usort($recommendations, fn($a, $b) => $b['score'] <=> $a['score']);
 
-        $topExercises = array_slice($recommendations, 0, 10);
+        $topExercises = array_slice($recommendations, 0, 3);
 
         return $topExercises;
 
