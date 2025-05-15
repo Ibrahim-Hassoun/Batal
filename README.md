@@ -28,21 +28,25 @@
 <!-- System Design -->
 <img src="./readme/title3.svg"/>
 
-### Add Title Here
+### Batal's skeleton
 
-- To be decided on later on.
+<p align="left">
+    <img src="./readme/system-design/ER-diagram.png" width="50%"/>
+</p>
 
 <br><br>
 
 <!-- Project Highlights -->
 <img src="./readme/title4.svg"/>
 
-### Add Title Here
+### Experience the magic
 
 - AI-powered pose detector with live feedback for each exercice.
 - Traffic detector using sensors to get live feedback on gym traffic level.
-- AI assistant that gives personalized advice based on previous interactions.
+- AI assistant that gives personalized advice based on previous interactions and profile.
 - Recommendation system for diet/workout plans.
+- Feed section that allows the abtal to upload posts and stories and interact with each others
+- Live chatting system using node's websockets.
 
 <br><br>
 
