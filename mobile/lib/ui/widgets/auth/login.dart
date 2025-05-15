@@ -22,12 +22,9 @@ class Login extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
-              PlatformText(
-                'Batal',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+              CircleAvatar(
+                backgroundImage: AssetImage('assets/logo.png'),
+                radius: 24,  
               ),
               const SizedBox(height: 56),
               PlatformText(

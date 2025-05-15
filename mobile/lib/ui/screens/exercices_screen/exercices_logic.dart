@@ -1,8 +1,10 @@
+import 'package:mobile/ui/screens/exercices_screen/exercices_screen.dart';
+
 import '../../../core/remote/server.dart';
 
 Future<List<dynamic>> fetchExercices() async{
   var response = await ApiServices.request(
-    endpoint: '/api/v0.1/exercices/search',
+    endpoint: '/api/v0.1/exercices/all-previews',
     method: 'GET'
   );
   if (response['success']){
@@ -15,7 +17,8 @@ Future<List<dynamic>> fetchExercices() async{
   throw Exception('Failed to fetch exercices');
 }
 
-Future<List<dynamic>> fetchRecommendedExercices() async{
+Future<List<dynamic>> fetchRecommendedExercices(ExercicesScreenState exercicesScreenState) async{
+  exercicesScreenState.loading = true ;
   var response = await ApiServices.request(
     endpoint: '/api/v0.1/exercices/recommended',
     method: 'GET'
@@ -23,6 +26,7 @@ Future<List<dynamic>> fetchRecommendedExercices() async{
   if (response['success']){
     print('recommended: ');
     print(response['data']['data']);
+    exercicesScreenState.loading = false ;
     return response['data']['data'];
   }
   

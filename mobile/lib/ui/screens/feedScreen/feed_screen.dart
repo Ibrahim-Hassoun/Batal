@@ -72,10 +72,11 @@ void _loadPostsAsync() async {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Story(userName: 'Your Story',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
-                          Story(userName: 'Your Story',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
-                          Story(userName: 'Your Story',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
-                          Story(userName: 'Your Story',storyImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
+                          Story(userName: 'Your Story',storyImageUrl: 'https://media.boohoo.com/i/boohoo/amm07233_black_xl/male-black-man-active-performance-muscle-fit-raglan-tee?w=700&qlt=default&fmt.jp2.qlt=70&fmt=auto&sm=fit',isViewed: true,),
+                          Story(userName: 'Moe Jawhar',storyImageUrl: 'https://img.freepik.com/free-photo/front-view-fit-man-holding-dumbbells_23-2149517267.jpg?ga=GA1.1.624058667.1747277893&semt=ais_hybrid&w=740',profileImageUrl: 'https://img.freepik.com/premium-photo/image-very-muscular-man-posing-with-naked-torso-studio-looking-black-background_157927-19852.jpg',isViewed: true,),
+                          Story(userName: 'Toni Khabbaz',storyImageUrl: 'https://img.freepik.com/free-photo/portrait-muscular-handsome-bodybuilder-sportswear-standing-with-crossed-arms-studio-isolated-gray-background_613910-19683.jpg?semt=ais_hybrid&w=740',profileImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',isViewed: true,),
+                          Story(userName: 'Ahmad Rashwani',storyImageUrl: 'https://img.freepik.com/free-photo/sporty-positive-guy-holds-pair-dumbbells-isolated-grey-background_613910-603.jpg?semt=ais_hybrid&w=740',profileImageUrl: 'https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',isViewed: true,),
+                         
                          
                         ],
                       ),

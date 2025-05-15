@@ -34,9 +34,12 @@ class _ChatRowState extends State<ChatRow>
             leading: SizedBox(
             height: 45,
             width: 45,
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(widget.chatImageUrl ?? 'https://randomuser.me/api/portraits'),
+            child: GestureDetector(
+              onTap: () =>{} ,
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(widget.chatImageUrl ?? 'https://randomuser.me/api/portraits/men/1.jpg'),
             ),
+            )
             ),
             
           

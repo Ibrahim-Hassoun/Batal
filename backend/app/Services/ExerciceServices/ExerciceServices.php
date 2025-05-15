@@ -31,6 +31,16 @@ class ExerciceServices
         return $exercice;
     }
 
+    public function getExercicesPreviews($request)
+    {
+        $exercices = Exercice::orderBy('area')
+            ->get(['id', 'exercice', 'image_url']);
+        if ($exercices->isEmpty()) {
+            throw new \Exception('Could not fetch exercices', 500);
+        }
+        return $exercices;
+    }
+
     public function searchExercice($request)
     {
         $query = Exercice::query();
@@ -75,6 +85,8 @@ class ExerciceServices
         return $exercices;
     }
 
+    
+
     public function getRecommendedExercices($request)
     {
         $user = auth()->user();
@@ -114,7 +126,7 @@ class ExerciceServices
         }
         usort($recommendations, fn($a, $b) => $b['score'] <=> $a['score']);
 
-        $topExercises = array_slice($recommendations, 0, 10);
+        $topExercises = array_slice($recommendations, 0, 3);
 
         return $topExercises;
 

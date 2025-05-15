@@ -11,14 +11,14 @@ class ExercicesScreen extends StatefulWidget{
   const ExercicesScreen({super.key});
 
   @override
-  State<ExercicesScreen> createState() => _ExercicesScreenState();
+  State<ExercicesScreen> createState() => ExercicesScreenState();
 }
 
-class _ExercicesScreenState extends State<ExercicesScreen> {
+class ExercicesScreenState extends State<ExercicesScreen> {
 
     late List<dynamic> AllExercices = [];
     late List<dynamic> recommendedExercices = [];
-    
+    bool loading = true;
 
     @override
     void initState() {
@@ -29,7 +29,7 @@ class _ExercicesScreenState extends State<ExercicesScreen> {
 
     Future<void> fetchExercicesList() async {
       AllExercices = await fetchExercices();
-      recommendedExercices = await fetchRecommendedExercices();
+      recommendedExercices = await fetchRecommendedExercices(this);
       setState(() {});
     }
 
@@ -56,6 +56,9 @@ class _ExercicesScreenState extends State<ExercicesScreen> {
         title: Text('Exercices')
       ),
       body: 
+      loading?
+            Center(child: CircularProgressIndicator(color: primaryColor,))
+            : 
       Column(
         children: [
           // Scrollable content
@@ -70,16 +73,14 @@ class _ExercicesScreenState extends State<ExercicesScreen> {
               ],
           ),
           
-          
+           
           Expanded(
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 padding: EdgeInsets.only(bottom: 100), 
                 child: Column(
                   children: [
-                    // ...exercices.map((exercice) =>
-                    //   ExerciseRowInScreen(title: 'title', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg')
-                    // ).toList()
+             
 
             mode=='all'?
             ListView.builder(
