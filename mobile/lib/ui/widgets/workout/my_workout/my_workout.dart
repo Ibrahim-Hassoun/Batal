@@ -13,7 +13,7 @@ class MyWorkout extends StatefulWidget {
 
 class _MyWorkoutState extends State<MyWorkout> {
   late List<dynamic> exercices=[];
-
+  bool loading = true;
   @override
   void initState() {
     
@@ -23,6 +23,7 @@ class _MyWorkoutState extends State<MyWorkout> {
 
   void fetchExercices()async{
     exercices = await fetchSavedExercices();
+    loading = false;
     setState(() {
       
     });
@@ -30,9 +31,14 @@ class _MyWorkoutState extends State<MyWorkout> {
 
   @override
   Widget build(BuildContext context) {
-   return  Stack(
+   return 
+   
+    Stack(
     children: [
       // Scrollable content
+      loading?
+   Center(child: CircularProgressIndicator(color: primaryColor,),)
+   :
       SizedBox(
         height: 640,
         child: Positioned.fill(
