@@ -28,7 +28,7 @@
 <!-- System Design -->
 <img src="./readme/title3.svg"/>
 
-### Batal's skeleton
+### ER Diagram
 
 <p align="left">
     <img src="./readme/system-design/ER-diagram.png" width="50%"/>
