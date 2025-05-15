@@ -39,12 +39,32 @@ class _ChatsScreenState extends State<ChatsScreen> {
         backgroundColor: tertiaryColor,
       
       ),
-      body: Column(
-        children:[
-          SizedBox(height: 16,),
-           ChatRow(chatId: 1, chatName: "John Doe", lastMessage: "Hello world", lastMessageTime: "9:00", chatImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg')
-           
-           ],
+      body: Stack(
+        children: [
+          Column(
+            children:[
+              SizedBox(height: 16,),
+               ChatRow(chatId: 1, chatName: "John Doe", lastMessage: "Hello world", lastMessageTime: "9:00", chatImageUrl: 'https://randomuser.me/api/portraits/men/1.jpg')
+               
+               ],
+          ),
+          Positioned(
+            bottom: 128,
+            right: 36,
+            child: SizedBox(
+              height: 64,
+              width: 64,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/chatbot-conversation', );
+                },
+                child: CircleAvatar(
+                  backgroundImage: AssetImage('assets/Screenshot 2025-05-15 051340.png'),
+                ),
+              ),
+            ),
+            )
+        ],
       ),
     );
   }
