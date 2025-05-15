@@ -6,7 +6,8 @@
 <img src="./readme/title2.svg"/>
 
 >Hey fellow gym batal 😄,
->I've got a present for you! 🎁 Meet Batal, a mobile app designed to take your performance to
+
+>I've got a present for you! Meet Batal, a mobile app designed to take your performance to
 >beast level. With its powerful AI pose detector , it will track 🕵️, evaluate ✅, and provide live
 >written and audio feedback 🎧 to help you correct your form in real time!
 
