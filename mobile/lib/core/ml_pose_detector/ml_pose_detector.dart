@@ -5,9 +5,15 @@ import 'package:flutter/services.dart';
 import 'package:camera/camera.dart';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
+import 'package:provider/provider.dart';
 
 class MlPoseDetectorFunctions {
-  static CameraDescription? camera;
+
+  CameraDescription? camera;
+  late PoseDetector poseDetector;
+  late WorkoutProvider workoutProvider;
+
+
   final _orientations = {
   DeviceOrientation.portraitUp: 0,
   DeviceOrientation.landscapeLeft: 90,
@@ -15,12 +21,13 @@ class MlPoseDetectorFunctions {
   DeviceOrientation.landscapeRight: 270,
   };
 
-  Future<List<Map<String, Map<String, double>>>> processCameraImage(CameraImage image, PoseDetector poseDetector,WorkoutProvider workoutProvider) async{
+  Future<List<Map<String, Map<String, double>>>> processCameraImage(CameraImage image, BuildContext context) async{
+
+    workoutProvider = context.read<WorkoutProvider>();
+    poseDetector = workoutProvider.poseDetector!;
+    camera = workoutProvider.camera;
+
     InputImage? inputImage = _inputImageFromCameraImage(image);
-    
-   
-    
-    
     List<Map<String, Map<String, double>>> landmarks = await detectPose(poseDetector, inputImage!);
     
     workoutProvider.setLandmarks(landmarks);
@@ -28,8 +35,9 @@ class MlPoseDetectorFunctions {
     
 }
 
+  
   InputImage? _inputImageFromCameraImage(CameraImage image) {
-  final camera =  MlPoseDetectorFunctions.camera!;
+  final camera =  this.camera!;
   final sensorOrientation = camera.sensorOrientation;
 
   final format = InputImageFormatValue.fromRawValue(image.format.raw);

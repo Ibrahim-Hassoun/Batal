@@ -15,15 +15,6 @@ class WorkoutProvider with ChangeNotifier {
   String _tab='pose_detector';
   String get tab =>_tab;
 
-  String _detected_area='';
-  String get detected_area => _detected_area;
-
-  String _detected_muscle='';
-  String get detected_muscle => _detected_muscle;
-
-  String _detected_exercise ='';
-  String get detected_exercise => _detected_exercise;
-
       //general
     void changeTab(newTab){
     _tab=newTab;
@@ -42,6 +33,50 @@ class WorkoutProvider with ChangeNotifier {
     }
   }
   
+  String _detected_area='';
+  String get detected_area => _detected_area;
+
+  String _detected_muscle='';
+  String get detected_muscle => _detected_muscle;
+
+  String _detected_exercise ='';
+  String get detected_exercise => _detected_exercise;
+
+    
+  String _MLFeedback ='';
+  String get MLFeedback => _MLFeedback;
+
+  //pose detector section
+  void setDetectedArea(String area) {
+    _detected_area = area;
+    print("this is from provider ${_detected_area ?? "unknown"}");
+    
+    notifyListeners();
+  }
+
+  void setDetectedMuscle(String muscle) {
+    
+    _detected_muscle = muscle;
+     print("this is from provider ${detected_muscle ?? "unknown"}");
+    notifyListeners();
+  }
+
+  void setDetectedExercice(String exercice) {
+   
+    _detected_exercise = exercice;
+     print("this is from provider ${_detected_exercise ?? "unknown"}");
+    notifyListeners();
+  }
+  void setMLFeedback(String feedback){
+    _MLFeedback+='\n';
+    _MLFeedback += feedback;
+    notifyListeners();
+  }
+  void resetMLFeedback(){
+    _MLFeedback='';
+    notifyListeners();
+  }
+
 
 
   //camera
@@ -54,10 +89,10 @@ class WorkoutProvider with ChangeNotifier {
 
   void setCamera(CameraDescription? camera) {
     _camera = camera;
-    setMLCamera(camera);
+   
     notifyListeners();
   }
-  void setMLCamera(CameraDescription? camera) { MlPoseDetectorFunctions.camera = camera; }
+ 
 
   CameraController? _controller;
   CameraController? get controller => _controller;
@@ -120,72 +155,6 @@ class WorkoutProvider with ChangeNotifier {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  String _MLFeedback ='';
-  String get MLFeedback => _MLFeedback;
-
-  void setDetectedArea(String area) {
-    _detected_area = area;
-    print("this is from provider ${_detected_area ?? "unknown"}");
-    
-    notifyListeners();
-  }
-
-  void setDetectedMuscle(String muscle) {
-    
-    _detected_muscle = muscle;
-     print("this is from provider ${detected_muscle ?? "unknown"}");
-    notifyListeners();
-  }
-
-  void setDetectedExercice(String exercice) {
-   
-    _detected_exercise = exercice;
-     print("this is from provider ${_detected_exercise ?? "unknown"}");
-    notifyListeners();
-  }
-  void setMLFeedback(String feedback){
-    _MLFeedback+='\n';
-    _MLFeedback += feedback;
-    notifyListeners();
-  }
-  void resetMLFeedback(){
-    _MLFeedback='';
-    notifyListeners();
-  }
-
-
-  
-  //my workout
-  void addWorkout(String workout) {
-    _workouts.add(workout);
-    notifyListeners();
-  }
-
-  void removeWorkout(String workout) {
-    _workouts.remove(workout);
-    notifyListeners();
-  }
-
-  void clearWorkouts() {
-    _workouts.clear();
-    notifyListeners();
-  }
 
   //exercices screen
   String? _selectedMode='all';

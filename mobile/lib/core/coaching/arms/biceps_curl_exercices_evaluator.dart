@@ -11,7 +11,7 @@ class BicepsCurlExercicesEvaluator implements ExerciceEvaluator{
   @override
   void evaluate( BuildContext context,List<List<Map<String, Map<String, double>>>> landmarks){
         provider = context.read<WorkoutProvider>();
-        print(provider!.MLFeedback);
+        
         if ( landmarks.isNotEmpty) {
         var lastFrame = landmarks.last;
         for (var landmark in lastFrame) {
