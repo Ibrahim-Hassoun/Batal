@@ -1,15 +1,12 @@
-import 'dart:typed_data';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
-import 'package:image/image.dart' as img;
 import 'package:flutter/material.dart';
 import 'package:mobile/core/ml_pose_detector/ml_pose_detector.dart';
-import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:camera/camera.dart';
 import '../../ui/widgets/workout/pose_detector/pose_detector.dart';
 import '../../ui/widgets/workout/my_workout/my_workout.dart';
 import '../../ui/widgets/workout/leaderboard/leaderboard.dart';
 import '../camera_logic/camera_logic.dart';
-import '../ml_pose_detector/coaching.dart';
+
 
 class WorkoutProvider with ChangeNotifier {
   final List<String> _workouts = [];
