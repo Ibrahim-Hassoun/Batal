@@ -22,7 +22,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
   Widget build(BuildContext context) {
     WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen:true);
     bool isRecording = provider.is_Recording;
-    Uint8List? pngBytes = provider.imageBytes;
+    
     List<Map<String, Map<String, double>>> landmarks = provider.landmarks;
     String feedback = provider.MLFeedback;
 
@@ -33,9 +33,9 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [//selections
-              CustomDropdownButton(items: ['option 1','option 2'],onChanged: (value){provider.setDetectedArea(value);}, label: 'Area',selectedValue: provider.detected_area,),
-              CustomDropdownButton(items: ['option 1','option 2'],onChanged: (value){provider.setDetectedMuscle(value);}, label: 'Muscle',selectedValue: provider.detected_muscle,),
-              CustomDropdownButton(items: ['option 1','option 2'],onChanged: (value){provider.setDetectedArea(value);}, label: 'Exercice',selectedValue: provider.detected_exercise,),
+              CustomDropdownButton(items: ['arm','option 2'],onChanged: (value){provider.setDetectedArea(value);}, label: 'Area',selectedValue: provider.detected_area,),
+              CustomDropdownButton(items: ['bicep','option 2'],onChanged: (value){provider.setDetectedMuscle(value);}, label: 'Muscle',selectedValue: provider.detected_muscle,),
+              CustomDropdownButton(items: ['curl','option 2'],onChanged: (value){provider.setDetectedExercice(value);}, label: 'Exercice',selectedValue: provider.detected_exercise,),
             
              
             ],
@@ -50,15 +50,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
             ? Stack(
               children: [
               CameraSection(), // The camera image
-              if (pngBytes != null)
-                Positioned.fill(
-                child: IgnorePointer(
-                  child: Image.memory(
-                  pngBytes,
-                  fit: BoxFit.cover,
-                  ),
-                ),
-                ),
+             
               
                 Positioned.fill(
                 child: CustomPaint(
@@ -81,7 +73,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
           padding: const EdgeInsets.only(left: 108,right: 108),
           child: ScreenWideElevatedButton(
             onPressed: () {
-              provider.toggleRecording();
+              provider.toggleRecording(context);
             },
             label: isRecording?'Stop':'Start',
             backgroundColor: isRecording?secondaryColor: primaryColor,
