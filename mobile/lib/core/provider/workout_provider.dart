@@ -15,14 +15,14 @@ class WorkoutProvider with ChangeNotifier {
   String _tab='pose_detector';
   String get tab =>_tab;
 
-  String? _detected_area='arm';
-  String? get detected_area => _detected_area;
+  String _detected_area='arm';
+  String get detected_area => _detected_area;
 
-  String? _detected_muscle='biceps';
-  String? get detected_muscle => _detected_muscle;
+  String _detected_muscle='bicep';
+  String get detected_muscle => _detected_muscle;
 
-  final String? _detected_exercise ='curl';
-  String? get detected_exercise => _detected_exercise;
+  String _detected_exercise ='curl';
+  String get detected_exercise => _detected_exercise;
 
       //general
     void changeTab(newTab){
@@ -71,6 +71,11 @@ class WorkoutProvider with ChangeNotifier {
   void toggleRecording(BuildContext context) async{
     
     if(!_is_Recording){
+      if(detected_area.isEmpty ||detected_muscle.isEmpty ||detected_exercise.isEmpty){
+        setMLFeedback('Choose settings first');
+        return;
+      }
+     
       
       createPoseDetector();
       // await loadModel();
@@ -136,7 +141,7 @@ class WorkoutProvider with ChangeNotifier {
 
   void setDetectedArea(String area) {
     _detected_area = area;
-    print("this is from provider${_detected_area ?? "unknown"}");
+    print("this is from provider ${_detected_area ?? "unknown"}");
     
     notifyListeners();
   }
@@ -144,12 +149,14 @@ class WorkoutProvider with ChangeNotifier {
   void setDetectedMuscle(String muscle) {
     
     _detected_muscle = muscle;
+     print("this is from provider ${detected_muscle ?? "unknown"}");
     notifyListeners();
   }
 
   void setDetectedExercice(String exercice) {
    
-    _detected_muscle = exercice;
+    _detected_exercise = exercice;
+     print("this is from provider ${_detected_exercise ?? "unknown"}");
     notifyListeners();
   }
   void setMLFeedback(String feedback){
