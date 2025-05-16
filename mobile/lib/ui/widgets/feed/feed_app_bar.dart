@@ -10,11 +10,13 @@ class FeedAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.white,
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         
         children: [
-          Container(
+          Text('Welcome!',style: TextStyle(color: primaryColor,fontWeight: FontWeight.bold),),
+          Row(children: [
+            Container(
             decoration: BoxDecoration(
               
              
@@ -29,6 +31,8 @@ class FeedAppBar extends StatelessWidget implements PreferredSizeWidget {
               Navigator.pushNamed(context, '/chats');
             } ,
             child: SvgPicture.asset('assets/message-circle.svg',)),
+          ],)
+          
         ],
       ),
     );

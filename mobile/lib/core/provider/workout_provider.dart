@@ -1,15 +1,12 @@
-import 'dart:typed_data';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
-import 'package:image/image.dart' as img;
 import 'package:flutter/material.dart';
-import 'package:tflite_flutter/tflite_flutter.dart';
+import 'package:mobile/core/ml_pose_detector/ml_pose_detector.dart';
 import 'package:camera/camera.dart';
 import '../../ui/widgets/workout/pose_detector/pose_detector.dart';
 import '../../ui/widgets/workout/my_workout/my_workout.dart';
 import '../../ui/widgets/workout/leaderboard/leaderboard.dart';
-import '../tensorflow/tensorflow.dart';
 import '../camera_logic/camera_logic.dart';
-import '../ml_pose_detector/coaching.dart';
+
 
 class WorkoutProvider with ChangeNotifier {
   final List<String> _workouts = [];
@@ -18,14 +15,14 @@ class WorkoutProvider with ChangeNotifier {
   String _tab='pose_detector';
   String get tab =>_tab;
 
-  String? _detected_area='arm';
-  String? get detected_area => _detected_area;
+  String _detected_area='arm';
+  String get detected_area => _detected_area;
 
-  String? _detected_muscle='biceps';
-  String? get detected_muscle => _detected_muscle;
+  String _detected_muscle='bicep';
+  String get detected_muscle => _detected_muscle;
 
-  final String? _detected_exercise ='curl';
-  String? get detected_exercise => _detected_exercise;
+  String _detected_exercise ='curl';
+  String get detected_exercise => _detected_exercise;
 
       //general
     void changeTab(newTab){
@@ -52,6 +49,16 @@ class WorkoutProvider with ChangeNotifier {
   bool _is_Recording = false;
   bool get is_Recording => _is_Recording;
 
+  CameraDescription? _camera;
+  CameraDescription? get camera => _camera;
+
+  void setCamera(CameraDescription? camera) {
+    _camera = camera;
+    setMLCamera(camera);
+    notifyListeners();
+  }
+  void setMLCamera(CameraDescription? camera) { MlPoseDetectorFunctions.camera = camera; }
+
   CameraController? _controller;
   CameraController? get controller => _controller;
 
@@ -60,70 +67,21 @@ class WorkoutProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  
-  Uint8List ? _imageBytes;
-  Uint8List? get imageBytes => _imageBytes;
-
-  void setImageBytes(Uint8List imageBytes) {
-    _imageBytes = imageBytes;
-    notifyListeners();
-  }
-   Uint8List ? _pngBytes;
-  Uint8List? get pngBytes => _pngBytes;
-
-  void buildPngBytes() {
-     final image = img.Image.fromBytes(
-    width:  192,
-    height:  192,
-    bytes:  _imageBytes!.buffer,
-    order: img.ChannelOrder.rgb,  // ← Critical fix
-    format: img.Format.uint8,     // ← 8-bit per channel
-  );
-    notifyListeners();
-  }
-
-  //model
-
-  Interpreter? _interpreter;
-  Interpreter? get interpreter => _interpreter;
-  
-  bool _modelLoaded = false;
-  bool get modelLoaded => _modelLoaded;
-
-
-  void setModelLoaded(bool value) {
-    _modelLoaded = value;
-    notifyListeners();}
-
-  void setInterpreter(Interpreter interpreter) {
-    _interpreter = interpreter;
-    notifyListeners();
-    
-  }
-
-  Future<void> loadModel() async {
-     TensorflowFunctions().loadModel(this);
-  }
-
-  void disposeModel() {
-    _interpreter!.close(); 
-  }
-
-
-
-
-
-
   //head controller function
-  void toggleRecording() async{
+  void toggleRecording(BuildContext context) async{
     
     if(!_is_Recording){
+      if(detected_area.isEmpty ||detected_muscle.isEmpty ||detected_exercise.isEmpty){
+        setMLFeedback('Choose settings first');
+        return;
+      }
+     
       
       createPoseDetector();
       // await loadModel();
       resetMLFeedback();
       await cameraLogic.initializeCamera(this);
-            cameraLogic.startStreaming(this);
+            cameraLogic.streamFrames(context);
       _is_Recording = !_is_Recording;
       notifyListeners();
     }else{
@@ -146,7 +104,7 @@ class WorkoutProvider with ChangeNotifier {
     if (_poseDetector != null) {
       return;
     }
-    final options = PoseDetectorOptions();
+    final options = PoseDetectorOptions(mode:PoseDetectionMode.stream,model: PoseDetectionModel.base);
     PoseDetector poseDetector = PoseDetector(options: options);
     _poseDetector = poseDetector;
     notifyListeners();
@@ -183,20 +141,22 @@ class WorkoutProvider with ChangeNotifier {
 
   void setDetectedArea(String area) {
     _detected_area = area;
-    print("this is from provider${_detected_area ?? "unknown"}");
-    Coaching.area = area;
+    print("this is from provider ${_detected_area ?? "unknown"}");
+    
     notifyListeners();
   }
 
   void setDetectedMuscle(String muscle) {
-    Coaching.muscle = muscle;
+    
     _detected_muscle = muscle;
+     print("this is from provider ${detected_muscle ?? "unknown"}");
     notifyListeners();
   }
 
   void setDetectedExercice(String exercice) {
-    Coaching.exercise = exercice;
-    _detected_muscle = exercice;
+   
+    _detected_exercise = exercice;
+     print("this is from provider ${_detected_exercise ?? "unknown"}");
     notifyListeners();
   }
   void setMLFeedback(String feedback){
