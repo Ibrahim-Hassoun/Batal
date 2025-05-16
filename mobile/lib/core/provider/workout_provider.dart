@@ -76,7 +76,7 @@ class WorkoutProvider with ChangeNotifier {
       // await loadModel();
       resetMLFeedback();
       await cameraLogic.initializeCamera(this);
-            cameraLogic.startStreaming(context);
+            cameraLogic.streamFrames(context);
       _is_Recording = !_is_Recording;
       notifyListeners();
     }else{

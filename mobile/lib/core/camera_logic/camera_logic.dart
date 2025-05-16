@@ -7,7 +7,7 @@ import 'package:mobile/core/provider/workout_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../ml_pose_detector/ml_pose_detector.dart';
-import '../ml_pose_detector/coaching.dart';
+import '../coaching/coaching.dart';
 
 class CameraLogic {
 
@@ -48,13 +48,8 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
   }
 
 
-  void startStreaming(BuildContext context ) {
+  void streamFrames(BuildContext context ) {
     WorkoutProvider workoutProvider = context.read<WorkoutProvider>();
-    //prepare the coaching class variables
-    
-    
-    // these setters are used for testing purposes
-
 
     DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 150));
 
@@ -65,12 +60,8 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
       if (now.difference(lastProcessed).inMilliseconds >= 150) {
         lastProcessed = now;
         List<Map<String, Map<String, double>>> newLandmark =await mlPoseDetectorFunctions.processCameraImage(image, workoutProvider.poseDetector!,workoutProvider);
-        // print(newLandmark);
         landmarks.add(newLandmark);
-        print('from streaming');
-        BicepsCurlExercicesEvaluator.landmarks = landmarks;
-        BicepsCurlExercicesEvaluator.provider = workoutProvider;
-        Coaching().evaluate( context);
+        Coaching().evaluate( context,landmarks);
       }
     });
 
