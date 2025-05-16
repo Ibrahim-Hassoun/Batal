@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile/core/provider/workout_section_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import './ui/screens/authScreen/auth_screen.dart';
@@ -33,7 +34,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => BottomNavbarProvider()),
         ChangeNotifierProvider(create: (_) => FeedProvider()),
-        ChangeNotifierProvider(create: (_) => WorkoutProvider())
+        ChangeNotifierProvider(create: (_) => WorkoutProvider()),
+        ChangeNotifierProvider(create: (_) => WorkoutSectionProvider())
       ],
       child: const MyApp(),
     ) 

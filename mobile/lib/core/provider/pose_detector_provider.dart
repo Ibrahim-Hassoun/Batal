@@ -12,26 +12,7 @@ class WorkoutProvider with ChangeNotifier {
   final List<String> _workouts = [];
   List<String> get workouts => _workouts;
   
-  String _tab='pose_detector';
-  String get tab =>_tab;
-
-      //general
-    void changeTab(newTab){
-    _tab=newTab;
-    notifyListeners();
-  }
-
-  Widget provideSection(){
-    if(_tab=="my_workout"){
-      return const MyWorkout();
-    }else if(_tab=="pose_detector"){
-      return const PoseDetectorTab();
-    }else if(_tab=="Leaderboard"){
-      return Leaderboard();
-    }else{
-      return const Text("Unknown Section");
-    }
-  }
+ 
   
   String _detected_area='';
   String get detected_area => _detected_area;

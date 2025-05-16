@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/core/provider/pose_detector_provider.dart';
+import 'package:mobile/core/provider/workout_section_provider.dart';
 import 'package:mobile/main.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +14,7 @@ class WorkoutTabbar extends StatefulWidget {
 
 class _WorkoutTabbarState extends State<WorkoutTabbar> {
   late String tab;
-  late WorkoutProvider provider;
+  late WorkoutSectionProvider provider;
 
   @override
   void initState() {
@@ -23,8 +24,8 @@ class _WorkoutTabbarState extends State<WorkoutTabbar> {
   @override
   Widget build(BuildContext context) {
 
-      tab = Provider.of<WorkoutProvider>(context, listen: true).tab;
-      provider = Provider.of<WorkoutProvider>(context, listen: true);
+      tab = Provider.of<WorkoutSectionProvider>(context, listen: true).tab;
+      provider = Provider.of<WorkoutSectionProvider>(context, listen: true);
 
     return  Padding(
       padding: const EdgeInsets.only(left:16,right: 16),
