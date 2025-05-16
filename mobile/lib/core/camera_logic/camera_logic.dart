@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mobile/core/coaching/arms/biceps_curl_exercices_evaluator.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -67,7 +68,8 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
         // print(newLandmark);
         landmarks.add(newLandmark);
         print('from streaming');
-        Coaching.landmarks = landmarks;
+        BicepsCurlExercicesEvaluator.landmarks = landmarks;
+        BicepsCurlExercicesEvaluator.provider = workoutProvider;
         Coaching().evaluate( context);
       }
     });
