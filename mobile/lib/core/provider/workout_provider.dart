@@ -15,13 +15,13 @@ class WorkoutProvider with ChangeNotifier {
   String _tab='pose_detector';
   String get tab =>_tab;
 
-  String _detected_area='arm';
+  String _detected_area='';
   String get detected_area => _detected_area;
 
-  String _detected_muscle='bicep';
+  String _detected_muscle='';
   String get detected_muscle => _detected_muscle;
 
-  String _detected_exercise ='curl';
+  String _detected_exercise ='';
   String get detected_exercise => _detected_exercise;
 
       //general
