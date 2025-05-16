@@ -1,13 +1,19 @@
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:camera/camera.dart';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
 
 class MlPoseDetectorFunctions {
-  get camera => null;
-
+  static CameraDescription? camera;
+  final _orientations = {
+  DeviceOrientation.portraitUp: 0,
+  DeviceOrientation.landscapeLeft: 90,
+  DeviceOrientation.portraitDown: 180,
+  DeviceOrientation.landscapeRight: 270,
+  };
 
   Future<List<Map<String, Map<String, double>>>> processCameraImage(CameraImage image, PoseDetector poseDetector,WorkoutProvider workoutProvider) async{
     InputImage? inputImage = _inputImageFromCameraImage(image);
@@ -23,8 +29,8 @@ class MlPoseDetectorFunctions {
 }
 
   InputImage? _inputImageFromCameraImage(CameraImage image) {
-  final camera =  this.camera;
-  
+  final camera =  MlPoseDetectorFunctions.camera!;
+  final sensorOrientation = camera.sensorOrientation;
 
   final format = InputImageFormatValue.fromRawValue(image.format.raw);
 
@@ -70,7 +76,7 @@ class MlPoseDetectorFunctions {
       });
       
       allPosesLandmarks.add(landmarksMap);
-      print(landmarksMap);
+      
     }
 
     // Now allPosesLandmarks contains all landmarks with their x, y, and likelihood for each pose
