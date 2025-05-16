@@ -25,7 +25,8 @@ class MlPoseDetectorFunctions {
   InputImage? _inputImageFromCameraImage(CameraImage image) {
   final camera =  this.camera;
   
-   final format = InputImageFormatValue.fromRawValue(image.format.raw);
+
+  final format = InputImageFormatValue.fromRawValue(image.format.raw);
 
    if (format == null ||
           (Platform.isAndroid && format != InputImageFormat.nv21) ||
@@ -58,16 +59,18 @@ class MlPoseDetectorFunctions {
       Map<String, Map<String, double>> landmarksMap = {};
 
       pose.landmarks.forEach((type, landmark) {
-        
+        if (type.name == 'rightWrist' || type.name == 'rightElbow' || type.name == 'rightShoulder'){
         landmarksMap[type.name] = {
           'x': landmark.x,
           'y': landmark.y,
           'z': landmark.z,
           'likelihood': landmark.likelihood,
         };
+        }
       });
-
+      
       allPosesLandmarks.add(landmarksMap);
+      print(landmarksMap);
     }
 
     // Now allPosesLandmarks contains all landmarks with their x, y, and likelihood for each pose

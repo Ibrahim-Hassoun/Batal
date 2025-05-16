@@ -7,7 +7,7 @@ import 'package:camera/camera.dart';
 import '../../ui/widgets/workout/pose_detector/pose_detector.dart';
 import '../../ui/widgets/workout/my_workout/my_workout.dart';
 import '../../ui/widgets/workout/leaderboard/leaderboard.dart';
-import '../tensorflow/tensorflow.dart';
+
 import '../camera_logic/camera_logic.dart';
 import '../ml_pose_detector/coaching.dart';
 
@@ -52,6 +52,14 @@ class WorkoutProvider with ChangeNotifier {
   bool _is_Recording = false;
   bool get is_Recording => _is_Recording;
 
+  CameraDescription? _camera;
+  CameraDescription? get camera => _camera;
+
+  void setCamera(CameraDescription? camera) {
+    _camera = camera;
+    notifyListeners();
+  }
+
   CameraController? _controller;
   CameraController? get controller => _controller;
 
@@ -60,27 +68,7 @@ class WorkoutProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  
-  Uint8List ? _imageBytes;
-  Uint8List? get imageBytes => _imageBytes;
 
-  void setImageBytes(Uint8List imageBytes) {
-    _imageBytes = imageBytes;
-    notifyListeners();
-  }
-   Uint8List ? _pngBytes;
-  Uint8List? get pngBytes => _pngBytes;
-
-  void buildPngBytes() {
-     final image = img.Image.fromBytes(
-    width:  192,
-    height:  192,
-    bytes:  _imageBytes!.buffer,
-    order: img.ChannelOrder.rgb,  // ← Critical fix
-    format: img.Format.uint8,     // ← 8-bit per channel
-  );
-    notifyListeners();
-  }
 
   //model
 
@@ -101,9 +89,7 @@ class WorkoutProvider with ChangeNotifier {
     
   }
 
-  Future<void> loadModel() async {
-     TensorflowFunctions().loadModel(this);
-  }
+ 
 
   void disposeModel() {
     _interpreter!.close(); 

@@ -22,7 +22,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
   Widget build(BuildContext context) {
     WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen:true);
     bool isRecording = provider.is_Recording;
-    Uint8List? pngBytes = provider.imageBytes;
+    
     List<Map<String, Map<String, double>>> landmarks = provider.landmarks;
     String feedback = provider.MLFeedback;
 
@@ -50,15 +50,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
             ? Stack(
               children: [
               CameraSection(), // The camera image
-              if (pngBytes != null)
-                Positioned.fill(
-                child: IgnorePointer(
-                  child: Image.memory(
-                  pngBytes,
-                  fit: BoxFit.cover,
-                  ),
-                ),
-                ),
+             
               
                 Positioned.fill(
                 child: CustomPaint(
