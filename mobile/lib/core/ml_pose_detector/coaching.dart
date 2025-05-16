@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/core/coaching/arms/biceps_curl_exercices_evaluator.dart';
+import 'package:mobile/core/coaching/exercice_evaluator.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
 import 'package:mobile/lib/angles/geometry.dart';
 import 'package:provider/provider.dart';
@@ -6,10 +8,21 @@ import 'package:provider/provider.dart';
 class Coaching{
 
   static  List<List<Map<String, Map<String, double>>>>? landmarks ;
- 
-
-
   static WorkoutProvider? provider;
+
+  final Map<String, Map<String, ExerciceEvaluator>> evaluators = {
+  'shoulder': {
+    // 'press': PressEvaluator(),
+    // 'lateral_raise': LateralRaiseEvaluator(),
+  },
+  'arm' : {
+    'curl' :BicepsCurlExercicesEvaluator()
+  },
+  'legs': {
+    // 'squat': SquatEvaluator(),
+  },
+  // add more areas...
+};
 
   void evaluate(BuildContext context) {
     provider = context.read<WorkoutProvider>();
