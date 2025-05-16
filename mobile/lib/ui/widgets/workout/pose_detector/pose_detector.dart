@@ -73,7 +73,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
           padding: const EdgeInsets.only(left: 108,right: 108),
           child: ScreenWideElevatedButton(
             onPressed: () {
-              provider.toggleRecording();
+              provider.toggleRecording(context);
             },
             label: isRecording?'Stop':'Start',
             backgroundColor: isRecording?secondaryColor: primaryColor,

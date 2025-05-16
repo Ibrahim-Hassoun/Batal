@@ -71,40 +71,8 @@ class WorkoutProvider with ChangeNotifier {
     notifyListeners();
   }
 
-
-
-  //model
-
-  Interpreter? _interpreter;
-  Interpreter? get interpreter => _interpreter;
-  
-  bool _modelLoaded = false;
-  bool get modelLoaded => _modelLoaded;
-
-
-  void setModelLoaded(bool value) {
-    _modelLoaded = value;
-    notifyListeners();}
-
-  void setInterpreter(Interpreter interpreter) {
-    _interpreter = interpreter;
-    notifyListeners();
-    
-  }
-
- 
-
-  void disposeModel() {
-    _interpreter!.close(); 
-  }
-
-
-
-
-
-
   //head controller function
-  void toggleRecording() async{
+  void toggleRecording(BuildContext context) async{
     
     if(!_is_Recording){
       
@@ -112,7 +80,7 @@ class WorkoutProvider with ChangeNotifier {
       // await loadModel();
       resetMLFeedback();
       await cameraLogic.initializeCamera(this);
-            cameraLogic.startStreaming(this);
+            cameraLogic.startStreaming(context);
       _is_Recording = !_is_Recording;
       notifyListeners();
     }else{
@@ -135,7 +103,7 @@ class WorkoutProvider with ChangeNotifier {
     if (_poseDetector != null) {
       return;
     }
-    final options = PoseDetectorOptions();
+    final options = PoseDetectorOptions(mode:PoseDetectionMode.stream,model: PoseDetectionModel.base);
     PoseDetector poseDetector = PoseDetector(options: options);
     _poseDetector = poseDetector;
     notifyListeners();
