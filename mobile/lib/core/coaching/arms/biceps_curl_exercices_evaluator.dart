@@ -6,11 +6,11 @@ import 'package:provider/provider.dart';
 
 class BicepsCurlExercicesEvaluator implements ExerciceEvaluator{
 
-  static WorkoutProvider? provider;
+  static PoseDetectorProvider? provider;
 
   @override
   void evaluate( BuildContext context,List<List<Map<String, Map<String, double>>>> landmarks){
-        provider = context.read<WorkoutProvider>();
+        provider = context.read<PoseDetectorProvider>();
         
         if ( landmarks.isNotEmpty) {
         var lastFrame = landmarks.last;

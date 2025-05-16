@@ -11,7 +11,7 @@ class MlPoseDetectorFunctions {
 
   CameraDescription? camera;
   late PoseDetector poseDetector;
-  late WorkoutProvider workoutProvider;
+  late PoseDetectorProvider workoutProvider;
 
 
   final _orientations = {
@@ -23,7 +23,7 @@ class MlPoseDetectorFunctions {
 
   Future<List<Map<String, Map<String, double>>>> processCameraImage(CameraImage image, BuildContext context) async{
 
-    workoutProvider = context.read<WorkoutProvider>();
+    workoutProvider = context.read<PoseDetectorProvider>();
     poseDetector = workoutProvider.poseDetector!;
     camera = workoutProvider.camera;
 

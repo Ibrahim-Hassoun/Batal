@@ -20,7 +20,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
   
   @override
   Widget build(BuildContext context) {
-    WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen:true);
+    PoseDetectorProvider provider = Provider.of<PoseDetectorProvider>(context,listen:true);
     bool isRecording = provider.is_Recording;
     
     List<Map<String, Map<String, double>>> landmarks = provider.landmarks;

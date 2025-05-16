@@ -8,12 +8,8 @@ import '../../ui/widgets/workout/leaderboard/leaderboard.dart';
 import '../camera_logic/camera_logic.dart';
 
 
-class WorkoutProvider with ChangeNotifier {
-  final List<String> _workouts = [];
-  List<String> get workouts => _workouts;
-  
- 
-  
+class PoseDetectorProvider with ChangeNotifier {
+
   String _detected_area='';
   String get detected_area => _detected_area;
 

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class Coaching{
 
 
-  static WorkoutProvider? provider;
+  static PoseDetectorProvider? provider;
 
   final Map<String, Map<String, ExerciceEvaluator>> evaluators = {
   'shoulder': {
@@ -22,7 +22,7 @@ class Coaching{
 
   void evaluate(BuildContext context, List<List<Map<String, Map<String, double>>>> landmarks){
    
-    provider = context.read<WorkoutProvider>();
+    provider = context.read<PoseDetectorProvider>();
     String? area = provider!.detected_area;
     
     String? exercice = provider!.detected_exercise;

@@ -34,7 +34,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => BottomNavbarProvider()),
         ChangeNotifierProvider(create: (_) => FeedProvider()),
-        ChangeNotifierProvider(create: (_) => WorkoutProvider()),
+        ChangeNotifierProvider(create: (_) => PoseDetectorProvider()),
         ChangeNotifierProvider(create: (_) => WorkoutSectionProvider())
       ],
       child: const MyApp(),

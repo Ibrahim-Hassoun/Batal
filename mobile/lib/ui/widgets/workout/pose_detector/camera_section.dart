@@ -21,7 +21,7 @@ class _CameraSectionState extends State<CameraSection> {
   @override
   Widget build(BuildContext context) {
 
-    WorkoutProvider workoutProvider = Provider.of<WorkoutProvider>(context,listen: true);
+    PoseDetectorProvider workoutProvider = Provider.of<PoseDetectorProvider>(context,listen: true);
     CameraController controller = workoutProvider.controller!;
 
     if (!controller.value.isInitialized) {

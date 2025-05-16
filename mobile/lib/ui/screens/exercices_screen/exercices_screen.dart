@@ -37,7 +37,7 @@ class ExercicesScreenState extends State<ExercicesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen: true);
+    PoseDetectorProvider provider = Provider.of<PoseDetectorProvider>(context,listen: true);
     String mode = provider.selectedMode!;
 
 

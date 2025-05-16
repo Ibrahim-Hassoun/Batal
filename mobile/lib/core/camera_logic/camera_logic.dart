@@ -22,16 +22,16 @@ final _orientations = {
   DeviceOrientation.landscapeRight: 270,
 };
 
-Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
+Future<void> initializeCamera(PoseDetectorProvider poseDetectorProvider) async {
     
     List<CameraDescription>? cameras = await availableCameras();
     
     
     int selectedCameraIdx = 1;
-    workoutProvider.setCamera( cameras[selectedCameraIdx]);
+    poseDetectorProvider.setCamera( cameras[selectedCameraIdx]);
   
-    workoutProvider.setController ( CameraController(
-      workoutProvider.camera!,
+    poseDetectorProvider.setController ( CameraController(
+      poseDetectorProvider.camera!,
       fps: 30,
       ResolutionPreset.low,
       
@@ -42,14 +42,14 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
     ));
 
    
-    await workoutProvider.controller!.initialize();
+    await poseDetectorProvider.controller!.initialize();
     
     
   }
 
 
   void streamFrames(BuildContext context ) {
-    WorkoutProvider workoutProvider = context.read<WorkoutProvider>();
+    PoseDetectorProvider workoutProvider = context.read<PoseDetectorProvider>();
 
     DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 150));
 
@@ -69,7 +69,7 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
    
   }
 
-   void disposeCameraController(WorkoutProvider workoutProvider) {
+   void disposeCameraController(PoseDetectorProvider workoutProvider) {
 
     workoutProvider.controller!.stopImageStream();
     workoutProvider.controller!.dispose();
