@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/core/coaching/interface_exercice_evaluator.dart';
-import 'package:mobile/core/provider/workout_provider.dart';
+import 'package:mobile/core/provider/pose_detector_provider.dart';
 import 'package:mobile/lib/angles/geometry.dart';
 import 'package:provider/provider.dart';
 

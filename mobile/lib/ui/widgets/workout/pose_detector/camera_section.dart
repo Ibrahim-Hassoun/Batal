@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:provider/provider.dart';
-import '../../../../core/provider/workout_provider.dart';
+import '../../../../core/provider/pose_detector_provider.dart';
 
 class CameraSection extends StatefulWidget {
   const CameraSection({super.key});

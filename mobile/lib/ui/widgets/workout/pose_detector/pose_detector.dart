@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import './camera_section.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile/core/provider/workout_provider.dart';
+import 'package:mobile/core/provider/pose_detector_provider.dart';
 import 'package:mobile/main.dart';
 import 'package:provider/provider.dart';
 import '../../../layouts/drop_down_button.dart';

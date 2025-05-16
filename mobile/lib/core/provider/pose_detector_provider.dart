@@ -113,7 +113,6 @@ class WorkoutProvider with ChangeNotifier {
      
       
       createPoseDetector();
-      // await loadModel();
       resetMLFeedback();
       await cameraLogic.initializeCamera(this);
             cameraLogic.streamFrames(context);
@@ -121,7 +120,6 @@ class WorkoutProvider with ChangeNotifier {
       notifyListeners();
     }else{
       _is_Recording = !_is_Recording;
-      // interpreter!.close();
       poseDetector!.close();
       cameraLogic.disposeCameraController(this);
       
@@ -165,21 +163,6 @@ class WorkoutProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  String? _selectedAreaForExercicesScreen;
-  String? get selectedAreaForExercicesScreen => _selectedAreaForExercicesScreen;
-
-  void setSelectedAreaForExercicesScreen(String? area) {
-    _selectedAreaForExercicesScreen = area;
-    notifyListeners();
-  }
-
-  String? _selectedMuscleForExercicesScreen;
-  String? get selectedMuscleForExercicesScreen => _selectedMuscleForExercicesScreen;
-
-  void setSelectedMuscleForExercicesScreen(String? muscle) {
-    _selectedMuscleForExercicesScreen = muscle;
-    notifyListeners();
-  }
 
   
 

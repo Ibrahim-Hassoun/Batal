@@ -8,7 +8,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import './core/provider/bottom_navbar_provider.dart';
 import './ui/widgets/bottom_navbar/bottom_navbar.dart';
 import './core/provider/feed_provider.dart';
-import './core/provider/workout_provider.dart';
+import 'core/provider/pose_detector_provider.dart';
 import './ui/screens/chats_screen/chats_screen.dart';
 import 'ui/screens/chats_screen/chatbot_conversation_screen.dart';
 import 'ui/screens/exercices_screen/exercices_screen.dart';
