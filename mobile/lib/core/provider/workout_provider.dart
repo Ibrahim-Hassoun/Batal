@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
 import 'package:image/image.dart' as img;
 import 'package:flutter/material.dart';
+import 'package:mobile/core/ml_pose_detector/ml_pose_detector.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:camera/camera.dart';
 import '../../ui/widgets/workout/pose_detector/pose_detector.dart';
@@ -57,8 +58,10 @@ class WorkoutProvider with ChangeNotifier {
 
   void setCamera(CameraDescription? camera) {
     _camera = camera;
+    setMLCamera(camera);
     notifyListeners();
   }
+  void setMLCamera(CameraDescription? camera) { MlPoseDetectorFunctions.camera = camera; }
 
   CameraController? _controller;
   CameraController? get controller => _controller;
