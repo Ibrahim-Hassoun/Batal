@@ -50,10 +50,7 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
   void startStreaming(BuildContext context ) {
     WorkoutProvider workoutProvider = context.read<WorkoutProvider>();
     //prepare the coaching class variables
-    Coaching.area = workoutProvider.detected_area;
-    Coaching.muscle = workoutProvider.detected_muscle;
-    Coaching.exercise = workoutProvider.detected_exercise;
-    Coaching.provider = workoutProvider;
+    
     
     // these setters are used for testing purposes
 
@@ -71,7 +68,7 @@ Future<void> initializeCamera(WorkoutProvider workoutProvider) async {
         landmarks.add(newLandmark);
         print('from streaming');
         Coaching.landmarks = landmarks;
-        Coaching().evaluate( );
+        Coaching().evaluate( context);
       }
     });
 

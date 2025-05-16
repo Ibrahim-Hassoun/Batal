@@ -1,42 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/core/provider/workout_provider.dart';
 import 'package:mobile/lib/angles/geometry.dart';
+import 'package:provider/provider.dart';
 
 class Coaching{
 
   static  List<List<Map<String, Map<String, double>>>>? landmarks ;
-  static String? area;
-  static String? muscle;
-  static String? exercise;
+ 
 
-  static double? minAngle;
-  static double? maxAngle;
 
   static WorkoutProvider? provider;
 
-  void evaluate() {
-    // print('started evaluating');
-    // print('area: $area');
-    // print('muscle: $muscle');
-    // print('exercise: $exercise');
+  void evaluate(BuildContext context) {
+    provider = context.read<WorkoutProvider>();
+    String? area = provider!.detected_area;
+   
+    
+
+    
     if(area=='shoulder'){
-      evaluateShoulderExercise();
+      evaluateShoulderExercise( context);
     }else if(area=='arm'){
       evaluateArmExercise();
     }
   }
 
-  void evaluateShoulderExercise() {
-    // Implement your logic to evaluate shoulder exercises
-    if (muscle == 'front deltoid' && exercise == 'shoulder press') {
-      shoulderPress();
-    }
+  void evaluateShoulderExercise(BuildContext context) {
+    //  
+    // String? exercise = provider!.detected_exercise;
+    // if (muscle == 'front deltoid' && exercise == 'shoulder press') {
+    //   shoulderPress();
+    // }
   }
   
   void evaluateArmExercise() {
-    
+    String? muscle = provider!.detected_muscle;
 
-    if (muscle == 'biceps' && exercise == 'curl') {
+    if (muscle == 'biceps')
+      {
+        evaluateBicepsExercice();
+      }
+    
+  }
+
+  void evaluateBicepsExercice(){
+    String? exercise = provider!.detected_exercise;
+     if(exercise =='curl') {
       if (landmarks != null && landmarks!.isNotEmpty) {
         var lastFrame = landmarks!.last;
         for (var landmark in lastFrame) {
@@ -58,16 +67,7 @@ class Coaching{
             );
             print('Elbow angle: $angle');
 
-            
-            if (minAngle == null || angle < minAngle!) {
-              minAngle = angle;
-            }
-            
-            if (maxAngle == null || angle > maxAngle!) {
-              maxAngle = angle;
-            }
-            print('minAngle ${minAngle}');        
-            print('maxAngle ${maxAngle}');        
+                  
             const feedbackMsg = 'you tuck your arm too much!';
             if (angle < 70) {
               if (!(provider?.MLFeedback?.contains(feedbackMsg) ?? false)) {
@@ -88,8 +88,6 @@ class Coaching{
       }
     }
   }
-
-
 
 
 
