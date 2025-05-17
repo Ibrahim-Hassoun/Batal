@@ -19,12 +19,11 @@ class ConversationController extends Controller
     public function getUserConversations(Request $request){
         
         try{
-            $post = $this->conversationServices->getUserConversations($request);
-            return $this->respond(true,'Convos retrieved successfully',$post,201);
+            $conversations = $this->conversationServices->getUserConversations($request);
+            return $this->respond(true,'Convos retrieved successfully',$conversations,201);
 
         }catch(\Exception $e){
             return $this->respond(false,$e->getMessage(),null,500);
         }
-    
     }
 }

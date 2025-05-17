@@ -5,11 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GymController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\ExerciceController;
 use App\Http\Controllers\JobProfileController;
 use App\Http\Controllers\LeaderBoardController;
 use App\Http\Controllers\ConversationController;
+
 
 Route::group(['prefix'=>"v0.1"],function(){
     Route::post('/register',[AuthController::class,'register'] );
@@ -88,10 +90,7 @@ Route::group(['prefix'=>"v0.1"],function(){
 
             Route::group(['prefix'=>'conversations'],function(){
                 Route::get('/all',[ConversationController::class,'getUserConversations']);
-            });
-
-            Route::group(['prefix'=>'messages'],function(){
-
+                Route::get('/{conversation_id}/messages',[MessageController::class,'getConversationMessages']);
             });
         });
 
