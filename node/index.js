@@ -13,7 +13,7 @@ wss.on('connection', (ws) => {
     try {
       const parsed = JSON.parse(data);
 
-      // Step 1: First message should be { "type": "register", "username": "ibrahim" }
+      
       if (parsed.type === 'register') {
         currentUsername = parsed.username;
         users.set(currentUsername, ws);
@@ -21,7 +21,7 @@ wss.on('connection', (ws) => {
         return;
       }
 
-      // Step 2: Handle private messages
+
       if (parsed.type === 'private_message') {
         const { to, message } = parsed;
         const target = users.get(to);
