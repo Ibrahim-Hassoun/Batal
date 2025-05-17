@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Services\ChatServices\MessageServices;
 use App\Services\ChatServices\ConversationServices;
+
 
 class ChatServicesProvider extends ServiceProvider
 {
@@ -14,6 +16,9 @@ class ChatServicesProvider extends ServiceProvider
     {
         $this->app->singleton(ConversationServices::class, function ($app) {
             return new ConversationServices();
+        });
+        $this->app->singleton(MessageServices::class, function ($app) {
+            return new MessageServices();
         });
     }
 
