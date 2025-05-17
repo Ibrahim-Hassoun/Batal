@@ -17,5 +17,10 @@ class MessageServices
         }
         return $messages;
     }
+
+    public function storeConversationMessage()
+    {
+        
+    }
     
 }
