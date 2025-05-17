@@ -10,7 +10,7 @@ class Conversation extends Model
     /** @use HasFactory<\Database\Factories\ConversationFactory> */
     use HasFactory;
 
-        public function messages()
+    public function messages()
     {
         return $this->hasMany(Message::class);
     }
