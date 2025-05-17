@@ -18,8 +18,8 @@ class ConversationFactory extends Factory
     public function definition(): array
     {
         return [
-            'user1_id'=>User::factory()->id,
-            'user2_id'=>User::factory()->id,
+            'user1_id'=>User::factory(),
+            'user2_id'=>User::factory(),
         ];
     }
 }
