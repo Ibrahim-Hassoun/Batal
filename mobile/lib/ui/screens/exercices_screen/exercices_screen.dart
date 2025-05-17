@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/core/provider/workout_provider.dart';
+import 'package:mobile/core/provider/pose_detector_provider.dart';
 import 'package:mobile/main.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/exercices/exercice_row_in_screen.dart';
@@ -37,7 +37,7 @@ class ExercicesScreenState extends State<ExercicesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen: true);
+    PoseDetectorProvider provider = Provider.of<PoseDetectorProvider>(context,listen: true);
     String mode = provider.selectedMode!;
 
 
