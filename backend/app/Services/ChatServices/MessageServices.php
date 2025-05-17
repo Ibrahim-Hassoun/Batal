@@ -9,6 +9,9 @@ use App\Models\Conversation;
 class MessageServices
 {
  
-
+    public function getConversationMessages()
+    {
+        return 'hey from service';
+    }
     
 }
