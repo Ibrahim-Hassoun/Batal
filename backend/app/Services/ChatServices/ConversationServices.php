@@ -7,8 +7,11 @@ use App\Models\Exercice;
 use App\Models\UserExercice;
 
 
-class ExerciceServices
+class ConversationServices
 {
-
+    public function getUserConversations()
+    {
+        return 'hi';
+    }
     
 }

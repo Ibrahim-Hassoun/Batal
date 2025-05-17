@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Traits\HttpResponseTrait;
-
+use App\Services\ChatServices\ConversationServices;
 
 class ConversationController extends Controller
 {
