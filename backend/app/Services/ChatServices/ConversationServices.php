@@ -14,27 +14,31 @@ class ConversationServices
 
         $conversations = Conversation::where('user1_id', $userId)
             ->orWhere('user2_id', $userId)
-            ->with([
-                'latestMessage',
-            ])
+            ->with(['latestMessage'])
             ->orderByDesc(
                 Message::select('created_at')
                     ->whereColumn('conversation_id', 'conversations.id')
                     ->latest()
-            ->limit(1)
+                    ->limit(1)
             )
-            ->limit(15)
-            ->get()
-            ->each(function ($conversation) use ($userId) {
-                $conversation->otherUserId = $userId == $conversation->user1_id
-                    ? $conversation->user2_id
-                    : $conversation->user1_id;
+            ->paginate(15);
 
-                $conversation->otherUser = User::where('id', $conversation->otherUserId)->select('first_name', 'last_name', 'profile_photo_path')->first();
-            });
-        
-        return $conversations;
+    
+        $conversations->getCollection()->transform(function ($conversation) use ($userId) {
+            $conversation->otherUserId = $userId == $conversation->user1_id
+                ? $conversation->user2_id
+                : $conversation->user1_id;
+
+            $conversation->otherUser = User::where('id', $conversation->otherUserId)
+                ->select('first_name', 'last_name', 'profile_photo_path')
+                ->first();
+
+            return $conversation;
+        });
+
+        return response()->json($conversations);
     }
+
 
     
 }
