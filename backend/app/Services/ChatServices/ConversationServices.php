@@ -12,8 +12,8 @@ class ConversationServices
     {
         $userId = auth()->id(); 
 
-        $conversations = Conversation::where('user_one_id', $userId)
-            ->orWhere('user_two_id', $userId)
+        $conversations = Conversation::where('user1_id', $userId)
+            ->orWhere('user2_id', $userId)
             ->with([
                 'latestMessage',
                 'userOne:id,name,profile_image_url',

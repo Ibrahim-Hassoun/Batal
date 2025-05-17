@@ -13,7 +13,21 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
+
+
+            $table->foreignId('conversation_id')->constrained()->onDelete('cascade');
+            $table->text('content');
+            $table->enum('status',['sent','delivered','seen']);
+            $table->enum('type', ['text', 'image', 'file'])->default('text');
+            $table->softDeletes();
             $table->timestamps();
+
+            $table->index('sender_id');
+            $table->index('conversation_id');
+            $table->index('status');
+
         });
     }
 
