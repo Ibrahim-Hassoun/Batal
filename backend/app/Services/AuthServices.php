@@ -41,4 +41,12 @@ class AuthServices {
         return $data;
        
     }
+
+    public function authCheck($request)
+    {
+        return [
+               'user' => auth()->user(),
+                'expires_in' => auth('api')->factory()->getTTL() * 60,
+        ];
+    }
 }
