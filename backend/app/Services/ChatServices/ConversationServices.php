@@ -5,13 +5,13 @@ namespace App\Services\ChatServices;
 use App\Models\User;
 use App\Models\Exercice;
 use App\Models\UserExercice;
-
+use App\Models\Conversation;
 
 class ConversationServices
 {
     public function getUserConversations()
     {
-        $userId = auth()->id(); // or pass it directly if not using auth
+        $userId = auth()->id(); 
 
         $conversations = Conversation::where('user_one_id', $userId)
             ->orWhere('user_two_id', $userId)
@@ -29,7 +29,7 @@ class ConversationServices
             ->limit(15)
             ->get()
             ->map(function ($conversation) use ($userId) {
-                // Determine the other participant
+                
                 $otherUser = $conversation->user_one_id == $userId
                     ? $conversation->userTwo
                     : $conversation->userOne;
