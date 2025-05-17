@@ -85,7 +85,12 @@ Route::group(['prefix'=>"v0.1"],function(){
         });
 
         Route::group(['prefix'=>'chat'],function(){
+
             Route::group(['prefix'=>'conversations'],function(){
+
+            });
+
+            Route::group(['prefix'=>'messages'],function(){
 
             });
         });
