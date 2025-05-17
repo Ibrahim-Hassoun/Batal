@@ -3,8 +3,7 @@
 namespace App\Services\ChatServices;
 
 use App\Models\User;
-use App\Models\Exercice;
-use App\Models\UserExercice;
+use App\Models\Message;
 use App\Models\Conversation;
 
 class ConversationServices
