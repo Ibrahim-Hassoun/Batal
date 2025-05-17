@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_conditional_assignment
+
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -11,7 +13,7 @@ class MlPoseDetectorFunctions {
 
   CameraDescription? camera;
   late PoseDetector poseDetector;
-  late PoseDetectorProvider workoutProvider;
+  late PoseDetectorProvider poseDetectorProvider;
 
 
   final _orientations = {
@@ -22,15 +24,23 @@ class MlPoseDetectorFunctions {
   };
 
   Future<List<Map<String, Map<String, double>>>> processCameraImage(CameraImage image, BuildContext context) async{
-
-    workoutProvider = context.read<PoseDetectorProvider>();
-    poseDetector = workoutProvider.poseDetector!;
-    camera = workoutProvider.camera;
+    
+    // if(poseDetectorProvider == null ){
+      poseDetectorProvider = context.read<PoseDetectorProvider>();
+    //}
+    // if(poseDetector == null ){
+      poseDetector = poseDetectorProvider.poseDetector!;
+    // }
+    // if(camera == null ){
+      camera = poseDetectorProvider.camera;
+    // }
+   
+   
 
     InputImage? inputImage = _inputImageFromCameraImage(image);
     List<Map<String, Map<String, double>>> landmarks = await detectPose(poseDetector, inputImage!);
     
-    workoutProvider.setLandmarks(landmarks);
+    poseDetectorProvider.setLandmarks(landmarks);
     return landmarks;
     
 }
@@ -39,6 +49,26 @@ class MlPoseDetectorFunctions {
   InputImage? _inputImageFromCameraImage(CameraImage image) {
   final camera =  this.camera!;
   final sensorOrientation = camera.sensorOrientation;
+
+  InputImageRotation? rotation;
+
+   if (Platform.isIOS) {
+    rotation = InputImageRotationValue.fromRawValue(sensorOrientation);
+  } else if (Platform.isAndroid) {
+    var rotationCompensation =
+        _orientations[poseDetectorProvider.controller!.value.deviceOrientation];
+    if (rotationCompensation == null) return null;
+    if (camera.lensDirection == CameraLensDirection.front) {
+      // front-facing
+      rotationCompensation = (sensorOrientation + rotationCompensation) % 360;
+    } else {
+      // back-facing
+      rotationCompensation =
+          (sensorOrientation - rotationCompensation + 360) % 360;
+    }
+    rotation = InputImageRotationValue.fromRawValue(rotationCompensation);
+  }
+  if (rotation == null) return null;
 
   final format = InputImageFormatValue.fromRawValue(image.format.raw);
 

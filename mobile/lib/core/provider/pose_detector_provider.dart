@@ -1,14 +1,37 @@
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile/core/ml_pose_detector/ml_pose_detector.dart';
 import 'package:camera/camera.dart';
-import '../../ui/widgets/workout/pose_detector/pose_detector.dart';
-import '../../ui/widgets/workout/my_workout/my_workout.dart';
-import '../../ui/widgets/workout/leaderboard/leaderboard.dart';
 import '../camera_logic/camera_logic.dart';
 
 
 class PoseDetectorProvider with ChangeNotifier {
+
+  //head controller function
+  void toggleRecording(BuildContext context) async{
+    
+    if(!_is_Recording){
+      if(detected_area.isEmpty ||detected_muscle.isEmpty ||detected_exercise.isEmpty){
+        setMLFeedback('Choose settings first');
+        return;
+      }
+     
+      
+      createPoseDetector();
+      resetMLFeedback();
+      await cameraLogic.initializeCamera(this);
+            cameraLogic.streamFrames(context);
+      _is_Recording = !_is_Recording;
+      notifyListeners();
+    }else{
+      _is_Recording = !_is_Recording;
+      poseDetector!.close();
+      cameraLogic.disposeCameraController(this);
+      
+    }
+    notifyListeners();
+  }
+
+
 
   String _detected_area='';
   String get detected_area => _detected_area;
@@ -44,11 +67,13 @@ class PoseDetectorProvider with ChangeNotifier {
      print("this is from provider ${_detected_exercise ?? "unknown"}");
     notifyListeners();
   }
+  
   void setMLFeedback(String feedback){
     _MLFeedback+='\n';
     _MLFeedback += feedback;
     notifyListeners();
   }
+  
   void resetMLFeedback(){
     _MLFeedback='';
     notifyListeners();
@@ -79,30 +104,7 @@ class PoseDetectorProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  //head controller function
-  void toggleRecording(BuildContext context) async{
-    
-    if(!_is_Recording){
-      if(detected_area.isEmpty ||detected_muscle.isEmpty ||detected_exercise.isEmpty){
-        setMLFeedback('Choose settings first');
-        return;
-      }
-     
-      
-      createPoseDetector();
-      resetMLFeedback();
-      await cameraLogic.initializeCamera(this);
-            cameraLogic.streamFrames(context);
-      _is_Recording = !_is_Recording;
-      notifyListeners();
-    }else{
-      _is_Recording = !_is_Recording;
-      poseDetector!.close();
-      cameraLogic.disposeCameraController(this);
-      
-    }
-    notifyListeners();
-  }
+  
 
 
 

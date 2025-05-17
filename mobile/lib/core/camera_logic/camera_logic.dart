@@ -15,12 +15,7 @@ MlPoseDetectorFunctions mlPoseDetectorFunctions = MlPoseDetectorFunctions();
 
 
 late final camera ;
-final _orientations = {
-  DeviceOrientation.portraitUp: 0,
-  DeviceOrientation.landscapeLeft: 90,
-  DeviceOrientation.portraitDown: 180,
-  DeviceOrientation.landscapeRight: 270,
-};
+
 
 Future<void> initializeCamera(PoseDetectorProvider poseDetectorProvider) async {
     
