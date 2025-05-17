@@ -16,36 +16,24 @@ class ConversationServices
             ->orWhere('user2_id', $userId)
             ->with([
                 'latestMessage',
-                'userOne:id,name,profile_image_url',
-                'userTwo:id,name,profile_image_url'
             ])
             ->orderByDesc(
                 Message::select('created_at')
                     ->whereColumn('conversation_id', 'conversations.id')
                     ->latest()
-                    ->limit(1)
+            ->limit(1)
             )
             ->limit(15)
             ->get()
-            ->map(function ($conversation) use ($userId) {
-                
-                $otherUser = $conversation->user_one_id == $userId
-                    ? $conversation->userTwo
-                    : $conversation->userOne;
+            ->each(function ($conversation) use ($userId) {
+                $conversation->otherUserId = $userId == $conversation->user1_id
+                    ? $conversation->user2_id
+                    : $conversation->user1_id;
 
-                return [
-                    'conversation_id' => $conversation->id,
-                    'last_message' => $conversation->latestMessage->body ?? null,
-                    'last_message_time' => $conversation->latestMessage->created_at ?? null,
-                    'other_user' => [
-                        'id' => $otherUser->id,
-                        'name' => $otherUser->name,
-                        'profile_image_url' => $otherUser->profile_image_url,
-                    ]
-                ];
+                $conversation->otherUser = User::where('id', $conversation->otherUserId)->select('first_name', 'last_name', 'profile_photo_path')->first();
             });
-
-        return response()->json($conversations);
+        
+        return $conversations;
     }
 
     
