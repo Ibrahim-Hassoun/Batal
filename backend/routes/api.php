@@ -23,6 +23,7 @@ Route::group(['prefix'=>"v0.1"],function(){
             'last test'=>'last test'
         ]);
     });
+    Route::get('/auth-check',[AuthController::class,'check'])->middleware('authenticated');
     // Route::post('/logout',[AuthController::class,'logout'] ); to be implemented
     
 
