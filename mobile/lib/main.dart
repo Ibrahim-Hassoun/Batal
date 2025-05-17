@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile/core/provider/workout_section_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import './ui/screens/authScreen/auth_screen.dart';
@@ -8,7 +9,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import './core/provider/bottom_navbar_provider.dart';
 import './ui/widgets/bottom_navbar/bottom_navbar.dart';
 import './core/provider/feed_provider.dart';
-import './core/provider/workout_provider.dart';
+import 'core/provider/pose_detector_provider.dart';
 import './ui/screens/chats_screen/chats_screen.dart';
 import 'ui/screens/chats_screen/chatbot_conversation_screen.dart';
 import 'ui/screens/exercices_screen/exercices_screen.dart';
@@ -33,7 +34,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => BottomNavbarProvider()),
         ChangeNotifierProvider(create: (_) => FeedProvider()),
-        ChangeNotifierProvider(create: (_) => WorkoutProvider())
+        ChangeNotifierProvider(create: (_) => PoseDetectorProvider()),
+        ChangeNotifierProvider(create: (_) => WorkoutSectionProvider())
       ],
       child: const MyApp(),
     ) 

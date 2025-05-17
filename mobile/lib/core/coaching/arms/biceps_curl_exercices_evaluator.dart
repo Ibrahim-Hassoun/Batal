@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/core/coaching/interface_exercice_evaluator.dart';
-import 'package:mobile/core/provider/workout_provider.dart';
+import 'package:mobile/core/provider/pose_detector_provider.dart';
 import 'package:mobile/lib/angles/geometry.dart';
 import 'package:provider/provider.dart';
 
 class BicepsCurlExercicesEvaluator implements ExerciceEvaluator{
 
-  static WorkoutProvider? provider;
+  static PoseDetectorProvider? provider;
 
   @override
   void evaluate( BuildContext context,List<List<Map<String, Map<String, double>>>> landmarks){
-        provider = context.read<WorkoutProvider>();
-        print(provider!.MLFeedback);
+        provider = context.read<PoseDetectorProvider>();
+        
         if ( landmarks.isNotEmpty) {
         var lastFrame = landmarks.last;
         for (var landmark in lastFrame) {

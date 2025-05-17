@@ -23,7 +23,7 @@ class CustomCanva extends CustomPainter {
       final y = entry.value['y'];
       final likelihood = entry.value['likelihood'];
       if (x != null && y != null && likelihood != null && likelihood > 0.7) {
-        canvas.drawCircle(Offset(y, x), 2.0, pointPaint);
+        canvas.drawCircle(Offset(x, y), 2.0, pointPaint);
       }
       }
 

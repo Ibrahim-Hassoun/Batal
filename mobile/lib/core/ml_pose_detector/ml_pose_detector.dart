@@ -1,13 +1,21 @@
+// ignore_for_file: prefer_conditional_assignment
+
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:camera/camera.dart';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
-import 'package:mobile/core/provider/workout_provider.dart';
+import 'package:mobile/core/provider/pose_detector_provider.dart';
+import 'package:provider/provider.dart';
 
 class MlPoseDetectorFunctions {
-  static CameraDescription? camera;
+
+  CameraDescription? camera;
+  late PoseDetector poseDetector;
+  late PoseDetectorProvider poseDetectorProvider;
+
+
   final _orientations = {
   DeviceOrientation.portraitUp: 0,
   DeviceOrientation.landscapeLeft: 90,
@@ -15,22 +23,52 @@ class MlPoseDetectorFunctions {
   DeviceOrientation.landscapeRight: 270,
   };
 
-  Future<List<Map<String, Map<String, double>>>> processCameraImage(CameraImage image, PoseDetector poseDetector,WorkoutProvider workoutProvider) async{
-    InputImage? inputImage = _inputImageFromCameraImage(image);
+  Future<List<Map<String, Map<String, double>>>> processCameraImage(CameraImage image, BuildContext context) async{
     
+    // if(poseDetectorProvider == null ){
+      poseDetectorProvider = context.read<PoseDetectorProvider>();
+    //}
+    // if(poseDetector == null ){
+      poseDetector = poseDetectorProvider.poseDetector!;
+    // }
+    // if(camera == null ){
+      camera = poseDetectorProvider.camera;
+    // }
    
-    
-    
+   
+
+    InputImage? inputImage = _inputImageFromCameraImage(image);
     List<Map<String, Map<String, double>>> landmarks = await detectPose(poseDetector, inputImage!);
     
-    workoutProvider.setLandmarks(landmarks);
+    poseDetectorProvider.setLandmarks(landmarks);
     return landmarks;
     
 }
 
+  
   InputImage? _inputImageFromCameraImage(CameraImage image) {
-  final camera =  MlPoseDetectorFunctions.camera!;
+  final camera =  this.camera!;
   final sensorOrientation = camera.sensorOrientation;
+
+  InputImageRotation? rotation;
+
+   if (Platform.isIOS) {
+    rotation = InputImageRotationValue.fromRawValue(sensorOrientation);
+  } else if (Platform.isAndroid) {
+    var rotationCompensation =
+        _orientations[poseDetectorProvider.controller!.value.deviceOrientation];
+    if (rotationCompensation == null) return null;
+    if (camera.lensDirection == CameraLensDirection.front) {
+      // front-facing
+      rotationCompensation = (sensorOrientation + rotationCompensation) % 360;
+    } else {
+      // back-facing
+      rotationCompensation =
+          (sensorOrientation - rotationCompensation + 360) % 360;
+    }
+    rotation = InputImageRotationValue.fromRawValue(rotationCompensation);
+  }
+  if (rotation == null) return null;
 
   final format = InputImageFormatValue.fromRawValue(image.format.raw);
 
@@ -47,7 +85,7 @@ class MlPoseDetectorFunctions {
     bytes: plane.bytes,
      metadata: InputImageMetadata(
       size: Size(image.width.toDouble(), image.height.toDouble()),
-      rotation: InputImageRotation.rotation0deg, // used only in Android
+      rotation: rotation, // used only in Android
       format: format, // used only in iOS
       bytesPerRow: plane.bytesPerRow, // used only in iOS
     ),

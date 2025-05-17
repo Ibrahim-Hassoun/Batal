@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import './camera_section.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile/core/provider/workout_provider.dart';
+import 'package:mobile/core/provider/pose_detector_provider.dart';
 import 'package:mobile/main.dart';
 import 'package:provider/provider.dart';
 import '../../../layouts/drop_down_button.dart';
@@ -20,7 +20,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
   
   @override
   Widget build(BuildContext context) {
-    WorkoutProvider provider = Provider.of<WorkoutProvider>(context,listen:true);
+    PoseDetectorProvider provider = Provider.of<PoseDetectorProvider>(context,listen:true);
     bool isRecording = provider.is_Recording;
     
     List<Map<String, Map<String, double>>> landmarks = provider.landmarks;
@@ -28,41 +28,47 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
 
     return Column(
       children: [
-        Padding(//selections wrapper
+        Padding(
           padding: EdgeInsets.only(left: 16, right: 16,top: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [//selections
+            children: [
               CustomDropdownButton(items: ['arm','option 2'],onChanged: (value){provider.setDetectedArea(value);}, label: 'Area',selectedValue: provider.detected_area,),
               CustomDropdownButton(items: ['bicep','option 2'],onChanged: (value){provider.setDetectedMuscle(value);}, label: 'Muscle',selectedValue: provider.detected_muscle,),
-              CustomDropdownButton(items: ['curl','option 2'],onChanged: (value){provider.setDetectedExercice(value);}, label: 'Exercice',selectedValue: provider.detected_exercise,),
-            
-             
+              CustomDropdownButton(items: ['curl','option 2'],onChanged: (value){provider.setDetectedExercice(value);}, label: 'Exercice',selectedValue: provider.detected_exercise,), 
             ],
           ),
           
         ),
         SizedBox(height: 24,),
-        SizedBox(//camera section
-            width: 300, 
-            height: 350,
+        Expanded(//camera section
+            
             child:  isRecording
-            ? Stack(
-              children: [
-              CameraSection(), // The camera image
-             
-              
-                Positioned.fill(
-                child: CustomPaint(
-                  painter: landmarks.isNotEmpty? CustomCanva(landmarks):null,
-                ),
-                ),
-              ],
+            ? Padding(
+              padding: const EdgeInsets.only(left: 32,right: 32),
+              child: Stack(
+                children: [
+                CameraSection(), // The camera image
+               
+                
+                  Padding(
+                    padding: const EdgeInsets.only(left: 32,right: 32),
+                    child: Positioned.fill(
+                    child: CustomPaint(
+                      painter: landmarks.isNotEmpty? CustomCanva(landmarks):null,
+                    ),
+                    ),
+                  ),
+                ],
+              ),
             )
-          : Container(
-            color: Colors.grey[300],
-            child: Center(
-              child: Text("Camera not initialized"),
+          : Padding(
+            padding: const EdgeInsets.only(left: 32,right: 32),
+            child: Container(
+              color: Colors.grey[300],
+              child: Center(
+                child: Text("Camera not initialized"),
+              ),
             ),
           ),
         ),
