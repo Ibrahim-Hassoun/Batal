@@ -22,7 +22,7 @@ class LeaderBoardController extends Controller
     {
          try{
             $leaderboard = $this->leaderBoardServices->getWeeklyLeaderboard($request);
-            return $this->respond(true,'Messages retrieved successfully',$leaderboard,200);
+            return $this->respond(true,'leaderboard retrieved successfully',$leaderboard,200);
 
         }catch(\Exception $e){
             return $this->respond(false,$e->getMessage(),null,500);

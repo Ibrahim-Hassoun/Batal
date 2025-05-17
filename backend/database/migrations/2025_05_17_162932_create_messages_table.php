@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->foreignId('conversation_id')->constrained()->onDelete('cascade');
             $table->text('content');
-            $table->enum('status',['sent','delivered','seen']);
+            $table->enum('status',['sent','delivered','seen'])->default('sent');
             $table->enum('type', ['text', 'image', 'file'])->default('text');
             $table->softDeletes();
             $table->timestamps();

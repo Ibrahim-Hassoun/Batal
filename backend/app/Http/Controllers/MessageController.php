@@ -17,8 +17,14 @@ class MessageController extends Controller
         $this->messageServices = $messageServices;
     }
 
-    public function storeConversationMessage(Request $request)
+    public function storeMessage(Request $request)
     {
-        
+         try{
+            $leaderboard = $this->messageServices->storeMessage($request);
+            return $this->respond(true,'Message stored successfully',$leaderboard,200);
+
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
     }
 }

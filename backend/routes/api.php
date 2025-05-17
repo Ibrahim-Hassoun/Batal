@@ -94,7 +94,7 @@ Route::group(['prefix'=>"v0.1"],function(){
             });
 
             Route::group(['prefix'=>'messages'],function(){
-                Route::post('/add',[MessageController::class,'storeMessage']);
+                Route::post('/',[MessageController::class,'storeMessage']);
             });
         });
 
