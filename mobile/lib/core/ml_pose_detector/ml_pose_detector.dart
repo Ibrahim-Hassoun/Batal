@@ -85,7 +85,7 @@ class MlPoseDetectorFunctions {
     bytes: plane.bytes,
      metadata: InputImageMetadata(
       size: Size(image.width.toDouble(), image.height.toDouble()),
-      rotation: InputImageRotation.rotation0deg, // used only in Android
+      rotation: rotation, // used only in Android
       format: format, // used only in iOS
       bytesPerRow: plane.bytesPerRow, // used only in iOS
     ),
