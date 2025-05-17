@@ -17,14 +17,8 @@ class MessageController extends Controller
         $this->messageServices = $messageServices;
     }
 
-    public function getConversationMessages($conversation_id,Request $request)
+    public function storeConversationMessage(Request $request)
     {
-         try{
-            $messages = $this->messageServices->getConversationMessages($conversation_id);
-            return $this->respond(true,'Convos retrieved successfully',$messages,201);
-
-        }catch(\Exception $e){
-            return $this->respond(false,$e->getMessage(),null,500);
-        }
+        
     }
 }

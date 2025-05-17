@@ -26,4 +26,15 @@ class ConversationController extends Controller
             return $this->respond(false,$e->getMessage(),null,500);
         }
     }
+
+     public function getConversationMessages($conversation_id,Request $request)
+    {
+         try{
+            $messages = $this->conversationServices->getConversationMessages($conversation_id);
+            return $this->respond(true,'Convos retrieved successfully',$messages,201);
+
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
+    }
 }

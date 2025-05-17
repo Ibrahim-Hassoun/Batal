@@ -9,7 +9,7 @@ use App\Models\Conversation;
 class MessageServices
 {
  
-    public function getConversationMessages($conversation_id)
+    public function getMessages($conversation_id)
     {
         $messages = Conversation::find($conversation_id)->messages;
         if(!$messages){
@@ -20,7 +20,7 @@ class MessageServices
 
     public function storeConversationMessage()
     {
-        
+
     }
     
 }
