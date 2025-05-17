@@ -13,8 +13,17 @@ return new class extends Migration
     {
         Schema::create('conversations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user1_id')->constrained('users')->onDelete('cascade')->index();
-            $table->foreignId('user2_id')->constrained('users')->onDelete('cascade')->index();
+            $table->unsignedBigInteger('user1_id');
+            $table->unsignedBigInteger('user2_id');
+
+            $table->foreign('user1_id', 'conversations_user1_fk')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('user2_id', 'conversations_user2_fk')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
+
             $table->softDeletes();
             $table->timestamps();
             $table->unique(['user1_id', 'user2_id']);
