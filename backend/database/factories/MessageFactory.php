@@ -17,7 +17,12 @@ class MessageFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'sender_id' => \App\Models\User::factory(),
+            'receiver_id' => \App\Models\User::factory(),
+            'conversation_id' => \App\Models\Conversation::factory(),
+            'content' => $this->faker->paragraph,
+            'status' => $this->faker->randomElement(['sent', 'delivered', 'seen']),
+            'type' => $this->faker->randomElement(['text', 'image', 'file']),
         ];
     }
 }
