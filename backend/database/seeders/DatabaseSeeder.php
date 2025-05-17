@@ -7,6 +7,7 @@ use App\Models\User;
 use Database\Seeders\GymSeeder;
 use Illuminate\Database\Seeder;
 use Database\Seeders\PostSeeder;
+use Database\Seeders\MessageSeeder;
 use Database\Seeders\ReactionSeeder;
 use Database\Seeders\FollowingSeeder;
 use Database\Seeders\JobProfileSeeder;
@@ -37,8 +38,8 @@ class DatabaseSeeder extends Seeder
             ChatbotSessionSeeder::class,
             ChatbotMessageSeeder::class,
             FollowingSeeder::class,
-            ConversationSeeder::class
-            
+            ConversationSeeder::class,
+            MessageSeeder::class
         ]);
         // User::factory(10)->create();
 
