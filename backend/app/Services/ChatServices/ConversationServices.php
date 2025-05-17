@@ -41,7 +41,10 @@ class ConversationServices
 
     public function getConversationMessages($conversation_id)
     {
-        $messages = Conversation::find($conversation_id)->messages;
+        $messages = Conversation::find($conversation_id)
+            ->messages()
+            ->orderBy('created_at', 'desc')
+            ->paginate(15);
         if(!$messages){
             throw new \Exception('unable to retrieve messages',404);
         }
