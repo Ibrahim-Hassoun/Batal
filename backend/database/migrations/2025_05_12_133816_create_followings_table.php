@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('followings', function (Blueprint $table) {
-                $table->id();
+            $table->id();
             $table->unsignedBigInteger('follower_id');
             $table->unsignedBigInteger('followed_id');
             $table->enum('status', ['pending', 'accepted', 'rejected'])->default('accepted');
