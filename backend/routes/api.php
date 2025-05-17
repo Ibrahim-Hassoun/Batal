@@ -84,6 +84,12 @@ Route::group(['prefix'=>"v0.1"],function(){
             Route::get('/weekly',[LeaderBoardController::class,'getWeeklyLeaderBoard']);
         });
 
+        Route::group(['prefix'=>'chat'],function(){
+            Route::group(['prefix'=>'conversations'],function(){
+
+            });
+        });
+
         Route::group(['middleware' => 'isAdmin'], function () {
             
             Route::group(['prefix'=>'exercices'],function(){
