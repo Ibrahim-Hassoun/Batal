@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Conversation;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ConversationSeeder extends Seeder
 {
@@ -12,6 +13,6 @@ class ConversationSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Conversation::factory()->count(10)->create();
     }
 }
