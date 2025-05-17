@@ -17,10 +17,10 @@ class MessageController extends Controller
         $this->messageServices = $messageServices;
     }
 
-    public function getConversationMessages(Request $request)
+    public function getConversationMessages($conversation_id,Request $request)
     {
          try{
-            $messages = $this->messageServices->getConversationMessages($request);
+            $messages = $this->messageServices->getConversationMessages($conversation_id);
             return $this->respond(true,'Convos retrieved successfully',$messages,201);
 
         }catch(\Exception $e){

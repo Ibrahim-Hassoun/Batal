@@ -9,9 +9,13 @@ use App\Models\Conversation;
 class MessageServices
 {
  
-    public function getConversationMessages()
+    public function getConversationMessages($conversation_id)
     {
-        return 'hey from service';
+        $messages = Conversation::find($conversation_id)->messages;
+        if(!$messages){
+            throw new \Exception('unable to retrieve messages',404);
+        }
+        return $messages;
     }
     
 }
