@@ -12,6 +12,7 @@ use Database\Seeders\FollowingSeeder;
 use Database\Seeders\JobProfileSeeder;
 use Database\Seeders\ExerciceSeeder;
 use Database\Seeders\UserExerciceSeeder;
+use Database\Seeders\ConversationSeeder;
 use Database\Seeders\ChatbotMessageSeeder;
 use Database\Seeders\ChatbotSessionSeeder;
 
@@ -36,6 +37,7 @@ class DatabaseSeeder extends Seeder
             ChatbotSessionSeeder::class,
             ChatbotMessageSeeder::class,
             FollowingSeeder::class,
+            ConversationSeeder::class
             
         ]);
         // User::factory(10)->create();
