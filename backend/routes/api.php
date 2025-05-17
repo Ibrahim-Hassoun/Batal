@@ -91,6 +91,7 @@ Route::group(['prefix'=>"v0.1"],function(){
             Route::group(['prefix'=>'conversations'],function(){
                 Route::get('/all',[ConversationController::class,'getUserConversations']);
                 Route::get('/{conversation_id}/messages',[MessageController::class,'getConversationMessages']);
+                Route::post('/{conversation_id}/message',[MessageController::class,'storeConversationMessage']);
             });
         });
 
