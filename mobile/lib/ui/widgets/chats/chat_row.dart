@@ -3,7 +3,7 @@ import 'package:mobile/core/provider/AuthProvider.dart';
 import 'package:mobile/lib/time_formatter/time_formatter.dart';
 import 'package:mobile/main.dart';
 import 'package:provider/provider.dart';
-import './conversation_screen.dart';
+import '../../screens/chats_screen/conversation_screen.dart';
 
 class ChatRow extends StatefulWidget {
   final int conversationId;
