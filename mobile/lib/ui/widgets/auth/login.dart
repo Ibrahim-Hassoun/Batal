@@ -25,7 +25,7 @@ class Login extends StatelessWidget {
             children: [
               CircleAvatar(
                 backgroundImage: AssetImage('assets/logo.png'),
-                radius: 24,  
+                radius: 48,  
               ),
               const SizedBox(height: 56),
               PlatformText(
