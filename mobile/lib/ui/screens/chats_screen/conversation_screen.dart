@@ -15,6 +15,7 @@ class ConversationScreen extends StatefulWidget{
   final int secondPartyId;
   final String chatName;
   final String lastSeen;
+  final String? imageURL;
   static String temp='';
   static final ScrollController scrollController = ScrollController();
   static bool isTyping = false;
@@ -29,6 +30,7 @@ class ConversationScreen extends StatefulWidget{
     required this.secondPartyId,
     required this.chatName,
     required this.lastSeen,
+    required this.imageURL,
   });
   @override
   ConversationScreenState createState() => ConversationScreenState();
@@ -112,7 +114,7 @@ void didChangeDependencies() {
         ),
        title: Row(
         children: [
-            // CircleAvatar(backgroundImage: NetworkImage(widget.chatImageUrl ?? 'https://randomuser.me/api/portraits')), // Add a default image
+            CircleAvatar(backgroundImage: NetworkImage(widget.imageURL ?? 'https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg')), // Add a default image
             SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
