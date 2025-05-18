@@ -6,15 +6,19 @@ import 'package:provider/provider.dart';
 import '../../../core/provider/AuthProvider.dart'; 
 
 class Register1 extends StatelessWidget {
-  final Function incrementStep;
-  final Function decrementStep;
-  final Function handleChange;
-  final Map data;
+ 
 
-  const Register1({super.key,required this.incrementStep,required this.decrementStep,required this.data,required this.handleChange});
+  
+  const Register1({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider= Provider.of<AuthProvider>(context,listen: true);
+    final Function incrementStep=authProvider.incrementStep;
+    final Function decrementStep=authProvider.decrementStep;
+    final Function handleChange=authProvider.handleChange;
+    final Map data = authProvider.data;
+
     return Container(
         alignment: Alignment.topCenter,
         padding: const EdgeInsets.only(top: 110),

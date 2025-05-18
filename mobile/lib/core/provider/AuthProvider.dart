@@ -51,7 +51,41 @@ class AuthProvider with ChangeNotifier {
 
 
   //register section 
-
-
   
+  int currentStep = 1;
+  final data = {
+    'email': '',
+    'password': '',
+    'confirmPassword': '',
+    'firstName': '',
+    'lastName': '',
+    'birthday': '',
+    'username': '',
+    'code': ''
+  };
+  
+  void incrementStep() {
+    
+      if(currentStep<6){
+        currentStep++;
+      
+    };
+  }
+  void decrementStep() {
+    
+      currentStep--;
+    
+  }
+  void setStep(step) {
+   
+      currentStep=step;
+    
+  }
+  void handleChange(key,value){
+    
+      data[key] = value;
+   
+  }
+
+
 }
