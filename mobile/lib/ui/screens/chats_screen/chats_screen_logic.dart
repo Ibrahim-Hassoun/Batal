@@ -14,6 +14,6 @@ Future <List<dynamic>>  fetchChats(ChatsScreenState chatsScreenState) async{
       return response['data']['data']['original']['data'];
     }
     else{
-      throw new Exception('Could not load rows');
+      throw Exception('Could not load rows');
     }
 }

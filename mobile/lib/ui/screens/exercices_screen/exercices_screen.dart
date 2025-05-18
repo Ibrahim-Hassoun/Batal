@@ -65,7 +65,7 @@ class ExercicesScreenState extends State<ExercicesScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children:[ 
-              CustomDropdownButton(items: ['all','recommended'],onChanged: (value){provider.setSelectedMode(value);this.setState(() {
+              CustomDropdownButton(items: ['all','recommended'],onChanged: (value){provider.setSelectedMode(value);setState(() {
                  
               });}, label: 'Mode',selectedValue: provider.selectedMode,),
               // CustomDropdownButton(items: ['arm','abs','shoulder','leg'],onChanged: (value){provider.setSelectedAreaForExercicesScreen(value);}, label: 'Area',selectedValue: provider.selectedAreaForExercicesScreen,),
@@ -90,7 +90,7 @@ class ExercicesScreenState extends State<ExercicesScreen> {
               itemCount: AllExercices.length,
               itemBuilder: (context,index){
                  var exerciceData = AllExercices[index]; 
-                 return ExerciseRowInScreen(id:exerciceData['id'],title: exerciceData['exercice'], imageUrl: exerciceData['image_url']==null?'https://cdn-icons-png.flaticon.com/512/2331/2331943.png':exerciceData['image_url']);
+                 return ExerciseRowInScreen(id:exerciceData['id'],title: exerciceData['exercice'], imageUrl: exerciceData['image_url'] ?? 'https://cdn-icons-png.flaticon.com/512/2331/2331943.png');
               },
             )
             :
@@ -101,7 +101,7 @@ class ExercicesScreenState extends State<ExercicesScreen> {
               itemCount: recommendedExercices.length,
               itemBuilder: (context,index){
                  var exerciceData = recommendedExercices[index]; 
-                 return ExerciseRowInScreen(id:exerciceData['exercise']['id'],title: exerciceData['exercise']['exercice'], imageUrl: exerciceData['exercise']['image_url']==null?'https://cdn-icons-png.flaticon.com/512/2331/2331943.png':exerciceData['exercise']['image_url']);
+                 return ExerciseRowInScreen(id:exerciceData['exercise']['id'],title: exerciceData['exercise']['exercice'], imageUrl: exerciceData['exercise']['image_url'] ?? 'https://cdn-icons-png.flaticon.com/512/2331/2331943.png');
               },
             )
                   ],

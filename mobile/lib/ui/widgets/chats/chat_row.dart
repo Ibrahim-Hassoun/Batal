@@ -64,6 +64,8 @@ class _ChatRowState extends State<ChatRow>
                   userId: userId,
                   secondPartyId :widget.secondPartyId,
                   conversationId: widget.conversationId,
+                  chatName:widget.chatName,
+                  lastSeen:widget.lastMessageTime
                 ),
               ),
             );

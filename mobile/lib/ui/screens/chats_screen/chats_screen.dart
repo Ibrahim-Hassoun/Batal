@@ -76,7 +76,7 @@ class ChatsScreenState extends State<ChatsScreen> {
               physics: const NeverScrollableScrollPhysics(), 
               shrinkWrap: true,
               
-              itemCount: conversations!.length,
+              itemCount: conversations.length,
               itemBuilder: (context,index){
                  var convoData = conversations[index]; 
                  String name = convoData['otherUser']['first_name']+" "+ convoData['otherUser']['last_name'];

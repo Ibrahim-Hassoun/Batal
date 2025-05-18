@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobile/ui/widgets/workout/leaderboard/leaderboard.dart';
 import 'package:mobile/ui/widgets/workout/my_workout/my_workout.dart';

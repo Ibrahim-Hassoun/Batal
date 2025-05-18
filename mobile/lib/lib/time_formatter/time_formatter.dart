@@ -1,4 +1,3 @@
-import 'package:intl/intl.dart';
 
 String formatTimeAgo(DateTime dateTime) {
   final now = DateTime.now();

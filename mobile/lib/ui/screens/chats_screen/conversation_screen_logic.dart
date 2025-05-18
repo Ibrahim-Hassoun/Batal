@@ -98,7 +98,7 @@ void loadMessages(ConversationScreenState screenState) async{
           'isMe': msg['role'] == 'user' ? true : false,
           'time': msg['created_at'],
         });
-      };
+      }
       ConversationScreen.loadingMessages=false;
     });
   } else {

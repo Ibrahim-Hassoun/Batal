@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/lib/time_formatter/time_formatter.dart';
 import 'package:mobile/main.dart';
 import './conversation_screen_logic.dart';
 
@@ -6,8 +7,8 @@ class ConversationScreen extends StatefulWidget{
   final int conversationId;
   final int userId;
   final int secondPartyId;
-
-
+  final String chatName;
+  final String lastSeen;
   static String temp='';
   static final ScrollController scrollController = ScrollController();
   static bool isTyping = false;
@@ -20,6 +21,8 @@ class ConversationScreen extends StatefulWidget{
     required this.conversationId,
     required this.userId,
     required this.secondPartyId,
+    required this.chatName,
+    required this.lastSeen,
   });
   @override
   ConversationScreenState createState() => ConversationScreenState();
@@ -30,7 +33,7 @@ class ConversationScreenState extends State<ConversationScreen>{
   final TextEditingController _controller = TextEditingController();
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
   }
   @override
@@ -47,14 +50,14 @@ class ConversationScreenState extends State<ConversationScreen>{
           ),
         ),
        title: Row(
-          children: [
+        children: [
             // CircleAvatar(backgroundImage: NetworkImage(widget.chatImageUrl ?? 'https://randomuser.me/api/portraits')), // Add a default image
             SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('John Doe', style: TextStyle(fontSize: 18)),
-                Text('Active 11m ago', style: TextStyle(fontSize: 12)),
+                Text(widget.chatName, style: TextStyle(fontSize: 18)),
+                Text(formatTimeAgo(DateTime.parse(widget.lastSeen)), style: TextStyle(fontSize: 12)),
               ],
             ),
           ],
@@ -89,42 +92,42 @@ class ConversationScreenState extends State<ConversationScreen>{
                 final message = ConversationScreen.messages[index];
                 final isMe = message['isMe'];
                 return Align(
-  alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
-  child: Column(
-    crossAxisAlignment:
-        isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-    children: [
-      if (message.containsKey('time'))
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: Text(
-            message['time'],
-            style: TextStyle(fontSize: 12, color: bg_gray),
-          ),
-        ),
-      Container(
-        margin: EdgeInsets.symmetric(vertical: 4),
-        padding: EdgeInsets.all(12),
-        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
-        decoration: BoxDecoration(
-          color: isMe ? Colors.grey.shade300 : Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Text(
-          message['text'],
-          style: TextStyle(fontSize: 16),
-        ),
-      ),
+                  alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+                  child: Column(
+                    crossAxisAlignment:
+                        isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                    children: [
+                      if (message.containsKey('time'))
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: Text(
+                            message['time'],
+                            style: TextStyle(fontSize: 12, color: bg_gray),
+                          ),
+                        ),
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 4),
+                        padding: EdgeInsets.all(12),
+                        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
+                        decoration: BoxDecoration(
+                          color: isMe ? Colors.grey.shade300 : Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Text(
+                          message['text'],
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
 
-      // Show arrow only after last chatbot message
-      if (index == ConversationScreen.messages.length - 1  && ConversationScreen.isTyping)
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [CircularProgressIndicator(color: primaryColor,)]
-        ),
-    ],
-  ),
-);
+                      // Show arrow only after last chatbot message
+                      if (index == ConversationScreen.messages.length - 1  && ConversationScreen.isTyping)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [CircularProgressIndicator(color: primaryColor,)]
+                        ),
+                    ],
+                  ),
+                );
 
               },
             ),
