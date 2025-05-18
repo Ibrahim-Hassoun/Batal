@@ -3,6 +3,7 @@
 return [
     App\Providers\AppServiceProvider::class,
     App\Providers\AuthServicesProvider::class,
+    App\Providers\ChatServicesProvider::class,
     App\Providers\ChatbotServicesProvider::class,
     App\Providers\ExerciceServicesProvider::class,
     App\Providers\GymServicesProvider::class,

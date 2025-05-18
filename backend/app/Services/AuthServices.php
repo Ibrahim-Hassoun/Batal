@@ -34,9 +34,19 @@ class AuthServices {
         $user = JWTAuth::user();
         $data = [
             'user' => $user,
-            'token' => $token
+            'token' => $token,
+            'expires_in' =>auth('api')->factory()->getTTL()*60
+
         ];
         return $data;
        
+    }
+
+    public function authCheck($request)
+    {
+        return [
+               'user' => auth()->user(),
+                'expires_in' => auth('api')->factory()->getTTL() * 60,
+        ];
     }
 }

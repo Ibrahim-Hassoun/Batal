@@ -70,4 +70,25 @@ class AuthController extends Controller
         // Logout logic here
        
     }
+
+    public function authCheck(Request $request)
+    {   
+        try{
+            
+            $result = $this->authServices->authCheck($request);
+            return $this->respond(
+                true,
+                "User check successful",
+                $result,
+                200
+            );
+        }catch(\Exception $e){
+            return $this->respond(
+                false,
+                $e->getMessage(),
+                null,
+                 500
+            );
+        }
+    }
 }

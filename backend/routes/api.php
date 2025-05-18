@@ -5,10 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GymController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\ExerciceController;
 use App\Http\Controllers\JobProfileController;
 use App\Http\Controllers\LeaderBoardController;
+use App\Http\Controllers\ConversationController;
 
 
 Route::group(['prefix'=>"v0.1"],function(){
@@ -21,6 +23,7 @@ Route::group(['prefix'=>"v0.1"],function(){
             'last test'=>'last test'
         ]);
     });
+    Route::get('/auth-check',[AuthController::class,'authCheck'])->middleware('authenticated');
     // Route::post('/logout',[AuthController::class,'logout'] ); to be implemented
     
 
@@ -87,11 +90,12 @@ Route::group(['prefix'=>"v0.1"],function(){
         Route::group(['prefix'=>'chat'],function(){
 
             Route::group(['prefix'=>'conversations'],function(){
-
+                Route::get('/all',[ConversationController::class,'getUserConversations']);
+                Route::get('/{conversation_id}/messages',[ConversationController::class,'getConversationMessages']);
             });
 
             Route::group(['prefix'=>'messages'],function(){
-
+                Route::post('/',[MessageController::class,'storeMessage']);
             });
         });
 
