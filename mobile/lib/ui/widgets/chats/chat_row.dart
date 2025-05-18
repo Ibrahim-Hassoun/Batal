@@ -7,6 +7,7 @@ class ChatRow extends StatefulWidget {
   final String lastMessage;
   final String lastMessageTime;
   final String? chatImageUrl;
+  
 
   const ChatRow({
     super.key,

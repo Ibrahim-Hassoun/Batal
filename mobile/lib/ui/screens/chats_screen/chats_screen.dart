@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/core/provider/AuthProvider.dart';
 import 'package:mobile/main.dart';
 import 'package:mobile/ui/widgets/chats/chat_row.dart';
+import 'package:provider/provider.dart';
 
 class ChatsScreen extends StatefulWidget {
   const ChatsScreen({super.key});
@@ -10,8 +12,13 @@ class ChatsScreen extends StatefulWidget {
 }
 
 class _ChatsScreenState extends State<ChatsScreen> {
+
+ 
+
   @override
   Widget build(BuildContext context) {
+     AuthProvider authProvider = Provider.of<AuthProvider>(context,listen: true);
+     int id = authProvider.user!['id'];
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
