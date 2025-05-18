@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile/core/provider/chat_provider.dart';
 import 'package:mobile/core/provider/workout_section_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -35,7 +36,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => BottomNavbarProvider()),
         ChangeNotifierProvider(create: (_) => FeedProvider()),
         ChangeNotifierProvider(create: (_) => PoseDetectorProvider()),
-        ChangeNotifierProvider(create: (_) => WorkoutSectionProvider())
+        ChangeNotifierProvider(create: (_) => WorkoutSectionProvider()),
+        ChangeNotifierProvider(create: (_) => ChatProvider())
       ],
       child: const MyApp(),
     ) 

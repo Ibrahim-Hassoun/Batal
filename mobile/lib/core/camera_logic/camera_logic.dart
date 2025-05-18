@@ -1,8 +1,6 @@
 import 'dart:io';
-import 'package:flutter/services.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mobile/core/coaching/arms/biceps_curl_exercices_evaluator.dart';
 import 'package:mobile/core/provider/pose_detector_provider.dart';
 import 'package:provider/provider.dart';
 

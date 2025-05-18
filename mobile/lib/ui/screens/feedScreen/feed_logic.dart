@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/ui/widgets/feed/post_button.dart';
 
 import '../../../core/remote/server.dart';
 

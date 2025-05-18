@@ -13,6 +13,6 @@ Future <List<dynamic>>  fetchRows(LeaderboardState leaderBoardState) async{
       return response['data']['data'];
     }
     else{
-      throw new Exception('Could not load rows');
+      throw Exception('Could not load rows');
     }
 }
