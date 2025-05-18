@@ -38,7 +38,8 @@ wss.on('connection', async (ws, req) => {
         if (targetWs?.readyState === 1) { 
           targetWs.send(JSON.stringify({
             from: userId,
-            message: parsed.message
+            message: parsed.message,
+            conversationId:parsed.conversationId
           }));
         }
       });

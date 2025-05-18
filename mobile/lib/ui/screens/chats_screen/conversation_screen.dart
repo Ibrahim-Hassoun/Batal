@@ -1,7 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:mobile/core/provider/AuthProvider.dart';
 import 'package:mobile/lib/time_formatter/time_formatter.dart';
 import 'package:mobile/main.dart';
+import 'package:provider/provider.dart';
 import './conversation_screen_logic.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ConversationScreen extends StatefulWidget{
   final int conversationId;
@@ -31,18 +37,60 @@ class ConversationScreen extends StatefulWidget{
 class ConversationScreenState extends State<ConversationScreen>{
   
   final TextEditingController _controller = TextEditingController();
-  @override
-  void initState() {
-    
-    super.initState();
-    loadConvoMessages();
-  }
+  late String token;
+late WebSocketChannel channel;
 
+@override
+void initState() {
+  super.initState();
+  // Avoid using context here for Provider
+  loadConvoMessages(); // You can still load basic setup here if it doesn't use context
+}
   void loadConvoMessages ()async{
       loadMessages(widget.userId,this,widget.conversationId);
   }
+@override
+void didChangeDependencies() {
+  super.didChangeDependencies();
+
+  // Safe to use context here
+  token = Provider.of<AuthProvider>(context, listen: true).access_token!;
+   final String websocketURL = dotenv.env['WEBSOCKET_URL'] ?? '';
+  channel = WebSocketChannel.connect(
+    Uri.parse('$websocketURL?token=$token'),
+  );
+
+ channel.stream.listen((message) {
+  print('Received: $message');
+
+  final data = jsonDecode(message); // Now it's a Map
+  if(int.parse(data['conversationId'])==widget.conversationId){
+    setState(() {
+    ConversationScreen.messages.insert(0, {
+      'text': data['message'], // safely access the field now
+      'isMe': false,
+      'time': formatTimeAgo(DateTime.now()),
+    });
+  });
+}
+  }
+  );
+
+}
+
+  @override
+  void dispose() {
+   
+    channel.sink.close();
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
+
+     
+
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -74,7 +122,7 @@ class ConversationScreenState extends State<ConversationScreen>{
           IconButton(
             icon: Icon(Icons.more_vert,color: secondaryColor,),
             onPressed: () {
-              // Handle video call action
+              
             },
           ),
           

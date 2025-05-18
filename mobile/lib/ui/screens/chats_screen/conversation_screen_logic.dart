@@ -1,6 +1,4 @@
-import 'package:mobile/core/provider/AuthProvider.dart';
 import 'package:mobile/ui/screens/chats_screen/conversation_screen.dart';
-import 'package:provider/provider.dart';
 import '../../../core/remote/server.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +15,12 @@ void sendMessage(ConversationScreenState screenState) async {
       },
       optimistic: () {
         screenState.setState(() {
-          ConversationScreen.messages.add({
+          ConversationScreen.messages.insert(0,{
             'text': ConversationScreen.temp,
             'isMe': true,
             'time': DateTime.now().toString(),
           });
-          ConversationScreen.isTyping = true;
+          
         });
         WidgetsBinding.instance.addPostFrameCallback((_) {
           ConversationScreen.scrollController.animateTo(
@@ -33,9 +31,7 @@ void sendMessage(ConversationScreenState screenState) async {
         });
       },
       rollback: () {
-        screenState.setState(() {
-          ConversationScreen.messages.removeLast();
-        });
+       
       },
     );
 
@@ -62,7 +58,8 @@ void sendMessage(ConversationScreenState screenState) async {
 
 
 void loadMessages (int userId,ConversationScreenState screenState,int conversationId) async{
-  
+  ConversationScreen.loadingMessages=true;
+  ConversationScreen.messages.clear();
 print(conversationId);
   var response = await ApiServices.request(
     
@@ -73,7 +70,7 @@ print(conversationId);
   if (response['success']) {
     screenState.setState(() {
       List<dynamic> messages = response['data']['data']['data'];
-      ConversationScreen.messages.clear();
+      
       for (var msg in messages) {
         ConversationScreen.messages.add({
           'text': msg['content'],
