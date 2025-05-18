@@ -6,6 +6,7 @@ import 'package:mobile/ui/widgets/auth/register_3.dart';
 import 'package:mobile/ui/widgets/auth/register_4.dart';
 import 'package:mobile/ui/widgets/auth/register_5.dart';
 import 'package:mobile/ui/widgets/auth/register_6.dart';
+// import 'package:mobile/ui/widgets/auth/register_code.dart';
 import 'package:provider/provider.dart';
 import '../../../core/provider/AuthProvider.dart'; 
 import './login.dart';

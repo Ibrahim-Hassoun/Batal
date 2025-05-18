@@ -61,7 +61,7 @@ class AuthProvider with ChangeNotifier {
     'lastName': '',
     'birthday': '',
     'username': '',
-    'code': ''
+    
   };
   
   void incrementStep() {
