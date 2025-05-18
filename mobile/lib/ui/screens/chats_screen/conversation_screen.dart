@@ -55,7 +55,7 @@ void didChangeDependencies() {
 
   // Safe to use context here
   token = Provider.of<AuthProvider>(context, listen: true).access_token!;
-   final String websocketURL = dotenv.env['WEBSOCKET_URL'] ?? '';
+  final String websocketURL = dotenv.env['WEBSOCKET_URL'] ?? '';
   channel = WebSocketChannel.connect(
     Uri.parse('$websocketURL?token=$token'),
   );
@@ -71,7 +71,15 @@ void didChangeDependencies() {
       'isMe': false,
       'time': formatTimeAgo(DateTime.now()),
     });
+    
   });
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+        ConversationScreen.scrollController.animateTo(
+          ConversationScreen.scrollController.position.minScrollExtent,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      });
 }
   }
   );
