@@ -34,6 +34,9 @@ class ChatsScreenState extends State<ChatsScreen> {
   @override
   Widget build(BuildContext context) {
     
+    int userId = Provider.of<AuthProvider>(context,listen: true).user!['id'];
+
+
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -79,7 +82,9 @@ class ChatsScreenState extends State<ChatsScreen> {
               itemCount: conversations!.length,
               itemBuilder: (context,index){
                  var convoData = conversations[index]; 
-                 return  ChatRow(chatId: 1, chatName: "Dani Sabbagh", lastMessage: "Eh hbb tamem", lastMessageTime: "1:43", chatImageUrl: 'https://media.boohoo.com/i/boohoo/amm07233_black_xl/male-black-man-active-performance-muscle-fit-raglan-tee?w=700&qlt=default&fmt.jp2.qlt=70&fmt=auto&sm=fit');
+                 String name = convoData['otherUser']['first_name']+" "+ convoData['otherUser']['last_name'];
+                 
+                 return  ChatRow(chatId: convoData['id'], secondPartyId: convoData['otherUser']['id'],chatName: name, lastMessage: convoData['latest_message']['content'], lastMessageTime: convoData['latest_message']['created_at'], chatImageUrl: convoData['otherUser']['profile_photo_path']);
               },
             )
               

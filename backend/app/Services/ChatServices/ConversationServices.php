@@ -30,7 +30,7 @@ class ConversationServices
                 : $conversation->user1_id;
 
             $conversation->otherUser = User::where('id', $conversation->otherUserId)
-                ->select('first_name', 'last_name', 'profile_photo_path')
+                ->select('id','first_name', 'last_name', 'profile_photo_path')
                 ->first();
 
             return $conversation;

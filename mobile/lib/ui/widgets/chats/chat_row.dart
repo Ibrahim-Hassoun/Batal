@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/lib/time_formatter/time_formatter.dart';
 import 'package:mobile/main.dart';
 
 class ChatRow extends StatefulWidget {
@@ -7,7 +8,7 @@ class ChatRow extends StatefulWidget {
   final String lastMessage;
   final String lastMessageTime;
   final String? chatImageUrl;
-  
+  final int secondPartyId;
 
   const ChatRow({
     super.key,
@@ -16,6 +17,7 @@ class ChatRow extends StatefulWidget {
     required this.lastMessage,
     required this.lastMessageTime,
     required this.chatImageUrl,
+    required this.secondPartyId
   });
   
   @override
@@ -38,7 +40,7 @@ class _ChatRowState extends State<ChatRow>
             child: GestureDetector(
               onTap: () =>{} ,
               child: CircleAvatar(
-                backgroundImage: NetworkImage(widget.chatImageUrl ?? 'https://randomuser.me/api/portraits/men/1.jpg'),
+                backgroundImage: NetworkImage(widget.chatImageUrl ?? 'https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg'),
             ),
             )
             ),
@@ -46,7 +48,10 @@ class _ChatRowState extends State<ChatRow>
           
           title: Text(widget.chatName),
           subtitle: Text(widget.lastMessage),
-          trailing: Text(widget.lastMessageTime,style: TextStyle(fontSize: 16,color: secondaryColor),),
+          trailing: Text(
+            formatTimeAgo(DateTime.parse(widget.lastMessageTime)),
+            style: TextStyle(fontSize: 16, color: secondaryColor),
+          ),
           onTap: () {
             Navigator.pushNamed(context, '/chatbot-conversation', );
           },
