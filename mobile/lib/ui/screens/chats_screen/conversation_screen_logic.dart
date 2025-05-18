@@ -1,4 +1,6 @@
+import 'package:mobile/core/provider/AuthProvider.dart';
 import 'package:mobile/ui/screens/chats_screen/conversation_screen.dart';
+import 'package:provider/provider.dart';
 import '../../../core/remote/server.dart';
 import 'package:flutter/material.dart';
 
@@ -82,24 +84,29 @@ void clearChat(ConversationScreenState screenState) async{
   });
 }
 
-void loadMessages(ConversationScreenState screenState) async{
+void loadMessages (int userId,ConversationScreenState screenState,int conversationId) async{
+  
+print(conversationId);
   var response = await ApiServices.request(
-    endpoint: '/api/v0.1/chatbot/messages',
+    
+    endpoint: '/api/v0.1/chat/conversations/$conversationId/messages',
     method: 'GET',
   );
-
+    
   if (response['success']) {
     screenState.setState(() {
-      List<dynamic> messages = response['data']['data'];
+      List<dynamic> messages = response['data']['data']['data'];
       ConversationScreen.messages.clear();
       for (var msg in messages) {
         ConversationScreen.messages.add({
           'text': msg['content'],
-          'isMe': msg['role'] == 'user' ? true : false,
+          'isMe': msg['sender_id']==userId ? true : false,
           'time': msg['created_at'],
         });
       }
       ConversationScreen.loadingMessages=false;
+      print('messages: ');
+      print(messages);
     });
   } else {
     print('Error loading messages: ${response['message']}');

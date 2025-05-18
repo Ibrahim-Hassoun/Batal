@@ -10,7 +10,6 @@ Future <List<dynamic>>  fetchChats(ChatsScreenState chatsScreenState) async{
 
     if(response['success']){
       chatsScreenState.loading = false;
-      print(response['data']['data']['original']['data']);
       return response['data']['data']['original']['data'];
     }
     else{

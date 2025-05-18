@@ -29,12 +29,17 @@ class ConversationScreen extends StatefulWidget{
 }
 
 class ConversationScreenState extends State<ConversationScreen>{
-
+  
   final TextEditingController _controller = TextEditingController();
   @override
   void initState() {
     
     super.initState();
+    loadConvoMessages();
+  }
+
+  void loadConvoMessages ()async{
+      loadMessages(widget.userId,this,widget.conversationId);
   }
   @override
   Widget build(BuildContext context) {
@@ -88,6 +93,7 @@ class ConversationScreenState extends State<ConversationScreen>{
               physics: BouncingScrollPhysics(),
               padding: EdgeInsets.all(16),
               itemCount: ConversationScreen.messages.length,
+              reverse: true,
               itemBuilder: (context, index) {
                 final message = ConversationScreen.messages[index];
                 final isMe = message['isMe'];
@@ -139,7 +145,7 @@ class ConversationScreenState extends State<ConversationScreen>{
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6),
             child: Row(
               children: [
-                IconButton(icon: Icon(Icons.refresh), onPressed: () {clearChat(this);}),
+                IconButton(icon: Icon(Icons.add), onPressed: () {clearChat(this);}),
                 Expanded(
                   child: TextField(
                     onChanged: (value) {
