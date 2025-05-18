@@ -68,23 +68,23 @@ class AuthProvider with ChangeNotifier {
     
       if(currentStep<6){
         currentStep++;
-      
+       notifyListeners();
     };
   }
   void decrementStep() {
     
       currentStep--;
-    
+      notifyListeners();
   }
   void setStep(step) {
    
       currentStep=step;
-    
+     notifyListeners();
   }
   void handleChange(key,value){
     
       data[key] = value;
-   
+       notifyListeners();
   }
 
 

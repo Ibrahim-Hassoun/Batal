@@ -27,7 +27,7 @@ class _AuthWidgetState extends State<AuthWidget> {
 
   @override
   Widget build(BuildContext context) {
-    AuthProvider authProvider = Provider.of<AuthProvider>(context, listen: true)
+    AuthProvider authProvider = Provider.of<AuthProvider>(context, listen: true);
     bool hasAccount = authProvider.hasAccount;
     int currentStep = authProvider.currentStep;
 
