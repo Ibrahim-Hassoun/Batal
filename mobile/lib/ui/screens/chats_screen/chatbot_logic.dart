@@ -97,7 +97,7 @@ void loadMessages(ChatbotConversationScreenState screenState) async{
           'isMe': msg['role'] == 'user' ? true : false,
           'time': msg['created_at'],
         });
-      };
+      }
       ChatbotConversationScreen.loadingMessages=false;
     });
   } else {

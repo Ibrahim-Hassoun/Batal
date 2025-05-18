@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/main.dart';
-import '../.../../../../core/remote/server.dart';
 import './chatbot_logic.dart';
 
 class ChatbotConversationScreen extends StatefulWidget {
@@ -21,7 +20,7 @@ class ChatbotConversationScreen extends StatefulWidget {
     
   ];
 
-  ChatbotConversationScreen({
+  const ChatbotConversationScreen({
     super.key,
     required this.chatId,
     required this.chatName,
@@ -42,7 +41,7 @@ class ChatbotConversationScreenState extends State<ChatbotConversationScreen> {
 
 
  
-TextEditingController _controller = TextEditingController();
+final TextEditingController _controller = TextEditingController();
 
 
 

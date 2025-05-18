@@ -1,5 +1,5 @@
  const validateMessage = (parsed) => {
-  if (!parsed.type || !parsed.to || !parsed.message) {
+  if (!parsed.type || !parsed.to || !parsed.message || !parsed.conversationId) {
     throw new Error('Invalid message format');
   }
   const parsedTo = parseInt(parsed.to, 10);

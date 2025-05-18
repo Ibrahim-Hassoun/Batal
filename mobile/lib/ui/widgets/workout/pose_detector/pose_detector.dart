@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import './camera_section.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/core/provider/pose_detector_provider.dart';

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/core/provider/pose_detector_provider.dart';
 import 'package:mobile/core/provider/workout_section_provider.dart';
 import 'package:mobile/main.dart';
 import 'package:provider/provider.dart';

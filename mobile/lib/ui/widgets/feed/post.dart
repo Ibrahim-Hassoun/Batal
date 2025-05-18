@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mobile/main.dart';
 import 'package:mobile/ui/screens/feedScreen/feed_logic.dart';
 import './post_button.dart';
-import '../../../lib/time_formatter/time_formatter.dart';
+import 'package:mobile/lib/time_formatter/time_formatter.dart';
 import '../../../core/remote/server.dart';
 
 class Post extends StatefulWidget {
@@ -213,13 +213,13 @@ class _PostState extends State<Post> {
             // GestureDetector(child: Text('test'),onTap: _toggleLike
             // ,),
           
-          this._isLiked?
+          _isLiked?
           PostButton(   key: const ValueKey('liked'),onClicked: (){removeReaction(context,widget.id);setState(() {
-            this._isLiked=!this._isLiked;
+            _isLiked=!_isLiked;
           });}, label: 'Like',icon: Icons.thumb_up,PostId: widget.id,isLiked: true,)
           :
           PostButton(key: const ValueKey('not_liked'),onClicked: (){addReaction(context,widget.id);setState(() {
-            this._isLiked=!this._isLiked;
+            _isLiked=!_isLiked;
           });}, label: 'Like',icon: Icons.thumb_up,PostId: widget.id,isLiked: false,),
         
 

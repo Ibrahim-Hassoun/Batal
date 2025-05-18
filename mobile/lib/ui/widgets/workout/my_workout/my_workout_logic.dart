@@ -10,7 +10,7 @@ Future<List<dynamic>> fetchSavedExercices() async{
       print (response['data']['data']);
       return response['data']['data'];
     }else{
-      throw new Exception('Could not load saved exercices');
+      throw Exception('Could not load saved exercices');
     }
 }
 
@@ -54,11 +54,11 @@ void removeExercice(ExerciseRowState exercicRowState) async{
   var response = await ApiServices.request(
     endpoint: '/api/v0.1/exercices/saved/${exercicRowState.id}',
     method: 'DELETE',
-    optimistic: ()=>exercicRowState.setState(() => {
-      exercicRowState.count=0
+    optimistic: ()=>exercicRowState.setState(() {
+      exercicRowState.count=0;
       }),
-    rollback: ()=>exercicRowState.setState(() => {
-      exercicRowState.count=prevCount
+    rollback: ()=>exercicRowState.setState(() {
+      exercicRowState.count=prevCount;
       }),
     );
     if(!response['success']){
@@ -72,11 +72,11 @@ void completeExercice(ExerciseRowState exercicRowState) async{
   var response = await ApiServices.request(
     endpoint: '/api/v0.1/exercices/saved/${exercicRowState.id}/complete',
     method: 'PATCH',
-    optimistic: ()=>exercicRowState.setState(() => {
-      exercicRowState.count=0
+    optimistic: ()=>exercicRowState.setState(() {
+      exercicRowState.count=0;
       }),
-    rollback: ()=>exercicRowState.setState(() => {
-      exercicRowState.count=prevCount
+    rollback: ()=>exercicRowState.setState(() {
+      exercicRowState.count=prevCount;
       }),
     );
 }
