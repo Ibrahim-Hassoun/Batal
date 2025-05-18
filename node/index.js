@@ -31,7 +31,15 @@ wss.on('connection', async (ws, req) => {
       const parsedTo = validateMessage(parsed); 
       const targets = users.get(parsedTo);
 
-      
+      const res = await axios.post(`${laravelURL}/api/v0.1/messages`, {
+        receiver_id: parsedTo,
+        content: parsed.message,
+      }, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+
+
       targets?.forEach((targetWs) => {
         if (targetWs?.readyState === 1) { 
           targetWs.send(JSON.stringify({

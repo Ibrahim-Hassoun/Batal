@@ -12,6 +12,11 @@ class Conversation extends Model
 {
     /** @use HasFactory<\Database\Factories\ConversationFactory> */
     use HasFactory;
+    protected $fillable = [
+        'user1_id',
+        'user2_id',
+        
+    ];
 
     public function messages()
     {
