@@ -31,7 +31,8 @@ wss.on('connection', async (ws, req) => {
       const parsedTo = validateMessage(parsed); 
       const targets = users.get(parsedTo);
 
-      const res = await axios.post(`${laravelURL}/api/v0.1/messages`, {
+      const res = await axios.post(`${laravelURL}/api/v0.1/chat/messages`, {
+        
         receiver_id: parsedTo,
         content: parsed.message,
       }, {
@@ -49,7 +50,7 @@ wss.on('connection', async (ws, req) => {
         }
       });
     } catch (err) {
-      ws.send(JSON.stringify({ error: err.message }));
+      ws.send(JSON.stringify({ error: err }));
     }
   });
 
