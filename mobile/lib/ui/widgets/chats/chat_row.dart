@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/core/provider/AuthProvider.dart';
 import 'package:mobile/lib/time_formatter/time_formatter.dart';
 import 'package:mobile/main.dart';
+import 'package:provider/provider.dart';
+import './conversation_screen.dart';
 
 class ChatRow extends StatefulWidget {
-  final int chatId;
+  final int conversationId;
   final String chatName;
   final String lastMessage;
   final String lastMessageTime;
@@ -12,7 +15,7 @@ class ChatRow extends StatefulWidget {
 
   const ChatRow({
     super.key,
-    required this.chatId,
+    required this.conversationId,
     required this.chatName,
     required this.lastMessage,
     required this.lastMessageTime,
@@ -28,6 +31,7 @@ class _ChatRowState extends State<ChatRow>
 {
   @override
   Widget build(BuildContext context) {
+    int userId = Provider.of<AuthProvider>(context,listen: true).user!['id'];
     return Padding(
       padding: const EdgeInsets.only(left: 16,right: 16),
       child: 
@@ -53,7 +57,16 @@ class _ChatRowState extends State<ChatRow>
             style: TextStyle(fontSize: 16, color: secondaryColor),
           ),
           onTap: () {
-            Navigator.pushNamed(context, '/chatbot-conversation', );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ConversationScreen(
+                  userId: userId,
+                  secondPartyId :widget.secondPartyId,
+                  conversationId: widget.conversationId,
+                ),
+              ),
+            );
           },
         ),
       

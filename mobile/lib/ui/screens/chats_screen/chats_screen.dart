@@ -34,7 +34,7 @@ class ChatsScreenState extends State<ChatsScreen> {
   @override
   Widget build(BuildContext context) {
     
-    int userId = Provider.of<AuthProvider>(context,listen: true).user!['id'];
+  
 
 
     return Scaffold(
@@ -84,7 +84,7 @@ class ChatsScreenState extends State<ChatsScreen> {
                  var convoData = conversations[index]; 
                  String name = convoData['otherUser']['first_name']+" "+ convoData['otherUser']['last_name'];
                  
-                 return  ChatRow(chatId: convoData['id'], secondPartyId: convoData['otherUser']['id'],chatName: name, lastMessage: convoData['latest_message']['content'], lastMessageTime: convoData['latest_message']['created_at'], chatImageUrl: convoData['otherUser']['profile_photo_path']);
+                 return  ChatRow(conversationId: convoData['id'], secondPartyId: convoData['otherUser']['id'],chatName: name, lastMessage: convoData['latest_message']['content'], lastMessageTime: convoData['latest_message']['created_at'], chatImageUrl: convoData['otherUser']['profile_photo_path']);
               },
             )
               
