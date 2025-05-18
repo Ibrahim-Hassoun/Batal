@@ -24,14 +24,10 @@ class Coaching{
    
     provider = context.read<PoseDetectorProvider>();
     String? area = provider!.detected_area;
-    
     String? exercice = provider!.detected_exercise;
   
     final areaEvaluators = evaluators[area];
-  
-
     final evaluator = areaEvaluators?[exercice];
-   
     evaluator?.evaluate(context,landmarks);
   }
 
