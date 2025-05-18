@@ -48,4 +48,10 @@ class AuthProvider with ChangeNotifier {
     _isLoggedIn = false;
     notifyListeners();
   }
+
+
+  //register section 
+
+
+  
 }
