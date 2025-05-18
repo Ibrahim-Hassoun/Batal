@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/main.dart';
-import '../.../../../../core/remote/server.dart';
 import './chatbot_logic.dart';
 
 class ChatbotConversationScreen extends StatefulWidget {

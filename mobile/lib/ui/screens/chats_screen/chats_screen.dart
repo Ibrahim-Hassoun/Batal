@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/core/provider/AuthProvider.dart';
-import 'package:mobile/core/provider/chat_provider.dart';
 import 'package:mobile/main.dart';
 import 'package:mobile/ui/widgets/chats/chat_row.dart';
-import 'package:provider/provider.dart';
 import './chats_screen_logic.dart';
 
 class ChatsScreen extends StatefulWidget {

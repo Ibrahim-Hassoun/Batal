@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mobile/main.dart';
 import 'package:mobile/ui/widgets/workout/leaderboard/leaderboard_logic.dart';
 import './player_row.dart';
-import './leaderboard.dart';
 
 class Leaderboard extends StatefulWidget {
   const Leaderboard({super.key});
