@@ -3,7 +3,7 @@ import http from 'http';
 import dotenv from 'dotenv';
 import { verifyToken } from './middlewares/verify_token.js';
 import { validateMessage } from './middlewares/validate_message.js';
-import axios from 'axios';
+import { storeMessage } from './middlewares/store_message.js';
 
 dotenv.config();
 const server = http.createServer();
@@ -31,15 +31,8 @@ wss.on('connection', async (ws, req) => {
       const parsedTo = validateMessage(parsed); 
       const targets = users.get(parsedTo);
 
-      const res = await axios.post(`${laravelURL}/api/v0.1/chat/messages`, {
-        
-        receiver_id: parsedTo,
-        content: parsed.message,
-      }, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
 
-
+      storeMessage(parsedTo,parsed.message,token,laravelURL)
 
       targets?.forEach((targetWs) => {
         if (targetWs?.readyState === 1) { 
