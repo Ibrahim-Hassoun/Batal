@@ -60,29 +60,6 @@ void sendMessage(ConversationScreenState screenState) async {
   }
 }
 
-void clearChat(ConversationScreenState screenState) async{
-  var response = await ApiServices.request(
-    endpoint: '/api/v0.1/chatbot/session',
-    method: 'DELETE',
-    optimistic: () {
-      screenState.setState(() {
-        ConversationScreen.messages.clear();
-      });
-    },
-    rollback: () {
-      screenState.setState(() {
-        ConversationScreen.messages.add({
-          'text': 'session not deleted',
-          'isMe': false,
-          'time': DateTime.now().toString(),
-        });
-      });
-    },
-  );
-  screenState.setState(() {
-    ConversationScreen.messages.clear();
-  });
-}
 
 void loadMessages (int userId,ConversationScreenState screenState,int conversationId) async{
   

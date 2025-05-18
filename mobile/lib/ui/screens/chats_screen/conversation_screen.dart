@@ -145,7 +145,7 @@ class ConversationScreenState extends State<ConversationScreen>{
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6),
             child: Row(
               children: [
-                IconButton(icon: Icon(Icons.add), onPressed: () {clearChat(this);}),
+                IconButton(icon: Icon(Icons.add), onPressed: () {}),
                 Expanded(
                   child: TextField(
                     onChanged: (value) {
