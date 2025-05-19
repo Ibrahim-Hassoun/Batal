@@ -6,15 +6,16 @@ import 'package:provider/provider.dart';
 import '../../../core/provider/AuthProvider.dart'; 
 
 class Login extends StatelessWidget {
-  final Function incrementStep;
-  final Function decrementStep;
-  final Function handleChange;
-  final Map data;
 
-  const Login({super.key,required this.incrementStep,required this.decrementStep,required this.data,required this.handleChange});
+  const Login({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    AuthProvider authProvider= Provider.of<AuthProvider>(context,listen: true);
+    final Function handleChange=authProvider.handleChange;
+    final Map data = authProvider.data;
+
     return Container(
         alignment: Alignment.topCenter,
         padding: const EdgeInsets.only(top: 110),
@@ -24,7 +25,7 @@ class Login extends StatelessWidget {
             children: [
               CircleAvatar(
                 backgroundImage: AssetImage('assets/logo.png'),
-                radius: 24,  
+                radius: 48,  
               ),
               const SizedBox(height: 56),
               PlatformText(

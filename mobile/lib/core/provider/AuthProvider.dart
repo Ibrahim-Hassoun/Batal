@@ -48,4 +48,70 @@ class AuthProvider with ChangeNotifier {
     _isLoggedIn = false;
     notifyListeners();
   }
+
+
+  //register section 
+  
+  int currentStep = 1;
+  final data = {
+    'email': '',
+    'password': '',
+    'confirm_password': '',
+    'first_name': '',
+    'last_name': '',
+    'date_of_birth': '',
+    'username': '',
+    'fitness_level':'',
+    'fitness_goal':'',
+    'injuries':'',
+    'medical_conditions':'',
+    'allergies':'',
+    'dietary_preferences':'',
+    
+  };
+  
+  void incrementStep() {
+    
+      if(currentStep<8){
+        currentStep++;
+       notifyListeners();
+    };
+  }
+  void decrementStep() {
+    
+      currentStep--;
+      notifyListeners();
+  }
+  void setStep(step) {
+   
+      currentStep=step;
+     notifyListeners();
+  }
+  void handleChange(key,value){
+    
+      data[key] = value;
+       notifyListeners();
+  }
+
+  void register() async {
+  print(data);
+  final response = await ApiServices.request(
+    endpoint: '/api/v0.1/register',
+    method: 'POST',
+    body: data,
+  );
+
+  if (response['success']) {
+    _isLoggedIn = true;
+   _access_token = response['data']['data']['token'];
+   _user = response['data']['data']['user'];
+   ApiServices.access_token=response['data']['data']['token'];
+    print('User Data: ${response['data']}');
+    print('token is: $_access_token');
+  } else {
+    print('Error: ${response['message']}');
+  }
+
+  notifyListeners();
+}
 }
