@@ -16,7 +16,7 @@ class Register8 extends StatelessWidget {
   Widget build(BuildContext context) {
     
     AuthProvider authProvider= Provider.of<AuthProvider>(context,listen: true);
-    final Function incrementStep=authProvider.incrementStep;
+    final Function register=authProvider.register;
     final Function decrementStep=authProvider.decrementStep;
     final Function handleChange=authProvider.handleChange;
     final Map data = authProvider.data;
@@ -39,7 +39,7 @@ class Register8 extends StatelessWidget {
                   SizedBox(height: 16),
                   ScreenWideElevatedButton(label: 'Back',onPressed:(){decrementStep();},backgroundColor: bg_gray,foregroundColor: secondaryColor),
                   SizedBox(height: 16),
-                  ScreenWideElevatedButton(label: 'Next',onPressed:(){incrementStep();},backgroundColor: secondaryColor,foregroundColor: tertiaryColor),
+                  ScreenWideElevatedButton(label: 'Register',onPressed:(){register();},backgroundColor: secondaryColor,foregroundColor: tertiaryColor),
                   ],
               ),
               ) 

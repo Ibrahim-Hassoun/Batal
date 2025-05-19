@@ -59,7 +59,7 @@ class AuthProvider with ChangeNotifier {
     'confirm_password': '',
     'first_name': '',
     'last_name': '',
-    'birthday': '',
+    'date_of_birth': '',
     'username': '',
     'fitness_level':'',
     'fitness_goal':'',
