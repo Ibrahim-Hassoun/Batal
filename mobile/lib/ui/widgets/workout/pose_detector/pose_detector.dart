@@ -19,12 +19,15 @@ class PoseDetectorTab extends StatefulWidget {
 
 class _PoseDetectorState extends State<PoseDetectorTab> {
   
-
+  double _opacity = 1;
   double _size = 90.0;
 
   void _onTapDown(TapDownDetails details) {
     setState(() {
       _size = 75.0;
+      Future.delayed(const Duration(seconds: 3),(){
+        _opacity = 0;
+      });
     });
   }
 
@@ -40,6 +43,9 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
     });
   }
 
+  void resetOpacity(){
+    _opacity=1;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,34 +89,41 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
               return Stack(
                 children: [
                   Container(color: secondaryColor),
-                  Center(
-                    child: SizedBox(
-                      width: screenWidth,
-                      height: height,
-                      child: CameraSection(),
+                  GestureDetector(
+                    onTap:  resetOpacity,
+                    child: Center(
+                      child: SizedBox(
+                        width: screenWidth,
+                        height: height,
+                        child: CameraSection(),
+                      ),
+                    
                     ),
-
                   ),
                    Align(
                   alignment: Alignment.center,
-                  child: GestureDetector(
-                           onTap: () {
+                  child: AnimatedOpacity(
+                          opacity: _opacity, 
+                          duration: const Duration(milliseconds: 2000),
+                          child: GestureDetector(
+                            onTap: () {
                               provider.toggleRecording(context);
                             },
-                          onTapDown: _onTapDown,
-                          onTapUp: _onTapUp,
-                          onTapCancel: _onTapCancel,
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 100),
-                            width: _size,
-                            height: _size,
-                            decoration: const BoxDecoration(
-                              color: primaryColor,
-                              shape: BoxShape.circle,
+                            onTapDown: _onTapDown,
+                            onTapUp: _onTapUp,
+                            onTapCancel: _onTapCancel,
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 100),
+                              width: _size,
+                              height: _size,
+                              decoration: const BoxDecoration(
+                                color: primaryColor,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(Icons.pause, color: Colors.white),
                             ),
-                            child: const Icon(Icons.pause, color: Colors.white),
                           ),
-                        )
+                        ),
                 ),
                 ],
               );
@@ -130,7 +143,12 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
                   alignment: Alignment.center,
                   child: GestureDetector(
                            onTap: () {
+                             setState((){
+                                _opacity=1;
+                              });
                               provider.toggleRecording(context);
+                             
+                              
                             },
                           onTapDown: _onTapDown,
                           onTapUp: _onTapUp,
