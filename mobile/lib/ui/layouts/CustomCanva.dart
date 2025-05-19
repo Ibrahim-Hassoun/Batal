@@ -9,7 +9,7 @@ class CustomCanva extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final pointPaint = Paint()
-      ..color = Colors.blue
+      ..color = const Color.fromARGB(255, 255, 0, 0)
       ..style = PaintingStyle.fill;
 
     final linePaint = Paint()
@@ -23,7 +23,7 @@ class CustomCanva extends CustomPainter {
       final y = entry.value['y'];
       final likelihood = entry.value['likelihood'];
       if (x != null && y != null && likelihood != null && likelihood > 0.7) {
-        canvas.drawCircle(Offset(x, y), 2.0, pointPaint);
+        canvas.drawCircle(Offset(y, x), 2.0, pointPaint);
       }
       }
 

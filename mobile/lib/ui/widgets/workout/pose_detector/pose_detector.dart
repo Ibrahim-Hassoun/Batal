@@ -89,17 +89,34 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
               return Stack(
                 children: [
                   Container(color: secondaryColor),
-                  GestureDetector(
-                    onTap:  resetOpacity,
-                    child: Center(
-                      child: SizedBox(
-                        width: screenWidth,
-                        height: height,
-                        child: CameraSection(),
-                      ),
-                    
-                    ),
-                  ),
+                 GestureDetector(
+  onTap: resetOpacity,
+  child: Container(
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.red, width: 2), // 🔴 Red border
+    ),
+    child: Center(
+      child: SizedBox(
+        width: screenWidth,
+        height: height,
+        child: CameraSection(),
+      ),
+    ),
+  ),
+),
+
+                 Align(
+  alignment: Alignment.center,
+  child: Container(
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.green, width: 2), // 🟢 Green border
+    ),
+    child: CustomPaint(
+      painter: landmarks.isNotEmpty ? CustomCanva(landmarks) : null,
+    ),
+  ),
+),
+
                    Align(
                   alignment: Alignment.center,
                   child: AnimatedOpacity(
