@@ -46,28 +46,42 @@ class MlPoseDetectorFunctions {
 
   
   InputImage? _inputImageFromCameraImage(CameraImage image) {
+  print('we are now inside inputImageFromCamera method');
   final camera =  this.camera!;
   final sensorOrientation = camera.sensorOrientation;
+  print('sensorOrientaion is: ');
+  print(sensorOrientation);
+  // InputImageRotation? rotation;
 
-  InputImageRotation? rotation;
+  //  if (Platform.isIOS) {
+  //   rotation = InputImageRotationValue.fromRawValue(sensorOrientation);
+  // } else if (Platform.isAndroid) {
+  //    //for testing on laptop
+     
+  //   final fakeDeviceOrientation = DeviceOrientation.landscapeLeft;
+  //   var rotationCompensation=_orientations[fakeDeviceOrientation];
 
-   if (Platform.isIOS) {
-    rotation = InputImageRotationValue.fromRawValue(sensorOrientation);
-  } else if (Platform.isAndroid) {
-    var rotationCompensation =
-        _orientations[poseDetectorProvider.controller!.value.deviceOrientation];
-    if (rotationCompensation == null) return null;
-    if (camera.lensDirection == CameraLensDirection.front) {
-      // front-facing
-      rotationCompensation = (sensorOrientation + rotationCompensation) % 360;
-    } else {
-      // back-facing
-      rotationCompensation =
-          (sensorOrientation - rotationCompensation + 360) % 360;
-    }
-    rotation = InputImageRotationValue.fromRawValue(rotationCompensation);
-  }
-  if (rotation == null) return null;
+  //   //on real application
+
+  //   // var rotationCompensation =
+  //   //     _orientations[poseDetectorProvider.controller!.value.deviceOrientation];
+       
+  //   if (rotationCompensation == null) return null;
+  //   if (camera.lensDirection == CameraLensDirection.front) {
+  //     // front-facing
+  //     print('rotation compensation before: ');
+  //     print(rotationCompensation);
+  //     rotationCompensation = (sensorOrientation + rotationCompensation) % 360;
+  //     print('rotation compensation after: ');
+  //     print(rotationCompensation);
+  //   } else {
+  //     // back-facing
+  //     rotationCompensation =
+  //         (sensorOrientation - rotationCompensation + 360) % 360;
+  //   }
+  //   rotation = InputImageRotationValue.fromRawValue(rotationCompensation);
+  // }
+  // if (rotation == null) return null;
 
   final format = InputImageFormatValue.fromRawValue(image.format.raw);
 
@@ -84,7 +98,7 @@ class MlPoseDetectorFunctions {
     bytes: plane.bytes,
      metadata: InputImageMetadata(
       size: Size(image.width.toDouble(), image.height.toDouble()),
-      rotation: rotation, // used only in Android
+      rotation: InputImageRotation.rotation0deg, // used only in Android
       format: format, // used only in iOS
       bytesPerRow: plane.bytesPerRow, // used only in iOS
     ),

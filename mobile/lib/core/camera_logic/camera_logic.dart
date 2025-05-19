@@ -53,7 +53,7 @@ Future<void> initializeCamera(PoseDetectorProvider poseDetectorProvider) async {
       if (now.difference(lastProcessed).inMilliseconds >= 150) {
         lastProcessed = now;
         List<Map<String, Map<String, double>>> newLandmark =await mlPoseDetectorFunctions.processCameraImage(image, context);
-        
+        print(newLandmark);
         landmarks.add(newLandmark);
         Coaching().evaluate( context,landmarks);
       }
