@@ -32,9 +32,9 @@ class Register3 extends StatelessWidget {
               child:Padding(padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                 children: [
-                  LabeledInput(label: "First Name", placeholder: "John",dataKey:'firstName',value:data['firstName'],handleChange:handleChange),
+                  LabeledInput(label: "First Name", placeholder: "John",dataKey:'first_name',value:data['first_name'],handleChange:handleChange),
                   SizedBox(height: 16),
-                  LabeledInput(label: "Last Name", placeholder: "Doe",dataKey:'lastName',value:data['lastName'],handleChange:handleChange),
+                  LabeledInput(label: "Last Name", placeholder: "Doe",dataKey:'last_name',value:data['last_name'],handleChange:handleChange),
                   SizedBox(height: 16),
                   ScreenWideElevatedButton(label: 'Back',onPressed:(){decrementStep();},backgroundColor: bg_gray,foregroundColor: secondaryColor),
                   SizedBox(height: 16),

@@ -56,12 +56,19 @@ class AuthProvider with ChangeNotifier {
   final data = {
     'email': '',
     'password': '',
-    'confirmPassword': '',
-    'firstName': '',
-    'lastName': '',
+    'confirm_password': '',
+    'first_name': '',
+    'last_name': '',
     'birthday': '',
     'username': '',
-    
+    'fitness_level':'',
+    'fitness_goal':'',
+    'fitness_interests':'',
+    'injuries':'',
+    'medical_conditions':'',
+    'allergies':'',
+    'dietary_preferences':'',
+    'dietery_restrictions':''
   };
   
   void incrementStep() {
