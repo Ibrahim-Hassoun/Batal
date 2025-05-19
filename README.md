@@ -32,6 +32,12 @@
     <img src="./readme/system-design/ER-diagram.png" width="100%"/>
 </p>
 
+### HTTP Request Lifecycle
+
+<p >
+    <img src="./readme/system-design/request flow.png" width="100%"/>
+</p>
+
 <br><br>
 
 <!-- Project Highlights -->
