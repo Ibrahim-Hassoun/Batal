@@ -7,13 +7,13 @@ import '../../layouts/labeled_input.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 
-class Register4 extends StatelessWidget {
-
-  const Register4({super.key});
+class Register7 extends StatelessWidget {
+  
+  const Register7({super.key});
 
   @override
   Widget build(BuildContext context) {
-
+    
     AuthProvider authProvider= Provider.of<AuthProvider>(context,listen: true);
     final Function incrementStep=authProvider.incrementStep;
     final Function decrementStep=authProvider.decrementStep;
@@ -24,16 +24,17 @@ class Register4 extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 110),
-          PlatformText("Insert Your Date of Birth"),
-          const SizedBox(height: 160,),
+          PlatformText("About your medical history"),
+          const SizedBox(height: 160),
           Expanded(
             child: Center(
               
               child:Padding(padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                 children: [
-                  LabeledInput(label: "Birthdate", placeholder: "1/1/1999",dataKey:'date_of_birth',value:data['date_of_birth'],handleChange:handleChange,keyboardType: TextInputType.datetime,),
-                  
+                  LabeledInput(label: "Injuries", placeholder: "Ankle sprain",dataKey:'injuries',value:data['injuries'],handleChange:handleChange),
+                  SizedBox(height: 16),
+                  LabeledInput(label: "Medical conditions", placeholder: "Asthma",dataKey:'medical_conditions',value:data['medical_conditions'],handleChange:handleChange),
                   SizedBox(height: 16),
                   ScreenWideElevatedButton(label: 'Back',onPressed:(){decrementStep();},backgroundColor: bg_gray,foregroundColor: secondaryColor),
                   SizedBox(height: 16),

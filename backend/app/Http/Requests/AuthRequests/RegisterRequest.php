@@ -29,7 +29,7 @@ class RegisterRequest extends RootRequest
             'date_of_birth' => 'required|date',
             'username' => 'required|string|max:15|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:8',
            
         ];
     }
@@ -46,7 +46,7 @@ class RegisterRequest extends RootRequest
             'email.unique' => 'The email address has already been taken.',
             'password.required' => 'The password is required.',
             'password.min' => 'The password must be at least 8 characters.',
-            'password.confirmed' => 'The password confirmation does not match.',
+            
         ];
     }
 }

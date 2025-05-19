@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/core/provider/AuthProvider.dart';
 import 'package:mobile/main.dart';
 import 'package:mobile/ui/atoms/screen_wide_elevated_button.dart';
+import 'package:provider/provider.dart';
 import '../../layouts/labeled_input.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 
 class Register2 extends StatelessWidget {
-  final Function incrementStep;
-  final Function decrementStep;
-   final Function handleChange;
-  final Map data;
-
-  const Register2({super.key,required this.incrementStep,required this.decrementStep,required this.data,required this.handleChange});
+ 
+  const Register2({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider= Provider.of<AuthProvider>(context,listen: true);
+    final Function incrementStep=authProvider.incrementStep;
+    final Function decrementStep=authProvider.decrementStep;
+    final Function handleChange=authProvider.handleChange;
+    final Map data = authProvider.data;
+    
     return Expanded(
       child: Column(
         children: [
@@ -29,7 +33,7 @@ class Register2 extends StatelessWidget {
                 children: [
                   LabeledInput(label: "Password", placeholder: "********",dataKey:'password',value:data['password'],handleChange:handleChange,type: 'password'),
                   SizedBox(height: 16),
-                  LabeledInput(label: "Password Confirmation", placeholder: "********",dataKey:'confirmPassword',value:data['confirmPassword'],handleChange:handleChange,type: 'password',),
+                  LabeledInput(label: "Password Confirmation", placeholder: "********",dataKey:'confirm_password',value:data['confirm_password'],handleChange:handleChange,type: 'password',),
                   SizedBox(height: 16),
                   ScreenWideElevatedButton(label: 'Back',onPressed:(){decrementStep();},backgroundColor: bg_gray,foregroundColor: secondaryColor),
                   SizedBox(height: 16),
