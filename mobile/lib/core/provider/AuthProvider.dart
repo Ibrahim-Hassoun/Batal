@@ -93,5 +93,25 @@ class AuthProvider with ChangeNotifier {
        notifyListeners();
   }
 
+  void register() async {
+  print(data);
+  final response = await ApiServices.request(
+    endpoint: '/api/v0.1/register',
+    method: 'POST',
+    body: data,
+  );
 
+  if (response['success']) {
+    _isLoggedIn = true;
+   _access_token = response['data']['data']['token'];
+   _user = response['data']['data']['user'];
+   ApiServices.access_token=response['data']['data']['token'];
+    print('User Data: ${response['data']}');
+    print('token is: $_access_token');
+  } else {
+    print('Error: ${response['message']}');
+  }
+
+  notifyListeners();
+}
 }
