@@ -6,6 +6,7 @@ import 'package:mobile/ui/widgets/auth/register_3.dart';
 import 'package:mobile/ui/widgets/auth/register_4.dart';
 import 'package:mobile/ui/widgets/auth/register_5.dart';
 import 'package:mobile/ui/widgets/auth/register_6.dart';
+import 'package:mobile/ui/widgets/auth/register_7.dart';
 // import 'package:mobile/ui/widgets/auth/register_code.dart';
 import 'package:provider/provider.dart';
 import '../../../core/provider/AuthProvider.dart'; 
@@ -39,7 +40,8 @@ class _AuthWidgetState extends State<AuthWidget> {
             currentStep==3?Register3():
             currentStep==4?Register4():
             currentStep==5?Register5():
-            currentStep==6?Register6():null
+            currentStep==6?Register6():
+            currentStep==7?Register7(): null
                 :
             hasAccount? Login():null
     );

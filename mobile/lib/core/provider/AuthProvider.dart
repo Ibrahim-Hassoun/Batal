@@ -63,17 +63,16 @@ class AuthProvider with ChangeNotifier {
     'username': '',
     'fitness_level':'',
     'fitness_goal':'',
-    'fitness_interests':'',
     'injuries':'',
     'medical_conditions':'',
     'allergies':'',
     'dietary_preferences':'',
-    'dietery_restrictions':''
+    
   };
   
   void incrementStep() {
     
-      if(currentStep<6){
+      if(currentStep<8){
         currentStep++;
        notifyListeners();
     };
