@@ -1,3 +1,5 @@
+import 'package:camera/camera.dart';
+
 import './camera_section.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/core/provider/pose_detector_provider.dart';
@@ -17,8 +19,33 @@ class PoseDetectorTab extends StatefulWidget {
 
 class _PoseDetectorState extends State<PoseDetectorTab> {
   
+
+  double _size = 90.0;
+
+  void _onTapDown(TapDownDetails details) {
+    setState(() {
+      _size = 75.0;
+    });
+  }
+
+  void _onTapUp(TapUpDetails details) {
+    setState(() {
+      _size = 90.0;
+    });
+  }
+
+  void _onTapCancel() {
+    setState(() {
+      _size = 90.0;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    PoseDetectorProvider workoutProvider = Provider.of<PoseDetectorProvider>(context,listen: true);
+    CameraController? controller = workoutProvider.controller;
+
     PoseDetectorProvider provider = Provider.of<PoseDetectorProvider>(context,listen:true);
     bool isRecording = provider.is_Recording;
     
@@ -44,48 +71,101 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
             
             child:  isRecording
             ? Padding(
-              padding: const EdgeInsets.only(left: 32,right: 32),
-              child: Stack(
-                children: [
-                CameraSection(), // The camera image
-               
-                
-                  Padding(
-                    padding: const EdgeInsets.only(left: 32,right: 32),
-                    child: Positioned.fill(
-                    child: CustomPaint(
-                      painter: landmarks.isNotEmpty? CustomCanva(landmarks):null,
-                    ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          : Padding(
             padding: const EdgeInsets.only(left: 32,right: 32),
-            child: Container(
-              color: Colors.grey[300],
-              child: Center(
-                child: Text("Camera not initialized"),
-              ),
+            child:LayoutBuilder(
+            builder: (context, constraints) {
+              final screenWidth = constraints.maxWidth;
+              final cameraAspectRatio = controller!.value.aspectRatio;
+
+              // Calculate height based on aspect ratio
+              final height = screenWidth * cameraAspectRatio;
+
+              return Stack(
+                children: [
+                  Container(color: secondaryColor),
+                  Center(
+                    child: SizedBox(
+                      width: screenWidth,
+                      height: height,
+                      child: CameraSection(),
+                    ),
+
+                  ),
+                   Align(
+                  alignment: Alignment.center,
+                  child: GestureDetector(
+                           onTap: () {
+                              provider.toggleRecording(context);
+                            },
+                          onTapDown: _onTapDown,
+                          onTapUp: _onTapUp,
+                          onTapCancel: _onTapCancel,
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 100),
+                            width: _size,
+                            height: _size,
+                            decoration: const BoxDecoration(
+                              color: primaryColor,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(Icons.pause, color: Colors.white),
+                          ),
+                        )
+                ),
+                ],
+              );
+            },
+          ),
+          )
+            : Padding(
+            padding: const EdgeInsets.only(left: 32,right: 32),
+            child: Stack(
+              children: [
+                Container(
+                  color: secondaryColor,
+                  
+                ),
+               
+                 Align(
+                  alignment: Alignment.center,
+                  child: GestureDetector(
+                           onTap: () {
+                              provider.toggleRecording(context);
+                            },
+                          onTapDown: _onTapDown,
+                          onTapUp: _onTapUp,
+                          onTapCancel: _onTapCancel,
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 100),
+                            width: _size,
+                            height: _size,
+                            decoration: const BoxDecoration(
+                              color: primaryColor,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(Icons.play_arrow, color: Colors.white),
+                          ),
+                        )
+                ),
+              ],
             ),
           ),
         ),
        
         SizedBox(height: 24,),
        
-        Padding(
-          padding: const EdgeInsets.only(left: 108,right: 108),
-          child: ScreenWideElevatedButton(
-            onPressed: () {
-              provider.toggleRecording(context);
-            },
-            label: isRecording?'Stop':'Start',
-            backgroundColor: isRecording?secondaryColor: primaryColor,
-            foregroundColor: tertiaryColor,
+        // Padding(
+        //   padding: const EdgeInsets.only(left: 108,right: 108),
+        //   child: ScreenWideElevatedButton(
+        //     onPressed: () {
+        //       provider.toggleRecording(context);
+        //     },
+        //     label: isRecording?'Stop':'Start',
+        //     backgroundColor: isRecording?secondaryColor: primaryColor,
+        //     foregroundColor: tertiaryColor,
             
-          ),
-        ),
+        //   ),
+        // ),
          Text(feedback),
         
       ],
