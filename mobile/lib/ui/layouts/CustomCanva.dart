@@ -3,11 +3,21 @@ import 'package:flutter/material.dart';
 class CustomCanva extends CustomPainter {
 
   final List<Map<String, Map<String, double>>> landmarks;
-
-  CustomCanva(this.landmarks);
+  final double aspectRatio;
+  CustomCanva(this.landmarks,this.aspectRatio);
 
   @override
   void paint(Canvas canvas, Size size) {
+    // Top-left corner
+canvas.drawCircle(Offset(0, 0), 5, Paint()..color = const Color.fromARGB(255, 0, 255, 89));
+canvas.drawCircle(Offset(size.width, 0), 5, Paint()..color = const Color.fromARGB(255, 0, 255, 89));
+canvas.drawCircle(Offset(0, size.height), 5, Paint()..color = const Color.fromARGB(255, 0, 255, 89));
+canvas.drawCircle(Offset(size.width, size.height), 5, Paint()..color = const Color.fromARGB(255, 0, 255, 89));
+
+
+// Bottom-right corner
+// canvas.drawCircle(Offset(size.width, size.height), 5, Paint()..color = Colors.green);
+
     final pointPaint = Paint()
       ..color = const Color.fromARGB(255, 255, 0, 0)
       ..style = PaintingStyle.fill;
@@ -19,11 +29,19 @@ class CustomCanva extends CustomPainter {
     for (final landmarkSet in landmarks) {
       // Draw all points
       for (final entry in landmarkSet.entries) {
+        if( entry.value['x'] !=null){
+          entry.value['x'] = entry.value['x']!*aspectRatio;
+        }
+        if( entry.value['y'] !=null){
+          entry.value['y'] = entry.value['y']!*aspectRatio;
+        }
+      
+
       final x = entry.value['x'];
       final y = entry.value['y'];
       final likelihood = entry.value['likelihood'];
       if (x != null && y != null && likelihood != null && likelihood > 0.7) {
-        canvas.drawCircle(Offset(y, x), 2.0, pointPaint);
+        canvas.drawCircle(Offset(y , x), 2.0, pointPaint);
       }
       }
 
