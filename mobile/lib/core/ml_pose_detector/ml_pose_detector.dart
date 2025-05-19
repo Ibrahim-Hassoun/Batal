@@ -116,7 +116,7 @@ class MlPoseDetectorFunctions {
       Map<String, Map<String, double>> landmarksMap = {};
 
       pose.landmarks.forEach((type, landmark) {
-        if (type.name == 'rightWrist' || type.name == 'rightElbow' || type.name == 'rightShoulder'){
+        if (type.name == 'rightWrist' || type.name == 'rightElbow' || type.name == 'rightShoulder' || type.name == 'leftWrist' ){
         landmarksMap[type.name] = {
           'x': landmark.x,
           'y': landmark.y,

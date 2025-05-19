@@ -23,7 +23,7 @@ canvas.drawCircle(Offset(size.width, size.height), 5, Paint()..color = const Col
       ..style = PaintingStyle.fill;
 
     final linePaint = Paint()
-      ..color = Colors.blue
+      ..color = const Color.fromARGB(255, 98, 255, 0)
       ..strokeWidth = 1.0;
 
     for (final landmarkSet in landmarks) {
@@ -120,40 +120,40 @@ canvas.drawCircle(Offset(size.width, size.height), 5, Paint()..color = const Col
       // }
       // if (hasHighLikelihood(landmarkSet['rightEye']) && hasHighLikelihood(landmarkSet['rightEar'])) {
       //   drawLineBetween('rightEye', 'rightEar');
-      }
+      // }
       // Hands (optional, if available)
-    //   if (hasHighLikelihood(landmarkSet['rightWrist']) && hasHighLikelihood(landmarkSet['rightThumb'])) {
-    //     drawLineBetween('rightWrist', 'rightThumb');
-    //   }
-    //   if (hasHighLikelihood(landmarkSet['rightWrist']) && hasHighLikelihood(landmarkSet['rightIndex'])) {
-    //     drawLineBetween('rightWrist', 'rightIndex');
-    //   }
-    //   if (hasHighLikelihood(landmarkSet['rightWrist']) && hasHighLikelihood(landmarkSet['rightPinky'])) {
-    //     drawLineBetween('rightWrist', 'rightPinky');
-    //   }
-    //   if (hasHighLikelihood(landmarkSet['leftWrist']) && hasHighLikelihood(landmarkSet['leftThumb'])) {
-    //     drawLineBetween('leftWrist', 'leftThumb');
-    //   }
-    //   if (hasHighLikelihood(landmarkSet['leftWrist']) && hasHighLikelihood(landmarkSet['leftIndex'])) {
-    //     drawLineBetween('leftWrist', 'leftIndex');
-    //   }
-    //   if (hasHighLikelihood(landmarkSet['leftWrist']) && hasHighLikelihood(landmarkSet['leftPinky'])) {
-    //     drawLineBetween('leftWrist', 'leftPinky');
-    //   }
-    //   // Feet (optional, if available)
-    //   if (hasHighLikelihood(landmarkSet['rightAnkle']) && hasHighLikelihood(landmarkSet['rightHeel'])) {
-    //     drawLineBetween('rightAnkle', 'rightHeel');
-    //   }
-    //   if (hasHighLikelihood(landmarkSet['rightAnkle']) && hasHighLikelihood(landmarkSet['rightFootIndex'])) {
-    //     drawLineBetween('rightAnkle', 'rightFootIndex');
-    //   }
-    //   if (hasHighLikelihood(landmarkSet['leftAnkle']) && hasHighLikelihood(landmarkSet['leftHeel'])) {
-    //     drawLineBetween('leftAnkle', 'leftHeel');
-    //   }
-    //   if (hasHighLikelihood(landmarkSet['leftAnkle']) && hasHighLikelihood(landmarkSet['leftFootIndex'])) {
-    //     drawLineBetween('leftAnkle', 'leftFootIndex');
-    //   }
-    // }
+      // if (hasHighLikelihood(landmarkSet['rightWrist']) && hasHighLikelihood(landmarkSet['rightThumb'])) {
+      //   drawLineBetween('rightWrist', 'rightThumb');
+      // }
+      // if (hasHighLikelihood(landmarkSet['rightWrist']) && hasHighLikelihood(landmarkSet['rightIndex'])) {
+      //   drawLineBetween('rightWrist', 'rightIndex');
+      // }
+      // if (hasHighLikelihood(landmarkSet['rightWrist']) && hasHighLikelihood(landmarkSet['rightPinky'])) {
+      //   drawLineBetween('rightWrist', 'rightPinky');
+      // }
+      // if (hasHighLikelihood(landmarkSet['leftWrist']) && hasHighLikelihood(landmarkSet['leftThumb'])) {
+      //   drawLineBetween('leftWrist', 'leftThumb');
+      // }
+      // if (hasHighLikelihood(landmarkSet['leftWrist']) && hasHighLikelihood(landmarkSet['leftIndex'])) {
+      //   drawLineBetween('leftWrist', 'leftIndex');
+      // }
+      // if (hasHighLikelihood(landmarkSet['leftWrist']) && hasHighLikelihood(landmarkSet['leftPinky'])) {
+      //   drawLineBetween('leftWrist', 'leftPinky');
+      // }
+      // Feet (optional, if available)
+      // if (hasHighLikelihood(landmarkSet['rightAnkle']) && hasHighLikelihood(landmarkSet['rightHeel'])) {
+      //   drawLineBetween('rightAnkle', 'rightHeel');
+      // }
+      // if (hasHighLikelihood(landmarkSet['rightAnkle']) && hasHighLikelihood(landmarkSet['rightFootIndex'])) {
+      //   drawLineBetween('rightAnkle', 'rightFootIndex');
+      // }
+      // if (hasHighLikelihood(landmarkSet['leftAnkle']) && hasHighLikelihood(landmarkSet['leftHeel'])) {
+      //   drawLineBetween('leftAnkle', 'leftHeel');
+      // }
+      // if (hasHighLikelihood(landmarkSet['leftAnkle']) && hasHighLikelihood(landmarkSet['leftFootIndex'])) {
+      //   drawLineBetween('leftAnkle', 'leftFootIndex');
+      // }
+    }
   }
 
   @override
