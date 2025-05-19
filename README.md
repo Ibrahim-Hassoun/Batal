@@ -40,7 +40,6 @@
 ### Experience the magic
 
 - AI-powered pose detector with live feedback for each exercice.
-- Traffic detector using sensors to get live feedback on gym traffic level.
 - AI assistant that gives personalized advice based on previous interactions and profile.
 - Recommendation system for diet/workout plans.
 - Feed section that allows the abtal to upload posts and stories and interact with each others
