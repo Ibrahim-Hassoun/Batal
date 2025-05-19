@@ -8,41 +8,34 @@ import '../../layouts/labeled_input.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 
-class Register6 extends StatelessWidget {
-
-  const Register6({super.key});
+class Register8 extends StatelessWidget {
+  
+  const Register8({super.key});
 
   @override
   Widget build(BuildContext context) {
-
+    
     AuthProvider authProvider= Provider.of<AuthProvider>(context,listen: true);
     final Function incrementStep=authProvider.incrementStep;
     final Function decrementStep=authProvider.decrementStep;
     final Function handleChange=authProvider.handleChange;
-    
     final Map data = authProvider.data;
-    
+
     return Expanded(
       child: Column(
         children: [
           const SizedBox(height: 110),
-          PlatformText("Choose your fitness level between 1\n (lowest) and 3 (highest)\n and your fitness goal",style: TextStyle(),  textAlign: TextAlign.center,),
-          const SizedBox(height: 160,),
+          PlatformText("About your medical history"),
+          const SizedBox(height: 160),
           Expanded(
             child: Center(
               
               child:Padding(padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      CustomDropdownButton(label: 'Fitness level', onChanged: (value){handleChange('fitness_level',value);}, items: ['1','2','3']),
-                      CustomDropdownButton(label: 'Fitness goal', onChanged: (value){handleChange('fitness_goal',value);}, items: ['1','2','3']),
-                    ],
-                  ),
-                 
-                  
+                  LabeledInput(label: "Allergies", placeholder: "Nut allergies",dataKey:'allergies',value:data['allergies'],handleChange:handleChange),
+                  SizedBox(height: 16),
+                  CustomDropdownButton(label: 'Dietary preferences', onChanged: (value){handleChange('dietary_preferences',value);}, items: ['none','vegan','vegetarian','keto']),
                   SizedBox(height: 16),
                   ScreenWideElevatedButton(label: 'Back',onPressed:(){decrementStep();},backgroundColor: bg_gray,foregroundColor: secondaryColor),
                   SizedBox(height: 16),
