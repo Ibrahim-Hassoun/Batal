@@ -82,10 +82,22 @@
 <!-- Deployment -->
 <img src="./readme/title7.svg"/>
 
-### Add Title Here
+### CI/CD Workflows
 
-- Description here.
+- We start developing a new feature on a local branch
+- We push said branch on its remote counterpart
+- We merge remote branch to stage
+- Github actions start the workflows
+- Github actions attempt booting the database,then makes the migrations,testing and serving
+- If CI succeeds,we proceed with staging CD
+- Github actions pushes the code to the staging AWS EC2 instance and executes the deployment script
+- The deployment script builds docker containers for laravel,node, database and react,one for each
+- Once the feature is finished we merge stage to main
+- Github actions takes the same staging CD steps again but for production
 
+<p >
+    <img src="./readme/development-testing/workflows.png" width="100%"/>
+</p>
 
 | Postman API 1                            | Postman API 2                       | Postman API 3                        |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
