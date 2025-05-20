@@ -9,6 +9,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\ExerciceController;
 use App\Http\Controllers\JobProfileController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\LeaderBoardController;
 use App\Http\Controllers\ConversationController;
 
@@ -110,5 +111,9 @@ Route::group(['prefix'=>"v0.1"],function(){
        
         
 
+    });
+
+    Route::group(['prefix'=>'statistics'],function(){
+        Route::get('/users',[StatisticsController::class,'getNumberOfUsers']);
     });
 });
