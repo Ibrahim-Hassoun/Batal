@@ -79,7 +79,7 @@
 
 | Social feed | Gamified leaderboard | Recommender system |
 | ------------- | ------- | ------------------ |
-| <img src="./readme/demo/feed.gif" height="400"/> | <img src="./readme/demo/leaderboard.gif" height="400"/> | <img src="./readme/demo/recommender-system%20refined.gif" height="400"/> |
+| <img src="./readme/demo/feed.gif" height="400"/> | <img src="./readme/demo/leaderboard.gif" height="400"/> | <img src="./readme/demo/convo refined.gif" height="400"/> |
 
 
 ### Admin Screens (Web)
