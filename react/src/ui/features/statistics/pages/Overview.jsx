@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import TableRow from '../components/TableRow';
 import BasicBarChart from '../components/BarChart';
+import { LineChart } from 'recharts';
+import CustomLineChart from '../components/CustomLineChart';
 
 
 const Overview = () => {
@@ -50,7 +52,15 @@ const Overview = () => {
                 { name: 'Apr', value: 800 },
                 ]}/>
             </div>
-            <div className='bg-black flex-1'>2</div>
+            <div className='bg-white flex-1'>
+                <CustomLineChart data={ [{ name: 'Jan', value: 400 },
+                { name: 'Feb', value: 300 },
+                { name: 'Mar', value: 600 },
+                { name: 'Apr', value: 800 },
+                { name: 'May', value: 500 },
+                { name: 'Jun', value: 900 },
+                { name: 'Jul', value: 1000 }]}/>
+            </div>
         </div>
     </div>
   )
