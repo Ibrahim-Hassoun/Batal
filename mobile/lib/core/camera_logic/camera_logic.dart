@@ -44,16 +44,16 @@ Future<void> initializeCamera(PoseDetectorProvider poseDetectorProvider) async {
   void streamFrames(BuildContext context ) {
     PoseDetectorProvider workoutProvider = context.read<PoseDetectorProvider>();
 
-    DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 150));
+    DateTime lastProcessed = DateTime.now().subtract(const Duration(milliseconds: 80));
 
     List<List<Map<String, Map<String, double>>>> landmarks = [];
 
     workoutProvider.controller!.startImageStream((CameraImage image) async{
       final now = DateTime.now();
-      if (now.difference(lastProcessed).inMilliseconds >= 150) {
+      if (now.difference(lastProcessed).inMilliseconds >= 80) {
         lastProcessed = now;
         List<Map<String, Map<String, double>>> newLandmark =await mlPoseDetectorFunctions.processCameraImage(image, context);
-        print(newLandmark);
+        
         landmarks.add(newLandmark);
         Coaching().evaluate( context,landmarks);
       }

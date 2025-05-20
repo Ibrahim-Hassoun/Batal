@@ -57,7 +57,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
     
     List<Map<String, Map<String, double>>> landmarks = provider.landmarks;
     String feedback = provider.MLFeedback;
-
+    Color borderColor = feedback.isEmpty? Colors.green:Colors.red;
     return Column(
       children: [
         Padding(
@@ -88,34 +88,40 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
 
               return Stack(
                 children: [
-                  Container(color: secondaryColor),
-                 GestureDetector(
-  onTap: resetOpacity,
-  child: Container(
-    decoration: BoxDecoration(
-      border: Border.all(color: Colors.red, width: 2), // 🔴 Red border
-    ),
-    child: Center(
-      child: SizedBox(
-        width: screenWidth,
-        height: height,
-        child: CameraSection(),
-      ),
-    ),
-  ),
-),
+               Container(
+                decoration: BoxDecoration(
+                  color: secondaryColor,
+                  border: Border.all(
+                    color: borderColor, 
+                    width: 7.0, 
+                  ),
+                  borderRadius: BorderRadius.circular(8), // Optional: rounded corners
+                ),
+              ),
+                GestureDetector(
+                  onTap: resetOpacity,
+                  child:  Center(
+                      child: SizedBox(
+                        width: screenWidth,
+                        height: height,
+                        child: CameraSection(),
+                      ),
+                    ),
+                  
+                ),
 
-                 Align(
-  alignment: Alignment.center,
-  child: Container(
-    decoration: BoxDecoration(
-      border: Border.all(color: Colors.green, width: 2), // 🟢 Green border
-    ),
-    child: CustomPaint(
-      painter: landmarks.isNotEmpty ? CustomCanva(landmarks) : null,
-    ),
-  ),
-),
+                 
+                    
+                     Align(
+                    alignment: Alignment.centerRight,
+                    child:  CustomPaint(
+                      size:Size(screenWidth, height) ,
+                      painter: landmarks.isNotEmpty ? CustomCanva(landmarks,cameraAspectRatio) : null,
+                      
+                      ),
+                    ),
+                    
+                  
 
                    Align(
                   alignment: Alignment.center,

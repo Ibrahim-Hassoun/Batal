@@ -27,6 +27,7 @@ static Future<Map<String, dynamic>> request({
 
   try {
     optimistic?.call();
+    print('url is: $url');
     http.Response response;
     final token =access_token;
         final postHeaders = Map<String, String>.from(defaultHeaders);

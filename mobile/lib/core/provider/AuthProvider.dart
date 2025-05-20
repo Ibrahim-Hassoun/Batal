@@ -29,7 +29,7 @@ class AuthProvider with ChangeNotifier {
     method: 'POST',
     body: data,
   );
-
+  print('sent login request');
   if (response['success']) {
     _isLoggedIn = true;
    _access_token = response['data']['data']['token'];
