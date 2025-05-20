@@ -57,7 +57,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
     
     List<Map<String, Map<String, double>>> landmarks = provider.landmarks;
     String feedback = provider.MLFeedback;
-
+    Color borderColor = feedback.isEmpty? Colors.green:Colors.red;
     return Column(
       children: [
         Padding(
@@ -88,7 +88,16 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
 
               return Stack(
                 children: [
-                Container(color: secondaryColor),
+               Container(
+                decoration: BoxDecoration(
+                  color: secondaryColor,
+                  border: Border.all(
+                    color: borderColor, 
+                    width: 7.0, 
+                  ),
+                  borderRadius: BorderRadius.circular(8), // Optional: rounded corners
+                ),
+              ),
                 GestureDetector(
                   onTap: resetOpacity,
                   child:  Center(
