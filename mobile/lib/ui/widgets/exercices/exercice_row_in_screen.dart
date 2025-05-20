@@ -5,7 +5,7 @@ import 'package:mobile/ui/widgets/exercices/exercice_row_in_screen_logic.dart';
 
 class ExerciseRowInScreen extends StatefulWidget {
   final String title;
-  final String imageUrl;
+  final String? imageUrl;
   final int id;
 
   const ExerciseRowInScreen({
@@ -39,9 +39,8 @@ class ExerciseRowInScreenState extends State<ExerciseRowInScreen> {
         child: Padding(
           padding: const EdgeInsets.only(left: 16),
           child: ListTile(
-            leading: widget.imageUrl.isNotEmpty
-                ? SizedBox(height: 48,width: 48,child: CircleAvatar(backgroundImage: NetworkImage(widget.imageUrl)))
-                : null,
+            leading: SizedBox(height: 48,width: 48,child: CircleAvatar(backgroundImage: NetworkImage(widget.imageUrl??'https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg')))
+                ,
             title: Text(widget.title),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
