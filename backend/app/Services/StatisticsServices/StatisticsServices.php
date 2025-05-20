@@ -5,6 +5,7 @@ namespace App\Services\StatisticsServices;
 use App\Models\User;
 use App\Models\UserExercice;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class StatisticsServices {
 
@@ -47,5 +48,13 @@ class StatisticsServices {
         ->groupBy('country')
         ->orderByDesc('total')
         ->get();
+    }
+    public function getGrowthOfUsers()
+    {
+       return $growth = User::select(DB::raw('DATE(created_at) as date'), DB::raw('COUNT(*) as total'))
+                        ->where('created_at', '>=', Carbon::now()->subDays(6)->startOfDay()) // last 7 days including today
+                        ->groupBy(DB::raw('DATE(created_at)'))
+                        ->orderBy('date')
+                        ->get();
     }
 }

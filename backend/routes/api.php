@@ -115,6 +115,7 @@ Route::group(['prefix'=>"v0.1"],function(){
 
     Route::group(['prefix'=>'statistics'],function(){
         Route::get('/users',[StatisticsController::class,'getNumberOfUsers']);
+        Route::get('/users/growth',[StatisticsController::class,'getGrowthOfUsers']);
         Route::get('/users/by-role',[StatisticsController::class,'getNumberOfUsersByRole']);
         Route::get('/user-exercices',[StatisticsController::class,'getNumberOfExercicesMade']);
 

@@ -70,4 +70,14 @@ class StatisticsController extends Controller
             return $this->respond(false,$e->getMessage(),null,500);
         }
     }
+    public function getGrowthOfUsers(Request $request)
+    {
+         try{
+            $growth = $this->statisticsServices->getGrowthOfUsers($request->all());
+            return $this->respond(true,'growth retrieved successfully',$growth,201);
+
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
+    }
 }
