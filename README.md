@@ -26,10 +26,16 @@
 <!-- System Design -->
 <img src="./readme/title3.svg"/>
 
-### ER Diagram
+### ER Diagram1
 
 <p >
     <img src="./readme/system-design/ER-diagram.png" width="100%" height='1000px'/>
+</p>
+
+### ER Diagram2
+
+<p >
+    <img src="./readme/system-design/ER-diagram2 (2).png" width="100%" />
 </p>
 
 ### HTTP Request Lifecycle
