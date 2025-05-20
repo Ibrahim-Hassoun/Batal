@@ -46,11 +46,10 @@ class MlPoseDetectorFunctions {
 
   
   InputImage? _inputImageFromCameraImage(CameraImage image) {
-  print('we are now inside inputImageFromCamera method');
+ 
   final camera =  this.camera!;
   final sensorOrientation = camera.sensorOrientation;
-  print('sensorOrientaion is: ');
-  print(sensorOrientation);
+
   InputImageRotation? rotation;
 
    if (Platform.isIOS) {
@@ -69,11 +68,9 @@ class MlPoseDetectorFunctions {
     if (rotationCompensation == null) return null;
     if (camera.lensDirection == CameraLensDirection.front) {
       // front-facing
-      print('rotation compensation before: ');
-      print(rotationCompensation);
+
       rotationCompensation = (sensorOrientation + rotationCompensation) % 360;
-      print('rotation compensation after: ');
-      print(rotationCompensation);
+
     } else {
       // back-facing
       rotationCompensation =
@@ -114,9 +111,28 @@ class MlPoseDetectorFunctions {
     for (Pose pose in poses) {
       // Map to hold this pose's landmarks
       Map<String, Map<String, double>> landmarksMap = {};
+      final excluded = {
+        "lefteyeinner",
+        "lefteyeouter",
+        "righteyeinner",
+        "righteyeouter",
+        "leftmouth",
+        "rightmouth",
+        "nose",
+        "lefteye",
+        "righteye",
+        "leftear",
+        "rightear",
+        "rightheel",
+        "leftheel",
+        "leftfootindex",
+        "rightfootindex"
+      };
 
-      pose.landmarks.forEach((type, landmark) {
-      
+     pose.landmarks.forEach((type, landmark) {
+      final name = type.name.toLowerCase();
+
+    if (!excluded.contains(name)) {
         landmarksMap[type.name] = {
           'x': landmark.x,
           'y': landmark.y,
@@ -124,9 +140,12 @@ class MlPoseDetectorFunctions {
           'likelihood': landmark.likelihood,
         };
         
-      });
-      
+        
+      }
+    });
       allPosesLandmarks.add(landmarksMap);
+      print('we have added these points: ');
+        print(landmarksMap);
       
     }
 

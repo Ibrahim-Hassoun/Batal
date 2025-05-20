@@ -90,7 +90,7 @@ class ExercicesScreenState extends State<ExercicesScreen> {
               itemCount: AllExercices.length,
               itemBuilder: (context,index){
                  var exerciceData = AllExercices[index]; 
-                 return ExerciseRowInScreen(id:exerciceData['id'],title: exerciceData['exercice'], imageUrl: exerciceData['image_url'] ?? 'https://cdn-icons-png.flaticon.com/512/2331/2331943.png');
+                 return ExerciseRowInScreen(id:exerciceData['id'],title: exerciceData['exercice'], imageUrl: exerciceData['image_url'] );
               },
             )
             :
@@ -101,7 +101,7 @@ class ExercicesScreenState extends State<ExercicesScreen> {
               itemCount: recommendedExercices.length,
               itemBuilder: (context,index){
                  var exerciceData = recommendedExercices[index]; 
-                 return ExerciseRowInScreen(id:exerciceData['exercise']['id'],title: exerciceData['exercise']['exercice'], imageUrl: exerciceData['exercise']['image_url'] ?? 'https://cdn-icons-png.flaticon.com/512/2331/2331943.png');
+                 return ExerciseRowInScreen(id:exerciceData['exercise']['id'],title: exerciceData['exercise']['exercice'], imageUrl: exerciceData['exercise']['image_url'] );
               },
             )
                   ],

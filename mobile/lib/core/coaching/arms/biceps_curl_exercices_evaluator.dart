@@ -35,7 +35,7 @@ class BicepsCurlExercicesEvaluator implements ExerciceEvaluator{
 
                   
             const feedbackMsg = 'you tuck your arm too much!';
-            if (angle < 70) {
+            if (angle < 60) {
               if (!(provider?.MLFeedback.contains(feedbackMsg) ?? false)) {
               provider?.setMLFeedback(feedbackMsg);
               }

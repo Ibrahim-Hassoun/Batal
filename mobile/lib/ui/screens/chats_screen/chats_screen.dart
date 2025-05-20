@@ -99,7 +99,7 @@ class ChatsScreenState extends State<ChatsScreen> {
                   Navigator.pushNamed(context, '/chatbot-conversation', );
                 },
                 child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/Screenshot 2025-05-15 051340.png'),
+                  backgroundImage: AssetImage('assets/chatbot.jpg'),
                 ),
               ),
             ),
