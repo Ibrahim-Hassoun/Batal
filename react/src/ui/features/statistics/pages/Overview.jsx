@@ -3,6 +3,7 @@ import InfoTiles from '../components/InfoTiles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import TableRow from '../components/TableRow';
+import BasicBarChart from '../components/BarChart';
 
 
 const Overview = () => {
@@ -28,7 +29,7 @@ const Overview = () => {
 
         <div className=' flex-1 flex gap-3'>
 
-            <div className='bg-tertiary flex-1 flex flex-col'>
+            <div className='bg-tertiary flex-1 flex flex-col rounded-2xl pt-4'>
                 <div className='flex w-full text-dark_grey'>
                     <h3 className='flex-1 pl-4'>NAME</h3> 
                     <div className='flex-1 flex w-full justify-between pr-4 text-center' ><h3 className='flex-1'>STREAK</h3> <h3 className='flex-1'>POINTS</h3></div>
@@ -39,7 +40,16 @@ const Overview = () => {
                 <TableRow image='https://www.cameo.com/cdn-cgi/image/fit=cover,format=auto,width=210,height=278/https://cdn.cameo.com/thumbnails/648e2bf7c2977ff5614bc426-wm-thumbnail.jpg' name='john doe' streak={50} points={800}/>
             </div>
 
-            <div className='bg-indigo-600 flex-1'>1</div>
+            {/* most used exercices */}
+            <div className='bg-white flex-1 flex flex-col items-center justify-between'>
+                <h3 className='pt-4'>Most used exercices</h3>
+                <BasicBarChart data={ [
+                { name: 'Jan', value: 400 },
+                { name: 'Feb', value: 300 },
+                { name: 'Mar', value: 600 },
+                { name: 'Apr', value: 800 },
+                ]}/>
+            </div>
             <div className='bg-black flex-1'>2</div>
         </div>
     </div>
