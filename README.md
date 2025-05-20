@@ -38,6 +38,12 @@
     <img src="./readme/system-design/ER-diagram2 (2).png" width="100%" />
 </p>
 
+### System Architecture
+
+<p >
+    <img src="./readme/system-design/components diagram.png" width="100%"/>
+</p>
+
 ### HTTP Request Lifecycle
 
 <p >
@@ -53,8 +59,8 @@
 
 - AI-powered pose detector with live feedback for each exercice.
 - AI assistant that gives personalized advice based on previous interactions and profile.
-- Recommendation system for diet/workout plans.
-- Feed section that allows the abtal to upload posts and stories and interact with each others
+- Recommendation system for exercices.
+- Feed section for posts and stories.
 - Live chatting system using node's websockets.
 
 <br><br>
@@ -67,6 +73,13 @@
 | Pose Detector | Chatbot | Recommender system |
 | ------------- | ------- | ------------------ |
 | <img src="./readme/demo/feedback.gif" height="400"/> | <img src="./readme/demo/chatbot%20refined.gif" height="400"/> | <img src="./readme/demo/recommender-system%20refined.gif" height="400"/> |
+
+
+### User Screens (Mobile)
+
+| Social feed | Gamified leaderboard | Recommender system |
+| ------------- | ------- | ------------------ |
+| <img src="./readme/demo/feed.gif" height="400"/> | <img src="./readme/demo/leaderboard.gif" height="400"/> | <img src="./readme/demo/convo refined.gif" height="400"/> |
 
 
 ### Admin Screens (Web)
