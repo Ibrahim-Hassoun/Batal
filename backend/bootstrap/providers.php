@@ -10,4 +10,5 @@ return [
     App\Providers\JobProfileServicesProvider::class,
     App\Providers\LeaderBoardServicesProvider::class,
     App\Providers\PostServicesProvider::class,
+    App\Providers\StatisticsServicesProvider::class,
 ];
