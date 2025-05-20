@@ -35,8 +35,17 @@ class StatisticsServices {
        $exerciseCounts = UserExercice::select('exercices.exercice', DB::raw('COUNT(*) as count'))
     ->join('exercices', 'user_exercice.exercice_id', '=', 'exercices.id')
     ->groupBy('exercices.exercice')
+    ->orderByDesc('count')
     ->get();
     return $exerciseCounts;
 
+    }
+
+    public function getCountryAggregations()
+    {
+       return $usersPerCountry = User::select('country', \DB::raw('count(*) as total'))
+        ->groupBy('country')
+        ->orderByDesc('total')
+        ->get();
     }
 }

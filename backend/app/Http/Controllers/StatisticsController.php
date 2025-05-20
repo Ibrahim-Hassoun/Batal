@@ -59,4 +59,15 @@ class StatisticsController extends Controller
             return $this->respond(false,$e->getMessage(),null,500);
         }
     }
+
+    public function getCountryAggregations(Request $request)
+    {
+         try{
+            $countries = $this->statisticsServices->getCountryAggregations($request->all());
+            return $this->respond(true,'countries retrieved successfully',$countries,201);
+
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,500);
+        }
+    }
 }

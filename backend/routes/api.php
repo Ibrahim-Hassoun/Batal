@@ -119,5 +119,6 @@ Route::group(['prefix'=>"v0.1"],function(){
         Route::get('/user-exercices',[StatisticsController::class,'getNumberOfExercicesMade']);
 
         Route::get('/exercices/aggregations',[StatisticsController::class,'getExercicesAggregations']);
+        Route::get('/countries/aggregations',[StatisticsController::class,'getCountryAggregations']);
     });
 });
