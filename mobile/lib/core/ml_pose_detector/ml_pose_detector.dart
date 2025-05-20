@@ -51,37 +51,37 @@ class MlPoseDetectorFunctions {
   final sensorOrientation = camera.sensorOrientation;
   print('sensorOrientaion is: ');
   print(sensorOrientation);
-  // InputImageRotation? rotation;
+  InputImageRotation? rotation;
 
-  //  if (Platform.isIOS) {
-  //   rotation = InputImageRotationValue.fromRawValue(sensorOrientation);
-  // } else if (Platform.isAndroid) {
-  //    //for testing on laptop
+   if (Platform.isIOS) {
+    rotation = InputImageRotationValue.fromRawValue(sensorOrientation);
+  } else if (Platform.isAndroid) {
+     //for testing on laptop
      
-  //   final fakeDeviceOrientation = DeviceOrientation.landscapeLeft;
-  //   var rotationCompensation=_orientations[fakeDeviceOrientation];
+    final fakeDeviceOrientation = DeviceOrientation.landscapeLeft;
+    var rotationCompensation=_orientations[fakeDeviceOrientation];
 
-  //   //on real application
+    //on real application
 
-  //   // var rotationCompensation =
-  //   //     _orientations[poseDetectorProvider.controller!.value.deviceOrientation];
+    // var rotationCompensation =
+    //     _orientations[poseDetectorProvider.controller!.value.deviceOrientation];
        
-  //   if (rotationCompensation == null) return null;
-  //   if (camera.lensDirection == CameraLensDirection.front) {
-  //     // front-facing
-  //     print('rotation compensation before: ');
-  //     print(rotationCompensation);
-  //     rotationCompensation = (sensorOrientation + rotationCompensation) % 360;
-  //     print('rotation compensation after: ');
-  //     print(rotationCompensation);
-  //   } else {
-  //     // back-facing
-  //     rotationCompensation =
-  //         (sensorOrientation - rotationCompensation + 360) % 360;
-  //   }
-  //   rotation = InputImageRotationValue.fromRawValue(rotationCompensation);
-  // }
-  // if (rotation == null) return null;
+    if (rotationCompensation == null) return null;
+    if (camera.lensDirection == CameraLensDirection.front) {
+      // front-facing
+      print('rotation compensation before: ');
+      print(rotationCompensation);
+      rotationCompensation = (sensorOrientation + rotationCompensation) % 360;
+      print('rotation compensation after: ');
+      print(rotationCompensation);
+    } else {
+      // back-facing
+      rotationCompensation =
+          (sensorOrientation - rotationCompensation + 360) % 360;
+    }
+    rotation = InputImageRotationValue.fromRawValue(rotationCompensation);
+  }
+  if (rotation == null) return null;
 
   final format = InputImageFormatValue.fromRawValue(image.format.raw);
 
@@ -98,7 +98,7 @@ class MlPoseDetectorFunctions {
     bytes: plane.bytes,
      metadata: InputImageMetadata(
       size: Size(image.width.toDouble(), image.height.toDouble()),
-      rotation: InputImageRotation.rotation0deg, // used only in Android
+      rotation: InputImageRotation.rotation180deg, // used only in Android
       format: format, // used only in iOS
       bytesPerRow: plane.bytesPerRow, // used only in iOS
     ),
@@ -116,14 +116,14 @@ class MlPoseDetectorFunctions {
       Map<String, Map<String, double>> landmarksMap = {};
 
       pose.landmarks.forEach((type, landmark) {
-        if (type.name == 'rightWrist' || type.name == 'rightElbow' || type.name == 'rightShoulder'){
+      
         landmarksMap[type.name] = {
           'x': landmark.x,
           'y': landmark.y,
           'z': landmark.z,
           'likelihood': landmark.likelihood,
         };
-        }
+        
       });
       
       allPosesLandmarks.add(landmarksMap);
@@ -135,36 +135,4 @@ class MlPoseDetectorFunctions {
     return allPosesLandmarks;
   }
 
-  Widget drawLandmarks(List<Map<String, Map<String, double>>> posesLandmarks, {double pointSize = 6.0}) {
-    return CustomPaint(
-      painter: _LandmarksPainter(posesLandmarks, pointSize),
-      child: Container(),
-    );
-  }
 }
-
-class _LandmarksPainter extends CustomPainter {
-  final List<Map<String, Map<String, double>>> posesLandmarks;
-  final double pointSize;
-
-  _LandmarksPainter(this.posesLandmarks, this.pointSize);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFFFF0000)
-      ..style = PaintingStyle.fill;
-
-    for (final pose in posesLandmarks) {
-      for (final landmark in pose.values) {
-        final x = landmark['x'] ?? 0.0;
-        final y = landmark['y'] ?? 0.0;
-        canvas.drawCircle(Offset(x, y), pointSize, paint);
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
-}
-
