@@ -37,4 +37,15 @@ class StatisticsController extends Controller
             return $this->respond(false,$e->getMessage(),null,$e->getCode());
         }
     }
+
+    public function getNumberOfExercicesMade(Request $request)
+    {
+         try{
+            $exercises = $this->statisticsServices->getNumberOfExercicesMade($request->all());
+            return $this->respond(true,'user exercices retrieved successfully',$exercises,201);
+
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,$e->getCode());
+        }
+    }
 }

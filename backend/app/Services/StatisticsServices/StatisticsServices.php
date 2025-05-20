@@ -3,7 +3,7 @@
 namespace App\Services\StatisticsServices;
 
 use App\Models\User;
-
+use App\Models\UserExercice;
 
 class StatisticsServices {
 
@@ -22,5 +22,10 @@ class StatisticsServices {
             'trainers' => $trainers
         ];
 
+    }
+
+    public function getNumberOfExercicesMade()
+    {
+        return UserExercice::count();
     }
 }
