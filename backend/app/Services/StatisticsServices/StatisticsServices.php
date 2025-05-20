@@ -11,4 +11,16 @@ class StatisticsServices {
     {
         return User::count();
     }
+
+    public function getNumberOfUsersByRole()
+    {
+        $dietitians = User::where('role','dietitian')->count();
+        $trainers = User::where('role','trainer')->count();
+
+        return [
+            'dietitians' => $dietitians,
+            'trainers' => $trainers
+        ];
+
+    }
 }

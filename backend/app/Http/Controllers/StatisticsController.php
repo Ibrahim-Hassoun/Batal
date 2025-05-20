@@ -26,4 +26,15 @@ class StatisticsController extends Controller
             return $this->respond(false,$e->getMessage(),null,$e->getCode());
         }
     }
+
+    public function getNumberOfUsersByRole(Request $request)
+    {
+         try{
+            $usersCount = $this->statisticsServices->getNumberOfUsersByRole($request->all());
+            return $this->respond(true,'users retrieved successfully',$usersCount,201);
+
+        }catch(\Exception $e){
+            return $this->respond(false,$e->getMessage(),null,$e->getCode());
+        }
+    }
 }
