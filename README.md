@@ -63,6 +63,8 @@
 - Feed section for posts and stories.
 - Live chatting system using node's websockets.
 
+<img src="./readme/highlights/Group 39.png"/>
+
 <br><br>
 
 <!-- Demo -->
