@@ -21,7 +21,10 @@ class CustomDropdownButton extends StatefulWidget {
 
 class _CustomDropdownButtonState extends State<CustomDropdownButton> {
   String? _internalValue;
-
+  String capitalize(String input) {
+  if (input.isEmpty) return input;
+  return input[0].toUpperCase() + input.substring(1);
+}
   @override
   void didUpdateWidget(covariant CustomDropdownButton oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -41,37 +44,47 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
-      onSelected: (value) {
-        setState(() {
-          _internalValue = value;
-        });
-        widget.onChanged(value);
-      },
-      itemBuilder: (BuildContext context) => widget.items
-          .map((item) => PopupMenuItem<String>(
-                value: item,
-                child: Text(item),
-              ))
-          .toList(),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-        decoration: BoxDecoration(
-          color: bg_gray,
-          borderRadius: BorderRadius.circular(80),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
+  onSelected: (value) {
+    setState(() {
+      _internalValue = value;
+    });
+    widget.onChanged(value);
+  },
+  itemBuilder: (BuildContext context) => widget.items
+      .map((item) => PopupMenuItem<String>(
+            value: item,
+            child: SizedBox(
+              width: 100, // 👈 Dropdown item width
+              child: Text(item),
+            ),
+          ))
+      .toList(),
+  child: SizedBox(
+    width: 100, // 👈 Set width for the button itself
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      decoration: BoxDecoration(
+        color: bg_gray,
+        borderRadius: BorderRadius.circular(80),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween, // 👈 Optional: space between text & icon
+        children: [
+          Expanded(
+            child: Text(
               _internalValue?.isNotEmpty == true
-                  ? _internalValue!
+                  ? capitalize(_internalValue!)
                   : widget.label,
               style: TextStyle(color: secondaryColor),
+              overflow: TextOverflow.ellipsis, // 👈 Prevents overflow
             ),
-            Icon(Icons.arrow_drop_down, color: secondaryColor),
-          ],
-        ),
+          ),
+          Icon(Icons.arrow_drop_down, color: secondaryColor),
+        ],
       ),
-    );
+    ),
+  ),
+);
+
   }
 }

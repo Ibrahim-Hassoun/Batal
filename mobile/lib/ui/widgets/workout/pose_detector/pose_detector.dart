@@ -57,7 +57,7 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
     
     List<Map<String, Map<String, double>>> landmarks = provider.landmarks;
     String feedback = provider.MLFeedback;
-    Color borderColor = feedback.isEmpty? Colors.green:Colors.red;
+    Color borderColor = isRecording? feedback.isEmpty? Colors.green:Colors.red:tertiaryColor;
     return Column(
       children: [
         Padding(
@@ -74,64 +74,107 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
         ),
         SizedBox(height: 24,),
         Expanded(//camera section
-            
-            child:  isRecording
-            ? Padding(
+          child: Padding(
             padding: const EdgeInsets.only(left: 32,right: 32),
-            child:LayoutBuilder(
-            builder: (context, constraints) {
-              final screenWidth = constraints.maxWidth;
-              final cameraAspectRatio = controller!.value.aspectRatio;
-
-              // Calculate height based on aspect ratio
-              final height = screenWidth * cameraAspectRatio;
-
-              return Stack(
-                children: [
-               Container(
-                decoration: BoxDecoration(
-                  color: secondaryColor,
-                  border: Border.all(
-                    color: borderColor, 
-                    width: 7.0, 
+            child: Container(
+              
+              decoration: BoxDecoration(
+              border: Border.all(color: borderColor,width: 3), 
+              borderRadius: BorderRadius.circular(8),
+            ),
+              child:  isRecording
+              ? Padding(
+              padding: const EdgeInsets.only(left: 0,right: 0),
+              child:LayoutBuilder(
+              builder: (context, constraints) {
+                final screenWidth = constraints.maxWidth;
+                final cameraAspectRatio = controller!.value.aspectRatio;
+                final height = screenWidth * cameraAspectRatio;
+            
+                return Stack(
+                  children: [
+                 Container(
+                  decoration: BoxDecoration(
+                    color: secondaryColor,
+                   
+                    borderRadius: BorderRadius.circular(8), 
                   ),
-                  borderRadius: BorderRadius.circular(8), // Optional: rounded corners
                 ),
-              ),
-                GestureDetector(
-                  onTap: resetOpacity,
-                  child:  Center(
-                      child: SizedBox(
-                        width: screenWidth,
-                        height: height,
-                        child: CameraSection(),
+                  GestureDetector(
+                    onTap: resetOpacity,
+                    child:  Center(
+                        child: SizedBox(
+                          width: screenWidth,
+                          height: height,
+                          child: CameraSection(),
+                        ),
                       ),
-                    ),
-                  
-                ),
-
-                 
                     
-                     Align(
-                    alignment: Alignment.centerRight,
-                    child:  CustomPaint(
-                      size:Size(screenWidth, height) ,
-                      painter: landmarks.isNotEmpty ? CustomCanva(landmarks,cameraAspectRatio) : null,
+                  ),
+            
+                   
                       
+                       Align(
+                      alignment: Alignment.centerRight,
+                      child:  CustomPaint(
+                        size:Size(screenWidth, height) ,
+                        painter: landmarks.isNotEmpty ? CustomCanva(landmarks,cameraAspectRatio) : null,
+                        
+                        ),
                       ),
-                    ),
+                      
                     
-                  
-
+            
+                     Align(
+                    alignment: Alignment.center,
+                    child: AnimatedOpacity(
+                            opacity: _opacity, 
+                            duration: const Duration(milliseconds: 2000),
+                            child: GestureDetector(
+                              onTap: () {
+                                provider.toggleRecording(context);
+                              },
+                              onTapDown: _onTapDown,
+                              onTapUp: _onTapUp,
+                              onTapCancel: _onTapCancel,
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 100),
+                                width: _size,
+                                height: _size,
+                                decoration: const BoxDecoration(
+                                  color: primaryColor,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(Icons.pause, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                  ),
+                  ],
+                );
+              },
+            ),
+            )
+              : Padding(
+              padding: const EdgeInsets.only(left: 0,right: 0),
+              child: Stack(
+                children: [
+                  Container(
+                    color: secondaryColor,
+                    
+                  ),
+                 
                    Align(
-                  alignment: Alignment.center,
-                  child: AnimatedOpacity(
-                          opacity: _opacity, 
-                          duration: const Duration(milliseconds: 2000),
-                          child: GestureDetector(
-                            onTap: () {
-                              provider.toggleRecording(context);
-                            },
+                    alignment: Alignment.center,
+                    child: GestureDetector(
+                             onTap: () {
+                               setState((){
+                                  _opacity=1;
+                                });
+                                provider.toggleRecording(context);
+                               
+                                
+                              },
                             onTapDown: _onTapDown,
                             onTapUp: _onTapUp,
                             onTapCancel: _onTapCancel,
@@ -143,56 +186,16 @@ class _PoseDetectorState extends State<PoseDetectorTab> {
                                 color: primaryColor,
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(Icons.pause, color: Colors.white),
+                              child: const Icon(Icons.play_arrow, color: Colors.white),
                             ),
-                          ),
-                        ),
-                ),
+                          )
+                  ),
                 ],
-              );
-            },
-          ),
-          )
-            : Padding(
-            padding: const EdgeInsets.only(left: 32,right: 32),
-            child: Stack(
-              children: [
-                Container(
-                  color: secondaryColor,
-                  
-                ),
-               
-                 Align(
-                  alignment: Alignment.center,
-                  child: GestureDetector(
-                           onTap: () {
-                             setState((){
-                                _opacity=1;
-                              });
-                              provider.toggleRecording(context);
-                             
-                              
-                            },
-                          onTapDown: _onTapDown,
-                          onTapUp: _onTapUp,
-                          onTapCancel: _onTapCancel,
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 100),
-                            width: _size,
-                            height: _size,
-                            decoration: const BoxDecoration(
-                              color: primaryColor,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(Icons.play_arrow, color: Colors.white),
-                          ),
-                        )
-                ),
-              ],
+              ),
             ),
+                    ),
           ),
         ),
-       
         SizedBox(height: 24,),
        
         // Padding(
