@@ -12,7 +12,7 @@ function App() {
     <div className="flex flex-col h-screen">
       <Navbar></Navbar>
 
-      <div id='horizontal-section' className=' flex h-full'>
+      <div id='horizontal-section' className=' flex h-full bg-gray-100'>
 
         <Sidebar/>
 
