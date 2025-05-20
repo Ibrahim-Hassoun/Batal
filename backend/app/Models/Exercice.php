@@ -32,4 +32,9 @@ class Exercice extends Model
     {
         return 'exercice';
     }
+
+    public function exercice()
+    {
+        return $this->belongsTo(Exercice::class);
+    }
 }

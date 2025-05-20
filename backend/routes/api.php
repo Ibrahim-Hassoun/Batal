@@ -118,5 +118,6 @@ Route::group(['prefix'=>"v0.1"],function(){
         Route::get('/users/by-role',[StatisticsController::class,'getNumberOfUsersByRole']);
         Route::get('/user-exercices',[StatisticsController::class,'getNumberOfExercicesMade']);
 
+        Route::get('/exercices/aggregations',[StatisticsController::class,'getExercicesAggregations']);
     });
 });
