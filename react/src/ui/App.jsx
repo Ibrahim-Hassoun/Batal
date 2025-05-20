@@ -2,6 +2,7 @@ import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import Navbar from './components/Navbar'
 import './App.css'
 import Sidebar from './components/Sidebar';
+import Overview from './features/statistics/pages/Overview';
 
 function App() {
   
@@ -17,8 +18,8 @@ function App() {
 
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<h1>home screen</h1>}/>
-            <Route path='/stats' element={<h1>stats screen</h1>}/>
+            <Route path='/' element={<Overview/>}/>
+            <Route path='/statistics' element={<h1>stats screen</h1>}/>
           </Routes>
       </BrowserRouter>
       </div>
