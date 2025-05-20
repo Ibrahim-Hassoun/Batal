@@ -66,7 +66,7 @@
 
 | Pose Detector | Chatbot | Recommender system |
 | ------------- | ------- | ------------------ |
-| <img src="./readme/demo/feedback.gif" height="600"/> | <img src="./readme/demo/chatbot%20refined.gif" height="600"/> | <img src="./readme/demo/recommender-system%20refined.gif" height="600"/> |
+| <img src="./readme/demo/feedback.gif" height="400"/> | <img src="./readme/demo/chatbot%20refined.gif" height="400"/> | <img src="./readme/demo/recommender-system%20refined.gif" height="400"/> |
 
 
 ### Admin Screens (Web)
