@@ -24,8 +24,15 @@ const Overview = () => {
                     <InfoTiles icon={faCoffee} title='user' count={500}/>
                 </div>
             </div>
-            <div className='bg-black w-2/3'>
-            2
+            <div className='bg-white w-2/3 flex flex-col items-center justify-between'>
+                <h3 className='pt-4'>Users growth</h3>
+                <CustomLineChart data={ [{ name: 'Jan', value: 400 },
+                { name: 'Feb', value: 300 },
+                { name: 'Mar', value: 600 },
+                { name: 'Apr', value: 800 },
+                { name: 'May', value: 500 },
+                { name: 'Jun', value: 900 },
+                { name: 'Jul', value: 1000 }]}/>
             </div>
         </div>
 
@@ -52,7 +59,8 @@ const Overview = () => {
                 { name: 'Apr', value: 800 },
                 ]}/>
             </div>
-            <div className='bg-white flex-1'>
+            <div className='bg-white flex-1 flex flex-col items-center justify-between'>
+                <h3 className='pt-4'>Users growth</h3>
                 <CustomLineChart data={ [{ name: 'Jan', value: 400 },
                 { name: 'Feb', value: 300 },
                 { name: 'Mar', value: 600 },

@@ -14,9 +14,9 @@ import {
 
 const CustomLineChart = ({data}) => {
   return (
-    <div style={{ width: '100%', height: 400 }}>
-      <h2 style={{ textAlign: 'center' }}>Line Chart Example</h2>
-      <ResponsiveContainer width="100%" height="100%">
+    <div style={{ width: '100%', height:'80%' }}>
+      
+      <ResponsiveContainer>
         <LineChart
           data={data}
           margin={{
