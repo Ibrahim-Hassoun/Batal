@@ -4,8 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import TableRow from '../components/TableRow';
 import BasicBarChart from '../components/BarChart';
-import { LineChart } from 'recharts';
+import { LineChart, PieChart } from 'recharts';
 import CustomLineChart from '../components/CustomLineChart';
+import CustomPieChart from '../components/PieChart';
 
 
 const Overview = () => {
@@ -61,13 +62,14 @@ const Overview = () => {
             </div>
             <div className='bg-white flex-1 flex flex-col items-center justify-between'>
                 <h3 className='pt-4'>Users growth</h3>
-                <CustomLineChart data={ [{ name: 'Jan', value: 400 },
-                { name: 'Feb', value: 300 },
-                { name: 'Mar', value: 600 },
-                { name: 'Apr', value: 800 },
-                { name: 'May', value: 500 },
-                { name: 'Jun', value: 900 },
-                { name: 'Jul', value: 1000 }]}/>
+                {/* geography */}
+                <CustomPieChart data={[
+                { name: 'Squats', value: 35 },
+                { name: 'Push-ups', value: 25 },
+                { name: 'Deadlifts', value: 20 },
+                { name: 'Pull-ups', value: 15 },
+                { name: 'Lunges', value: 5 },
+                ]}/>
             </div>
         </div>
     </div>
