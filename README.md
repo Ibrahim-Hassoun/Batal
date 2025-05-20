@@ -29,7 +29,7 @@
 ### ER Diagram
 
 <p >
-    <img src="./readme/system-design/ER-diagram.png" width="100%"/>
+    <img src="./readme/system-design/ER-diagram.png" width="100%" height='1000px'/>
 </p>
 
 ### HTTP Request Lifecycle
