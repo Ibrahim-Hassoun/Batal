@@ -64,9 +64,9 @@
 
 ### User Screens (Mobile)
 
-| Login screen                            | Register screen                       | Register screen                       |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| Pose Detector | Chatbot | Recommender system |
+| ------------- | ------- | ------------------ |
+| <img src="./readme/demo/feedback.gif" height="800"/> | <img src="./readme/demo/chatbot%20refined.gif" height="800"/> | <img src="./readme/demo/recommender-system%20refined.gif" height="800"/> |
 
 
 ### Admin Screens (Web)
