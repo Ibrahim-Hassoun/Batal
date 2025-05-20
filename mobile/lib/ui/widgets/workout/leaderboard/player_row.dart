@@ -8,7 +8,7 @@ class PlayerRow extends StatelessWidget {
   final int playerScore;
   final int rank;
   final int streak;
-  final String imageUrl;
+  final String? imageUrl;
 
   const PlayerRow({
     super.key,
@@ -31,17 +31,20 @@ class PlayerRow extends StatelessWidget {
               leading: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    '$rank',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  SizedBox(
+                    width: 24,
+                    child: Text(
+                      '$rank',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  const SizedBox(width: 8),
-                  if (imageUrl.isNotEmpty)
+                  const SizedBox(width: 16),
+                  
                     SizedBox(
                       width: 48,
                       height: 48,
                       child: CircleAvatar(
-                        backgroundImage: NetworkImage(imageUrl),
+                        backgroundImage: NetworkImage(imageUrl??'https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg'),
                       ),
                     ),
                 ],
@@ -50,7 +53,7 @@ class PlayerRow extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(playerName),
+              Text(playerName,style: TextStyle(fontSize: 14),),
               if(streak >30)
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,

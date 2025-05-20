@@ -66,13 +66,15 @@ void initState() {
         ),
        title: Row(
           children: [
-            // CircleAvatar(backgroundImage: NetworkImage(widget.chatImageUrl ?? 'https://randomuser.me/api/portraits')), // Add a default image
+           CircleAvatar(
+                  backgroundImage: AssetImage('assets/chatbot.jpg'),
+                ), // Add a default image
             SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('John Doe', style: TextStyle(fontSize: 18)),
-                Text('Active 11m ago', style: TextStyle(fontSize: 12)),
+                Text('Rambo', style: TextStyle(fontSize: 18)),
+                Text('Online', style: TextStyle(fontSize: 12)),
               ],
             ),
           ],
@@ -125,12 +127,12 @@ void initState() {
         padding: EdgeInsets.all(12),
         constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
         decoration: BoxDecoration(
-          color: isMe ? Colors.grey.shade300 : Colors.grey.shade200,
+          color: isMe ? primaryColor : Colors.grey.shade200,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Text(
           message['text'],
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(fontSize: 16,color: isMe?tertiaryColor:secondaryColor),
         ),
       ),
 

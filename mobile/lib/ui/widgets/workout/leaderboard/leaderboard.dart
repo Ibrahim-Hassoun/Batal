@@ -44,7 +44,7 @@ class LeaderboardState extends State<Leaderboard> {
               itemCount: players.length,
               itemBuilder: (context,index){
                  var playerData = players[index]; 
-                 return PlayerRow(playerName: playerData['first_name']+' '+playerData['last_name'],playerScore: playerData['current_xp'],rank: index+1,imageUrl: playerData['profile_photo_url'] ?? 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y',streak: playerData['streak'],
+                 return PlayerRow(playerName: playerData['first_name']+' '+playerData['last_name'],playerScore: playerData['current_xp'],rank: index+1,imageUrl: playerData['profile_photo_path'] ,streak: playerData['streak'],
                   );
               },
             )
