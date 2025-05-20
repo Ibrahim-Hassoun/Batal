@@ -1,15 +1,25 @@
-
+import { BrowserRouter,Routes,Route } from 'react-router-dom'; 
+import Navbar from './components/Navbar'
 import './App.css'
 
 function App() {
   
 
   return (
-    <>
-    <div className="bg-red-500 text-white p-4">
-      Hello Tailwind!
+   
+    <div className="">
+     
+
+
+      <BrowserRouter>
+        <Navbar></Navbar>
+        <Routes>
+
+        </Routes>
+      </BrowserRouter>
+
     </div>
-    </>
+    
   )
 }
 
