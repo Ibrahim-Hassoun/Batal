@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import InfoTiles from '../components/InfoTiles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBowlFood,  faDumbbell, faPersonChalkboard, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -6,63 +6,17 @@ import TableRow from '../components/TableRow';
 import BasicBarChart from '../components/BarChart';
 import CustomLineChart from '../components/CustomLineChart';
 import CustomPieChart from '../components/PieChart';
-import { useDispatch, useSelector } from 'react-redux';
-import StatisticsSlice, { setLoading, storeDietitiansCount, storeUsersCount,storeTrainersCount ,storeExercicesCount} from '../../../../core/redux/Statistics/slice';
-import request from '../../../../lib/remote/axios';
-import requestMethods from '../../../../lib/enums/request.methods'
+import OverviewLogic from './OverviewLogic';
+
 
 const Overview = () => {
 
-
-    const dispatch = useDispatch()
-    const StatisticsState = useSelector((global)=>global.Statistics)
-    useEffect(()=>{
-       
-        fetchUsersCount();
-        fetchDietitiansAndTrainers();
-        fetchExercices()
-        
-    },[])
-
-    const fetchUsersCount = async()=>{
-        const response = await request({
-        method: requestMethods.GET,
-        route:'/api/v0.1/statistics/users' 
-        });
-        if(response.success){
-        dispatch(storeUsersCount({totalUsers:response.data}))
-        }
-    }
-    const fetchDietitiansAndTrainers = async()=>{
-        const response = await request({
-        method: requestMethods.GET,
-        route:'/api/v0.1/statistics/users/by-role' 
-        });
-        if(response.success){
-        dispatch(storeDietitiansCount({dietitians:response.data.dietitians}))
-        dispatch(storeTrainersCount({trainers:response.data.trainers}))
-        // dispatch(storeExercicesCount({exercices:response.data}))
-        }
-    }
-    const fetchExercices = async()=>{
-        const response = await request({
-        method: requestMethods.GET,
-        route:'/api/v0.1/statistics/user-exercices' 
-        });
-        console.log(response)
-        if(response.success){
-        
-        dispatch(storeExercicesCount({exercices:response.data}))
-        dispatch(setLoading({loading:false}))
-        }
-    }
-    
-    const totalUsers = StatisticsState.totalUsers
-    const totalTrainers = StatisticsState.trainers
-    const totalDietitians = StatisticsState.dietitians
-    const totalExercices = StatisticsState.exercices
-        
-
+    const {
+        totalDietitians,
+        totalTrainers,
+        totalUsers,
+        totalExercices
+        } = OverviewLogic()
 
   return (
     <div className=' w-3/4 h-[90%] m-auto flex flex-col gap-6 '>
