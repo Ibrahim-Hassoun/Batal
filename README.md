@@ -113,7 +113,7 @@
 ### Integrated AI
 
 
-| Postman API 1                            | Postman API 2                       | Postman API 3                        |
+| Chatbot main logic                            | deciding which attributes to provide                       | Values sent                       |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
 | ![Landing](./readme/AI/Screenshot%202025-05-21%20105333.png) | ![fsdaf](./readme/AI/decide%20chunks.png) | ![fsdaf](./readme/AI/chunk%20selector.png) |
 
