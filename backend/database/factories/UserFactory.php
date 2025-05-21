@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-
+use Carbon\Carbon;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
@@ -67,6 +67,7 @@ class UserFactory extends Factory
             'dietary_restrictions' => fake()->optional()->words(2, true),
             'fitness_equipment' => json_encode([fake()->randomElement(['none','home','gym'])]),
             'fitness_experience' => fake()->optional()->randomElement(['none', 'some', 'regular', 'expert']),
+            'created_at' => Carbon::now()->subDays(rand(0, 6)),
         ];
     }
 
