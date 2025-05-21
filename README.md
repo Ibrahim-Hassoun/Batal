@@ -36,13 +36,13 @@
 ### System Architecture
 
 <p >
-    <img src="./readme/system-design/components diagram.png" width="100%"/>
+    <img src="./readme/system-design/Services diagram.png" width="100%"/>
 </p>
 
 ### HTTP Request Lifecycle
 
 <p >
-    <img src="./readme/system-design/request flow.png" width="100%"/>
+    <img src="./readme/system-design/request-lifecycle.png" width="100%"/>
 </p>
 
 <br><br>
@@ -125,7 +125,7 @@
 - Github actions takes the same staging CD steps again but for production
 
 <p >
-    <img src="./readme/development-testing/workflows.png" width="100%"/>
+    <img src="./readme/development-testing/Flowchart.png" width="100%"/>
 </p>
 
 | Postman API 1                            | Postman API 2                       | Postman API 3                        |
