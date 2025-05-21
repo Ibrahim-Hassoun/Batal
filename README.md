@@ -105,6 +105,17 @@
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
 | ![Landing](./readme/development-testing/service.png) | ![fsdaf](./readme/development-testing/validation-request.png) | ![fsdaf](./readme/development-testing/tests.png) |
 
+<br><br>
+
+<img src="./readme/title7 (2) 1.png"/>
+
+
+### Integrated AI
+
+
+| Postman API 1                            | Postman API 2                       | Postman API 3                        |
+| --------------------------------------- | ------------------------------------- | ------------------------------------- |
+| ![Landing](./readme/AI/Screenshot%202025-05-21%20105333.png) | ![fsdaf](./readme/AI/decide%20chunks.png) | ![fsdaf](./readme/AI/chunk%20selector.png) |
 
 <br><br>
 
