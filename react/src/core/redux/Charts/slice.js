@@ -4,7 +4,7 @@ const ChartsSlice = createSlice({
     name:'gallery',
     initialState:{
         
-        loading:true,
+        chartsLoading:true,
         leaderboard:[],
         usersGrowth:[],
         usedExercices:[],
@@ -12,11 +12,11 @@ const ChartsSlice = createSlice({
     },
     reducers:{
        
-        setLoading:(state,action)=>{
-            const loading = action.payload.loading
+        setChartsLoading:(state,action)=>{
+            const chartsLoading = action.payload.chartsLoading
             return {
                 ...state,
-                loading:loading,
+                chartsLoading:chartsLoading,
             }
         },
         setLeaderboard:(state,action)=>{
@@ -50,5 +50,5 @@ const ChartsSlice = createSlice({
 
     }
 })
-export const {setLoading,setLeaderboard,setLocations,setUsedExercices,setUsersGrowth} = ChartsSlice.actions;
+export const {setChartsLoading,setLeaderboard,setLocations,setUsedExercices,setUsersGrowth} = ChartsSlice.actions;
 export default ChartsSlice;

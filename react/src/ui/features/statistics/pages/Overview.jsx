@@ -7,7 +7,7 @@ import BasicBarChart from '../components/BarChart';
 import CustomLineChart from '../components/CustomLineChart';
 import CustomPieChart from '../components/PieChart';
 import OverviewLogic from './OverviewLogic';
-
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 
 const Overview = () => {
 
@@ -15,7 +15,9 @@ const Overview = () => {
         totalDietitians,
         totalTrainers,
         totalUsers,
-        totalExercices
+        totalExercices,
+        leaderboard,
+        chartsLoading
         } = OverviewLogic()
 
   return (
@@ -35,6 +37,7 @@ const Overview = () => {
             </div>
             <div className='bg-white w-2/3 flex flex-col items-center justify-between'>
                 <h3 className='pt-4'>Users growth</h3>
+                
                 <CustomLineChart data={ [{ name: 'Jan', value: 400 },
                 { name: 'Feb', value: 300 },
                 { name: 'Mar', value: 600 },
@@ -52,11 +55,18 @@ const Overview = () => {
                     <h3 className='flex-1 pl-4'>NAME</h3> 
                     <div className='flex-1 flex w-full justify-between pr-4 text-center' ><h3 className='flex-1'>STREAK</h3> <h3 className='flex-1'>POINTS</h3></div>
                     </div>
-                <TableRow image='https://www.cameo.com/cdn-cgi/image/fit=cover,format=auto,width=210,height=278/https://cdn.cameo.com/thumbnails/648e2bf7c2977ff5614bc426-wm-thumbnail.jpg' name='john doe' streak={50} points={800}/>
-                <TableRow image='https://www.cameo.com/cdn-cgi/image/fit=cover,format=auto,width=210,height=278/https://cdn.cameo.com/thumbnails/648e2bf7c2977ff5614bc426-wm-thumbnail.jpg' name='john doe' streak={50} points={800}/>
-                <TableRow image='https://www.cameo.com/cdn-cgi/image/fit=cover,format=auto,width=210,height=278/https://cdn.cameo.com/thumbnails/648e2bf7c2977ff5614bc426-wm-thumbnail.jpg' name='john doe' streak={50} points={800}/>
-                <TableRow image='https://www.cameo.com/cdn-cgi/image/fit=cover,format=auto,width=210,height=278/https://cdn.cameo.com/thumbnails/648e2bf7c2977ff5614bc426-wm-thumbnail.jpg' name='john doe' streak={50} points={800}/>
-            </div>
+                    {
+                    chartsLoading?
+                    <FontAwesomeIcon icon={faCircleNotch} spin />
+                    :
+                    leaderboard.map((row,index)=>{
+                        if(index<7)
+                    return  <TableRow key={row.id} image={row.profile_photo_path} name={row.first_name+" "+row.last_name} streak={row.streak} points={row.current_xp}/>;
+                    })
+                    }
+               
+                
+                    </div>
 
             {/* most used exercices */}
             <div className='bg-white flex-1 flex flex-col items-center justify-between'>
