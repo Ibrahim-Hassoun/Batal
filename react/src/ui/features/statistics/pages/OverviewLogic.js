@@ -12,7 +12,7 @@ const OverviewLogic = () => {
        
         fetchUsersCount();
         fetchDietitiansAndTrainers();
-        fetchExercices()
+        fetchExercices();
         
     },[])
 
