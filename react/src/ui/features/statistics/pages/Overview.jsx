@@ -8,18 +8,27 @@ import CustomLineChart from '../components/CustomLineChart';
 import CustomPieChart from '../components/PieChart';
 import OverviewLogic from './OverviewLogic';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
-
+import {  useSelector } from 'react-redux';
 const Overview = () => {
-
+    const ChartsState = useSelector((global)=>global.Charts)
+    const StatisticsState = useSelector((global)=>global.Statistics)
     const {
         totalDietitians,
         totalTrainers,
         totalUsers,
         totalExercices,
         leaderboard,
-        chartsLoading
+        chartsLoading,
+        finallineChartData,
+        lineChartData,
+        renameKeys,
+        pieChartData,finalPieChartData
         } = OverviewLogic()
 
+        // setInterval(() => {
+        //   console.log( StatisticsState)
+        // }, 2000);
+       
   return (
     <div className=' w-3/4 h-[90%] m-auto flex flex-col gap-6 '>
         {/* //split horizontal */}
@@ -38,13 +47,8 @@ const Overview = () => {
             <div className='bg-white w-2/3 flex flex-col items-center justify-between'>
                 <h3 className='pt-4'>Users growth</h3>
                 
-                <CustomLineChart data={ [{ name: 'Jan', value: 400 },
-                { name: 'Feb', value: 300 },
-                { name: 'Mar', value: 600 },
-                { name: 'Apr', value: 800 },
-                { name: 'May', value: 500 },
-                { name: 'Jun', value: 900 },
-                { name: 'Jul', value: 1000 }]}/>
+                <CustomLineChart data={lineChartData.length === 0 ?"":finallineChartData}/>
+                
             </div>
         </div>
 
@@ -71,23 +75,19 @@ const Overview = () => {
             {/* most used exercices */}
             <div className='bg-white flex-1 flex flex-col items-center justify-between'>
                 <h3 className='pt-4'>Most used exercices</h3>
-                <BasicBarChart data={ [
-                { name: 'Jan', value: 400 },
-                { name: 'Feb', value: 300 },
-                { name: 'Mar', value: 600 },
-                { name: 'Apr', value: 800 },
+                <BasicBarChart  data={[
+                { name: 'Bench press', value: 2 },
+                { name: 'Biceps curl', value: 4 },
+                { name: 'Hammer', value: 2 },
+                { name: 'Shoulder press', value: 3 },
                 ]}/>
             </div>
             <div className='bg-white flex-1 flex flex-col items-center justify-between'>
                 <h3 className='pt-4'>Users growth</h3>
                 {/* geography */}
-                <CustomPieChart data={[
-                { name: 'Squats', value: 35 },
-                { name: 'Push-ups', value: 25 },
-                { name: 'Deadlifts', value: 20 },
-                { name: 'Pull-ups', value: 15 },
-                { name: 'Lunges', value: 5 },
-                ]}/>
+
+                {pieChartData.length !== 0?<CustomPieChart data={ finalPieChartData.slice(0,3)}/>:null}
+                
             </div>
         </div>
     </div>

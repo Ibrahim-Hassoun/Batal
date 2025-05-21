@@ -9,7 +9,7 @@ const BasicBarChart = ({data}) => {
         <BarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis />
+          <YAxis domain={[0, 5]} />
           <Tooltip />
           <Legend />
           <Bar dataKey="value" fill="#8884d8" />

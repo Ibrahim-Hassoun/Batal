@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import StatisticsSlice, { setLoading, storeDietitiansCount, storeUsersCount,storeTrainersCount ,storeExercicesCount} from '../../../../core/redux/Statistics/slice';
-import  {setLeaderboard,setChartsLoading} from '../../../../core/redux/Charts/slice';
+import  {setLeaderboard,setChartsLoading,setUsersGrowth,setUsedExercices,setLocations} from '../../../../core/redux/Charts/slice';
 import request from '../../../../lib/remote/axios';
 import requestMethods from '../../../../lib/enums/request.methods'
 
@@ -16,7 +16,10 @@ const OverviewLogic = () => {
         fetchUsersCount();
         fetchDietitiansAndTrainers();
         fetchExercices();
-        fetchLeaderboard()
+        fetchLeaderboard();
+        fetchUsersGrowth();
+        fetchUsedExercices();
+        fetchLocations();
         
     },[])
 
@@ -45,7 +48,7 @@ const OverviewLogic = () => {
         method: requestMethods.GET,
         route:'/api/v0.1/statistics/user-exercices' 
         });
-        console.log(response)
+        
         if(response.success){
         
         dispatch(storeExercicesCount({exercices:response.data}))
@@ -59,16 +62,56 @@ const OverviewLogic = () => {
         method: requestMethods.GET,
         route:'/api/v0.1/statistics/leaderboard' 
         });
-        console.log(response)
+        
         if(response.success){
         
         dispatch(setLeaderboard({leaderboard:response.data}))
+        
+        }
+    }
+    const fetchUsersGrowth = async()=>{
+        const response = await request({
+        method: requestMethods.GET,
+        route:'/api/v0.1/statistics/users/growth' 
+        });
+        
+        if(response.success){
+        
+        dispatch(setUsersGrowth({usersGrowth:response.data}))
+        
+        }
+    }
+    function renameKeys(data) {
+    return data.map(item => ({
+        name: item.date,   
+        value: item.total  
+    }));
+    }
+    
+    const fetchUsedExercices = async()=>{
+        const response = await request({
+        method: requestMethods.GET,
+        route:'/api/v0.1/statistics/exercices/aggregations' 
+        });
+        console.log(response)
+        if(response.success){
+        
+        dispatch(setUsedExercices({usedExercices:response.data}))
         dispatch(setChartsLoading({chartsLoading:false}))
         }
     }
-    
-    
-
+    const fetchLocations = async()=>{
+        const response = await request({
+        method: requestMethods.GET,
+        route:'/api/v0.1/statistics/countries/aggregations' 
+        });
+        
+        if(response.success){
+        
+        dispatch(setLocations({locations:response.data}))
+        
+        }
+    }
 
     const totalUsers = StatisticsState.totalUsers
     const totalTrainers = StatisticsState.trainers
@@ -77,6 +120,14 @@ const OverviewLogic = () => {
         
     const leaderboard = ChartsState.leaderboard
     const chartsLoading = ChartsState.loading
+    const lineChartData = ChartsState.usersGrowth
+    const finallineChartData = renameKeys(lineChartData)
+    const barChartData = ChartsState.usersGrowth
+    const finalBarChartData = renameKeys(barChartData)
+
+    const pieChartData = ChartsState.locations
+    const finalPieChartData = renameKeys(pieChartData)
+
 
   return {
     totalUsers,
@@ -84,7 +135,12 @@ const OverviewLogic = () => {
     totalTrainers,
     totalExercices,
     leaderboard,
-    chartsLoading
+    chartsLoading,
+    finallineChartData,
+    lineChartData,
+    renameKeys,
+    pieChartData,finalPieChartData,
+    barChartData,finalBarChartData
   }
 }
 
