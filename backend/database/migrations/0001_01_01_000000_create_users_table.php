@@ -53,7 +53,7 @@ return new class extends Migration
             $table->string('allergies')->nullable();
             $table->string('dietary_preferences')->nullable();
             $table->string('dietary_restrictions')->nullable();
-            $table->json('fitness_equipment')->default("[\"none\"]");
+            $table->json('fitness_equipment');
             $table->string('fitness_experience')->nullable();
             
 

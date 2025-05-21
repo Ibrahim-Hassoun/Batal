@@ -118,6 +118,7 @@ Route::group(['prefix'=>"v0.1"],function(){
         Route::get('/users/growth',[StatisticsController::class,'getGrowthOfUsers']);
         Route::get('/users/by-role',[StatisticsController::class,'getNumberOfUsersByRole']);
         Route::get('/user-exercices',[StatisticsController::class,'getNumberOfExercicesMade']);
+        Route::get('/leaderboard',[LeaderBoardController::class,'getWeeklyLeaderBoard']);
 
         Route::get('/exercices/aggregations',[StatisticsController::class,'getExercicesAggregations']);
         Route::get('/countries/aggregations',[StatisticsController::class,'getCountryAggregations']);

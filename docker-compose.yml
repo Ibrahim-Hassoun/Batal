@@ -20,7 +20,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile.laravel
     command: >
-      bash -c "/backend/wait-for-it.sh batal-database:3306 --timeout=300 -- php artisan migrate && exec php artisan serve --host=0.0.0.0 --port=8000"
+      bash -c "composer install && /backend/wait-for-it.sh batal-database:3306 --timeout=300 -- php artisan migrate && exec php artisan serve --host=0.0.0.0 --port=8000"
 
 
 
