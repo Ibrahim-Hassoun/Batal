@@ -32,11 +32,6 @@
     <img src="./readme/system-design/ER-diagram.png" width="100%" height='1000px'/>
 </p>
 
-### ER Diagram2
-
-<p >
-    <img src="./readme/system-design/ER-diagram2 (2).png" width="100%" />
-</p>
 
 ### System Architecture
 
@@ -70,6 +65,13 @@
 <!-- Demo -->
 <img src="./readme/title5.svg"/>
 
+
+### User Screens (Mobile)
+
+| Pose Detector | Chatbot | Recommender system |
+| ------------- | ------- | ------------------ |
+| <img src="./readme/demo/capture_1747810407141.png" height="400"/> | <img src="./readme/demo/capture_1747810390159.png" height="400"/> | <img src="./readme/demo/capture_1747810421405.png" height="400"/> |
+
 ### User Screens (Mobile)
 
 | Pose Detector | Chatbot | Recommender system |
@@ -84,11 +86,11 @@
 | <img src="./readme/demo/feed.gif" height="400"/> | <img src="./readme/demo/leaderboard.gif" height="400"/> | <img src="./readme/demo/convo refined.gif" height="400"/> |
 
 
-### Admin Screens (Web)
+<!-- ### Admin Screens (Web)
 
 | Login screen                            | Register screen                       |
 | --------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | -->
 
 
 <br><br>
@@ -128,6 +130,6 @@
 
 | Postman API 1                            | Postman API 2                       | Postman API 3                        |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| ![Landing](./readme/development-testing/postman1.png) | ![fsdaf](./readme/development-testing/postman2.png) | ![fsdaf](./readme/development-testing/postman3.png) |
 
 <br><br>
